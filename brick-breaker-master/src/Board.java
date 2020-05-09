@@ -21,7 +21,7 @@ public class Board extends JPanel implements Runnable, Constants {
     //BoardListener2 boardtest = new BoardListener2();
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
-    private int score = 0, lives = MAX_LIVES, bricksLeft = MAX_BRICKS, waitTime = 3, xSpeed, withSound, level = 1;
+    private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, xSpeed, withSound, level = 1;
      
     //왼쪽 오른쪽 키 입력을 확인할 변수
     int key_temp = 0;
@@ -68,7 +68,6 @@ public class Board extends JPanel implements Runnable, Constants {
         addKeyListener(boardtest1);
         setFocusable(true);
 
-        makeBricks();
         paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
@@ -93,16 +92,23 @@ public class Board extends JPanel implements Runnable, Constants {
         isPaused.set(true);
     }
 
-    //fills the array of bricks
+    //fills the array of bricks(벽돌을 랜덤한 위치에 생성)
     public void makeBricks() {
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 5; j++) {
-                Random rand = new Random();
-                int itemType = rand.nextInt(3) + 1;
-                int numLives = 3;
-                Color color = colors[rand.nextInt(7)][0];
-                brick[i][j] = new Brick((i * BRICK_WIDTH), ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
-            }
+    	Random rand = new Random();//랜덤 객체
+    	//벽돌 생성 속도를 조절하는 변수 rand.nextInt(i) + 1; 에서 i를 수정해 속도 조절
+    	int genSpeed = rand.nextInt(150) + 1;
+    	//a와 b를 랜덤으로 생성해 랜덤한 위치를 저장
+    	int a = rand.nextInt(10);
+    	int b = rand.nextInt(5);
+    	//벽돌 생성 속도 조절과 벽돌을 동시에 최대 10개 까지만 생성되도록 한다
+    	if (genSpeed == 1 && bricksLeft <= 10 && brick[a][b] == null) {
+    		//아이템 종류(rand.nextInt(i) + 1의 i를 수정해 아이템 확률 조정)
+    		int itemType = rand.nextInt(10) + 1;
+    		int numLives = 1;//벽돌을 한번만 맞아도 없어지도록 1로 저장
+    		Color color = colors[rand.nextInt(7)][0];//벽돌 color
+    		//벽돌 생성
+    		brick[a][b] = new Brick((a * BRICK_WIDTH), ((b * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
+    		bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
         }
     }
 
@@ -142,7 +148,7 @@ public class Board extends JPanel implements Runnable, Constants {
                     xSpeed++;
                 }
             }
-
+            makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
             checkBricks(x1, y1);
@@ -186,25 +192,6 @@ public class Board extends JPanel implements Runnable, Constants {
     }
 
     public void checkLives() {
-        if (bricksLeft == NO_BRICKS) {
-            try {
-                clip.stop();
-                clip.close();
-                audio.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            ball.reset();
-            bricksLeft = MAX_BRICKS;
-            makeBricks();
-            lives++;
-            level++;
-            score += 100;
-            playMusic(trackList, withSound, level);
-            repaint();
-            stop();
-            isPaused.set(true);
-        }
         if (lives == MIN_LIVES) {
             repaint();
             stop();
@@ -250,42 +237,59 @@ public class Board extends JPanel implements Runnable, Constants {
     }
 
     public void checkBricks(int x1, int y1) {
+    	boolean destroy_check = false; //벽돌이 깨졌는지 확인하는 변수
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 5; j++) {
-                if (brick[i][j].hitBottom(x1, y1)) {
-                    ball.setYDir(1);
-                    if (brick[i][j].isDestroyed()) {
-                        bricksLeft--;
-                        score += 50;
-                        addItem(brick[i][j].item);
-                    }
-                }
-                if (brick[i][j].hitLeft(x1, y1)) {
-                    xSpeed = -xSpeed;
-                    ball.setXDir(xSpeed);
-                    if (brick[i][j].isDestroyed()) {
-                        bricksLeft--;
-                        score += 50;
-                        addItem(brick[i][j].item);
-                    }
-                }
-                if (brick[i][j].hitRight(x1, y1)) {
-                    xSpeed = -xSpeed;
-                    ball.setXDir(xSpeed);
-                    if (brick[i][j].isDestroyed()) {
-                        bricksLeft--;
-                        score += 50;
-                        addItem(brick[i][j].item);
-                    }
-                }
-                if (brick[i][j].hitTop(x1, y1)) {
-                    ball.setYDir(-1);
-                    if (brick[i][j].isDestroyed()) {
-                        bricksLeft--;
-                        score += 50;
-                        addItem(brick[i][j].item);
-                    }
-                }
+            	//벽돌이 있을 경우
+            	if(brick[i][j] != null) {
+            		//공이 벽돌의 아래 맞은 경우
+	                if (brick[i][j].hitBottom(x1, y1)) {
+	                    ball.setYDir(1);
+	                    if (brick[i][j].isDestroyed()) {
+	                    	   destroy_check = true;	
+	                        bricksLeft--;
+	                        score += 1;
+	                        addItem(brick[i][j].item);
+	                    }
+	                }
+	                //공이 벽돌의 왼쪽에 맞은 경우
+	                if (brick[i][j].hitLeft(x1, y1)) {
+	                    xSpeed = -xSpeed;
+	                    ball.setXDir(xSpeed);
+	                    if (brick[i][j].isDestroyed()) {
+	                    	   destroy_check = true;
+	                        bricksLeft--;
+	                        score += 1;
+	                        addItem(brick[i][j].item);
+	                    }
+	                }
+	                //공이 벽돌의 오른쪽에 맞은 경우
+	                if (brick[i][j].hitRight(x1, y1)) {
+	                    xSpeed = -xSpeed;
+	                    ball.setXDir(xSpeed);
+	                    if (brick[i][j].isDestroyed()) {
+	                    	   destroy_check = true;
+	                        bricksLeft--;
+	                        score += 1;
+	                        addItem(brick[i][j].item);
+	                    }
+	                }
+	                //공이 벽돌의 위쪽에 맞은 경우
+	                if (brick[i][j].hitTop(x1, y1)) {
+	                    ball.setYDir(-1);
+	                    if (brick[i][j].isDestroyed()) {
+	                    	   destroy_check = true;
+	                        bricksLeft--;
+	                        score += 1;
+	                        addItem(brick[i][j].item);
+	                    }
+	                }
+	            }
+            	//벽돌이 깨진 경우 그 벽돌 위치에 벽돌 제거
+            	if (destroy_check) {
+            		brick[i][j] = null;
+            		destroy_check = false;
+            	}
             }
         }
     }
@@ -293,7 +297,6 @@ public class Board extends JPanel implements Runnable, Constants {
     public void checkIfOut(int y1) {
         if (y1 > PADDLE_Y_START + 10) {
             lives--;
-            score -= 100;
             ball.reset();
             repaint();
             stop();
@@ -332,7 +335,9 @@ public class Board extends JPanel implements Runnable, Constants {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 5; j++) {
-                brick[i][j].draw(g);
+            	//벽돌이 그 위치에 없을 경우 벽돌을 그린다
+            	if (brick[i][j] != null)
+            		brick[i][j].draw(g);
             }
         }
         g.setColor(Color.BLACK);
@@ -544,7 +549,6 @@ public class Board extends JPanel implements Runnable, Constants {
                     paddle.setWidth(getWidth()/7);
                     lives = MAX_LIVES;
                     score = 0;
-                    bricksLeft = MAX_BRICKS;
                     level = 1;
                     makeBricks();
                     isPaused.set(true);

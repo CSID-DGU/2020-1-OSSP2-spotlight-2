@@ -38,7 +38,8 @@ public class Item extends Structure implements Constants {
 
 	//Draw an item
 	public void draw(Graphics g) {
-		if(type == 3) {
+		//board.java의 makeBrick()에서 itemType 확률에 맞게 조건 변경
+		if(type >= 3 && type <= 10 ) {
 			return;
 		}
 		g.setColor(color);
