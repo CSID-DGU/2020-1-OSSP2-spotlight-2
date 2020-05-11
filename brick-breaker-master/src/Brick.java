@@ -49,11 +49,21 @@ public class Brick extends Structure implements Constants {
 		setHits(0);
 		setDestroyed(false);
 
-		if (itemType == 1) {
+		/*아이템 타입*/
+		if (itemType == 1) { // 하단 바 크기 증가
 			itemColor = Color.GREEN;
 		}
-		if (itemType == 2) {
+		if (itemType == 2) { // 하단 바 크기 감소
 			itemColor = Color.RED;
+		}
+		if (itemType == 3) { // 공 속도 증가
+			itemColor = Color.BLUE;
+		}
+		if (itemType == 4) { // 공 속도 감소
+			itemColor = Color.PINK;
+		}
+		if (itemType == 5) { // 리버스 아이템
+			itemColor = Color.ORANGE;
 		}
 
 		//Places an item of specified type inside the brick to fall when the brick is destroyed

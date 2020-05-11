@@ -16,19 +16,30 @@ import java.awt.Toolkit.*;
 public class Board extends JPanel implements Runnable, Constants {
     //Items on-screen
     private Paddle paddle;
-    private Ball ball;
+    public static Ball ball;
     private Brick[][] brick = new Brick[10][5];
     //BoardListener2 boardtest = new BoardListener2();
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
-    private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, xSpeed, withSound, level = 1;
+    private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
      
+    //공 속도 변수
+    public static int xSpeed = 1;
+    
+    //리버스 모드 확인 변수
+    public static boolean reverse = false;
     //왼쪽 오른쪽 키 입력을 확인할 변수
     int key_temp = 0;
    
     //Player's name
     private String playerName;
 
+    //게임 모드
+    public static int gameMode;
+    
+    //하드 모드 시 변경되는 좌우키가 저장되는 변수
+    private char randomLeftKey = 'F';
+    private char randomRightKey = 'J';
     //The game
     private Thread game;
 
@@ -80,10 +91,13 @@ public class Board extends JPanel implements Runnable, Constants {
             score += 1000;
             JOptionPane.showMessageDialog(null, "You unlocked the secret 1,000 point bonus! Nice name choice by the way.", "1,000 Points", JOptionPane.INFORMATION_MESSAGE);
         }
-
+        
+        //게임 모드 선택
+        String[] modeOptions = {"Basic", "Hard"};
+        gameMode = JOptionPane.showOptionDialog(null, "게임 모드를 선택하세요", "게임 모드 선택", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, modeOptions, modeOptions[0]);
         //Start Screen that displays information and asks if the user wants music or not, stores that choice
-        String[] options = {"Yes", "No"};
-        withSound = JOptionPane.showOptionDialog(null, "Brick Breaker, Version 1.2\nTy-Lucas Kelley\nVisit www.tylucaskelley.com for more projects.\n\nControls\n    Spacebar: Start game, Pause/Resume while in game.\n    Left/Right arrow keys: Move paddle\nItems\n    Green Item: Expand paddle\n    Red Item: Shrink paddle\nScoring\n    Block: 50 points\n    Level-up: 100 points\n    Life Loss: -100 points\n\n\n     Do you want background music?", "About the Game", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        String[] musicOptions = {"Yes", "No"};
+        withSound = JOptionPane.showOptionDialog(null, "Brick Breaker, Version 1.2\nTy-Lucas Kelley\nVisit www.tylucaskelley.com for more projects.\n\nControls\n    Spacebar: Start game, Pause/Resume while in game.\n    Left/Right arrow keys: Move paddle\nItems\n    Green Item: Expand paddle\n    Red Item: Shrink paddle\nScoring\n    Block: 50 points\n    Level-up: 100 points\n    Life Loss: -100 points\n\n\n     Do you want background music?", "About the Game", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, musicOptions, musicOptions[1]);
         playMusic(trackList, withSound, level);
 
         game = new Thread(this);
@@ -132,22 +146,11 @@ public class Board extends JPanel implements Runnable, Constants {
     }
 
     //runs the game
-    public void run() {
-        xSpeed = 1;
-       
+    public void run() {   
         while(true) {
             int x1 = ball.getX();
             int y1 = ball.getY();
 
-            //Makes sure speed doesnt get too fast/slow
-            if (Math.abs(xSpeed) > 1) {
-                if (xSpeed > 1) {
-                    xSpeed--;
-                }
-                if (xSpeed < 1) {
-                    xSpeed++;
-                }
-            }
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
@@ -199,15 +202,14 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
+    /*하단 바에 공이 닿았는지 확인하고 공의 방향을 변경*/
     public void checkPaddle(int x1, int y1) {
         if (paddle.hitPaddle(x1, y1) && ball.getXDir() < 0) {
-            ball.setYDir(-1);
-            xSpeed = -1;
-            ball.setXDir(xSpeed);
+            ball.setYDir(-xSpeed);
+            ball.setXDir(-xSpeed);
         }
         if (paddle.hitPaddle(x1, y1) && ball.getXDir() > 0) {
-            ball.setYDir(-1);
-            xSpeed = 1;
+            ball.setYDir(-xSpeed);
             ball.setXDir(xSpeed);
         }
 
@@ -219,20 +221,19 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
+    /*벽돌에 공이 닿았는지 확인하고 공의 방향을 변경*/
     public void checkWall(int x1, int y1) {
         if (x1 >= getWidth() - ball.getWidth()) {
-            xSpeed = -Math.abs(xSpeed);
-            ball.setXDir(xSpeed);
+            ball.setXDir(-xSpeed);
         }
         if (x1 <= 0) {
-            xSpeed = Math.abs(xSpeed);
             ball.setXDir(xSpeed);
         }
         if (y1 <= 0) {
-            ball.setYDir(1);
+            ball.setYDir(xSpeed);
         }
         if (y1 >= getHeight()) {
-            ball.setYDir(-1);
+            ball.setYDir(-xSpeed);
         }
     }
 
@@ -244,7 +245,7 @@ public class Board extends JPanel implements Runnable, Constants {
             	if(brick[i][j] != null) {
             		//공이 벽돌의 아래 맞은 경우
 	                if (brick[i][j].hitBottom(x1, y1)) {
-	                    ball.setYDir(1);
+	                    ball.setYDir(xSpeed);
 	                    if (brick[i][j].isDestroyed()) {
 	                    	   destroy_check = true;	
 	                        bricksLeft--;
@@ -254,8 +255,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                }
 	                //공이 벽돌의 왼쪽에 맞은 경우
 	                if (brick[i][j].hitLeft(x1, y1)) {
-	                    xSpeed = -xSpeed;
-	                    ball.setXDir(xSpeed);
+	                    ball.setXDir(-xSpeed);
 	                    if (brick[i][j].isDestroyed()) {
 	                    	   destroy_check = true;
 	                        bricksLeft--;
@@ -265,8 +265,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                }
 	                //공이 벽돌의 오른쪽에 맞은 경우
 	                if (brick[i][j].hitRight(x1, y1)) {
-	                    xSpeed = -xSpeed;
-	                    ball.setXDir(xSpeed);
+	                    ball.setXDir(-xSpeed);
 	                    if (brick[i][j].isDestroyed()) {
 	                    	   destroy_check = true;
 	                        bricksLeft--;
@@ -276,7 +275,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                }
 	                //공이 벽돌의 위쪽에 맞은 경우
 	                if (brick[i][j].hitTop(x1, y1)) {
-	                    ball.setYDir(-1);
+	                    ball.setYDir(-xSpeed);
 	                    if (brick[i][j].isDestroyed()) {
 	                    	   destroy_check = true;
 	                        bricksLeft--;
@@ -294,10 +293,12 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
+    /*lives를 하나 읽을 경우 리셋*/
     public void checkIfOut(int y1) {
         if (y1 > PADDLE_Y_START + 10) {
-            lives--;
-            ball.reset();
+            lives--; //lives 1 감소
+            ball.reset(); //공 리셋
+            paddle.reset(); //하단 바 리셋
             repaint();
             stop();
             isPaused.set(true);
@@ -341,6 +342,13 @@ public class Board extends JPanel implements Runnable, Constants {
             }
         }
         g.setColor(Color.BLACK);
+        //하드모드(좌우 방향 키를 게임 화면에 출력)
+        if(gameMode == 1) {
+        	g.drawString("Left_Key", 10, getHeight() - (getHeight()/3));
+        	g.drawString(Character.toString(randomLeftKey), 10, getHeight() - (getHeight()/3) + 20);
+        	g.drawString("Right_Key", getWidth() - 60, getHeight() - (getHeight()/3));
+        	g.drawString(Character.toString(randomRightKey), getWidth() - 15, getHeight() - (getHeight()/3) + 20);
+        }
         g.drawString("Lives: " + lives, 10, getHeight() - (getHeight()/10));
         g.drawString("Score: " + score, 10, getHeight() - (2*(getHeight()/10)) + 25);
         g.drawString("Level: " + level, 10, getHeight() - (3*(getHeight()/10)) + 50);
@@ -533,8 +541,7 @@ public class Board extends JPanel implements Runnable, Constants {
     private class BoardListener extends KeyAdapter {
             
         public void keyPressed(KeyEvent ke) {
-            int key = ke.getKeyCode();
-            if (key == KeyEvent.VK_SPACE) {
+            if (ke.getKeyCode() == KeyEvent.VK_SPACE) {
                 //isSpace = true;
                 if (lives > MIN_LIVES) {
                     if (isPaused.get() == false) {
@@ -559,13 +566,48 @@ public class Board extends JPanel implements Runnable, Constants {
                     }
                 }
             }
-            //왼쪽 키가 눌렸을 경우
-            if (key == KeyEvent.VK_LEFT) {
-                key_temp = 1;
+            //Basic 모드 조작 키
+            if(gameMode == 0) {
+            	//리버스 비 활성화
+            	if(reverse == false) {
+            		//왼쪽 이동
+            		if(ke.getKeyCode() == KeyEvent.VK_LEFT) {
+            			key_temp = 1;
+            		}
+            		//오른쪽 이동
+            		if(ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+            			key_temp = -1;
+            		}
+            	}
+            	//리버스 활성화
+            	if(reverse == true) {
+            		//왼쪽 이동
+            		if(ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+            			key_temp = 1;
+            		}
+            		//오른쪽 이동
+            		if(ke.getKeyCode() == KeyEvent.VK_LEFT) {
+            			key_temp = -1;
+            		}
+            	}      	
             }
-            //오른쪽 키가 눌렸을 경우
-            if (key == KeyEvent.VK_RIGHT) {
-                key_temp = -1;
+            else {    	
+	            //왼쪽으로 이동
+	            if (Character.toUpperCase(ke.getKeyChar()) == randomLeftKey) {
+	                key_temp = 1;
+	                //다음 randomLeftKey 생성
+	                do {
+	                		randomLeftKey = (char)((Math.random() * 26) + 65);
+	                }while(randomLeftKey == randomRightKey);
+	            }
+	            //오른쪽으로 이동
+	            if (Character.toUpperCase(ke.getKeyChar()) == randomRightKey) {
+	                key_temp = -1;
+	                //다음 randomRightKey 생성
+	                do {
+	                		randomRightKey = (char)((Math.random() * 26) + 65);
+	                }while(randomLeftKey == randomRightKey);
+	            }
             }
         }
 
