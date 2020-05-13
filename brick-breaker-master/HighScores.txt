@@ -9,7 +9,11 @@ Name: Player9, Score: 405
 Name: Player5, Score: 264
 Name: r, Score: 250
 Name: Player8, Score: 67
+Name: ssss, Score: 18
+Name: ssss, Score: 13
 Name: ㅇㅇㅇ, Score: 10
+Name: Spotlight, Score: 5
+Name: Spotlight, Score: 4
 Name: 1, Score: 0
 Name: 1a, Score: -100
 Name: 1, Score: -200

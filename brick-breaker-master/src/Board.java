@@ -44,16 +44,16 @@ public class Board extends JPanel implements Runnable, Constants {
     private Thread game;
 
     //Songs for background music
-    private String songOne = "wav/One.wav";
-    private String songTwo = "wav/Two.wav";
-    private String songThree = "wav/Three.wav";
-    private String songFour = "wav/Four.wav";
-    private String songFive = "wav/Five.wav";
-    private String songSix = "wav/Six.wav";
-    private String songSeven = "wav/Seven.wav";
-    private String songEight = "wav/Eight.wav";
-    private String songNine = "wav/Nine.wav";
-    private String songTen = "wav/Ten.wav";
+    private String songOne = "./dist/wav/One.wav";
+    private String songTwo = "./dist/wav/Two.wav";
+    private String songThree = "./dist/wav/Three.wav";
+    private String songFour = "./dist/wav/Four.wav";
+    private String songFive = "./dist/wav/Five.wav";
+    private String songSix = "./dist/wav/Six.wav";
+    private String songSeven = "./dist/wav/Seven.wav";
+    private String songEight = "./dist/wav/Eight.wav";
+    private String songNine = "./dist/wav/Nine.wav";
+    private String songTen = "./dist/wav/Ten.wav";
     private String[] trackList = {songOne, songTwo, songThree, songFour, songFive, songSix, songSeven, songEight, songNine, songTen};
     private AudioInputStream audio;
     private Clip clip;
@@ -265,7 +265,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                }
 	                //공이 벽돌의 오른쪽에 맞은 경우
 	                if (brick[i][j].hitRight(x1, y1)) {
-	                    ball.setXDir(-xSpeed);
+	                    ball.setXDir(xSpeed);
 	                    if (brick[i][j].isDestroyed()) {
 	                    	   destroy_check = true;
 	                        bricksLeft--;
@@ -299,6 +299,7 @@ public class Board extends JPanel implements Runnable, Constants {
             lives--; //lives 1 감소
             ball.reset(); //공 리셋
             paddle.reset(); //하단 바 리셋
+            key_temp = 0;
             repaint();
             stop();
             isPaused.set(true);
@@ -346,7 +347,7 @@ public class Board extends JPanel implements Runnable, Constants {
         if(gameMode == 1) {
         	g.drawString("Left_Key", 10, getHeight() - (getHeight()/3));
         	g.drawString(Character.toString(randomLeftKey), 10, getHeight() - (getHeight()/3) + 20);
-        	g.drawString("Right_Key", getWidth() - 60, getHeight() - (getHeight()/3));
+        	g.drawString("Right_Key", getWidth() - 70, getHeight() - (getHeight()/3));
         	g.drawString(Character.toString(randomRightKey), getWidth() - 15, getHeight() - (getHeight()/3) + 20);
         }
         g.drawString("Lives: " + lives, 10, getHeight() - (getHeight()/10));
@@ -561,11 +562,13 @@ public class Board extends JPanel implements Runnable, Constants {
                     isPaused.set(true);
                     for (int i = 0; i < 10; i++) {
                         for (int j = 0; j < 5; j++) {
-                            brick[i][j].setDestroyed(false);
-                        }
-                    }
-                }
-            }
+                        		if(brick[i][j] != null) { //brick이 생성되어 있는 경우
+                        			brick[i][j].setDestroyed(false);
+                        		}
+                        	}
+                    	}
+                	}
+           		}
             //Basic 모드 조작 키
             if(gameMode == 0) {
             	//리버스 비 활성화

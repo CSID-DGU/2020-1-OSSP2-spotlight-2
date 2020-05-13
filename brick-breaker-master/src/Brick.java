@@ -75,7 +75,7 @@ public class Brick extends Structure implements Constants {
 	public void draw(Graphics g) {
 		if (!destroyed) {
 			g.setColor(color);
-			g.fillRect(x, y, width, height);
+			g.fillOval(x, y, width, height); //벽돌을 타원형으로 그림
 		}
 	}
 
@@ -114,34 +114,66 @@ public class Brick extends Structure implements Constants {
 	}
 
 	//Detect if the brick has been hit on its bottom, top, left, or right sides
-	public boolean hitBottom(int ballX, int ballY) {
-		if ((ballX >= x) && (ballX <= x + width + 1) && (ballY == y + height) && (destroyed == false)) {
-			addHit();
-			return true;
+	public boolean hitBottom(int ballX, int ballY) { //아래쪽에 공이 맞는 경우
+		if(Board.xSpeed == 1) { //속도가 1 일때
+			if ((ballX >= x) && (ballX <= x + width + 1) && (ballY == y + height) && (destroyed == false)) {
+				addHit();
+				return true;
+			}
+		}
+		else { //속도가 2 일때
+			if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y + height - 1) && (ballY <= y + height) && (destroyed == false)) {
+				addHit();
+				return true;
+			}
 		}
 		return false;
 	}
 
-	public boolean hitTop(int ballX, int ballY) {
-		if ((ballX >= x) && (ballX <= x + width + 1) && (ballY == y) && (destroyed == false)) {
-			addHit();
-			return true;
+	public boolean hitTop(int ballX, int ballY) { //위쪽에 공이 맞는 경우
+		if(Board.xSpeed == 1) { //속도가 1 일때
+			if ((ballX >= x) && (ballX <= x + width + 1) && (ballY == y) && (destroyed == false)) {
+				addHit();
+				return true;
+			}
+		}
+		else { //속도가 2 일때
+			if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y) && (ballY <= y + 1) && (destroyed == false)) {
+				addHit();
+				return true;
+			}
 		}
 		return false;
 	}
 
-	public boolean hitLeft(int ballX, int ballY) {
-		if ((ballY >= y) && (ballY <= y + height) && (ballX == x) && (destroyed == false)) {
-			addHit();
-			return true;
+	public boolean hitLeft(int ballX, int ballY) { //왼쪽에 공이 맞는 경우
+		if(Board.xSpeed == 1) { //속도가 1 일때
+			if ((ballY >= y) && (ballY <= y + height) && (ballX == x) && (destroyed == false)) {
+				addHit();
+				return true;
+			}
+		}
+		else { //속도가 2 일때
+			if ((ballY >= y) && (ballY <= y + height) && (ballX >= x) && (ballX <= x + 1) && (destroyed == false)) {
+				addHit();
+				return true;
+			}
 		}
 		return false;
 	}
 
-	public boolean hitRight(int ballX, int ballY) {
-		if ((ballY >= y) && (ballY <= y + height) && (ballX == x + width) && (destroyed == false)) {
-			addHit();
-			return true;
+	public boolean hitRight(int ballX, int ballY) { //오른쪽에 공이 맞는 경우
+		if(Board.xSpeed == 1) { //속도가 1 일때
+			if ((ballY >= y) && (ballY <= y + height) && (ballX == x + width) && (destroyed == false)) {
+				addHit();
+				return true;
+			}
+		}
+		else { //속도가 2 일때
+			if ((ballY >= y) && (ballY <= y + height) && (ballX <= x + width) && (ballX >= x + width - 1) && (destroyed == false)) {
+				addHit();
+				return true;
+			}
 		}
 		return false;
 	}
