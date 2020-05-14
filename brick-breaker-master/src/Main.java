@@ -44,14 +44,14 @@ public class Main extends JFrame implements Constants {
 		}
 		frame = new JFrame("Brick Breaker 1.2");
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 		frame.setResizable(true);//동적 페이지
-=======
+//=======
 		frame.setBounds((int)frame.getWidth() - WINDOW_WIDTH, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 		frame.setLocationRelativeTo (pane);
 		
 		frame.setResizable(true);
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		board = new Board(WINDOW_WIDTH, WINDOW_HEIGHT);
