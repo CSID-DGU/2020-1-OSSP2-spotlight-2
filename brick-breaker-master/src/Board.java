@@ -107,7 +107,6 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //fills the array of bricks(벽돌을 랜덤한 위치에 생성)
     public void makeBricks() {
-<<<<<<< Updated upstream
     	Random rand = new Random();//랜덤 객체
     	//벽돌 생성 속도를 조절하는 변수 rand.nextInt(i) + 1; 에서 i를 수정해 속도 조절
     	int genSpeed = rand.nextInt(150) + 1;
@@ -123,16 +122,6 @@ public class Board extends JPanel implements Runnable, Constants {
     		//벽돌 생성
     		brick[a][b] = new Brick((a * BRICK_WIDTH), ((b * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
     		bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
-=======
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 5; j++) {
-                Random rand = new Random();
-                int itemType = rand.nextInt(3) + 1;
-                int numLives = 3;
-                Color color = colors[rand.nextInt(7)][0];
-                brick[i][j] = new Brick((i * BRICK_WIDTH), ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH -5, BRICK_HEIGHT -5, color, numLives, itemType);
-            }
->>>>>>> Stashed changes
         }
     }
 
