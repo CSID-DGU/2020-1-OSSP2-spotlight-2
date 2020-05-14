@@ -1,9 +1,9 @@
 # 2020-1-OSSP2-spotlight-2
-Team spotlight 
+Team spotlight
 
-원본 소스 : https://github.com/tylucaskelley/brick-breaker 
+원본 소스 : https://github.com/tylucaskelley/brick-breaker
 
-[OSSP]김관우 박계원 윤기범 
+[OSSP]김관우 박계원 윤기범
 
 동국대학교 컴퓨터공학전공 공개 SW 프로젝트진행 중  
 벽돌깨기 오픈 소스를 이용해 개선점을 파악하고 이를 개선하며 새로운 기능을 추가한다.  
@@ -37,6 +37,4 @@ Team spotlight
 > +하단 바 좌우 조작을 반전시키는 리버스 아이템 구현
 > 리버스 아이템을 먹을 시 하단 바의 색상이 변경됨
 
-
- 
-
+## 4. 게임 아이템 추가
