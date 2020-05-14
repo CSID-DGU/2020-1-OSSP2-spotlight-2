@@ -7,4 +7,12 @@ Team spotlight
 
 프로젝트 진행 중 
 
-테스트 진행 중
+## 1. 개발환경
+
+운영체제 : Linux(ubuntu)  
+통합 계발 환경 : Eclipse  
+개발 언어 : JAVA  
+데이터베이스 MySQL  
+ 
+
+
