@@ -45,7 +45,7 @@ Team spotlight
 - 노란색 아이템 획득 : 좌우 키 반전(paddle의 색상 RED)
 
 ## 5. GameTheme(게임 테마)
-<img src="res/thumnail.jpg">
+<img src="res/thumbnail.jpg">
 - 코로나가 만연한 지금! 의사가 되어 코로나 바이러스를 격퇴하라!
 - 금요일 자정을 넘어 토요일 아침 해가 떠오르기전까지 미친듯이 놀아라!
 - 비가 와도 문제 없어! 비가 오면 실내에서 파티를 즐기면 돼!
