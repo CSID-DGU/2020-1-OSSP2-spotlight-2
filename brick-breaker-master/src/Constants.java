@@ -28,7 +28,7 @@ import java.awt.Color;
 //Class definition
 public interface Constants {
 	//Window Size
-	public static final int WINDOW_WIDTH = 500;
+	public static final int WINDOW_WIDTH = 1000;
 	public static final int WINDOW_HEIGHT = 500;
 
 	//Lives
@@ -52,7 +52,7 @@ public interface Constants {
 	public static final int PADDLE_MAX = 140;
 
 	//Bricks
-	public static final int BRICK_WIDTH = 50;
+	public static final int BRICK_WIDTH = 100;
 	public static final int BRICK_HEIGHT = 25;
 	public static final int MAX_BRICKS = 50;
 	public static final int NO_BRICKS = 0;

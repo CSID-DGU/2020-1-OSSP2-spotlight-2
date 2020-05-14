@@ -17,10 +17,12 @@ Name: Spotlight, Score: 4
 Name: 1, Score: 0
 Name: 1a, Score: -100
 Name: 1, Score: -200
+Name: Yoon, Score: -200
 Name: r, Score: -250
 Name: 1, Score: -250
 Name: 1, Score: -250
 Name: 1, Score: -250
+Name: Yoon, Score: -250
 Name: 1, Score: -350
 Name: 1, Score: -350
 Name:   , Score: -350
@@ -31,5 +33,12 @@ Name: 1, Score: -400
 Name: 1, Score: -400
 Name: 1, Score: -400
 Name: , Score: -400
+<<<<<<< Updated upstream
 Name: 111, Score: -400
 Name: 111, Score: -400
+=======
+Name: Yoon, Score: -400
+Name: Yoon, Score: -400
+Name: Yoon, Score: -400
+Name: YOon, Score: -500
+>>>>>>> Stashed changes
