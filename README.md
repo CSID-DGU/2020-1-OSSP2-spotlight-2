@@ -46,4 +46,6 @@ Team spotlight
 
 ## 5. GameTheme(게임 테마)
 <img src="res/thumbnail.jpg">
+
 - 코로나가 만연한 지금! 의사가 되어 Covid-19를 격퇴하라!
+- 랜덤으로 생성되는 코로나 바이러스를 제거하라!
