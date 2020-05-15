@@ -55,3 +55,4 @@ Team spotlight
 - 과연 당신이 1등이 되고 최고 점수를 획득할 수 있을까??
 
 ## 5. 타임라인
+<img src="res/timeline.png">
