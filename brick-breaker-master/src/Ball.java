@@ -40,6 +40,8 @@ public class Ball extends Structure implements Constants {
 	//Draw the ball
 	@Override
 	public void draw(Graphics g) {
+		//g.drawImage(img, x, y, BALL_WIDTH, BALL_HEIGHT, this);
+		
 		g.setColor(color);
 		g.fillOval(x, y, width, height);
 	}

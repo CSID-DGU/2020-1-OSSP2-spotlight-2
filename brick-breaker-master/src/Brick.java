@@ -24,10 +24,14 @@
 
 //Imports
 import java.awt.*;
+import java.awt.image.ImageObserver;
+
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+
 //Class definition
-public class Brick extends Structure implements Constants {
+public class Brick extends Structure implements Constants, ImageObserver {
 	//Variables
 	private int lives, hits;
 	private boolean destroyed;
@@ -42,6 +46,10 @@ public class Brick extends Structure implements Constants {
 	private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
 	private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
 
+	ImageIcon icon = new ImageIcon("./img/corona.png");
+	Image img = icon.getImage();
+	
+	//Toolkit.getDefaultToolkit().getImage
 	//Constructor
 	public Brick(int x, int y, int width, int height, Color color, int lives, int itemType) {
 		super(x, y, width, height, color);
@@ -74,8 +82,10 @@ public class Brick extends Structure implements Constants {
 	@Override
 	public void draw(Graphics g) {
 		if (!destroyed) {
-			g.setColor(color);
-			g.fillOval(x, y, width, height); //벽돌을 타원형으로 그림
+	        g.drawImage(img, x, y, BRICK_WIDTH, BRICK_HEIGHT, this);
+	     
+			//g.setColor(color);
+			//g.fillOval(x, y, width, height); //벽돌을 타원형으로 그림
 		}
 	}
 
@@ -202,5 +212,11 @@ public class Brick extends Structure implements Constants {
 
 	public boolean isDestroyed() {
 		return destroyed;
+	}
+
+	@Override
+	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
