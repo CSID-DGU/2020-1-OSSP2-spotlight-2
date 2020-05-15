@@ -319,7 +319,7 @@ public class Board extends JPanel implements Runnable, Constants {
         }
         try {
             audio = AudioSystem.getAudioInputStream(new File(songs[level-1]).getAbsoluteFile());
-            clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip(null);
             clip.open(audio);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) {
