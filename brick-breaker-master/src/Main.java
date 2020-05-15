@@ -42,7 +42,7 @@ public class Main extends JFrame implements Constants {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		frame = new JFrame("Brick Breaker 1.2");
+		frame = new JFrame("Virus Breaker");
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		frame.setResizable(true);//�룞�쟻 �럹�씠吏�
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
