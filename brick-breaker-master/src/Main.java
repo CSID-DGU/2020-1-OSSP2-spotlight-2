@@ -53,14 +53,16 @@ public class Main extends JFrame implements Constants {
 		board = new Board(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 		//-----------------------------
-		//pane = frame.getContentPane();
-		//pane.add(board);
+		pane = frame.getContentPane();
+		pane.add(board);
+		
+		/*
 		JLabel imageLabel = new JLabel();
 		pane = frame.getContentPane();
 		ImageIcon ii = new ImageIcon(frame.getClass().getResource("/res/giphy.gif"));
 		imageLabel.setIcon(ii);
 		pane.add(imageLabel, java.awt.BorderLayout.CENTER);
-		
+		*/
 		//-----------------------------
 		
 		
