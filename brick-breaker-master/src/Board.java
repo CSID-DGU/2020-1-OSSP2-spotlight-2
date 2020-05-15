@@ -43,6 +43,8 @@ public class Board extends JPanel implements Runnable, Constants {
     //The game
     private Thread game;
 
+    public static int xp = PADDLE_X_START; 
+    public static int yp = PADDLE_Y_START;
     //Songs for background music
     private String songOne = "./dist/wav/One.wav";
     private String songTwo = "./dist/wav/Two.wav";
@@ -162,6 +164,8 @@ public class Board extends JPanel implements Runnable, Constants {
             int x1 = ball.getX();
             int y1 = ball.getY();
 
+            xp = (int)getWidth()/2;
+            yp = (int)getHeight() - 50;
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
@@ -193,18 +197,6 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
-    public void checkItemList() {
-        for (int i = 0; i < items.size(); i++) {
-            Item tempItem = items.get(i);
-            if (paddle.caughtItem(tempItem)) {
-                items.remove(i);
-            }
-            else if (tempItem.getY() > WINDOW_HEIGHT) {
-                items.remove(i);
-            }
-        }
-    }
-
     public void checkLives() {
         if (lives == MIN_LIVES) {
             repaint();
@@ -232,7 +224,19 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
-    /*벽돌에 공이 닿았는지 확인하고 공의 방향을 변경*/
+    public void checkItemList() {
+	    for (int i = 0; i < items.size(); i++) {
+	        Item tempItem = items.get(i);
+	        if (paddle.caughtItem(tempItem)) {
+	            items.remove(i);
+	        }
+	        else if (tempItem.getY() > WINDOW_HEIGHT) {
+	            items.remove(i);
+	        }
+	    }
+	}
+
+	/*벽돌에 공이 닿았는지 확인하고 공의 방향을 변경*/
     public void checkWall(int x1, int y1) {
         if (x1 >= getWidth() - ball.getWidth()) {
             ball.setXDir(-xSpeed);
