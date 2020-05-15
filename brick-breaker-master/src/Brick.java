@@ -46,7 +46,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
 	private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
 
-	ImageIcon icon = new ImageIcon("C:\\image\\corona.png");
+	ImageIcon icon = new ImageIcon("./img/corona.png");
 	Image img = icon.getImage();
 	
 	//Toolkit.getDefaultToolkit().getImage
