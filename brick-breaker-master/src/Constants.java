@@ -24,6 +24,7 @@
 
 //Imports
 import java.awt.Color;
+import java.awt.image.ImageObserver;
 
 //Class definition
 public interface Constants {
