@@ -52,7 +52,7 @@ public interface Constants {
 	public static final int PADDLE_MAX = 140;
 
 	//Bricks
-	public static final int BRICK_WIDTH = 100;
+	public static final int BRICK_WIDTH = 50;
 	public static final int BRICK_HEIGHT = 25;
 	public static final int MAX_BRICKS = 50;
 	public static final int NO_BRICKS = 0;
