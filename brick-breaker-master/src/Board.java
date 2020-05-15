@@ -120,8 +120,20 @@ public class Board extends JPanel implements Runnable, Constants {
     		int numLives = 1;//벽돌을 한번만 맞아도 없어지도록 1로 저장
     		Color color = colors[rand.nextInt(7)][0];//벽돌 color
     		//벽돌 생성
-    		brick[a] = new Brick((getWidth() - (rand.nextInt(getWidth()) + BRICK_WIDTH)), ((getHeight()/3) - (rand.nextInt(getHeight()/3) + 1)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
+    		int ranX = ((int)getWidth() - (rand.nextInt((int)getWidth() - BRICK_WIDTH/2) + BRICK_WIDTH/2));
+    		int ranY = (((int)getHeight()/3) - (rand.nextInt((int)getHeight()/3) + 1));
+    		brick[a] = new Brick(ranX, ranY, BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
 	    	bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
+	    	for (int i = 0; i < 10; i++) {
+	    		if ((brick[i] != null) && (i != a)) {
+		    		if ((brick[i].getX() - BRICK_WIDTH < ranX) && (ranX < brick[i].getX() + BRICK_WIDTH )) {
+		    			if((brick[i].getY() - BRICK_HEIGHT < ranY) && (ranY < brick[i].getY() + BRICK_HEIGHT )) {
+			    			brick[a] = null;
+			    			bricksLeft--;
+		    			}
+		    		}
+		    	}
+	    	}
         }
     }
 

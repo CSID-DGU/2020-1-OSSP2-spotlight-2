@@ -44,3 +44,4 @@ Name: YOon, Score: -500
 >>>>>>> Stashed changes
 
 Name: ddd, Score: 20
+Name: ddd, Score: 20
