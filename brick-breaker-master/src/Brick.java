@@ -82,8 +82,6 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	@Override
 	public void draw(Graphics g) {
 		if (!destroyed) {
-		    
-			//Image scaledImage = img.getScaledInstance(BRICK_WIDTH/2, BRICK_HEIGHT/2,Image.SCALE_DEFAULT); 
 	        g.drawImage(img, x, y, BRICK_WIDTH, BRICK_HEIGHT, this);
 	     
 			//g.setColor(color);
