@@ -23,6 +23,9 @@ public class Board extends JPanel implements Runnable, Constants {
     //Initial Values for some important variables
     private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
      
+    //창의 크기 불러옴
+    int FrameWidth = WINDOW_WIDTH ;
+    int FrameHeight = WINDOW_HEIGHT;
     //공 속도 변수
     public static int xSpeed = 1;
     
@@ -122,14 +125,16 @@ public class Board extends JPanel implements Runnable, Constants {
     		int numLives = 1;//벽돌을 한번만 맞아도 없어지도록 1로 저장
     		Color color = colors[rand.nextInt(7)][0];//벽돌 color
     		//벽돌 생성
-    		int ranX = ((int)getWidth() - (rand.nextInt((int)getWidth() - BRICK_WIDTH/2) + BRICK_WIDTH/2));
-    		int ranY = (((int)getHeight()/3) - (rand.nextInt((int)getHeight()/3) + 1));
-    		brick[a] = new Brick(ranX, ranY, BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
+    		int BrickWidth = FrameWidth/10;
+    		int BrickHeight = FrameWidth/20;
+    		int ranX = (FrameWidth - (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2));
+    		int ranY = ((FrameHeight/3) - (rand.nextInt(FrameHeight/3) + 1));
+    		brick[a] = new Brick(ranX, ranY, BrickWidth - 5, BrickHeight - 5, color, numLives, itemType);
 	    	bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
 	    	for (int i = 0; i < 10; i++) {
 	    		if ((brick[i] != null) && (i != a)) {
-		    		if ((brick[i].getX() - BRICK_WIDTH < ranX) && (ranX < brick[i].getX() + BRICK_WIDTH )) {
-		    			if((brick[i].getY() - BRICK_HEIGHT < ranY) && (ranY < brick[i].getY() + BRICK_HEIGHT )) {
+		    		if ((brick[i].getX() - BrickWidth < ranX) && (ranX < brick[i].getX() + BrickWidth )) {
+		    			if((brick[i].getY() - BrickHeight < ranY) && (ranY < brick[i].getY() + BrickHeight )) {
 			    			brick[a] = null;
 			    			bricksLeft--;
 		    			}
@@ -163,9 +168,9 @@ public class Board extends JPanel implements Runnable, Constants {
         while(true) {
             int x1 = ball.getX();
             int y1 = ball.getY();
-
-            xp = (int)getWidth()/2;
-            yp = (int)getHeight() - 50;
+            
+            FrameWidth = (int)getWidth();
+            FrameHeight = (int)getHeight();
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
