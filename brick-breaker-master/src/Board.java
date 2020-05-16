@@ -14,6 +14,10 @@ import java.awt.Toolkit.*;
 
 //Class definition
 public class Board extends JPanel implements Runnable, Constants {
+	
+	private Dimension lastScreenSize;
+	
+	
     //Items on-screen
     private Paddle paddle;
     public static Ball ball;
@@ -24,8 +28,8 @@ public class Board extends JPanel implements Runnable, Constants {
     private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
      
     //창의 크기 불러옴
-    int FrameWidth = WINDOW_WIDTH ;
-    int FrameHeight = WINDOW_HEIGHT;
+    public static int FrameWidth = WINDOW_WIDTH ;
+    public static int FrameHeight = WINDOW_HEIGHT;
     //공 속도 변수
     public static int xSpeed = 1;
     
@@ -46,8 +50,6 @@ public class Board extends JPanel implements Runnable, Constants {
     //The game
     private Thread game;
 
-    public static int xp = PADDLE_X_START; 
-    public static int yp = PADDLE_Y_START;
     //Songs for background music
     private String songOne = "./dist/wav/One.wav";
     private String songTwo = "./dist/wav/Two.wav";
@@ -77,6 +79,13 @@ public class Board extends JPanel implements Runnable, Constants {
     private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
     private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
 
+    // size of frame width and height
+    public static int frameWidth;
+    public static int frameHeight;
+    
+    //패들의 위치
+    static int paddleX = (FrameWidth/2)-(Main.PADDLE_WIDTH/2);
+    static int paddleY = Board.FrameHeight / 8 * 7;
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
@@ -84,7 +93,10 @@ public class Board extends JPanel implements Runnable, Constants {
         addKeyListener(boardtest1);
         setFocusable(true);
 
-        paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
+       
+        
+        
+        paddle = new Paddle(paddleX, paddleY, Main.PADDLE_WIDTH, Main.PADDLE_HEIGHT, Color.BLACK);
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
@@ -163,12 +175,37 @@ public class Board extends JPanel implements Runnable, Constants {
         isPaused.set(true);
     }
 
+    
+    
     //runs the game
     public void run() {   
+//    	lastScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//
+//        AWTEventListener listener = new AWTEventListener()
+//        {
+//          @Override
+//          public void eventDispatched(AWTEvent event)
+//          {
+//            Dimension actualScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//
+//            if (! lastScreenSize.equals(actualScreenSize))
+//            {
+//              System.out.println("resolution changed");
+//              lastScreenSize = actualScreenSize;
+//
+//              // Here is where you would resize your frame appropriately
+//              // and the LayoutManager would do the rest
+//            }
+//          }
+//        };
+        
+
+        //Toolkit.getDefaultToolkit().addAWTEventListener(listener, AWTEvent.PAINT_EVENT_MASK);
+
         while(true) {
+        	paddle.reset();
             int x1 = ball.getX();
             int y1 = ball.getY();
-            
             FrameWidth = (int)getWidth();
             FrameHeight = (int)getHeight();
             makeBricks();//벽돌 생성
@@ -313,7 +350,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
     /*lives를 하나 읽을 경우 리셋*/
     public void checkIfOut(int y1) {
-        if (y1 > PADDLE_Y_START + 10) {
+        if (y1 > paddleY) {
             lives--; //lives 1 감소
             ball.reset(); //공 리셋
             paddle.reset(); //하단 바 리셋
