@@ -46,8 +46,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
 	private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
 
+	//블록 이미지 img에 저장
 	ImageIcon icon = new ImageIcon("./img/corona.png");
 	Image img = icon.getImage();
+	
 	
 	//Toolkit.getDefaultToolkit().getImage
 	//Constructor
@@ -82,8 +84,9 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	@Override
 	public void draw(Graphics g) {
 		if (!destroyed) {
+            //img에 저장된 블록 이미지를 블록 크기에 맟춰 그리기
 	        g.drawImage(img, x, y, width, height, this);
-	     
+	      
 			//g.setColor(color);
 			//g.fillOval(x, y, width, height); //벽돌을 타원형으로 그림
 		}
