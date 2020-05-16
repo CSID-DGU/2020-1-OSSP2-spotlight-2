@@ -24,12 +24,9 @@
 
 //Imports
 import java.awt.*;
-import java.awt.event.*;
 
 //Class definition
 public class Paddle extends Structure implements Constants {
-	//Variables
-	private int xSpeed;
 
 	//Constructor
 	public Paddle(int x , int y, int width, int height, Color color) {
@@ -43,11 +40,17 @@ public class Paddle extends Structure implements Constants {
 		g.fillRect(x , y, width, height);
 	}
 
+	public void movePaddle() {
+		x = getX();
+		y = Board.FrameHeight -13;
+    }
+	
 	//Places the paddle back in starting position at center of screen(하단 바 리셋) 
 	public void reset() 
 	{
 		x = (Board.FrameWidth/2)-(Main.PADDLE_WIDTH/2);
-		y = Main.PADDLE_Y_START;
+		y = Board.FrameHeight / 8 * 7;
+
 		setWidth(Main.PADDLE_WIDTH); //하단 바 크기 초기화
 		setColor(Color.BLACK);//하단 바 색상 BLACK으로 초기화
 		Board.reverse = false;//리버스 모드 비활성화
