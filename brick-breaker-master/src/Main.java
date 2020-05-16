@@ -33,7 +33,6 @@ public class Main extends JFrame implements Constants {
 	private static Board board;
 	private static Container pane;
 	private static Dimension dim;
-	
 	private static JPanel contentPane;
 	
 	public static int PADDLE_WIDTH = 70;
