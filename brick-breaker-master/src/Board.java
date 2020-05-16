@@ -23,6 +23,9 @@ public class Board extends JPanel implements Runnable, Constants {
     //Initial Values for some important variables
     private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
      
+    //창의 크기 불러옴
+    int FrameWidth = WINDOW_WIDTH ;
+    int FrameHeight = WINDOW_HEIGHT;
     //공 속도 변수
     public static int xSpeed = 1;
     
@@ -43,6 +46,8 @@ public class Board extends JPanel implements Runnable, Constants {
     //The game
     private Thread game;
 
+    public static int xp = PADDLE_X_START; 
+    public static int yp = PADDLE_Y_START;
     //Songs for background music
     private String songOne = "./dist/wav/One.wav";
     private String songTwo = "./dist/wav/Two.wav";
@@ -120,14 +125,16 @@ public class Board extends JPanel implements Runnable, Constants {
     		int numLives = 1;//벽돌을 한번만 맞아도 없어지도록 1로 저장
     		Color color = colors[rand.nextInt(7)][0];//벽돌 color
     		//벽돌 생성
-    		int ranX = ((int)getWidth() - (rand.nextInt((int)getWidth() - BRICK_WIDTH/2) + BRICK_WIDTH/2));
-    		int ranY = (((int)getHeight()/3) - (rand.nextInt((int)getHeight()/3) + 1));
-    		brick[a] = new Brick(ranX, ranY, BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
+    		int BrickWidth = FrameWidth/10;
+    		int BrickHeight = FrameWidth/20;
+    		int ranX = (FrameWidth - (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2));
+    		int ranY = ((FrameHeight/3) - (rand.nextInt(FrameHeight/3) + 1));
+    		brick[a] = new Brick(ranX, ranY, BrickWidth - 5, BrickHeight - 5, color, numLives, itemType);
 	    	bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
 	    	for (int i = 0; i < 10; i++) {
 	    		if ((brick[i] != null) && (i != a)) {
-		    		if ((brick[i].getX() - BRICK_WIDTH < ranX) && (ranX < brick[i].getX() + BRICK_WIDTH )) {
-		    			if((brick[i].getY() - BRICK_HEIGHT < ranY) && (ranY < brick[i].getY() + BRICK_HEIGHT )) {
+		    		if ((brick[i].getX() - BrickWidth < ranX) && (ranX < brick[i].getX() + BrickWidth )) {
+		    			if((brick[i].getY() - BrickHeight < ranY) && (ranY < brick[i].getY() + BrickHeight )) {
 			    			brick[a] = null;
 			    			bricksLeft--;
 		    			}
@@ -161,7 +168,9 @@ public class Board extends JPanel implements Runnable, Constants {
         while(true) {
             int x1 = ball.getX();
             int y1 = ball.getY();
-
+            
+            FrameWidth = (int)getWidth();
+            FrameHeight = (int)getHeight();
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
@@ -193,18 +202,6 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
-    public void checkItemList() {
-        for (int i = 0; i < items.size(); i++) {
-            Item tempItem = items.get(i);
-            if (paddle.caughtItem(tempItem)) {
-                items.remove(i);
-            }
-            else if (tempItem.getY() > WINDOW_HEIGHT) {
-                items.remove(i);
-            }
-        }
-    }
-
     public void checkLives() {
         if (lives == MIN_LIVES) {
             repaint();
@@ -232,7 +229,19 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
-    /*벽돌에 공이 닿았는지 확인하고 공의 방향을 변경*/
+    public void checkItemList() {
+	    for (int i = 0; i < items.size(); i++) {
+	        Item tempItem = items.get(i);
+	        if (paddle.caughtItem(tempItem)) {
+	            items.remove(i);
+	        }
+	        else if (tempItem.getY() > WINDOW_HEIGHT) {
+	            items.remove(i);
+	        }
+	    }
+	}
+
+	/*벽돌에 공이 닿았는지 확인하고 공의 방향을 변경*/
     public void checkWall(int x1, int y1) {
         if (x1 >= getWidth() - ball.getWidth()) {
             ball.setXDir(-xSpeed);

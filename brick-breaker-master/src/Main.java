@@ -29,7 +29,7 @@ import java.awt.*;
 //Class definition
 public class Main extends JFrame implements Constants {
 	//Variables
-	private static JFrame frame;
+	public static JFrame frame;
 	private static Board board;
 	private static Container pane;
 	private static Dimension dim;
