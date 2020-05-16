@@ -42,7 +42,7 @@ public class Paddle extends Structure implements Constants {
 
 	public void movePaddle() {
 		x = getX();
-		y = Board.FrameHeight / 8 * 7;
+		y = Board.FrameHeight -13;
     }
 	
 	//Places the paddle back in starting position at center of screen(하단 바 리셋) 

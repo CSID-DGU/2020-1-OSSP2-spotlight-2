@@ -174,6 +174,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
         while(true) {
         	paddle.movePaddle();
+        	paddle.draw(getGraphics());
             int x1 = ball.getX();
             int y1 = ball.getY();
             FrameWidth = (int)getWidth();
