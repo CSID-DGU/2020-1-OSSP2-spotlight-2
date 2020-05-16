@@ -36,6 +36,13 @@ public class Main extends JFrame implements Constants {
 	
 	private static JPanel contentPane;
 	
+	public static int PADDLE_WIDTH = 70;
+	public static int PADDLE_HEIGHT = 10;
+	public static int PADDLE_RIGHT_BOUND = 430;
+	public static int PADDLE_X_START = 225;
+	public static int PADDLE_Y_START = 450;
+	public static int PADDLE_MIN = 35;
+	public static int PADDLE_MAX = 140;
 	
 	//Build and run the game
 	public static void main(String[] args) {
