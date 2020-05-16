@@ -59,7 +59,7 @@ public class Main extends JFrame implements Constants {
 		/*
 		JLabel imageLabel = new JLabel();
 		pane = frame.getContentPane();
-		ImageIcon ii = new ImageIcon(frame.getClass().getResource("/res/giphy.gif"));
+		ImageIcon ii = new ImageIcon(frame.getClass().getResource("./img/giphy.gif"));
 		imageLabel.setIcon(ii);
 		pane.add(imageLabel, java.awt.BorderLayout.CENTER);
 		*/
