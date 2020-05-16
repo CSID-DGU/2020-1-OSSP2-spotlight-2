@@ -46,8 +46,6 @@ public class Board extends JPanel implements Runnable, Constants {
     //The game
     private Thread game;
 
-    public static int xp = PADDLE_X_START; 
-    public static int yp = PADDLE_Y_START;
     //Songs for background music
     private String songOne = "./dist/wav/One.wav";
     private String songTwo = "./dist/wav/Two.wav";

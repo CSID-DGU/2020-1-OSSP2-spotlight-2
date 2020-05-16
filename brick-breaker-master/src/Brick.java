@@ -84,20 +84,8 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	@Override
 	public void draw(Graphics g) {
 		if (!destroyed) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 	        //img에 저장된 블록 이미지를 블록 크기에 맟춰 그리기
-			g.drawImage(img, x, y, BRICK_WIDTH, BRICK_HEIGHT, this);
-	        
-=======
-	        g.drawImage(img, x, y, width, height, this);
-	     
->>>>>>> kwan
-=======
-            //img에 저장된 블록 이미지를 블록 크기에 맟춰 그리기
-	        g.drawImage(img, x, y, width, height, this);
-	      
->>>>>>> 24efe6f135572ad13a85b9d5d53ec3b1fe823e25
+			g.drawImage(img, x, y, width, height, this);
 			//g.setColor(color);
 			//g.fillOval(x, y, width, height); //벽돌을 타원형으로 그림
 		}
@@ -202,6 +190,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		return false;
 	}
 
+	
 	//Mutator methods
 	public void setLives(int lives) {
 		this.lives = lives;
