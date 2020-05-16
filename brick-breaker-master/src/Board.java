@@ -14,6 +14,10 @@ import java.awt.Toolkit.*;
 
 //Class definition
 public class Board extends JPanel implements Runnable, Constants {
+	
+	private Dimension lastScreenSize;
+	
+	
     //Items on-screen
     private Paddle paddle;
     public static Ball ball;
@@ -79,14 +83,18 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int frameWidth;
     public static int frameHeight;
     
+    //패들의 위치
+    static int paddleX = (FrameWidth/2)-(Main.PADDLE_WIDTH/2);
+    static int paddleY = Board.FrameHeight / 8 * 7;
+
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
         //addKeyListener(new BoardListener());
         addKeyListener(boardtest1);
         setFocusable(true);
-
-        paddle = new Paddle((FrameWidth/2)-(Main.PADDLE_WIDTH/2), Main.PADDLE_Y_START, Main.PADDLE_WIDTH, Main.PADDLE_HEIGHT, Color.BLACK);
+        
+        paddle = new Paddle(paddleX, paddleY, Main.PADDLE_WIDTH, Main.PADDLE_HEIGHT, Color.BLACK);
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
@@ -165,9 +173,35 @@ public class Board extends JPanel implements Runnable, Constants {
         isPaused.set(true);
     }
 
+    
+    
     //runs the game
     public void run() {   
+//    	lastScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//
+//        AWTEventListener listener = new AWTEventListener()
+//        {
+//          @Override
+//          public void eventDispatched(AWTEvent event)
+//          {
+//            Dimension actualScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//
+//            if (! lastScreenSize.equals(actualScreenSize))
+//            {
+//              System.out.println("resolution changed");
+//              lastScreenSize = actualScreenSize;
+//
+//              // Here is where you would resize your frame appropriately
+//              // and the LayoutManager would do the rest
+//            }
+//          }
+//        };
+        
+
+        //Toolkit.getDefaultToolkit().addAWTEventListener(listener, AWTEvent.PAINT_EVENT_MASK);
+
         while(true) {
+        	paddle.reset();
             int x1 = ball.getX();
             int y1 = ball.getY();
             FrameWidth = (int)getWidth();
@@ -314,7 +348,9 @@ public class Board extends JPanel implements Runnable, Constants {
 
     /*lives를 하나 읽을 경우 리셋*/
     public void checkIfOut(int y1) {
-        if (y1 > Main.PADDLE_Y_START + 10) {
+
+        if (y1 > paddleY) {
+
             lives--; //lives 1 감소
             ball.reset(); //공 리셋
             paddle.reset(); //하단 바 리셋
