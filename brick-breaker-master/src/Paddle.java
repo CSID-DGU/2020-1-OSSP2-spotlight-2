@@ -30,7 +30,7 @@ import java.awt.event.*;
 public class Paddle extends Structure implements Constants {
 	//Variables
 	private int xSpeed;
-
+	private int xpos = (Board.FrameWidth/2)-(Main.PADDLE_WIDTH/2);
 	//Constructor
 	public Paddle(int x , int y, int width, int height, Color color) {
 		super(x, y, width, height, color);
@@ -40,13 +40,13 @@ public class Paddle extends Structure implements Constants {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(color);
-		g.fillRect(x , y, width, height);
+		g.fillRect((Board.FrameWidth/2) - (Main.PADDLE_WIDTH/2), y, width, height);
 	}
 
 	//Places the paddle back in starting position at center of screen(하단 바 리셋) 
 	public void reset() 
 	{
-		x = (Board.FrameWidth/2)-(Main.PADDLE_WIDTH/2);
+		x = xpos;
 		y = Main.PADDLE_Y_START;
 		setWidth(Main.PADDLE_WIDTH); //하단 바 크기 초기화
 		setColor(Color.BLACK);//하단 바 색상 BLACK으로 초기화
@@ -54,11 +54,11 @@ public class Paddle extends Structure implements Constants {
 	}
 	//하단 바를 왼쪽으로 이동(숫자를 조절해 하단 바의 속도 조절)
 	public void moveLeft() {
-		x -= 2;
+		xpos -= 2;
 	}
 	//하단바를 오른쪽으로 이동(숫자를 조절해 하단 바의 속도 조절)
 	public void moveRight() {
-		x += 2;
+		xpos += 2;
 	}
 	//Checks if the ball hit the paddle
 	public boolean hitPaddle(int ballX, int ballY) {
