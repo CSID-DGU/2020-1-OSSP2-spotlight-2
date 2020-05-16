@@ -10,15 +10,14 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.TreeMap;
-import java.awt.Toolkit.*;
 
 //Class definition
 public class Board extends JPanel implements Runnable, Constants {
+	
     //Items on-screen
     private Paddle paddle;
     public static Ball ball;
     private Brick[] brick = new Brick[10];
-    //BoardListener2 boardtest = new BoardListener2();
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
     private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
@@ -79,14 +78,18 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int frameWidth;
     public static int frameHeight;
     
+    //패들의 위치
+    static int paddleX = (FrameWidth/2)-(Main.PADDLE_WIDTH/2);
+    static int paddleY = Board.FrameHeight / 8 * 7;
+
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
         //addKeyListener(new BoardListener());
         addKeyListener(boardtest1);
         setFocusable(true);
-
-        paddle = new Paddle((FrameWidth/2)-(Main.PADDLE_WIDTH/2), Main.PADDLE_Y_START, Main.PADDLE_WIDTH, Main.PADDLE_HEIGHT, Color.BLACK);
+        
+        paddle = new Paddle(paddleX, paddleY, Main.PADDLE_WIDTH, Main.PADDLE_HEIGHT, Color.BLACK);
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
@@ -165,9 +168,13 @@ public class Board extends JPanel implements Runnable, Constants {
         isPaused.set(true);
     }
 
+
     //runs the game
     public void run() {   
+
         while(true) {
+        	paddle.movePaddle();
+        	paddle.draw(getGraphics());
             int x1 = ball.getX();
             int y1 = ball.getY();
             FrameWidth = (int)getWidth();
@@ -314,7 +321,8 @@ public class Board extends JPanel implements Runnable, Constants {
 
     /*lives를 하나 읽을 경우 리셋*/
     public void checkIfOut(int y1) {
-        if (y1 > Main.PADDLE_Y_START + 10) {
+
+        if (y1 > paddle.getY()) {
             lives--; //lives 1 감소
             ball.reset(); //공 리셋
             paddle.reset(); //하단 바 리셋
