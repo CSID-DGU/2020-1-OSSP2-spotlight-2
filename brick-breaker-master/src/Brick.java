@@ -84,8 +84,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	@Override
 	public void draw(Graphics g) {
 		if (!destroyed) {
+
 	        //img에 저장된 블록 이미지를 블록 크기에 맟춰 그리기
 			g.drawImage(img, x, y, width, height, this);
+
 			//g.setColor(color);
 			//g.fillOval(x, y, width, height); //벽돌을 타원형으로 그림
 		}

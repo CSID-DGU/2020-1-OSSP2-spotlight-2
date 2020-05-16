@@ -44,13 +44,13 @@ public interface Constants {
 	public static final int BALL_Y_START = 245;
 
 	//Paddle
-	public static final int PADDLE_WIDTH = 70;
-	public static final int PADDLE_HEIGHT = 10;
-	public static final int PADDLE_RIGHT_BOUND = 430;
-	public static final int PADDLE_X_START = 225;
-	public static final int PADDLE_Y_START = 450;
-	public static final int PADDLE_MIN = 35;
-	public static final int PADDLE_MAX = 140;
+//	public static final int PADDLE_WIDTH = 70;
+//	public static final int PADDLE_HEIGHT = 10;
+//	public static final int PADDLE_RIGHT_BOUND = 430;
+//	public static final int PADDLE_X_START = 225;
+//	public static final int PADDLE_Y_START = 450;
+//	public static final int PADDLE_MIN = 35;
+//	public static final int PADDLE_MAX = 140;
 
 	//Bricks
 	public static final int BRICK_WIDTH = 50;
