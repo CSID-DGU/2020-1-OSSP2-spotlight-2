@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Name: Player10, Score: 1657
 Name: Player6, Score: 1631
 Name: Player3, Score: 1549
@@ -48,3 +49,9 @@ Name: ddd, Score: 20
 Name: dddd, Score: 13
 Name: asd, Score: 3
 Name: asc, Score: 1
+=======
+Name: , Score: 14
+Name: , Score: 13
+>>>>>>> master
+
+Name: as, Score: 14
