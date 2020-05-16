@@ -86,11 +86,7 @@ public class Board extends JPanel implements Runnable, Constants {
         addKeyListener(boardtest1);
         setFocusable(true);
 
-<<<<<<< Updated upstream
         paddle = new Paddle((FrameWidth/2)-(Main.PADDLE_WIDTH/2), Main.PADDLE_Y_START, Main.PADDLE_WIDTH, Main.PADDLE_HEIGHT, Color.BLACK);
-=======
-        paddle = new Paddle(Main.PADDLE_X_START + frameWidth, Main.PADDLE_Y_START, Main.PADDLE_WIDTH + frameWidth / 2, Main.PADDLE_HEIGHT, Color.BLACK);
->>>>>>> Stashed changes
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
@@ -174,14 +170,8 @@ public class Board extends JPanel implements Runnable, Constants {
         while(true) {
             int x1 = ball.getX();
             int y1 = ball.getY();
-<<<<<<< Updated upstream
-            
             FrameWidth = (int)getWidth();
             FrameHeight = (int)getHeight();
-=======
-            frameWidth = (int)getWidth();
-            frameHeight = (int)getHeight();
->>>>>>> Stashed changes
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
