@@ -15,9 +15,9 @@ import java.util.TreeMap;
 public class Board extends JPanel implements Runnable, Constants {
 	
     //Items on-screen
-    private Paddle paddle;
+    public static Paddle paddle;
     public static Ball ball;
-    private Brick[] brick = new Brick[10];
+    public static Brick[] brick = new Brick[10];
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
     private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
@@ -62,7 +62,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //Data structures to handle high scores
     private ArrayList<Item> items = new ArrayList<Item>();
-    private AtomicBoolean isPaused = new AtomicBoolean(true);
+    public static AtomicBoolean isPaused = new AtomicBoolean(true);
 
     //Colors for the bricks
     private Color[] blueColors = {BLUE_BRICK_ONE, BLUE_BRICK_TWO, BLUE_BRICK_THREE, Color.BLACK};
@@ -89,7 +89,7 @@ public class Board extends JPanel implements Runnable, Constants {
         addKeyListener(boardtest1);
         setFocusable(true);
         
-        paddle = new Paddle(paddleX, paddleY, Main.PADDLE_WIDTH, Main.PADDLE_HEIGHT, Color.BLACK);
+        paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
@@ -113,6 +113,7 @@ public class Board extends JPanel implements Runnable, Constants {
         game = new Thread(this);
         game.start();
         stop();
+        repaint();
         isPaused.set(true);
     }
 
@@ -174,7 +175,6 @@ public class Board extends JPanel implements Runnable, Constants {
 
         while(true) {
         	paddle.movePaddle();
-        	paddle.draw(getGraphics());
             int x1 = ball.getX();
             int y1 = ball.getY();
             FrameWidth = (int)getWidth();
@@ -189,6 +189,10 @@ public class Board extends JPanel implements Runnable, Constants {
             paddleMove();//하단 바 이동 메소드 실행
             dropItems();
             checkItemList();
+            for (int i = 0; i < 10; i++) {
+            	if (brick[i] != null)
+            		brick[i].changeBrickSet();
+            }
             repaint();
             try {
                 game.sleep(waitTime);

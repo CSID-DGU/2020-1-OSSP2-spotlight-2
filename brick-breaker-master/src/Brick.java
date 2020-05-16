@@ -192,7 +192,12 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		return false;
 	}
 
-	
+	public void changeBrickSet() {
+				//setX(getX() + Board.FrameWidth);
+				//brick[i].setY();
+				setWidth(Board.FrameWidth/10);
+				setHeight(Board.FrameWidth/20);
+	}
 	//Mutator methods
 	public void setLives(int lives) {
 		this.lives = lives;

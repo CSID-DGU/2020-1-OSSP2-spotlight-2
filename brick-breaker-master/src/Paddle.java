@@ -39,14 +39,7 @@ public class Paddle extends Structure implements Constants {
 		g.setColor(color);
 		g.fillRect(x, y, width, height);
 	}
-//
-//<<<<<<< HEAD
-//	//Places the paddle back in starting position at center of screen(하단 바 리셋)
-//	public void reset() {
-//		x = PADDLE_X_START;
-//		y = PADDLE_Y_START;
-//		setWidth(PADDLE_WIDTH); //하단 바 크기 초기화
-//=======
+
 	public void movePaddle() {
 		x = getX();
 		y = Board.FrameHeight-13;
@@ -57,14 +50,14 @@ public class Paddle extends Structure implements Constants {
 	//Places the paddle back in starting position at center of screen(하단 바 리셋) 
 	public void reset() 
 	{
-		x = (Board.FrameWidth/2)-(Main.PADDLE_WIDTH/2);
+		x = (Board.FrameWidth/2)-(PADDLE_WIDTH/2);
 		y = Board.FrameHeight -13;
 
-		setWidth(Main.PADDLE_WIDTH); //하단 바 크기 초기화
->>>>>>> master
+		setWidth((int)((70.0/486.0)*Board.FrameWidth)); //하단 바 크기 초기화
 		setColor(Color.BLACK);//하단 바 색상 BLACK으로 초기화
 		Board.reverse = false;//리버스 모드 비활성화
 	}
+	
 	//하단 바를 왼쪽으로 이동(숫자를 조절해 하단 바의 속도 조절)
 	public void moveLeft() {
 		x -= 2;
