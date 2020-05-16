@@ -45,3 +45,4 @@ Name: YOon, Score: -500
 
 Name: ddd, Score: 20
 Name: ddd, Score: 20
+Name: dddd, Score: 13
