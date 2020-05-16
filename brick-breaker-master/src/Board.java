@@ -175,35 +175,12 @@ public class Board extends JPanel implements Runnable, Constants {
         isPaused.set(true);
     }
 
-    
-    
+
     //runs the game
     public void run() {   
-//    	lastScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//
-//        AWTEventListener listener = new AWTEventListener()
-//        {
-//          @Override
-//          public void eventDispatched(AWTEvent event)
-//          {
-//            Dimension actualScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//
-//            if (! lastScreenSize.equals(actualScreenSize))
-//            {
-//              System.out.println("resolution changed");
-//              lastScreenSize = actualScreenSize;
-//
-//              // Here is where you would resize your frame appropriately
-//              // and the LayoutManager would do the rest
-//            }
-//          }
-//        };
-        
-
-        //Toolkit.getDefaultToolkit().addAWTEventListener(listener, AWTEvent.PAINT_EVENT_MASK);
 
         while(true) {
-        	paddle.reset();
+        	paddle.movePaddle();
             int x1 = ball.getX();
             int y1 = ball.getY();
             FrameWidth = (int)getWidth();

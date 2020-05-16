@@ -24,12 +24,9 @@
 
 //Imports
 import java.awt.*;
-import java.awt.event.*;
 
 //Class definition
 public class Paddle extends Structure implements Constants {
-	//Variables
-	private int xSpeed;
 
 	//Constructor
 	public Paddle(int x , int y, int width, int height, Color color) {
@@ -43,6 +40,15 @@ public class Paddle extends Structure implements Constants {
 		g.fillRect(x , y, width, height);
 	}
 
+	public void movePaddle() {
+		x = getX();
+		y = Board.FrameHeight / 8 * 7;
+    }
+	
+	public int getX() {
+		return x;
+	}
+	
 	//Places the paddle back in starting position at center of screen(하단 바 리셋) 
 	public void reset() 
 	{
