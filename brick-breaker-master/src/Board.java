@@ -10,19 +10,14 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.TreeMap;
-import java.awt.Toolkit.*;
 
 //Class definition
 public class Board extends JPanel implements Runnable, Constants {
-	
-	private Dimension lastScreenSize;
-	
 	
     //Items on-screen
     private Paddle paddle;
     public static Ball ball;
     private Brick[] brick = new Brick[10];
-    //BoardListener2 boardtest = new BoardListener2();
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
     private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
@@ -327,7 +322,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
     /*lives를 하나 읽을 경우 리셋*/
     public void checkIfOut(int y1) {
-        if (y1 > paddleY) {
+        if (y1 > paddle.getY()) {
             lives--; //lives 1 감소
             ball.reset(); //공 리셋
             paddle.reset(); //하단 바 리셋
