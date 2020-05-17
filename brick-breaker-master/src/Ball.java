@@ -32,8 +32,8 @@ public class Ball extends Structure implements Constants {
 	private int xDir = 1, yDir = -1;
 
 	//Constructor
-	public Ball(int x, int y, int width, int height, Color color) {
-		super(x, y, width, height, color);
+	public Ball(int x, int y, int width, int height, Color color, double rateX, double rateY) {
+		super(x, y, width, height, color, rateX, rateY);
 		setOnScreen(true);
 	}
 
@@ -67,7 +67,6 @@ public class Ball extends Structure implements Constants {
 	}
 
 	public void setYDir(int yDir) {
-		this.yDir = yDir;
 	}
 
 	public void setOnScreen(boolean onScreen) {

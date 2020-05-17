@@ -28,16 +28,19 @@ import java.awt.*;
 //Class definition
 public class Structure implements Constants {
 	//Variables
-	protected int x, y, width, height, randX, randY;
+	protected int x, y, width, height;
+	protected double rateX, rateY;
 	protected Color color;
 
 	//Constructor
-	public Structure(int x, int y, int width, int height, Color color) {
+	public Structure(int x, int y, int width, int height, Color color, double rateX, double rateY) {
 		setX(x);
 		setY(y);
 		setWidth(width);
 		setHeight(height);
 		setColor(color);
+		setRateX(rateX);
+		setRateY(rateY);
 	}
 
 
@@ -68,6 +71,14 @@ public class Structure implements Constants {
 		this.color = color;
 	}
 
+	public void setRateX(double rateX) {
+		this.rateX = rateX;
+	}
+	
+	public void setRateY(double rateY) {
+		this.rateY = rateY;
+	}
+	
 	//Accessor methods
 	public int getX() {
 		return x;
@@ -87,5 +98,13 @@ public class Structure implements Constants {
 	
 	public Color getColor() {
 		return color;
+	}
+	
+	public double getRateX() {
+		return rateX;
+	}
+	
+	public double getRateY() {
+		return rateY;
 	}
 }
