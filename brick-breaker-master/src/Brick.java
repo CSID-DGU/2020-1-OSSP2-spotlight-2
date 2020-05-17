@@ -33,7 +33,7 @@ import javax.swing.ImageIcon;
 //Class definition
 public class Brick extends Structure implements Constants, ImageObserver {
 	//Variables
-	private int lives, hits;
+	private int lives, hits, randX, randY;
 	private boolean destroyed;
 	public Item item;
 	private Color itemColor;
@@ -53,8 +53,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	
 	//Toolkit.getDefaultToolkit().getImage
 	//Constructor
-	public Brick(int x, int y, int width, int height, Color color, int lives, int itemType) {
+	public Brick(int x, int y, int width, int height, Color color, int randX, int randY, int lives, int itemType) {
 		super(x, y, width, height, color);
+		setRandX(randX);
+		setRandY(randY);
 		setLives(lives);
 		setHits(0);
 		setDestroyed(false);
@@ -194,8 +196,8 @@ public class Brick extends Structure implements Constants, ImageObserver {
 
 	//프레임 크기에 따른 벽돌 크기, 좌표 재설정
 	public void changeBrickSet() {
-				//setX(getX() + Board.FrameWidth);
-				//brick[i].setY();
+				//setX(Board.FrameWidth - getRandX());
+				//setY(Board.FrameHeight/3 - getRandY());
 				setWidth(Board.FrameWidth/10);
 				setHeight(Board.FrameWidth/20);
 	}
@@ -207,7 +209,15 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	public void setHits(int hits) {
 		this.hits = hits;
 	}
-
+	
+	public void setRandX(int randX) {
+		this.randX = randX;
+	}
+	
+	public void setRandY(int randY) {
+		this.randY = randY;
+	}
+	
 	public void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
 	}
@@ -220,7 +230,15 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	public int getHits() {
 		return hits;
 	}
-
+	
+	public int getRandX() {
+		return randX;
+	}
+	
+	public int getRandY() {
+		return randY;
+	}
+	
 	public boolean isDestroyed() {
 		return destroyed;
 	}

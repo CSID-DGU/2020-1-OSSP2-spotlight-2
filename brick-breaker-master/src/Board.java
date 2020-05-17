@@ -79,7 +79,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int frameHeight;
     
     //패들의 위치
-    static int paddleX = (FrameWidth/2)-(Main.PADDLE_WIDTH/2);
+    static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
     static int paddleY = Board.FrameHeight / 8 * 7;
 
     //Constructor
@@ -133,16 +133,18 @@ public class Board extends JPanel implements Runnable, Constants {
     		//벽돌 생성
     		int BrickWidth = FrameWidth/10;
     		int BrickHeight = FrameWidth/20;
-    		int ranX = FrameWidth/(a+1);//(FrameWidth - (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2));
-    		int ranY = FrameHeight/(a+1);//((FrameHeight/3) - (rand.nextInt(FrameHeight/3) + 1));
-    		brick[a] = new Brick(ranX, ranY, BrickWidth - 5, BrickHeight - 5, color, numLives, itemType);
+    		int ranX = (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2);
+    		int ranY = (rand.nextInt(FrameHeight/3) + 1);
+    		int brickX = FrameWidth - ranX;
+    		int brickY = FrameHeight/3 - ranY;
+    		brick[a] = new Brick(brickX, brickY, BrickWidth - 5, BrickHeight - 5, color, ranX, ranY, numLives, itemType);
 	    	bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
 	    	//벽돌 위치 중복 검사
 	    	for (int i = 0; i < 10; i++) {
 	    		if ((brick[i] != null) && (i != a)) { //벽돌이 존재하면서 비교 대상이 자신이 아닌 경우
 	    			//두 벽돌이 겹칠 경우
-		    		if ((brick[i].getX() - BrickWidth < ranX) && (ranX < brick[i].getX() + BrickWidth )) {
-		    			if((brick[i].getY() - BrickHeight < ranY) && (ranY < brick[i].getY() + BrickHeight )) {
+		    		if ((brick[i].getX() - BrickWidth < brickX) && (brickX < brick[i].getX() + BrickWidth )) {
+		    			if((brick[i].getY() - BrickHeight < brickY) && (brickY < brick[i].getY() + BrickHeight )) {
 			    			brick[a] = null; //벽돌 삭제
 			    			bricksLeft--;
 		    			}
