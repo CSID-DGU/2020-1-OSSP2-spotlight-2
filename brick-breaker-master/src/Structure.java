@@ -28,7 +28,7 @@ import java.awt.*;
 //Class definition
 public class Structure implements Constants {
 	//Variables
-	protected int x, y, width, height, randX, randY;
+	protected int x, y, width, height;
 	protected Color color;
 
 	//Constructor
@@ -67,7 +67,7 @@ public class Structure implements Constants {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-
+	
 	//Accessor methods
 	public int getX() {
 		return x;

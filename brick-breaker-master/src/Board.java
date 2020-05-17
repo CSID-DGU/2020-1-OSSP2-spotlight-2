@@ -80,7 +80,7 @@ public class Board extends JPanel implements Runnable, Constants {
     
     //패들의 위치
     static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
-    static int paddleY = FrameHeight-13;
+    static int paddleY = FrameHeight - 13;
 
     //Constructor
     public Board(int width, int height) {
@@ -182,6 +182,7 @@ public class Board extends JPanel implements Runnable, Constants {
             int y1 = ball.getY();
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
+            System.out.println(FrameWidth);
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);

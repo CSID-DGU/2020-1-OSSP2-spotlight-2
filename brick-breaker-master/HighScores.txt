@@ -1,4 +1,8 @@
+Name: ddd, Score: 28
+Name: dddd, Score: 25
+Name: ddd, Score: 23
 Name: ddddd, Score: 21
+Name: ddd, Score: 21
 Name: , Score: 14
 Name: , Score: 13
 Name: fff, Score: 12
@@ -18,6 +22,8 @@ Name: fff, Score: 12
 Name: fff, Score: 12
 Name: fff, Score: 12
 Name: fff, Score: 12
+Name: dddd, Score: 9
+Name: dddd, Score: 7
 Name: ddd, Score: 6
 Name: ddd, Score: 6
 Name: ddd, Score: 6
@@ -228,3 +234,6 @@ Name: gggg, Score: 1
 Name: gggg, Score: 1
 Name: gggg, Score: 1
 Name: ddd, Score: 0
+Name: dddd, Score: 0
+Name: dddd, Score: 0
+Name: dddd, Score: 0
