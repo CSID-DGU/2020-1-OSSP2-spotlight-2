@@ -80,7 +80,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		}
 
 		//Places an item of specified type inside the brick to fall when the brick is destroyed
-		item = new Item(x + (width / 4), y + (height / 4), ITEM_WIDTH, ITEM_HEIGHT, itemColor, itemType);
+		item = new Item(x + (width / 4), y + (height / 4), Board.FrameWidth/25, Board.FrameHeight/50 , itemColor, itemType);
 	}
 
 	//Draws a brick
@@ -197,11 +197,15 @@ public class Brick extends Structure implements Constants, ImageObserver {
 
 	//프레임 크기에 따른 벽돌 크기, 좌표 재설정
 	public void changeBrickSet() {
-			System.out.println(getRateX());
 			setX((int)((double)Board.FrameWidth/getRateX()));
 			setY((int)((double)(Board.FrameHeight/3)/getRateY()));
 			setWidth(Board.FrameWidth/10);
 			setHeight(Board.FrameWidth/20);
+			//벽돌의 위치 이동에 따라 아이템 크기 좌표 재설정
+			item.setX(getX() + (width / 4));
+			item.setY(getY() + (height / 4));
+			item.setWidth(Board.FrameWidth/25);
+			item.setHeight(Board.FrameHeight/50);
 	}
 	
 	//Mutator methods

@@ -74,6 +74,7 @@ public class Ball extends Structure implements Constants {
 	}
 
 	public void setYDir(int yDir) {
+		this.yDir = yDir;
 	}
 
 	public void setOnScreen(boolean onScreen) {
