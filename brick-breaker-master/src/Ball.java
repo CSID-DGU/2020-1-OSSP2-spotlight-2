@@ -56,9 +56,9 @@ public class Ball extends Structure implements Constants {
 	//Moves the ball
 	public void move() {
 		x += xDir;
-		System.out.printf("xDir : %d",xDir);
+		//System.out.printf("xDir : %lf",xDir);
 		y += yDir;
-		System.out.printf("yDir : %d",yDir);
+		//System.out.printf("yDir : %lf",yDir);
 	}
 
 	//Resets the ball to original position at center of screen

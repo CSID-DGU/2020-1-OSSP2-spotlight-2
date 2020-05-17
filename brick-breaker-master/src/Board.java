@@ -182,7 +182,6 @@ public class Board extends JPanel implements Runnable, Constants {
             int y1 = ball.getY();
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
-            System.out.println(FrameWidth);
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
