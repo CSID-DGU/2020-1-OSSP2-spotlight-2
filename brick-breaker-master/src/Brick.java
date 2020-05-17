@@ -80,7 +80,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		}
 
 		//Places an item of specified type inside the brick to fall when the brick is destroyed
-		item = new Item(x + (width / 4), y + (height / 4), ITEM_WIDTH, ITEM_HEIGHT, itemColor, itemType);
+		item = new Item(x + (width / 4), y + (height / 4), Board.FrameWidth/25, Board.FrameHeight/50 , itemColor, itemType);
 	}
 
 	//Draws a brick
@@ -201,6 +201,11 @@ public class Brick extends Structure implements Constants, ImageObserver {
 			setY((int)((double)(Board.FrameHeight/3)/getRateY()));
 			setWidth(Board.FrameWidth/10);
 			setHeight(Board.FrameWidth/20);
+			//벽돌의 위치 이동에 따라 아이템 크기 좌표 재설정
+			item.setX(getX() + (width / 4));
+			item.setY(getY() + (height / 4));
+			item.setWidth(Board.FrameWidth/25);
+			item.setHeight(Board.FrameHeight/50);
 	}
 	
 	//Mutator methods
@@ -212,6 +217,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		this.hits = hits;
 	}
 	
+	public void setDestroyed(boolean destroyed) {
+		this.destroyed = destroyed;
+	}
+
 	public void setRateX(double rateX) {
 		this.rateX = rateX;
 	}
@@ -220,10 +229,6 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		this.rateY = rateY;
 	}
 	
-	public void setDestroyed(boolean destroyed) {
-		this.destroyed = destroyed;
-	}
-
 	//Accessor methods
 	public int getLives() {
 		return lives;
@@ -233,6 +238,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		return hits;
 	}
 	
+	public boolean isDestroyed() {
+		return destroyed;
+	}
+
 	public double getRateX() {
 		return rateX;
 	}
@@ -241,10 +250,6 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		return rateY;
 	}
 	
-	public boolean isDestroyed() {
-		return destroyed;
-	}
-
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
 		// TODO Auto-generated method stub
