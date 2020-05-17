@@ -192,6 +192,7 @@ public class Board extends JPanel implements Runnable, Constants {
             paddleMove();//하단 바 이동 메소드 실행
             dropItems();
             checkItemList();
+            ball.changeBallSet();
             paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
             for (int i = 0; i < 10; i++) {
             	if (brick[i] != null)

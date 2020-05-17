@@ -46,6 +46,13 @@ public class Ball extends Structure implements Constants {
 		g.fillOval(x, y, width, height);
 	}
 
+	public void changeBallSet() {
+		setX(getX());
+		setY(getY());
+		setWidth((int)((10.0/486.0)*Board.FrameWidth));
+		setHeight((int)((10.0/486.0)*Board.FrameHeight));
+    }
+	
 	//Moves the ball
 	public void move() {
 		x += xDir;
