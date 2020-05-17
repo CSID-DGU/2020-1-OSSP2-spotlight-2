@@ -61,11 +61,11 @@ public class Paddle extends Structure implements Constants {
 	
 	//하단 바를 왼쪽으로 이동(숫자를 조절해 하단 바의 속도 조절)
 	public void moveLeft() {
-		x -= 2;
+		x -= (Board.FrameWidth*2)/486;
 	}
 	//하단바를 오른쪽으로 이동(숫자를 조절해 하단 바의 속도 조절)
 	public void moveRight() {
-		x += 2;
+		x += (2*Board.FrameWidth) / 486;
 	}
 	//Checks if the ball hit the paddle
 	public boolean hitPaddle(int ballX, int ballY) {
