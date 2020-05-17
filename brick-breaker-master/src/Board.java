@@ -80,7 +80,7 @@ public class Board extends JPanel implements Runnable, Constants {
     
     //패들의 위치
     static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
-    static int paddleY = Board.FrameHeight / 8 * 7;
+    static int paddleY = FrameHeight-13;
 
     //Constructor
     public Board(int width, int height) {

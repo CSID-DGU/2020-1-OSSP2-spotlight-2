@@ -197,7 +197,6 @@ public class Brick extends Structure implements Constants, ImageObserver {
 
 	//프레임 크기에 따른 벽돌 크기, 좌표 재설정
 	public void changeBrickSet() {
-			System.out.println(getRateX());
 			setX((int)((double)Board.FrameWidth/getRateX()));
 			setY((int)((double)(Board.FrameHeight/3)/getRateY()));
 			setWidth(Board.FrameWidth/10);
