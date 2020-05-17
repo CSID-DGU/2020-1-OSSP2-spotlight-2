@@ -33,7 +33,8 @@ import javax.swing.ImageIcon;
 //Class definition
 public class Brick extends Structure implements Constants, ImageObserver {
 	//Variables
-	private int lives, hits, rateX, rateY;
+	private int lives, hits;
+	private double rateX, rateY;
 	private boolean destroyed;
 	public Item item;
 	private Color itemColor;
@@ -53,7 +54,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	
 	//Toolkit.getDefaultToolkit().getImage
 	//Constructor
-	public Brick(int x, int y, int width, int height, Color color, int rateX, int rateY, int lives, int itemType) {
+	public Brick(int x, int y, int width, int height, Color color, double rateX, double rateY, int lives, int itemType) {
 		super(x, y, width, height, color);
 		setRateX(rateX);
 		setRateY(rateY);
@@ -196,11 +197,13 @@ public class Brick extends Structure implements Constants, ImageObserver {
 
 	//프레임 크기에 따른 벽돌 크기, 좌표 재설정
 	public void changeBrickSet() {
-			setX(Board.FrameWidth/getRateX());
-			setY((Board.FrameHeight/3)/getRateY());
+			System.out.println(getRateX());
+			setX((int)((double)Board.FrameWidth/getRateX()));
+			setY((int)((double)(Board.FrameHeight/3)/getRateY()));
 			setWidth(Board.FrameWidth/10);
 			setHeight(Board.FrameWidth/20);
 	}
+	
 	//Mutator methods
 	public void setLives(int lives) {
 		this.lives = lives;
@@ -210,11 +213,11 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		this.hits = hits;
 	}
 	
-	public void setRateX(int rateX) {
+	public void setRateX(double rateX) {
 		this.rateX = rateX;
 	}
 	
-	public void setRateY(int rateY) {
+	public void setRateY(double rateY) {
 		this.rateY = rateY;
 	}
 	
@@ -231,11 +234,11 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		return hits;
 	}
 	
-	public int getRateX() {
+	public double getRateX() {
 		return rateX;
 	}
 	
-	public int getRateY() {
+	public double getRateY() {
 		return rateY;
 	}
 	
