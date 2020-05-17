@@ -33,7 +33,7 @@ import javax.swing.ImageIcon;
 //Class definition
 public class Brick extends Structure implements Constants, ImageObserver {
 	//Variables
-	private int lives, hits, randX, randY;
+	private int lives, hits, rateX, rateY;
 	private boolean destroyed;
 	public Item item;
 	private Color itemColor;
@@ -53,10 +53,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	
 	//Toolkit.getDefaultToolkit().getImage
 	//Constructor
-	public Brick(int x, int y, int width, int height, Color color, int randX, int randY, int lives, int itemType) {
+	public Brick(int x, int y, int width, int height, Color color, int rateX, int rateY, int lives, int itemType) {
 		super(x, y, width, height, color);
-		setRandX(randX);
-		setRandY(randY);
+		setRateX(rateX);
+		setRateY(rateY);
 		setLives(lives);
 		setHits(0);
 		setDestroyed(false);
@@ -196,10 +196,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 
 	//프레임 크기에 따른 벽돌 크기, 좌표 재설정
 	public void changeBrickSet() {
-				//setX(Board.FrameWidth - getRandX());
-				//setY(Board.FrameHeight/3 - getRandY());
-				setWidth(Board.FrameWidth/10);
-				setHeight(Board.FrameWidth/20);
+			setX(Board.FrameWidth/getRateX());
+			setY((Board.FrameHeight/3)/getRateY());
+			setWidth(Board.FrameWidth/10);
+			setHeight(Board.FrameWidth/20);
 	}
 	//Mutator methods
 	public void setLives(int lives) {
@@ -210,12 +210,12 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		this.hits = hits;
 	}
 	
-	public void setRandX(int randX) {
-		this.randX = randX;
+	public void setRateX(int rateX) {
+		this.rateX = rateX;
 	}
 	
-	public void setRandY(int randY) {
-		this.randY = randY;
+	public void setRateY(int rateY) {
+		this.rateY = rateY;
 	}
 	
 	public void setDestroyed(boolean destroyed) {
@@ -231,12 +231,12 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		return hits;
 	}
 	
-	public int getRandX() {
-		return randX;
+	public int getRateX() {
+		return rateX;
 	}
 	
-	public int getRandY() {
-		return randY;
+	public int getRateY() {
+		return rateY;
 	}
 	
 	public boolean isDestroyed() {
