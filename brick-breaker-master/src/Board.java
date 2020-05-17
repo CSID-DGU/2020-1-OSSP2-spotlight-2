@@ -88,13 +88,7 @@ public class Board extends JPanel implements Runnable, Constants {
         //addKeyListener(new BoardListener());
         addKeyListener(boardtest1);
         setFocusable(true);
-<<<<<<< HEAD
-
-        paddle = new Paddle(paddleX, paddleY, Main.PADDLE_WIDTH, Main.PADDLE_HEIGHT, Color.BLACK);
-=======
-        
         paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
->>>>>>> master
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
@@ -142,7 +136,8 @@ public class Board extends JPanel implements Runnable, Constants {
     		int brickY = (FrameHeight/3) - (rand.nextInt(FrameHeight/3 - BrickHeight/2) + 1);
     		double rateX = (double)FrameWidth / (double)brickX;
     		double rateY = (double)(FrameHeight/3) /(double)brickY;
-    		brick[a] = new Brick(brickX, brickY, BrickWidth, BrickHeight, color, rateX, rateY, numLives, itemType);
+    		//brick[a] = new Brick(brickX, brickY, BrickWidth, BrickHeight, color, rateX, rateY, numLives, itemType);
+    		brick[a] = new Brick(brickX,brickY,BrickWidth,BrickHeight, color, rateX,rateY, numLives, itemType);
 	    	bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
 	    	//벽돌 위치 중복 검사
 	    	for (int i = 0; i < 10; i++) {
