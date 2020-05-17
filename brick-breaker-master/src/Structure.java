@@ -28,7 +28,7 @@ import java.awt.*;
 //Class definition
 public class Structure implements Constants {
 	//Variables
-	protected int x, y, width, height;
+	protected int x, y, width, height, randX, randY;
 	protected Color color;
 
 	//Constructor
@@ -39,6 +39,7 @@ public class Structure implements Constants {
 		setHeight(height);
 		setColor(color);
 	}
+
 
 	//Draw a structure
 	public void draw(Graphics g) {
@@ -62,7 +63,7 @@ public class Structure implements Constants {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-
+	
 	public void setColor(Color color) {
 		this.color = color;
 	}
@@ -83,7 +84,7 @@ public class Structure implements Constants {
 	public int getHeight() {
 		return height;
 	}
-
+	
 	public Color getColor() {
 		return color;
 	}
