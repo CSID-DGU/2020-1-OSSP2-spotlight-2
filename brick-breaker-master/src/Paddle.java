@@ -1,12 +1,12 @@
 /*
 *    Brick Breaker, Version 1.2
 *    By Ty-Lucas Kelley
-*	
-*	 **LICENSE**
+*   
+*    **LICENSE**
 *
-*	 This file is a part of Brick Breaker.
+*    This file is a part of Brick Breaker.
 *
-*	 Brick Breaker is free software: you can redistribute it and/or modify
+*    Brick Breaker is free software: you can redistribute it and/or modify
 *    it under the terms of the GNU General Public License as published by
 *    the Free Software Foundation, either version 3 of the License, or
 *    (at your option) any later version.
@@ -28,10 +28,10 @@ import java.awt.*;
 //Class definition
 public class Paddle extends Structure implements Constants {
 
-	//Constructor
-	public Paddle(int x , int y, int width, int height, Color color) {
-		super(x, y, width, height, color);
-	}
+   //Constructor
+   public Paddle(int x , int y, int width, int height, Color color) {
+      super(x, y, width, height, color);
+   }
 
 	//Draws the paddle
 	@Override
@@ -61,11 +61,11 @@ public class Paddle extends Structure implements Constants {
 	
 	//하단 바를 왼쪽으로 이동(숫자를 조절해 하단 바의 속도 조절)
 	public void moveLeft() {
-		x -= 2;
+		x -= (Board.FrameWidth*2)/486;
 	}
 	//하단바를 오른쪽으로 이동(숫자를 조절해 하단 바의 속도 조절)
 	public void moveRight() {
-		x += 2;
+		x += (2*Board.FrameWidth) / 486;
 	}
 	//Checks if the ball hit the paddle
 	public boolean hitPaddle(int ballX, int ballY) {
