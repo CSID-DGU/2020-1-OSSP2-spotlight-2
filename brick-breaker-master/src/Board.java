@@ -15,9 +15,9 @@ import java.util.TreeMap;
 public class Board extends JPanel implements Runnable, Constants {
 	
     //Items on-screen
-    private Paddle paddle;
+    public static Paddle paddle;
     public static Ball ball;
-    private Brick[] brick = new Brick[10];
+    public static Brick[] brick = new Brick[10];
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
     private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
@@ -62,7 +62,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //Data structures to handle high scores
     private ArrayList<Item> items = new ArrayList<Item>();
-    private AtomicBoolean isPaused = new AtomicBoolean(true);
+    public static AtomicBoolean isPaused = new AtomicBoolean(true);
 
     //Colors for the bricks
     private Color[] blueColors = {BLUE_BRICK_ONE, BLUE_BRICK_TWO, BLUE_BRICK_THREE, Color.BLACK};
@@ -79,8 +79,8 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int frameHeight;
     
     //패들의 위치
-    static int paddleX = (FrameWidth/2)-(Main.PADDLE_WIDTH/2);
-    static int paddleY = Board.FrameHeight / 8 * 7;
+    static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
+    static int paddleY = FrameHeight-13;
 
     //Constructor
     public Board(int width, int height) {
@@ -88,8 +88,13 @@ public class Board extends JPanel implements Runnable, Constants {
         //addKeyListener(new BoardListener());
         addKeyListener(boardtest1);
         setFocusable(true);
+<<<<<<< HEAD
 
         paddle = new Paddle(paddleX, paddleY, Main.PADDLE_WIDTH, Main.PADDLE_HEIGHT, Color.BLACK);
+=======
+        
+        paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
+>>>>>>> master
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
@@ -113,6 +118,7 @@ public class Board extends JPanel implements Runnable, Constants {
         game = new Thread(this);
         game.start();
         stop();
+        repaint();
         isPaused.set(true);
     }
 
@@ -132,15 +138,19 @@ public class Board extends JPanel implements Runnable, Constants {
     		//벽돌 생성
     		int BrickWidth = FrameWidth/10;
     		int BrickHeight = FrameWidth/20;
-    		int ranX = (FrameWidth - (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2));
-    		int ranY = ((FrameHeight/3) - (rand.nextInt(FrameHeight/3) + 1));
-    		brick[a] = new Brick(ranX, ranY, BrickWidth - 5, BrickHeight - 5, color, numLives, itemType);
+    		int brickX = (FrameWidth) - (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2);
+    		int brickY = (FrameHeight/3) - (rand.nextInt(FrameHeight/3 - BrickHeight/2) + 1);
+    		double rateX = (double)FrameWidth / (double)brickX;
+    		double rateY = (double)(FrameHeight/3) /(double)brickY;
+    		brick[a] = new Brick(brickX, brickY, BrickWidth, BrickHeight, color, rateX, rateY, numLives, itemType);
 	    	bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
+	    	//벽돌 위치 중복 검사
 	    	for (int i = 0; i < 10; i++) {
-	    		if ((brick[i] != null) && (i != a)) {
-		    		if ((brick[i].getX() - BrickWidth < ranX) && (ranX < brick[i].getX() + BrickWidth )) {
-		    			if((brick[i].getY() - BrickHeight < ranY) && (ranY < brick[i].getY() + BrickHeight )) {
-			    			brick[a] = null;
+	    		if ((brick[i] != null) && (i != a)) { //벽돌이 존재하면서 비교 대상이 자신이 아닌 경우
+	    			//두 벽돌이 겹칠 경우
+		    		if ((brick[i].getX() - BrickWidth < brickX) && (brickX < brick[i].getX() + BrickWidth )) {
+		    			if((brick[i].getY() - BrickHeight < brickY) && (brickY < brick[i].getY() + BrickHeight )) {
+			    			brick[a] = null; //벽돌 삭제
 			    			bricksLeft--;
 		    			}
 		    		}
@@ -171,14 +181,12 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {   
-
-        while(true) {
-        	paddle.movePaddle();
-        	paddle.draw(getGraphics());
+    	
+        while(true) {     	
             int x1 = ball.getX();
             int y1 = ball.getY();
-            FrameWidth = (int)getWidth();
-            FrameHeight = (int)getHeight();
+            FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
+            FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
@@ -189,6 +197,12 @@ public class Board extends JPanel implements Runnable, Constants {
             paddleMove();//하단 바 이동 메소드 실행
             dropItems();
             checkItemList();
+            ball.changeBallSet();
+            paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
+            for (int i = 0; i < 10; i++) {
+            	if (brick[i] != null)
+            		brick[i].changeBrickSet(); //벽돌의 크기, 좌표 재설정
+            }
             repaint();
             try {
                 game.sleep(waitTime);

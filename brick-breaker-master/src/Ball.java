@@ -29,7 +29,7 @@ import java.awt.*;
 public class Ball extends Structure implements Constants {
 	//Variables
 	private boolean onScreen;
-	private int xDir = 1, yDir = -1;
+	private int xDir = (Board.FrameWidth/486), yDir = -(Board.FrameHeight/463);
 
 	//Constructor
 	public Ball(int x, int y, int width, int height, Color color) {
@@ -46,10 +46,19 @@ public class Ball extends Structure implements Constants {
 		g.fillOval(x, y, width, height);
 	}
 
+	public void changeBallSet() {
+		setX(getX());
+		setY(getY());
+		setWidth((int)((10.0/486.0)*Board.FrameWidth));
+		setHeight((int)((10.0/486.0)*Board.FrameHeight));
+    }
+	
 	//Moves the ball
 	public void move() {
 		x += xDir;
+		System.out.printf("xDir : %d",xDir);
 		y += yDir;
+		System.out.printf("yDir : %d",yDir);
 	}
 
 	//Resets the ball to original position at center of screen
