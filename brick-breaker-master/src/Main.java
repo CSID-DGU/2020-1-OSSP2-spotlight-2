@@ -35,14 +35,6 @@ public class Main extends JFrame implements Constants {
 	private static Dimension dim;
 	private static JPanel contentPane;
 	
-	public static int PADDLE_WIDTH = 70;
-	public static int PADDLE_HEIGHT = 10;
-	public static int PADDLE_RIGHT_BOUND = 430;
-	public static int PADDLE_X_START = 225;
-	public static int PADDLE_Y_START = 450;
-	public static int PADDLE_MIN = 35;
-	public static int PADDLE_MAX = 140;
-	
 	//Build and run the game
 	public static void main(String[] args) {
 		//Set look and feel to that of OS
@@ -53,7 +45,7 @@ public class Main extends JFrame implements Constants {
 		}
 		frame = new JFrame("Virus Breaker");
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-		frame.setResizable(true);//�룞�쟻 �럹�씠吏�
+		frame.setResizable(true);//동적페이지
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		board = new Board(WINDOW_WIDTH, WINDOW_HEIGHT);

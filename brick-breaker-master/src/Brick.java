@@ -33,7 +33,7 @@ import javax.swing.ImageIcon;
 //Class definition
 public class Brick extends Structure implements Constants, ImageObserver {
 	//Variables
-	private int lives, hits;
+	private int lives, hits, rateX, rateY;
 	private boolean destroyed;
 	public Item item;
 	private Color itemColor;
@@ -53,8 +53,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	
 	//Toolkit.getDefaultToolkit().getImage
 	//Constructor
-	public Brick(int x, int y, int width, int height, Color color, int lives, int itemType) {
+	public Brick(int x, int y, int width, int height, Color color, int rateX, int rateY, int lives, int itemType) {
 		super(x, y, width, height, color);
+		setRateX(rateX);
+		setRateY(rateY);
 		setLives(lives);
 		setHits(0);
 		setDestroyed(false);
@@ -84,9 +86,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	@Override
 	public void draw(Graphics g) {
 		if (!destroyed) {
-            //img에 저장된 블록 이미지를 블록 크기에 맟춰 그리기
-	        g.drawImage(img, x, y, width, height, this);
-	      
+
+	        //img에 저장된 블록 이미지를 블록 크기에 맟춰 그리기
+			g.drawImage(img, x, y, width, height, this);
+
 			//g.setColor(color);
 			//g.fillOval(x, y, width, height); //벽돌을 타원형으로 그림
 		}
@@ -191,6 +194,13 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		return false;
 	}
 
+	//프레임 크기에 따른 벽돌 크기, 좌표 재설정
+	public void changeBrickSet() {
+			setX(Board.FrameWidth/getRateX());
+			setY((Board.FrameHeight/3)/getRateY());
+			setWidth(Board.FrameWidth/10);
+			setHeight(Board.FrameWidth/20);
+	}
 	//Mutator methods
 	public void setLives(int lives) {
 		this.lives = lives;
@@ -199,7 +209,15 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	public void setHits(int hits) {
 		this.hits = hits;
 	}
-
+	
+	public void setRateX(int rateX) {
+		this.rateX = rateX;
+	}
+	
+	public void setRateY(int rateY) {
+		this.rateY = rateY;
+	}
+	
 	public void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
 	}
@@ -212,7 +230,15 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	public int getHits() {
 		return hits;
 	}
-
+	
+	public int getRateX() {
+		return rateX;
+	}
+	
+	public int getRateY() {
+		return rateY;
+	}
+	
 	public boolean isDestroyed() {
 		return destroyed;
 	}

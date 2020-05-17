@@ -33,6 +33,7 @@ public class Paddle extends Structure implements Constants {
       super(x, y, width, height, color);
    }
 
+<<<<<<< HEAD
    //Draws the paddle
    @Override
    public void draw(Graphics g) {
@@ -83,3 +84,58 @@ public class Paddle extends Structure implements Constants {
       return false;
    }
 }
+=======
+	//Draws the paddle
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(color);
+		g.fillRect(x, y, width, height);
+	}
+
+	//프레임 크기에 따른 패들 크기, 좌표 재설정
+	public void changePaddleSet() {
+		setX(getX());
+		setY(Board.FrameHeight-13);
+		setWidth((int)((70.0/486.0)*Board.FrameWidth));
+		setHeight((int)((10.0/486.0)*Board.FrameHeight));
+    }
+	
+	//Places the paddle back in starting position at center of screen(하단 바 리셋) 
+	public void reset() 
+	{
+		x = (Board.FrameWidth/2)-(PADDLE_WIDTH/2);
+		y = Board.FrameHeight -13;
+
+		setWidth((int)((70.0/486.0)*Board.FrameWidth)); //하단 바 크기 초기화
+		setColor(Color.BLACK);//하단 바 색상 BLACK으로 초기화
+		Board.reverse = false;//리버스 모드 비활성화
+	}
+	
+	//하단 바를 왼쪽으로 이동(숫자를 조절해 하단 바의 속도 조절)
+	public void moveLeft() {
+		x -= 2;
+	}
+	//하단바를 오른쪽으로 이동(숫자를 조절해 하단 바의 속도 조절)
+	public void moveRight() {
+		x += 2;
+	}
+	//Checks if the ball hit the paddle
+	public boolean hitPaddle(int ballX, int ballY) {
+		if ((ballX >= x) && (ballX <= x + width) && ((ballY >= y) && (ballY <= y + height))) {
+			return true;
+		}
+		return false;
+	}
+
+	//Resizes the paddle if it touches an item, then returns true or false
+	public boolean caughtItem(Item i) {
+		if ((i.getX() < x + width) && (i.getX() + i.getWidth() > x) && (y == i.getY() || y == i.getY() - 1)) {
+			i.resizePaddle(this); //하단 바 크기 변경
+			i.changeBallSpeed(this); //공 속도 변경
+			i.reverseMode(this); //리버스 모드
+			return true;
+		}
+		return false;
+	}
+}
+>>>>>>> 2831dbc069c2eba057084c1d7f6d5e2f243f5600
