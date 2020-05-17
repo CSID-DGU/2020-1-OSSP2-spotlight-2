@@ -66,10 +66,10 @@ public class Item extends Structure implements Constants {
 
 	//Resize the paddle, depending on which item is caught. Changes in increments of 15 until min/max width is reached.
 	public void resizePaddle(Paddle p) {
-		if (getType() == 1 && p.getWidth() < Main.PADDLE_MAX) {
+		if (getType() == 1 && p.getWidth() < PADDLE_MAX) {
 			p.setWidth(p.getWidth() + 15);
 		}
-		else if (getType() == 2 && p.getWidth() > Main.PADDLE_MIN) {
+		else if (getType() == 2 && p.getWidth() > PADDLE_MIN) {
 			p.setWidth(p.getWidth() - 15);
 		}
 	}
