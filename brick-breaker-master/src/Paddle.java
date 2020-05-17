@@ -29,8 +29,8 @@ import java.awt.*;
 public class Paddle extends Structure implements Constants {
 
 	//Constructor
-	public Paddle(int x , int y, int width, int height, Color color, double rateX, double rateY) {
-		super(x, y, width, height, color, rateX, rateY);
+	public Paddle(int x , int y, int width, int height, Color color) {
+		super(x, y, width, height, color);
 	}
 
 	//Draws the paddle

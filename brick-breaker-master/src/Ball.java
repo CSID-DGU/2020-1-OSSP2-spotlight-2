@@ -32,8 +32,8 @@ public class Ball extends Structure implements Constants {
 	private int xDir = 1, yDir = -1;
 
 	//Constructor
-	public Ball(int x, int y, int width, int height, Color color, double rateX, double rateY) {
-		super(x, y, width, height, color, rateX, rateY);
+	public Ball(int x, int y, int width, int height, Color color) {
+		super(x, y, width, height, color);
 		setOnScreen(true);
 	}
 
@@ -46,6 +46,13 @@ public class Ball extends Structure implements Constants {
 		g.fillOval(x, y, width, height);
 	}
 
+	public void changeBallSet() {
+		setX(getX());
+		setY(getY());
+		setWidth((int)((10.0/486.0)*Board.FrameWidth));
+		setHeight((int)((10.0/486.0)*Board.FrameHeight));
+    }
+	
 	//Moves the ball
 	public void move() {
 		x += xDir;

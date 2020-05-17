@@ -81,7 +81,7 @@ public class Board extends JPanel implements Runnable, Constants {
     //패들의 위치
     static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
     static int paddleY = Board.FrameHeight / 8 * 7;
-    static double rateX, rateY = 0;
+
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
@@ -89,8 +89,8 @@ public class Board extends JPanel implements Runnable, Constants {
         addKeyListener(boardtest1);
         setFocusable(true);
         
-        paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK, rateX, rateY);
-        ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK, rateX, rateY);
+        paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
+        ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
         playerName = JOptionPane.showInputDialog(null, "Please enter your name:", "Virus Breaker", JOptionPane.QUESTION_MESSAGE);
@@ -192,6 +192,7 @@ public class Board extends JPanel implements Runnable, Constants {
             paddleMove();//하단 바 이동 메소드 실행
             dropItems();
             checkItemList();
+            ball.changeBallSet();
             paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
             for (int i = 0; i < 10; i++) {
             	if (brick[i] != null)

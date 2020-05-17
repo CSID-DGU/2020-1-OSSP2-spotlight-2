@@ -33,8 +33,8 @@ public class Item extends Structure implements Constants {
 	Ball b = Board.ball; //Board의 ball을 저장
 	
 	//Constructor
-	public Item(int x, int y, int width, int height, Color color, int type, double rateX, double rateY) {
-		super(x, y, width, height, color, rateX, rateY);
+	public Item(int x, int y, int width, int height, Color color, int type) {
+		super(x, y, width, height, color);
 		setType(type);
 	}
 

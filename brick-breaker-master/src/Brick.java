@@ -34,6 +34,7 @@ import javax.swing.ImageIcon;
 public class Brick extends Structure implements Constants, ImageObserver {
 	//Variables
 	private int lives, hits;
+	private double rateX, rateY;
 	private boolean destroyed;
 	public Item item;
 	private Color itemColor;
@@ -54,7 +55,9 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	//Toolkit.getDefaultToolkit().getImage
 	//Constructor
 	public Brick(int x, int y, int width, int height, Color color, double rateX, double rateY, int lives, int itemType) {
-		super(x, y, width, height, color, rateX, rateY);
+		super(x, y, width, height, color);
+		setRateX(rateX);
+		setRateY(rateY);
 		setLives(lives);
 		setHits(0);
 		setDestroyed(false);
@@ -77,7 +80,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		}
 
 		//Places an item of specified type inside the brick to fall when the brick is destroyed
-		item = new Item(x + (width / 4), y + (height / 4), ITEM_WIDTH, ITEM_HEIGHT, itemColor, itemType, rateX, rateY);
+		item = new Item(x + (width / 4), y + (height / 4), ITEM_WIDTH, ITEM_HEIGHT, itemColor, itemType);
 	}
 
 	//Draws a brick
@@ -214,6 +217,14 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		this.destroyed = destroyed;
 	}
 
+	public void setRateX(double rateX) {
+		this.rateX = rateX;
+	}
+	
+	public void setRateY(double rateY) {
+		this.rateY = rateY;
+	}
+	
 	//Accessor methods
 	public int getLives() {
 		return lives;
@@ -227,6 +238,14 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		return destroyed;
 	}
 
+	public double getRateX() {
+		return rateX;
+	}
+	
+	public double getRateY() {
+		return rateY;
+	}
+	
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
 		// TODO Auto-generated method stub
