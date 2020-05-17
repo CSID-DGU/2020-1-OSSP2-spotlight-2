@@ -133,15 +133,17 @@ public class Board extends JPanel implements Runnable, Constants {
     		//벽돌 생성
     		int BrickWidth = FrameWidth/10;
     		int BrickHeight = FrameWidth/20;
-    		int ranX = (FrameWidth - (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2));
-    		int ranY = ((FrameHeight/3) - (rand.nextInt(FrameHeight/3) + 1));
+    		int ranX = FrameWidth/(a+1);//(FrameWidth - (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2));
+    		int ranY = FrameHeight/(a+1);//((FrameHeight/3) - (rand.nextInt(FrameHeight/3) + 1));
     		brick[a] = new Brick(ranX, ranY, BrickWidth - 5, BrickHeight - 5, color, numLives, itemType);
 	    	bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
+	    	//벽돌 위치 중복 검사
 	    	for (int i = 0; i < 10; i++) {
-	    		if ((brick[i] != null) && (i != a)) {
+	    		if ((brick[i] != null) && (i != a)) { //벽돌이 존재하면서 비교 대상이 자신이 아닌 경우
+	    			//두 벽돌이 겹칠 경우
 		    		if ((brick[i].getX() - BrickWidth < ranX) && (ranX < brick[i].getX() + BrickWidth )) {
 		    			if((brick[i].getY() - BrickHeight < ranY) && (ranY < brick[i].getY() + BrickHeight )) {
-			    			brick[a] = null;
+			    			brick[a] = null; //벽돌 삭제
 			    			bricksLeft--;
 		    			}
 		    		}
@@ -172,13 +174,12 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {   
-
-        while(true) {
-        	paddle.movePaddle();
+    	
+        while(true) {     	
             int x1 = ball.getX();
             int y1 = ball.getY();
-            FrameWidth = (int)getWidth();
-            FrameHeight = (int)getHeight();
+            FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
+            FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
@@ -189,9 +190,10 @@ public class Board extends JPanel implements Runnable, Constants {
             paddleMove();//하단 바 이동 메소드 실행
             dropItems();
             checkItemList();
+            paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
             for (int i = 0; i < 10; i++) {
             	if (brick[i] != null)
-            		brick[i].changeBrickSet();
+            		brick[i].changeBrickSet(); //벽돌의 크기, 좌표 재설정
             }
             repaint();
             try {

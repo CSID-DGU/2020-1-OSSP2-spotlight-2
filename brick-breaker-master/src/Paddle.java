@@ -40,11 +40,12 @@ public class Paddle extends Structure implements Constants {
 		g.fillRect(x, y, width, height);
 	}
 
-	public void movePaddle() {
-		x = getX();
-		y = Board.FrameHeight-13;
-		width = (int)((70.0/486.0)*Board.FrameWidth);
-		height = (int)((10.0/486.0)*Board.FrameHeight);
+	//프레임 크기에 따른 패들 크기, 좌표 재설정
+	public void changePaddleSet() {
+		setX(getX());
+		setY(Board.FrameHeight-13);
+		setWidth((int)((70.0/486.0)*Board.FrameWidth));
+		setHeight((int)((10.0/486.0)*Board.FrameHeight));
     }
 	
 	//Places the paddle back in starting position at center of screen(하단 바 리셋) 
