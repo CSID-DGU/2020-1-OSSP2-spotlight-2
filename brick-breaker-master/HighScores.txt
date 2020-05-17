@@ -6,6 +6,7 @@ Name: ddd, Score: 23
 Name: ddddd, Score: 21
 Name: ddd, Score: 21
 Name: ddd, Score: 19
+Name: dddd, Score: 19
 Name: dddd, Score: 17
 Name: , Score: 14
 Name: ddd, Score: 14
@@ -139,6 +140,7 @@ Name: , Score: 4
 Name: dddd, Score: 4
 Name: ddd, Score: 3
 Name: dddd, Score: 3
+Name: poo, Score: 3
 Name: ddd, Score: 2
 Name: yuuuu, Score: 2
 Name: ddd, Score: 2

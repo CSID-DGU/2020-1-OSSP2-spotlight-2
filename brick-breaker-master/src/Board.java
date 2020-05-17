@@ -93,7 +93,7 @@ public class Board extends JPanel implements Runnable, Constants {
         setFocusable(true);
         
         paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
-        ball = new Ball(ballX, ballY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
+        ball = new Ball(paddleX, paddleY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
         playerName = JOptionPane.showInputDialog(null, "Please enter your name:", "Virus Breaker", JOptionPane.QUESTION_MESSAGE);
@@ -388,10 +388,10 @@ public class Board extends JPanel implements Runnable, Constants {
         	g.drawString("Right_Key", getWidth() - 70, getHeight() - (getHeight()/3));
         	g.drawString(Character.toString(randomRightKey), getWidth() - 15, getHeight() - (getHeight()/3) + 20);
         }
-        g.drawString("Lives: " + lives, 10, getHeight() - (getHeight()/10));
-        g.drawString("Score: " + score, 10, getHeight() - (2*(getHeight()/10)) + 25);
-        g.drawString("Level: " + level, 10, getHeight() - (3*(getHeight()/10)) + 50);
-        g.drawString("Player: " + playerName, 10, getHeight() - (4*(getHeight()/10)) + 75);
+        g.drawString("Lives: " + lives, 10, getHeight() - 50);
+        g.drawString("Score: " + score, 10, getHeight() - 70);
+        g.drawString("Level: " + level, 10, getHeight() - 90);
+        g.drawString("Player: " + playerName, 10, getHeight() - 110);
 
         for (Item i: items) {
             i.draw(g);
