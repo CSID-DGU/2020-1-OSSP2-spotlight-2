@@ -135,8 +135,8 @@ public class Board extends JPanel implements Runnable, Constants {
     		int BrickHeight = FrameWidth/20;
     		int brickX = (FrameWidth) - (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2);
     		int brickY = (FrameHeight/3) - (rand.nextInt(FrameHeight/3 - BrickHeight/2) + 1);
-    		int rateX = FrameWidth / brickX;
-    		int rateY = (FrameHeight/3) /brickY;
+    		double rateX = (double)FrameWidth / (double)brickX;
+    		double rateY = (double)(FrameHeight/3) /(double)brickY;
     		brick[a] = new Brick(brickX, brickY, BrickWidth, BrickHeight, color, rateX, rateY, numLives, itemType);
 	    	bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
 	    	//벽돌 위치 중복 검사
