@@ -63,7 +63,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		setDestroyed(false);
 
 		/*아이템 타입*/
-		if (itemType == 1) { // 하단 바 크기 증가
+		if (itemType == 1) { // 하단 바 크기 증가		
 			itemColor = Color.GREEN;
 		}
 		if (itemType == 2) { // 하단 바 크기 감소
@@ -80,7 +80,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		}
 
 		//Places an item of specified type inside the brick to fall when the brick is destroyed
-		item = new Item(x + (width / 4), y + (height / 4), Board.FrameWidth/25, Board.FrameHeight/50 , itemColor, itemType);
+		item = new Item(x + (width / 4), y + (height / 4), Board.FrameWidth/10, Board.FrameHeight/10 , itemColor, itemType);
 	}
 
 	//Draws a brick
