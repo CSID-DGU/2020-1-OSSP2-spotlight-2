@@ -46,11 +46,9 @@ public class Main extends JFrame implements Constants {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-		icon = new ImageIcon("./img/backvirus.gif");
-=======
+
 		icon = new ImageIcon("./img/Virus - 33131.gif");
->>>>>>> kwan
+
 		
 		frame = new JFrame("Virus Breaker");
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);

@@ -48,7 +48,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
 
 	//블록 이미지 img에 저장
-	ImageIcon icon = new ImageIcon("./img/virus.png");
+	ImageIcon icon = new ImageIcon("./img/ballvirus.png");
 	Image img = icon.getImage();
 	
 	
