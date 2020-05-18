@@ -387,11 +387,7 @@ public class Board extends JPanel implements Runnable, Constants {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
 
-<<<<<<< HEAD
-        g.drawImage(Main.icon.getImage(),0,0,null);
-=======
         g.drawImage(Main.icon.getImage(),0 , 0,getWidth(),getHeight(),null);
->>>>>>> kwan
 
         //Ready 상태 출력(처음 시작 전 Ready 출력)
         if ((lives > MIN_LIVES) && (readyDraw == true)) {
@@ -399,10 +395,6 @@ public class Board extends JPanel implements Runnable, Constants {
         }
 
         //패들과 공을 그려야 되는 경우
-<<<<<<< HEAD
-=======
-        
->>>>>>> kwan
         if(PBdraw == true) {
 		       paddle.draw(g);
 		       ball.draw(g);
