@@ -377,11 +377,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
-<<<<<<< HEAD
         g.drawImage(Main.icon.getImage(),0,0,null);
-=======
-        //패들과 공을 그려야 되는 경우
->>>>>>> 52b9976dd38fd14984832ad6e020b78e783e626e
         if(PBdraw == true) {
 		       paddle.draw(g);
 		       ball.draw(g);
