@@ -230,6 +230,7 @@ public class Board extends JPanel implements Runnable, Constants {
             readyDraw = true;
             stop();
             isPaused.set(true);
+            game.interrupt();
         }
     }
 
@@ -373,6 +374,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public void drawReady(Graphics g) {
     	Font font  = new Font("Serif", Font.BOLD, 30);
     	g.setFont(font);
+    	g.setColor(Color.yellow);
     	g.drawString("Ready", getWidth()/2 - 50, getHeight()/2 - 20);
     	font  = new Font("Serif", Font.BOLD, 10);
     	g.setFont(font);
@@ -384,20 +386,16 @@ public class Board extends JPanel implements Runnable, Constants {
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
-<<<<<<< HEAD
-<<<<<<< HEAD
-        g.drawImage(Main.icon.getImage(),0,0,null);
-=======
-=======
-        
+
+        g.drawImage(Main.icon.getImage(),0 , 0,getWidth(),getHeight(),null);
+
         //Ready 상태 출력(처음 시작 전 Ready 출력)
         if ((lives > MIN_LIVES) && (readyDraw == true)) {
         	drawReady(g);
         }
-        
->>>>>>> kwan
+
         //패들과 공을 그려야 되는 경우
->>>>>>> 52b9976dd38fd14984832ad6e020b78e783e626e
+        
         if(PBdraw == true) {
 		       paddle.draw(g);
 		       ball.draw(g);
