@@ -20,7 +20,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public static Brick[] brick = new Brick[10];
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
-    private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
+    private int score = 0, lives = MAX_LIVES, bricksLeft = 10, waitTime = 3, withSound, level = 1;
      
     //창의 크기 불러옴
     public static int FrameWidth = WINDOW_WIDTH ;
@@ -177,10 +177,9 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {   
-
-    	PBdraw = true; //공과 패들을 그림
         while(true) {   
         	readyDraw = false;
+        	PBdraw = true; //공과 패들을 그림
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
             ball.changeBallSet();
@@ -343,6 +342,13 @@ public class Board extends JPanel implements Runnable, Constants {
             ball.reset(); //공 리셋
             paddle.reset(); //하단 바 리셋
             key_temp = 0;
+            PBdraw = false;
+            readyDraw = true;
+            for (int i = 0; i < 10; i++) {
+            	if(brick[i] != null) {
+            		brick[i] = null;
+            	}
+            }
             repaint();
             stop();
             isPaused.set(true);
