@@ -73,18 +73,15 @@ public class Board extends JPanel implements Runnable, Constants {
     private Color[] grayColors = {GRAY_BRICK_ONE, GRAY_BRICK_TWO, GRAY_BRICK_THREE, Color.BLACK};
     private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
     private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
-
-    // size of frame width and height
-    public static int frameWidth;
-    public static int frameHeight;
     
     //패들의 위치
-    static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
-    static int paddleY = FrameHeight - 13;
+    private int paddleX = (486/2)-(PADDLE_WIDTH/2);
+    private int paddleY = 463 - 13;
     //공 시작 위치
-    static int ballX = FrameWidth/2;
-    static int ballY = FrameHeight/2;
+    private int ballX = FrameWidth/2;
+    private int ballY = FrameHeight/2;
     
+    private boolean PBdraw = false;
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
@@ -92,7 +89,7 @@ public class Board extends JPanel implements Runnable, Constants {
         addKeyListener(boardtest1);
         setFocusable(true);
         paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
-        ball = new Ball(paddleX, paddleY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
+        ball = new Ball(ballX, ballY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
         playerName = JOptionPane.showInputDialog(null, "Please enter your name:", "Virus Breaker", JOptionPane.QUESTION_MESSAGE);
@@ -114,7 +111,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
         game = new Thread(this);
         game.start();
-        stop();
+        //stop();
         repaint();
         isPaused.set(true);
     }
@@ -179,12 +176,24 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {   
-    	
-        while(true) {     	
-            int x1 = ball.getX();
-            int y1 = ball.getY();
+    	try {
+			game.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	PBdraw = true;
+        while(true) {     
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
+            ball.changeBallSet();
+            paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
+            for (int i = 0; i < 10; i++) {
+            	if (brick[i] != null)
+            		brick[i].changeBrickSet(); //벽돌의 크기, 좌표 재설정
+            }
+            int x1 = ball.getX();
+            int y1 = ball.getY();
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
@@ -195,12 +204,6 @@ public class Board extends JPanel implements Runnable, Constants {
             paddleMove();//하단 바 이동 메소드 실행
             dropItems();
             checkItemList();
-            ball.changeBallSet();
-            paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
-            for (int i = 0; i < 10; i++) {
-            	if (brick[i] != null)
-            		brick[i].changeBrickSet(); //벽돌의 크기, 좌표 재설정
-            }
             repaint();
             try {
                 game.sleep(waitTime);
@@ -208,6 +211,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 ie.printStackTrace();
             }
         }
+
     }
 
     public void addItem(Item i) {
@@ -225,6 +229,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public void checkLives() {
         if (lives == MIN_LIVES) {
             repaint();
+            PBdraw = false;
             stop();
             isPaused.set(true);
         }
@@ -255,7 +260,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	        if (paddle.caughtItem(tempItem)) {
 	            items.remove(i);
 	        }
-	        else if (tempItem.getY() > WINDOW_HEIGHT) {
+	        else if (tempItem.getY() > Board.FrameHeight) {
 	            items.remove(i);
 	        }
 	    }
@@ -371,8 +376,10 @@ public class Board extends JPanel implements Runnable, Constants {
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
-        paddle.draw(g);
-        ball.draw(g);
+        if(PBdraw == true) {
+	        paddle.draw(g);
+	        ball.draw(g);
+        }
 
         for (int i = 0; i < 10; i++) {
             	//벽돌이 그 위치에 없을 경우 벽돌을 그린다
@@ -400,13 +407,8 @@ public class Board extends JPanel implements Runnable, Constants {
             g.setColor(Color.BLACK);
             g.fillRect(0,0,getWidth(),getHeight());
             g.setColor(Color.WHITE);
-            g.drawString("Name: " + playerName + ", Score: " + score + ", Level: " + level, getWidth()/5, 20);
-            g.drawString("Game Over! Did you make it onto the high score table?", getWidth()/5, 50);
-            try {
-                printScores(g);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
+            //g.drawString("Name: " + playerName + ", Score: " + score + ", Level: " + level, getWidth()/5, 20);
+            g.drawString("Game Over!", getWidth()/5, 50);
             g.drawString("Press the Spacebar twice to play again.", getWidth()/5, getHeight()-20);
         }
     }
