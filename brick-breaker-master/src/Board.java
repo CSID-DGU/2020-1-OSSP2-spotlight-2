@@ -376,6 +376,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
+        g.drawImage(Main.icon.getImage(),0,0,null);
         if(PBdraw == true) {
 	        paddle.draw(g);
 	        ball.draw(g);

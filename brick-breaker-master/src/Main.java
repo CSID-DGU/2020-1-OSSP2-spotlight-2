@@ -35,6 +35,9 @@ public class Main extends JFrame implements Constants {
 	private static Dimension dim;
 	private static JPanel contentPane;
 	
+	//---------------------------------배경
+	static ImageIcon icon;
+	
 	//Build and run the game
 	public static void main(String[] args) {
 		//Set look and feel to that of OS
@@ -43,6 +46,8 @@ public class Main extends JFrame implements Constants {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		icon = new ImageIcon("./img/introBackGround.jpg");
+		
 		frame = new JFrame("Virus Breaker");
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		frame.setResizable(true);//동적페이지
