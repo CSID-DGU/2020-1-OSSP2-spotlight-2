@@ -91,7 +91,6 @@ public class Board extends JPanel implements Runnable, Constants {
         //addKeyListener(new BoardListener());
         addKeyListener(boardtest1);
         setFocusable(true);
-        
         paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
         ball = new Ball(paddleX, paddleY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
@@ -140,7 +139,8 @@ public class Board extends JPanel implements Runnable, Constants {
     		int brickY = (FrameHeight/3) - (rand.nextInt(FrameHeight/3 - BrickHeight/2) + 1);
     		double rateX = (double)FrameWidth / (double)brickX;
     		double rateY = (double)(FrameHeight/3) /(double)brickY;
-    		brick[a] = new Brick(brickX, brickY, BrickWidth, BrickHeight, color, rateX, rateY, numLives, itemType);
+    		//brick[a] = new Brick(brickX, brickY, BrickWidth, BrickHeight, color, rateX, rateY, numLives, itemType);
+    		brick[a] = new Brick(brickX,brickY,BrickWidth,BrickHeight, color, rateX,rateY, numLives, itemType);
 	    	bricksLeft++;//벽돌을 생성하고 남은 벽돌 개수 1 증가
 	    	//벽돌 위치 중복 검사
 	    	for (int i = 0; i < 10; i++) {
@@ -185,7 +185,6 @@ public class Board extends JPanel implements Runnable, Constants {
             int y1 = ball.getY();
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
-            System.out.println(FrameWidth);
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);

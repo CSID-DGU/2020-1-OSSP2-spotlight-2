@@ -32,7 +32,7 @@ import javax.swing.ImageIcon;
 public class Ball extends Structure implements Constants {
 	//Variables
 	private boolean onScreen;
-	private int xDir = 1, yDir = -1;
+	private int xDir = (Board.FrameWidth/486), yDir = -(Board.FrameHeight/463);
 
 	//Constructor
 	public Ball(int x, int y, int width, int height, Color color) {
@@ -62,7 +62,9 @@ public class Ball extends Structure implements Constants {
 	//Moves the ball
 	public void move() {
 		x += xDir;
+		//System.out.printf("xDir : %lf",xDir);
 		y += yDir;
+		//System.out.printf("yDir : %lf",yDir);
 	}
 
 	//Resets the ball to original position at center of screen

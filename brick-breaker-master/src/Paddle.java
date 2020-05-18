@@ -32,7 +32,6 @@ public class Paddle extends Structure implements Constants {
    public Paddle(int x , int y, int width, int height, Color color) {
       super(x, y, width, height, color);
    }
-
 	//Draws the paddle
 	@Override
 	public void draw(Graphics g) {
