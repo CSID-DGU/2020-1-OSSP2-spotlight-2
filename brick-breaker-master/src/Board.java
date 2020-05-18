@@ -81,7 +81,8 @@ public class Board extends JPanel implements Runnable, Constants {
     private int ballX = FrameWidth/2;
     private int ballY = FrameHeight/2;
     
-    private boolean PBdraw = false;
+    private boolean PBdraw = false; //패들과 공을 그릴지 결정
+
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
@@ -177,12 +178,12 @@ public class Board extends JPanel implements Runnable, Constants {
     //runs the game
     public void run() {   
     	try {
-			game.sleep(3000);
+			game.sleep(3000); //게임 시작 준비
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	PBdraw = true;
+    	PBdraw = true; //공과 패들을 그림
         while(true) {     
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
@@ -370,40 +371,44 @@ public class Board extends JPanel implements Runnable, Constants {
             e.printStackTrace();
         }
     }
-
+    
     //fills the board
     @Override
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
+<<<<<<< HEAD
         g.drawImage(Main.icon.getImage(),0,0,null);
+=======
+        //패들과 공을 그려야 되는 경우
+>>>>>>> 52b9976dd38fd14984832ad6e020b78e783e626e
         if(PBdraw == true) {
-	        paddle.draw(g);
-	        ball.draw(g);
+		       paddle.draw(g);
+		       ball.draw(g);
         }
-
-        for (int i = 0; i < 10; i++) {
-            	//벽돌이 그 위치에 없을 경우 벽돌을 그린다
-            	if (brick[i] != null)
-            		brick[i].draw(g);
-        }
-        g.setColor(Color.BLACK);
-        //하드모드(좌우 방향 키를 게임 화면에 출력)
-        if(gameMode == 1) {
-        	g.drawString("Left_Key", 10, getHeight() - (getHeight()/3));
-        	g.drawString(Character.toString(randomLeftKey), 10, getHeight() - (getHeight()/3) + 20);
-        	g.drawString("Right_Key", getWidth() - 70, getHeight() - (getHeight()/3));
-        	g.drawString(Character.toString(randomRightKey), getWidth() - 15, getHeight() - (getHeight()/3) + 20);
-        }
-        g.drawString("Lives: " + lives, 10, getHeight() - 50);
-        g.drawString("Score: " + score, 10, getHeight() - 70);
-        g.drawString("Level: " + level, 10, getHeight() - 90);
-        g.drawString("Player: " + playerName, 10, getHeight() - 110);
-
-        for (Item i: items) {
-            i.draw(g);
-        }
-
+        
+	    for (int i = 0; i < 10; i++) {
+	            //벽돌이 그 위치에 없을 경우 벽돌을 그린다
+	            if (brick[i] != null)
+	            	brick[i].draw(g);
+	    }
+	    g.setColor(Color.BLACK);
+	    //하드모드(좌우 방향 키를 게임 화면에 출력)
+	    if(gameMode == 1) {
+	        g.drawString("Left_Key", 10, getHeight() - (getHeight()/3));
+	        g.drawString(Character.toString(randomLeftKey), 10, getHeight() - (getHeight()/3) + 20);
+	        g.drawString("Right_Key", getWidth() - 70, getHeight() - (getHeight()/3));
+	        g.drawString(Character.toString(randomRightKey), getWidth() - 15, getHeight() - (getHeight()/3) + 20);
+	        }
+	        g.drawString("Lives: " + lives, 10, getHeight() - 50);
+	        g.drawString("Score: " + score, 10, getHeight() - 70);
+	        g.drawString("Level: " + level, 10, getHeight() - 90);
+	        g.drawString("Player: " + playerName, 10, getHeight() - 110);
+	
+	        for (Item i: items) {
+	            i.draw(g);
+	        }
+	        
         if (lives == MIN_LIVES) {
             g.setColor(Color.BLACK);
             g.fillRect(0,0,getWidth(),getHeight());

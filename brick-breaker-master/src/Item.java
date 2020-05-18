@@ -74,10 +74,6 @@ public class Item extends Structure implements Constants {
 				g.drawImage(img, x, y, width, height, null);
 			}
 			
-			
-			
-			//g.setColor(color);
-			//g.fillRect(x, y, width, height);
 		}
 		//Hard 모드 아이템
 		else {

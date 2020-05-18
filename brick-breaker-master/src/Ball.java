@@ -24,7 +24,6 @@
 
 //Imports
 import java.awt.*;
-import java.awt.image.ImageObserver;
 
 import javax.swing.ImageIcon;
 
