@@ -98,6 +98,17 @@ Name: fff, Score: 12
 Name: fff, Score: 12
 Name: fff, Score: 12
 Name: ddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
+Name: dddd, Score: 10
 Name: dddd, Score: 9
 Name: dddd, Score: 7
 Name: ddd, Score: 6

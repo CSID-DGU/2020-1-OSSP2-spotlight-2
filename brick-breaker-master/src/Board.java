@@ -79,11 +79,11 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int frameHeight;
     
     //패들의 위치
-    static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
-    static int paddleY = FrameHeight - 13;
+    private int paddleX = (Main.frame.getWidth()/2)-(PADDLE_WIDTH/2);
+    private int paddleY = Main.frame.getHeight() - 13;
     //공 시작 위치
-    static int ballX = FrameWidth/2;
-    static int ballY = FrameHeight/2;
+    private int ballX = Main.frame.getWidth()/2;
+    private int ballY = Main.frame.getHeight()/2;
     
     //Constructor
     public Board(int width, int height) {
@@ -92,7 +92,7 @@ public class Board extends JPanel implements Runnable, Constants {
         addKeyListener(boardtest1);
         setFocusable(true);
         paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
-        ball = new Ball(paddleX, paddleY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
+        ball = new Ball(ballX, ballY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
         playerName = JOptionPane.showInputDialog(null, "Please enter your name:", "Virus Breaker", JOptionPane.QUESTION_MESSAGE);
