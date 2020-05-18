@@ -33,10 +33,29 @@ public class Main extends JFrame implements Constants {
 	private static Board board;
 	private static Container pane;
 	private static Dimension dim;
-	private static JPanel contentPane;
+	//private static JPanel jpane;
+	
+	JPanel background = new JPanel() {
+        public void paintComponent(Graphics g) {
+       	 ImageIcon ii = new ImageIcon(frame.getClass().getResource("./img/background.jpg"));
+       	 // Dispaly image at at full size
+            g.drawImage(ii.getImage(), 0, 0, null);
+            // Approach 2: Scale image to size of component
+            // Dimension d = getSize();
+            // g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+            // Approach 3: Fix the image position in the scroll pane
+            // Point p = scrollPane.getViewport().getViewPosition();
+            // g.drawImage(icon.getImage(), p.x, p.y, null);
+            setOpaque(false); //그림을 표시하게 설정,투명하게 조절
+            super.paintComponent(g);
+        }
+    };
 	
 	//Build and run the game
 	public static void main(String[] args) {
+		
+		JPanel jpane = new JPanel();
+		
 		//Set look and feel to that of OS
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -47,12 +66,13 @@ public class Main extends JFrame implements Constants {
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		frame.setResizable(true);//동적페이지
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
 		board = new Board(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 		//-----------------------------
 		pane = frame.getContentPane();
 		pane.add(board);
+		
 		
 		/*
 		JLabel imageLabel = new JLabel();
@@ -62,8 +82,7 @@ public class Main extends JFrame implements Constants {
 		pane.add(imageLabel, java.awt.BorderLayout.CENTER);
 		*/
 		//-----------------------------
-		
-		
+	
 		//Place frame in the middle of the screen
 		dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
@@ -73,4 +92,7 @@ public class Main extends JFrame implements Constants {
 		
 		frame.setVisible(true);
 	}
+	
+	 
+	
 }
