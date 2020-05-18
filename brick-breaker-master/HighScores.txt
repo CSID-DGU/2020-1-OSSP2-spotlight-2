@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Name: Player10, Score: 1657
 Name: Player6, Score: 1631
 Name: Player3, Score: 1549
@@ -354,3 +355,7 @@ Name:  s, Score: 14
 Name: as, Score: 29
 Name: asd, Score: 16
 Name: asd, Score: 28
+=======
+﻿
+Name: sad, Score: 6
+>>>>>>> master

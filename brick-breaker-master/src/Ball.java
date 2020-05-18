@@ -25,6 +25,8 @@
 //Imports
 import java.awt.*;
 
+import javax.swing.ImageIcon;
+
 //Class definition
 public class Ball extends Structure implements Constants {
 	//Variables
@@ -37,13 +39,16 @@ public class Ball extends Structure implements Constants {
 		setOnScreen(true);
 	}
 
+	ImageIcon icon = new ImageIcon("./img/ball.png");
+	Image img = icon.getImage();
+	
 	//Draw the ball
 	@Override
 	public void draw(Graphics g) {
-		//g.drawImage(img, x, y, BALL_WIDTH, BALL_HEIGHT, this);
+		g.drawImage(img, x, y, width, height, null);
 		
-		g.setColor(color);
-		g.fillOval(x, y, width, height);
+		//g.setColor(color);
+		//g.fillOval(x, y, width, height);
 	}
 
 	public void changeBallSet() {

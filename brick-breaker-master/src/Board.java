@@ -70,6 +70,7 @@ public class Board extends JPanel implements Runnable, Constants {
     private Color[] grayColors = {GRAY_BRICK_ONE, GRAY_BRICK_TWO, GRAY_BRICK_THREE, Color.BLACK};
     private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
     private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
+<<<<<<< HEAD
 
     // size of frame width and height
     public static int FrameWidth = WINDOW_WIDTH;
@@ -78,10 +79,18 @@ public class Board extends JPanel implements Runnable, Constants {
     //패들의 위치
     static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
     static int paddleY = FrameHeight - 50;
-    //공 시작 위치
-    static int ballX = FrameWidth/2;
-    static int ballY = FrameHeight/2;
+=======
     
+    //패들의 위치
+    private int paddleX = (486/2)-(PADDLE_WIDTH/2);
+    private int paddleY = 463 - 13;
+>>>>>>> master
+    //공 시작 위치
+    private int ballX = FrameWidth/2;
+    private int ballY = FrameHeight/2;
+    
+    private boolean PBdraw = false; //패들과 공을 그릴지 결정
+    private boolean readyDraw = true; //레디 상태
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
@@ -176,12 +185,20 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {   
-    	
-        while(true) {     	
-            int x1 = ball.getX();
-            int y1 = ball.getY();
+
+    	PBdraw = true; //공과 패들을 그림
+        while(true) {   
+        	readyDraw = false;
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
+            ball.changeBallSet();
+            paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
+            for (int i = 0; i < 10; i++) {
+            	if (brick[i] != null)
+            		brick[i].changeBrickSet(); //벽돌의 크기, 좌표 재설정
+            }
+            int x1 = ball.getX();
+            int y1 = ball.getY();
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);
@@ -192,12 +209,6 @@ public class Board extends JPanel implements Runnable, Constants {
             paddleMove();//하단 바 이동 메소드 실행
             dropItems();
             checkItemList();
-            ball.changeBallSet();
-            paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
-            for (int i = 0; i < 10; i++) {
-            	if (brick[i] != null)
-            		brick[i].changeBrickSet(); //벽돌의 크기, 좌표 재설정
-            }
             repaint();
             try {
                 game.sleep(waitTime);
@@ -205,6 +216,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 ie.printStackTrace();
             }
         }
+
     }
 
     public void addItem(Item i) {
@@ -222,6 +234,8 @@ public class Board extends JPanel implements Runnable, Constants {
     public void checkLives() {
         if (lives == MIN_LIVES) {
             repaint();
+            PBdraw = false;
+            readyDraw = true;
             stop();
             isPaused.set(true);
         }
@@ -252,7 +266,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	        if (paddle.caughtItem(tempItem)) {
 	            items.remove(i);
 	        }
-	        else if (tempItem.getY() > WINDOW_HEIGHT) {
+	        else if (tempItem.getY() > Board.FrameHeight) {
 	            items.remove(i);
 	        }
 	    }
@@ -362,48 +376,65 @@ public class Board extends JPanel implements Runnable, Constants {
             e.printStackTrace();
         }
     }
-
+    
+    /*Ready상태 출력*/
+    public void drawReady(Graphics g) {
+    	Font font  = new Font("Serif", Font.BOLD, 30);
+    	g.setFont(font);
+    	g.drawString("Ready", getWidth()/2 - 50, getHeight()/2 - 20);
+    	font  = new Font("Serif", Font.BOLD, 10);
+    	g.setFont(font);
+    	g.drawString("Press space to start", getWidth()/2 - 50, getHeight()/2);
+    }
+    
     //fills the board
     @Override
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
-        paddle.draw(g);
-        ball.draw(g);
 
-        for (int i = 0; i < 10; i++) {
-            	//벽돌이 그 위치에 없을 경우 벽돌을 그린다
-            	if (brick[i] != null)
-            		brick[i].draw(g);
+        g.drawImage(Main.icon.getImage(),0,0,null);
+        
+        //Ready 상태 출력(처음 시작 전 Ready 출력)
+        if ((lives > MIN_LIVES) && (readyDraw == true)) {
+        	drawReady(g);
         }
-        g.setColor(Color.BLACK);
-        //하드모드(좌우 방향 키를 게임 화면에 출력)
-        if(gameMode == 1) {
-        	g.drawString("Left_Key", 10, getHeight() - (getHeight()/3));
-        	g.drawString(Character.toString(randomLeftKey), 10, getHeight() - (getHeight()/3) + 20);
-        	g.drawString("Right_Key", getWidth() - 70, getHeight() - (getHeight()/3));
-        	g.drawString(Character.toString(randomRightKey), getWidth() - 15, getHeight() - (getHeight()/3) + 20);
-        }
-        g.drawString("Lives: " + lives, 10, getHeight() - 50);
-        g.drawString("Score: " + score, 10, getHeight() - 70);
-        g.drawString("Level: " + level, 10, getHeight() - 90);
-        g.drawString("Player: " + playerName, 10, getHeight() - 110);
+        
+        //패들과 공을 그려야 되는 경우
 
-        for (Item i: items) {
-            i.draw(g);
+        if(PBdraw == true) {
+		       paddle.draw(g);
+		       ball.draw(g);
         }
-
+        
+	    for (int i = 0; i < 10; i++) {
+	            //벽돌이 그 위치에 없을 경우 벽돌을 그린다
+	            if (brick[i] != null)
+	            	brick[i].draw(g);
+	    }
+	    g.setColor(Color.BLACK);
+	    //하드모드(좌우 방향 키를 게임 화면에 출력)
+	    if(gameMode == 1) {
+	        g.drawString("Left_Key", 10, getHeight() - (getHeight()/3));
+	        g.drawString(Character.toString(randomLeftKey), 10, getHeight() - (getHeight()/3) + 20);
+	        g.drawString("Right_Key", getWidth() - 70, getHeight() - (getHeight()/3));
+	        g.drawString(Character.toString(randomRightKey), getWidth() - 15, getHeight() - (getHeight()/3) + 20);
+	        }
+	        g.drawString("Lives: " + lives, 10, getHeight() - 50);
+	        g.drawString("Score: " + score, 10, getHeight() - 70);
+	        g.drawString("Level: " + level, 10, getHeight() - 90);
+	        g.drawString("Player: " + playerName, 10, getHeight() - 110);
+	
+	        for (Item i: items) {
+	            i.draw(g);
+	        }
+	        
         if (lives == MIN_LIVES) {
             g.setColor(Color.BLACK);
             g.fillRect(0,0,getWidth(),getHeight());
             g.setColor(Color.WHITE);
-            g.drawString("Name: " + playerName + ", Score: " + score + ", Level: " + level, getWidth()/5, 20);
-            g.drawString("Game Over! Did you make it onto the high score table?", getWidth()/5, 50);
-            try {
-                printScores(g);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
+            //g.drawString("Name: " + playerName + ", Score: " + score + ", Level: " + level, getWidth()/5, 20);
+            g.drawString("Game Over!", getWidth()/5, 50);
             g.drawString("Press the Spacebar twice to play again.", getWidth()/5, getHeight()-20);
         }
     }
@@ -580,7 +611,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 //isSpace = true;
                 if (lives > MIN_LIVES) {
                     if (isPaused.get() == false) {
-                        stop();
+                        //stop();
                         isPaused.set(true);
                     }
                     else {
