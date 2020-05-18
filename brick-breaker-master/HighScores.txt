@@ -358,3 +358,10 @@ Name: ddd, Score: 0
 Name: fffff, Score: 0
 Name: fffff, Score: 0
 >>>>>>> master
+
+Name: dddd, Score: 16
+Name: dddd, Score: 9
+Name: dddd, Score: 2
+Name: dddd, Score: 4
+Name: ddd, Score: 4
+Name: ddd, Score: 4
