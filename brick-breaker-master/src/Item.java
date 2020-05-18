@@ -25,6 +25,8 @@
 //Imports
 import java.awt.*;
 
+import javax.swing.ImageIcon;
+
 //Class definition
 public class Item extends Structure implements Constants {
 	//Variables
@@ -46,6 +48,7 @@ public class Item extends Structure implements Constants {
 			if(type >= 6 && type <= 10 ) {
 				return;
 			}
+
 			g.setColor(color);
 			g.fillRect(x, y, width, height);
 		}
@@ -54,6 +57,7 @@ public class Item extends Structure implements Constants {
 			if(type >= 5 && type <= 10 ) {
 				return;
 			}
+			
 			g.setColor(color);
 			g.fillRect(x, y, width, height);
 		}
