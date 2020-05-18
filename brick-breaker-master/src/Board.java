@@ -21,10 +21,7 @@ public class Board extends JPanel implements Runnable, Constants {
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
     private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
-     
-    //창의 크기 불러옴
-    public static int FrameWidth = WINDOW_WIDTH ;
-    public static int FrameHeight = WINDOW_HEIGHT;
+
     //공 속도 변수
     public static int xSpeed = 1;
     
@@ -75,12 +72,12 @@ public class Board extends JPanel implements Runnable, Constants {
     private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
 
     // size of frame width and height
-    public static int frameWidth;
-    public static int frameHeight;
+    public static int FrameWidth = WINDOW_WIDTH;
+    public static int FrameHeight = WINDOW_HEIGHT;
     
     //패들의 위치
     static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
-    static int paddleY = FrameHeight - 13;
+    static int paddleY = FrameHeight - 50;
     //공 시작 위치
     static int ballX = FrameWidth/2;
     static int ballY = FrameHeight/2;
@@ -92,7 +89,7 @@ public class Board extends JPanel implements Runnable, Constants {
         addKeyListener(boardtest1);
         setFocusable(true);
         paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
-        ball = new Ball(paddleX, paddleY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
+        ball = new Ball(ballX, ballY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
         playerName = JOptionPane.showInputDialog(null, "Please enter your name:", "Virus Breaker", JOptionPane.QUESTION_MESSAGE);
@@ -615,7 +612,7 @@ public class Board extends JPanel implements Runnable, Constants {
             			key_temp = 1;
             		}
             		//오른쪽 이동
-            		if(ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+            		if(ke.getKeyCode() == KeyEvent.VK_RIGHT) { 
             			key_temp = -1;
             		}
             	}

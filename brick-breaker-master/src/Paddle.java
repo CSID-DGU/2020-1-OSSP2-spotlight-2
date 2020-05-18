@@ -43,7 +43,16 @@ public class Paddle extends Structure implements Constants {
 	public void changePaddleSet() {
 		setX(getX());
 		setY(Board.FrameHeight-13);
-		setWidth((int)((70.0/486.0)*Board.FrameWidth));
+		if(Item.check == false)
+		{
+			setWidth((int)((70.0/486.0)*Board.FrameWidth));
+		}
+		else if(Item.check == true)
+		{
+			System.out.printf("asd : %d\n",getWidth());
+			setWidth((int)((70.0/486.0)*Board.FrameWidth+15));
+			System.out.printf("dfki : %d\n",getWidth());
+		}
 		setHeight((int)((10.0/486.0)*Board.FrameHeight));
     }
 	
