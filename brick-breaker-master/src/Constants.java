@@ -33,7 +33,7 @@ public interface Constants {
 	public static final int WINDOW_HEIGHT = 500;
 
 	//Lives
-	public static final int MAX_LIVES = 5;
+	public static final int MAX_LIVES = 1;
 	public static final int MIN_LIVES = 0;
 
 	//Ball
