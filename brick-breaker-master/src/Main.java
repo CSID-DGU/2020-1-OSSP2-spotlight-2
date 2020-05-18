@@ -33,31 +33,12 @@ public class Main extends JFrame implements Constants {
 	private static Board board;
 	private static Container pane;
 	private static Dimension dim;
-	//private static JPanel jpane;
-	
-	JPanel background = new JPanel() {
-        public void paintComponent(Graphics g) {
-       	 ImageIcon ii = new ImageIcon(frame.getClass().getResource("./img/background.jpg"));
-       	 // Dispaly image at at full size
-            g.drawImage(ii.getImage(), 0, 0, null);
-            // Approach 2: Scale image to size of component
-            // Dimension d = getSize();
-            // g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
-            // Approach 3: Fix the image position in the scroll pane
-            // Point p = scrollPane.getViewport().getViewPosition();
-            // g.drawImage(icon.getImage(), p.x, p.y, null);
-            setOpaque(false); //그림을 표시하게 설정,투명하게 조절
-            super.paintComponent(g);
-        }
-    };
-	
+
 	//---------------------------------배경
 	static ImageIcon icon;
 	
 	//Build and run the game
 	public static void main(String[] args) {
-		
-		JPanel jpane = new JPanel();
 		
 		//Set look and feel to that of OS
 		try {
@@ -65,7 +46,7 @@ public class Main extends JFrame implements Constants {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		icon = new ImageIcon("./img/introBackGround.jpg");
+		icon = new ImageIcon("./img/backvirus.gif");
 		
 		frame = new JFrame("Virus Breaker");
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -77,16 +58,6 @@ public class Main extends JFrame implements Constants {
 		//-----------------------------
 		pane = frame.getContentPane();
 		pane.add(board);
-		
-		
-		/*
-		JLabel imageLabel = new JLabel();
-		pane = frame.getContentPane();
-		ImageIcon ii = new ImageIcon(frame.getClass().getResource("./img/giphy.gif"));
-		imageLabel.setIcon(ii);
-		pane.add(imageLabel, java.awt.BorderLayout.CENTER);
-		*/
-		//-----------------------------
 	
 		//Place frame in the middle of the screen
 		dim = Toolkit.getDefaultToolkit().getScreenSize();

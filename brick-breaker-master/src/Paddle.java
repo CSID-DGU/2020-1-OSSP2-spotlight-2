@@ -54,7 +54,7 @@ public class Paddle extends Structure implements Constants {
 		y = Board.FrameHeight -13;
 
 		setWidth((int)((70.0/486.0)*Board.FrameWidth)); //하단 바 크기 초기화
-		setColor(Color.BLACK);//하단 바 색상 BLACK으로 초기화
+		setColor(Color.WHITE);//하단 바 색상 BLACK으로 초기화
 		Board.reverse = false;//리버스 모드 비활성화
 	}
 	

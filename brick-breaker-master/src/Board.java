@@ -386,14 +386,23 @@ public class Board extends JPanel implements Runnable, Constants {
         super.paintComponent(g);
 
         g.drawImage(Main.icon.getImage(),0,0,null);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 80a861217d696c5419ed813f46065aafeb88e8cc
         //Ready 상태 출력(처음 시작 전 Ready 출력)
         if ((lives > MIN_LIVES) && (readyDraw == true)) {
         	drawReady(g);
         }
+<<<<<<< HEAD
         
         //패들과 공을 그려야 되는 경우
 
+=======
+
+        //패들과 공을 그려야 되는 경우
+>>>>>>> 80a861217d696c5419ed813f46065aafeb88e8cc
         if(PBdraw == true) {
 		       paddle.draw(g);
 		       ball.draw(g);
