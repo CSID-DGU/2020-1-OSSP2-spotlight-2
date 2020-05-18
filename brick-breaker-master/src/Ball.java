@@ -63,8 +63,8 @@ public class Ball extends Structure implements Constants {
 
 	//Resets the ball to original position at center of screen
 	public void reset() {
-		x = BALL_X_START;
-		y = BALL_Y_START;
+		x = Board.FrameWidth/2;
+		y = Board.FrameHeight/2;
 		xDir = 1;
 		yDir = -1;
 		Board.xSpeed = 1; //공속도 초기화

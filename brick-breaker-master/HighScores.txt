@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Name: Player10, Score: 1657
 Name: Player6, Score: 1631
 Name: Player3, Score: 1549
@@ -59,13 +60,25 @@ Name: , Score: 13
 Name: as, Score: 14
 =======
 =======
+=======
+Name: dddd, Score: 31
+Name: ddd, Score: 28
+>>>>>>> master
 Name: ddd, Score: 28
 Name: dddd, Score: 25
 Name: ddd, Score: 23
 >>>>>>> master
 Name: ddddd, Score: 21
 Name: ddd, Score: 21
+Name: ddd, Score: 19
+Name: dddd, Score: 19
+Name: dddd, Score: 17
 Name: , Score: 14
+Name: ddd, Score: 14
+Name: ddd, Score: 14
+Name: ddd, Score: 14
+Name: ddd, Score: 14
+Name: ddd, Score: 14
 Name: , Score: 13
 Name: fff, Score: 12
 Name: fff, Score: 12
@@ -84,6 +97,7 @@ Name: fff, Score: 12
 Name: fff, Score: 12
 Name: fff, Score: 12
 Name: fff, Score: 12
+Name: ddd, Score: 10
 Name: dddd, Score: 9
 Name: dddd, Score: 7
 Name: ddd, Score: 6
@@ -131,6 +145,8 @@ Name: ddd, Score: 6
 Name: ddd, Score: 6
 Name: fffdddd, Score: 6
 Name: ddddd, Score: 6
+Name: ddd, Score: 6
+Name: ddd, Score: 6
 Name: ffff, Score: 4
 Name: ffff, Score: 4
 Name: ffff, Score: 4
@@ -186,8 +202,10 @@ Name: ddd, Score: 4
 Name: ddd, Score: 4
 Name: ddd, Score: 4
 Name: , Score: 4
+Name: dddd, Score: 4
 Name: ddd, Score: 3
 Name: dddd, Score: 3
+Name: poo, Score: 3
 Name: ddd, Score: 2
 Name: yuuuu, Score: 2
 Name: ddd, Score: 2
@@ -237,6 +255,14 @@ Name: dddd, Score: 2
 Name: dddd, Score: 2
 Name: dddd, Score: 2
 Name: dddd, Score: 2
+Name: ddd, Score: 2
+Name: ddd, Score: 2
+Name: ddd, Score: 2
+Name: ddd, Score: 2
+Name: ddd, Score: 2
+Name: ddd, Score: 2
+Name: ddd, Score: 2
+Name: ddd, Score: 2
 Name: gggg, Score: 1
 Name: gggg, Score: 1
 Name: gggg, Score: 1
@@ -302,6 +328,7 @@ Name: ddd, Score: 0
 Name: dddd, Score: 0
 Name: dddd, Score: 0
 Name: dddd, Score: 0
+<<<<<<< HEAD
 >>>>>>> master
 
 Name: sad, Score: 11
@@ -310,3 +337,13 @@ Name: sad, Score: 8
 Name: asd, Score: 15
 Name: qwd, Score: 6
 Name: asd, Score: 19
+=======
+Name: dddd, Score: 0
+Name: ddddd, Score: 0
+Name: ddd, Score: 0
+Name: ddd, Score: 0
+Name: ddd, Score: 0
+Name: ddd, Score: 0
+Name: fffff, Score: 0
+Name: fffff, Score: 0
+>>>>>>> master
