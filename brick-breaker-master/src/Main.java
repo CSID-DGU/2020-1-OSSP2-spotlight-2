@@ -48,7 +48,6 @@ public class Main extends JFrame implements Constants {
 		}
 
 		icon = new ImageIcon("./img/Virus - 33131.gif");
-
 		
 		frame = new JFrame("Virus Breaker");
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);

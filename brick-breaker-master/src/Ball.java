@@ -39,7 +39,8 @@ public class Ball extends Structure implements Constants {
 		setOnScreen(true);
 	}
 
-	ImageIcon icon = new ImageIcon("./img/virus.png");
+	ImageIcon icon = new ImageIcon("./img/ball.png");
+
 	Image img = icon.getImage();
 	
 	//Draw the ball

@@ -89,7 +89,7 @@ public class Board extends JPanel implements Runnable, Constants {
         //addKeyListener(new BoardListener());
         addKeyListener(boardtest1);
         setFocusable(true);
-        paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
+        paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.WHITE);
         ball = new Ball(ballX, ballY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
