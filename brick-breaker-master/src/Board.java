@@ -260,7 +260,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	        if (paddle.caughtItem(tempItem)) {
 	            items.remove(i);
 	        }
-	        else if (tempItem.getY() > WINDOW_HEIGHT) {
+	        else if (tempItem.getY() > Board.FrameHeight) {
 	            items.remove(i);
 	        }
 	    }
