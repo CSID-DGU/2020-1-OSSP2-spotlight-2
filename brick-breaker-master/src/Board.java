@@ -82,7 +82,7 @@ public class Board extends JPanel implements Runnable, Constants {
     private int ballY = FrameHeight/2;
     
     private boolean PBdraw = false; //패들과 공을 그릴지 결정
-
+    private boolean readyDraw = true; //레디 상태
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
@@ -112,7 +112,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
         game = new Thread(this);
         game.start();
-        //stop();
+        stop();
         repaint();
         isPaused.set(true);
     }
@@ -177,14 +177,10 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {   
-    	try {
-			game.sleep(3000); //게임 시작 준비
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
     	PBdraw = true; //공과 패들을 그림
-        while(true) {     
+        while(true) {   
+        	readyDraw = false;
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
             ball.changeBallSet();
@@ -231,6 +227,7 @@ public class Board extends JPanel implements Runnable, Constants {
         if (lives == MIN_LIVES) {
             repaint();
             PBdraw = false;
+            readyDraw = true;
             stop();
             isPaused.set(true);
         }
@@ -372,14 +369,33 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
     
+    /*Ready상태 출력*/
+    public void drawReady(Graphics g) {
+    	Font font  = new Font("Serif", Font.BOLD, 30);
+    	g.setFont(font);
+    	g.drawString("Ready", getWidth()/2 - 50, getHeight()/2 - 20);
+    	font  = new Font("Serif", Font.BOLD, 10);
+    	g.setFont(font);
+    	g.drawString("Press space to start", getWidth()/2 - 50, getHeight()/2);
+    }
+    
     //fills the board
     @Override
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
 <<<<<<< HEAD
+<<<<<<< HEAD
         g.drawImage(Main.icon.getImage(),0,0,null);
 =======
+=======
+        
+        //Ready 상태 출력(처음 시작 전 Ready 출력)
+        if ((lives > MIN_LIVES) && (readyDraw == true)) {
+        	drawReady(g);
+        }
+        
+>>>>>>> kwan
         //패들과 공을 그려야 되는 경우
 >>>>>>> 52b9976dd38fd14984832ad6e020b78e783e626e
         if(PBdraw == true) {
@@ -591,7 +607,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 //isSpace = true;
                 if (lives > MIN_LIVES) {
                     if (isPaused.get() == false) {
-                        stop();
+                        //stop();
                         isPaused.set(true);
                     }
                     else {
