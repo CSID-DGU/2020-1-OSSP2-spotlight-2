@@ -36,7 +36,7 @@ public class Paddle extends Structure implements Constants {
    }
 	//Draws the paddle
    
-    ImageIcon icon = new ImageIcon("./img/whitepaddle.png");
+    ImageIcon icon = new ImageIcon("./img/paddle1.png");
 	Image img = icon.getImage();
 	
 	@Override
