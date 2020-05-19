@@ -392,55 +392,14 @@ public class Board extends JPanel implements Runnable, Constants {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        g.drawImage(Main.icon.getImage(),0,0,null);
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-=======
-=======
-=======
-        g.drawImage(Main.icon.getImage(),0 , 0,getWidth(),getHeight(),null);
->>>>>>> kwan
->>>>>>> 89dae117a6e375ba71f7f03ed265cbd565f10da7
-=======
-        g.drawImage(Main.icon.getImage(),0 , 0,getWidth(),getHeight(),null);
->>>>>>> 880063c6c28e6d07d904d44881c64e126ce123ee
-
->>>>>>> 80a861217d696c5419ed813f46065aafeb88e8cc
-=======
         g.drawImage(Main.icon.getImage(),0 , 0,getWidth(),getHeight(),null);
 
->>>>>>> yoon
         //Ready 상태 출력(처음 시작 전 Ready 출력)
         if ((lives > MIN_LIVES) && (readyDraw == true)) {
         	drawReady(g);
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
         
         //패들과 공을 그려야 되는 경우
-
-=======
-
-        //패들과 공을 그려야 되는 경우
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 80a861217d696c5419ed813f46065aafeb88e8cc
-=======
-<<<<<<< HEAD
-=======
-        
->>>>>>> kwan
->>>>>>> 89dae117a6e375ba71f7f03ed265cbd565f10da7
-=======
->>>>>>> 880063c6c28e6d07d904d44881c64e126ce123ee
-=======
-
-        //패들과 공을 그려야 되는 경우
->>>>>>> yoon
         if(PBdraw == true) {
 		       paddle.draw(g);
 		       ball.draw(g);
