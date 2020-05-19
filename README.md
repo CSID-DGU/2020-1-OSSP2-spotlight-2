@@ -72,4 +72,4 @@ Team spotlight
 ## 7. 이미지 및 음원 출처
 - Virus 이미지 : https://pixabay.com/ko/illustrations/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EC%99%B8%EB%94%B4-%EC%BD%94%EB%A1%9C%EB%82%98-%EC%A0%84%EC%97%BC%EB%B3%91-4930122/
 
-- Background 이미지 :  https://pixabay.com/ko/illustrations/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EB%B3%91%EC%9B%90-%EC%B2%B4-%EA%B0%90%EC%97%BC-4937553/
+- Background 영상 : https://pixabay.com/ko/videos/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EC%BD%94%EB%A1%9C%EB%82%98-%EC%84%B8%EA%B3%84%EC%A0%81-%EC%9C%A0%ED%96%89%EB%B3%91-33131/
