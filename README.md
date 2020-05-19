@@ -69,12 +69,6 @@ Team spotlight
 <img src="res/timeline.png">
 
 ## 7. 이미지 및 음원 출처
-<img src="img/ballvirus.png">
-
 - Virus 이미지 :
 
-<img src="img/introBackGround.jpg">
-
-- Background 이미지 :
-
-- https://pixabay.com/ko/illustrations/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EB%B3%91%EC%9B%90-%EC%B2%B4-%EA%B0%90%EC%97%BC-4937553/
+- Background 이미지 :  https://pixabay.com/ko/illustrations/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EB%B3%91%EC%9B%90-%EC%B2%B4-%EA%B0%90%EC%97%BC-4937553/
