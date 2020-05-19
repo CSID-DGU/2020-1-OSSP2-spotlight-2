@@ -1,3 +1,4 @@
+
 /*
 *    Brick Breaker, Version 1.2
 *    By Ty-Lucas Kelley
@@ -49,10 +50,14 @@ public class Brick extends Structure implements Constants, ImageObserver {
 
 	//블록 이미지 img에 저장
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ImageIcon icon = new ImageIcon("./img/virus2.png");
 =======
 	ImageIcon icon = new ImageIcon("./img/ballvirus.png");
 >>>>>>> 880063c6c28e6d07d904d44881c64e126ce123ee
+=======
+	ImageIcon icon = new ImageIcon("./img/ballvirus.png");
+>>>>>>> yoon
 	Image img = icon.getImage();
 	
 	

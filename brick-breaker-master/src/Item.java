@@ -33,6 +33,8 @@ public class Item extends Structure implements Constants {
 	private int type;
 
 	Ball b = Board.ball; //Board의 ball을 저장
+	//---------------------------------------------------------
+	public static boolean check = false;
 	
 	//Constructor
 	public Item(int x, int y, int width, int height, Color color, int type) {
@@ -93,11 +95,20 @@ public class Item extends Structure implements Constants {
 	//Resize the paddle, depending on which item is caught. Changes in increments of 15 until min/max width is reached.
 	public void resizePaddle(Paddle p) {
 		if (getType() == 1 && p.getWidth() < PADDLE_MAX) {
+			//System.out.println(p.getWidth());
 			p.setWidth(p.getWidth() + 15);
+			//System.out.println(p.getWidth());
+			check = true;
+			return;
 		}
 		else if (getType() == 2 && p.getWidth() > PADDLE_MIN) {
+			//System.out.println(p.getWidth());
 			p.setWidth(p.getWidth() - 15);
+			//System.out.println(p.getWidth());
+			check= true;
+			return;
 		}
+		check= false;
 	}
 
 	/*공의 속도 변경*/
