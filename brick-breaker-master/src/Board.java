@@ -391,7 +391,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
-        g.drawImage(Main.icon.getImage(),0 , 0,getWidth(),getHeight(),null);
+        g.drawImage(Main.icon.getImage(), 0, 0, getWidth(), getHeight(), null);
 
         //Ready 상태 출력(처음 시작 전 Ready 출력)
         if ((lives > MIN_LIVES) && (readyDraw == true)) {
