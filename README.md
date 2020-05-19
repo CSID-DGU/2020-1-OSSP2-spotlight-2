@@ -65,5 +65,16 @@ Team spotlight
 - 당신의 기록을 저장하고 자랑할수 있는 랭킹 시스템 까지!!!
 - 과연 당신이 1등이 되고 최고 점수를 획득할 수 있을까??
 
-## 5. 타임라인
+## 6. 타임라인
 <img src="res/timeline.png">
+
+## 7. 이미지 및 음원 출처
+<img src="img/ballvirus.png">
+
+- Virus 이미지 :
+
+<img src="img/introBackGround.jpg">
+
+- Background 이미지 :
+
+- https://pixabay.com/ko/illustrations/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EB%B3%91%EC%9B%90-%EC%B2%B4-%EA%B0%90%EC%97%BC-4937553/

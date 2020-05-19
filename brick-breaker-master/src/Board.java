@@ -1,4 +1,3 @@
-
 //Imports
 import java.awt.*;
 import javax.swing.*;
@@ -20,8 +19,11 @@ public class Board extends JPanel implements Runnable, Constants {
     public static Brick[] brick = new Brick[10];
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
-    private int score = 0, lives = MAX_LIVES, bricksLeft = 1, waitTime = 3, withSound, level = 1;
-
+    private int score = 0, lives = MAX_LIVES, bricksLeft = 10, waitTime = 3, withSound, level = 1;
+     
+    //창의 크기 불러옴
+    public static int FrameWidth = WINDOW_WIDTH ;
+    public static int FrameHeight = WINDOW_HEIGHT;
     //공 속도 변수
     public static int xSpeed = 1;
     
@@ -70,21 +72,10 @@ public class Board extends JPanel implements Runnable, Constants {
     private Color[] grayColors = {GRAY_BRICK_ONE, GRAY_BRICK_TWO, GRAY_BRICK_THREE, Color.BLACK};
     private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
     private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
-<<<<<<< HEAD
-
-    // size of frame width and height
-    public static int FrameWidth = WINDOW_WIDTH;
-    public static int FrameHeight = WINDOW_HEIGHT;
-    
-    //패들의 위치
-    static int paddleX = (FrameWidth/2)-(PADDLE_WIDTH/2);
-    static int paddleY = FrameHeight - 50;
-=======
     
     //패들의 위치
     private int paddleX = (486/2)-(PADDLE_WIDTH/2);
     private int paddleY = 463 - 13;
->>>>>>> master
     //공 시작 위치
     private int ballX = FrameWidth/2;
     private int ballY = FrameHeight/2;
@@ -97,7 +88,7 @@ public class Board extends JPanel implements Runnable, Constants {
         //addKeyListener(new BoardListener());
         addKeyListener(boardtest1);
         setFocusable(true);
-        paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
+        paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.WHITE);
         ball = new Ball(ballX, ballY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
@@ -185,10 +176,9 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {   
-
-    	PBdraw = true; //공과 패들을 그림
         while(true) {   
         	readyDraw = false;
+        	PBdraw = true; //공과 패들을 그림
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
             ball.changeBallSet();
@@ -238,6 +228,7 @@ public class Board extends JPanel implements Runnable, Constants {
             readyDraw = true;
             stop();
             isPaused.set(true);
+            game.interrupt();
         }
     }
 
@@ -350,6 +341,13 @@ public class Board extends JPanel implements Runnable, Constants {
             ball.reset(); //공 리셋
             paddle.reset(); //하단 바 리셋
             key_temp = 0;
+            PBdraw = false;
+            readyDraw = true;
+            for (int i = 0; i < 10; i++) {
+            	if(brick[i] != null) {
+            		brick[i] = null;
+            	}
+            }
             repaint();
             stop();
             isPaused.set(true);
@@ -381,6 +379,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public void drawReady(Graphics g) {
     	Font font  = new Font("Serif", Font.BOLD, 30);
     	g.setFont(font);
+    	g.setColor(Color.yellow);
     	g.drawString("Ready", getWidth()/2 - 50, getHeight()/2 - 20);
     	font  = new Font("Serif", Font.BOLD, 10);
     	g.setFont(font);
@@ -393,15 +392,14 @@ public class Board extends JPanel implements Runnable, Constants {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
 
-        g.drawImage(Main.icon.getImage(),0,0,null);
-        
+        g.drawImage(Main.icon.getImage(),0 , 0,getWidth(),getHeight(),null);
+
         //Ready 상태 출력(처음 시작 전 Ready 출력)
         if ((lives > MIN_LIVES) && (readyDraw == true)) {
         	drawReady(g);
         }
-        
-        //패들과 공을 그려야 되는 경우
 
+        //패들과 공을 그려야 되는 경우
         if(PBdraw == true) {
 		       paddle.draw(g);
 		       ball.draw(g);
@@ -643,7 +641,7 @@ public class Board extends JPanel implements Runnable, Constants {
             			key_temp = 1;
             		}
             		//오른쪽 이동
-            		if(ke.getKeyCode() == KeyEvent.VK_RIGHT) { 
+            		if(ke.getKeyCode() == KeyEvent.VK_RIGHT) {
             			key_temp = -1;
             		}
             	}
@@ -681,3 +679,4 @@ public class Board extends JPanel implements Runnable, Constants {
 
     }
 }
+
