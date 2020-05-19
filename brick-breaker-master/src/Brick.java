@@ -50,7 +50,6 @@ public class Brick extends Structure implements Constants, ImageObserver {
 
 	//블록 이미지 img에 저장
 	ImageIcon icon = new ImageIcon("./img/ballvirus.png");
-
 	Image img = icon.getImage();
 	
 	
