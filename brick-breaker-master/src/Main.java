@@ -47,7 +47,7 @@ public class Main extends JFrame implements Constants {
 			e.printStackTrace();
 		}
 
-		icon = new ImageIcon("./img/earth3.gif");
+		icon = new ImageIcon("./img/quarantineBackground.gif");
 		
 		frame = new JFrame("Virus Breaker");
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
