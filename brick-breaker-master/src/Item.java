@@ -51,31 +51,30 @@ public class Item extends Structure implements Constants {
 				return;
 			}
 			if(color == Color.GREEN) {// 하단 바 크기 증가	
-				ImageIcon icon = new ImageIcon("./img/increasePaddle.png");
+				ImageIcon icon = new ImageIcon("./img/item1.png");
 				Image img = icon.getImage();
-				g.drawImage(img, x, y, 3* width, 3* height, null);
+				g.drawImage(img, x, y, width, height, null);
 			}
 			if(color == Color.RED) {// 하단 바 크기 감소
-				ImageIcon icon = new ImageIcon("./img/reducePaddle.png");
+				ImageIcon icon = new ImageIcon("./img/item2.png");
 				Image img = icon.getImage();
-				g.drawImage(img, x, y, 3* width, 3* height, null);
+				g.drawImage(img, x, y, width, height, null);
 			}
 			if(color== Color.BLUE) {// 공 속도 증가
-				ImageIcon icon = new ImageIcon("./img/fast.png");
+				ImageIcon icon = new ImageIcon("./img/item3.png");
 				Image img = icon.getImage();
-				g.drawImage(img, x, y, 3* width, 3* height, null);
+				g.drawImage(img, x, y, width, height, null);
 			}
 			if(color == Color.PINK) {// 공 속도 감소
-				ImageIcon icon = new ImageIcon("./img/snail.png");
+				ImageIcon icon = new ImageIcon("./img/item4.png");
 				Image img = icon.getImage();
-				g.drawImage(img, x, y, 3* width, 3* height, null);
+				g.drawImage(img, x, y, width, height, null);
 			}
 			if(color == Color.ORANGE) { //리버스
-				ImageIcon icon = new ImageIcon("./img/reverse.png");
+				ImageIcon icon = new ImageIcon("./img/item5.png");
 				Image img = icon.getImage();
-				g.drawImage(img, x, y, 3* width, 3* height, null);
-			}
-			
+				g.drawImage(img, x, y, width, height, null);
+			}			
 		}
 		//Hard 모드 아이템
 		else {
