@@ -40,8 +40,6 @@ public class Ball extends Structure implements Constants {
 	}
 
 	ImageIcon icon = new ImageIcon("./img/ballimage.png");
-
-
 	Image img = icon.getImage();
 	
 	//Draw the ball

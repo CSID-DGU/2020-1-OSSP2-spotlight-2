@@ -25,6 +25,8 @@
 //Imports
 import java.awt.*;
 
+import javax.swing.ImageIcon;
+
 //Class definition
 public class Paddle extends Structure implements Constants {
 
@@ -33,10 +35,15 @@ public class Paddle extends Structure implements Constants {
       super(x, y, width, height, color);
    }
 	//Draws the paddle
+   
+    ImageIcon icon = new ImageIcon("./img/whitepaddle.png");
+	Image img = icon.getImage();
+	
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(color);
-		g.fillRect(x, y, width, height);
+		g.drawImage(img, x, y, width, height, null);
+		//g.setColor(color);
+		//g.fillRect(x, y, width, height);
 	}
 
 	//프레임 크기에 따른 패들 크기, 좌표 재설정
