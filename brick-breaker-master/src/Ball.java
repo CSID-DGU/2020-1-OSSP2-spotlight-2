@@ -39,7 +39,7 @@ public class Ball extends Structure implements Constants {
 		setOnScreen(true);
 	}
 
-	ImageIcon icon = new ImageIcon("./img/ball1.png");
+	ImageIcon icon = new ImageIcon("./img/ball.png");
 
 	Image img = icon.getImage();
 	
