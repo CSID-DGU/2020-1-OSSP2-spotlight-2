@@ -49,11 +49,12 @@ public class Main extends JFrame implements Constants {
 
 		icon = new ImageIcon("./img/background.gif");
 		
+		Dimension dim = new Dimension(750, 750);
 		frame = new JFrame("Virus Breaker");
-		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		frame.setSize(dim);
 		frame.setResizable(true);//동적페이지
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.setMinimumSize(new Dimension(750, 750)); //창 최소 사이즈
+		frame.setMinimumSize(dim);
 		board = new Board(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 		//-----------------------------

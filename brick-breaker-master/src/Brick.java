@@ -81,7 +81,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 		}
 
 		//Places an item of specified type inside the brick to fall when the brick is destroyed
-		item = new Item(x + (width / 4), y + (height / 4), Board.FrameWidth/10, Board.FrameHeight/5 , itemColor, itemType);
+		item = new Item(x + (width / 4), y + (height / 4), Board.FrameWidth/25, Board.FrameHeight/50 , itemColor, itemType);
 	}
 
 	//Draws a brick
@@ -129,73 +129,41 @@ public class Brick extends Structure implements Constants, ImageObserver {
 
 	//Detect if the brick has been hit on its bottom, top, left, or right sides
 	public boolean hitBottom(int ballX, int ballY) { //아래쪽에 공이 맞는 경우
-		if(Board.xSpeed == 1) { //속도가 1 일때
-			if ((ballX >= x) && (ballX <= x + width + 1) && (ballY == y + height) && (destroyed == false)) {
-				addHit();
-				return true;
-			}
-		}
-		else { //속도가 2 일때
-			if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y + height - 1) && (ballY <= y + height) && (destroyed == false)) {
-				addHit();
-				return true;
-			}
+		if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y + height - Board.xSpeed) && (ballY <= y + height) && (destroyed == false)) {
+			addHit();
+			return true;
 		}
 		return false;
 	}
 
 	public boolean hitTop(int ballX, int ballY) { //위쪽에 공이 맞는 경우
-		if(Board.xSpeed == 1) { //속도가 1 일때
-			if ((ballX >= x) && (ballX <= x + width + 1) && (ballY == y) && (destroyed == false)) {
-				addHit();
-				return true;
-			}
-		}
-		else { //속도가 2 일때
-			if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y) && (ballY <= y + 1) && (destroyed == false)) {
-				addHit();
-				return true;
-			}
+		if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y) && (ballY <= y + Board.xSpeed) && (destroyed == false)) {
+			addHit();
+			return true;
 		}
 		return false;
 	}
 
 	public boolean hitLeft(int ballX, int ballY) { //왼쪽에 공이 맞는 경우
-		if(Board.xSpeed == 1) { //속도가 1 일때
-			if ((ballY >= y) && (ballY <= y + height) && (ballX == x) && (destroyed == false)) {
-				addHit();
-				return true;
-			}
-		}
-		else { //속도가 2 일때
-			if ((ballY >= y) && (ballY <= y + height) && (ballX >= x) && (ballX <= x + 1) && (destroyed == false)) {
-				addHit();
-				return true;
-			}
+		if ((ballY >= y) && (ballY <= y + height) && (ballX >= x) && (ballX <= x + Board.xSpeed) && (destroyed == false)) {
+			addHit();
+			return true;
 		}
 		return false;
 	}
 
 	public boolean hitRight(int ballX, int ballY) { //오른쪽에 공이 맞는 경우
-		if(Board.xSpeed == 1) { //속도가 1 일때
-			if ((ballY >= y) && (ballY <= y + height) && (ballX == x + width) && (destroyed == false)) {
-				addHit();
-				return true;
-			}
-		}
-		else { //속도가 2 일때
-			if ((ballY >= y) && (ballY <= y + height) && (ballX <= x + width) && (ballX >= x + width - 1) && (destroyed == false)) {
-				addHit();
-				return true;
-			}
+		if ((ballY >= y) && (ballY <= y + height) && (ballX <= x + width) && (ballX >= x + width - Board.xSpeed) && (destroyed == false)) {
+			addHit();
+			return true;
 		}
 		return false;
 	}
 
 	//프레임 크기에 따른 벽돌 크기, 좌표 재설정
 	public void changeBrickSet() {
-			setX((int)((double)Board.FrameWidth/getRateX()));
-			setY((int)((double)(Board.FrameHeight/3)/getRateY()));
+			setX((int)Math.round(((double)Board.FrameWidth/getRateX())));
+			setY((int)Math.round(((double)(Board.FrameHeight/3)/getRateY())));
 			setWidth(Board.FrameWidth/10);
 			setHeight(Board.FrameHeight/10);
 			//벽돌의 위치 이동에 따라 아이템 크기 좌표 재설정

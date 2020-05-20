@@ -38,10 +38,10 @@ public class Paddle extends Structure implements Constants {
    }
 	//Draws the paddle
    
-    ImageIcon paddle1 = new ImageIcon("./img/paddle1.png");
-    ImageIcon paddle2 = new ImageIcon("./img/paddle2.png");
-	Image pad_1 = paddle1.getImage();
-	Image pad_2 = paddle2.getImage();
+    ImageIcon paddle1 = new ImageIcon("./img/paddle1.png"); //일반 패들 이미지
+    ImageIcon paddle2 = new ImageIcon("./img/paddle2.png"); //리버스 패들 이미지
+	Image pad_1 = paddle1.getImage(); //일반 패들
+	Image pad_2 = paddle2.getImage(); //리버스 패들
 	
 	@Override
 	public void draw(Graphics g) {
@@ -77,9 +77,7 @@ public class Paddle extends Structure implements Constants {
 	{
 		x = (Board.FrameWidth/2)-(PADDLE_WIDTH/2);
 		y = Board.FrameHeight - 13;
-
 		setWidth((int)((70.0/486.0)*Board.FrameWidth)); //하단 바 크기 초기화
-		setColor(Color.WHITE);//하단 바 색상 BLACK으로 초기화
 		Board.reverse = false;//리버스 모드 비활성화
 	}
 	
@@ -93,7 +91,7 @@ public class Paddle extends Structure implements Constants {
 	}
 	//Checks if the ball hit the paddle
 	public boolean hitPaddle(int ballX, int ballY) {
-		if ((ballX >= x) && (ballX <= x + width) && ((ballY >= y) && (ballY <= y + height))) {
+		if ((ballX >= x) && (ballX <= x + width) && ((ballY >= y - Board.xSpeed) && (ballY <= y + height))) {
 			return true;
 		}
 		return false;
