@@ -38,15 +38,19 @@ public class Paddle extends Structure implements Constants {
    }
 	//Draws the paddle
    
-    ImageIcon icon1 = new ImageIcon("./img/paddle1.png");
-	Image img1 = icon1.getImage();
-	ImageIcon icon2 = new ImageIcon("./img/paddle2.png");
-	Image img2 = icon2.getImage();
+    ImageIcon paddle1 = new ImageIcon("./img/paddle1.png");
+    ImageIcon paddle2 = new ImageIcon("./img/paddle2.png");
+	Image pad_1 = paddle1.getImage();
+	Image pad_2 = paddle2.getImage();
+	
 	@Override
 	public void draw(Graphics g) {
-		if(Board.reverse == true) {
-			g.drawImage(img2, x, y, width, height, null);
-		} else g.drawImage(img1, x, y, width, height, null);
+		if(Board.reverse == false) {
+			g.drawImage(pad_1, x, y, width, height, null);
+		}
+		else {
+			g.drawImage(pad_2, x, y, width, height, null);
+		}
 	}
 
 	//프레임 크기에 따른 패들 크기, 좌표 재설정
@@ -59,11 +63,12 @@ public class Paddle extends Structure implements Constants {
 		}
 		else if(Item.check == 1)
 		{
-			setWidth((int)((70.0/486.0)*Board.FrameWidth+Board.FrameWidth/30));
+
+			setWidth((int)((70.0/486.0)*Board.FrameWidth+Board.FrameWidth/25));
 		}
 		else if(Item.check == -1)
-		{ 
-			setWidth((int)((70.0/486.0)*Board.FrameWidth-Board.FrameWidth/30));
+		{
+			setWidth((int)((70.0/486.0)*Board.FrameWidth-Board.FrameWidth/25));
 		}
 		setHeight((int)((10.0/486.0)*Board.FrameHeight));
     }
@@ -72,7 +77,7 @@ public class Paddle extends Structure implements Constants {
 	public void reset() 
 	{
 		x = (Board.FrameWidth/2)-(PADDLE_WIDTH/2);
-		y = Board.FrameHeight -13;
+		y = Board.FrameHeight - 13;
 
 		//setWidth((int)((70.0/486.0)*Board.FrameWidth)); //하단 바 크기 초기화
 		setColor(Color.WHITE);//하단 바 색상 BLACK으로 초기화

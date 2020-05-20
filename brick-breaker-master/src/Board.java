@@ -25,7 +25,8 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int FrameWidth = WINDOW_WIDTH ;
     public static int FrameHeight = WINDOW_HEIGHT;
     //공 속도 변수
-    public static int xSpeed = 2;//Math.round(Board.FrameWidth+Board.FrameHeight/949);
+ static int xSpeed = (int)Math.round(((double)(FrameWidth + FrameHeight)/949.0));
+
     
     //리버스 모드 확인 변수
     public static boolean reverse = false;
@@ -169,7 +170,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {  
-        while(true) {   
+        while(true) {
         	readyDraw = false;
         	PBdraw = true; //공과 패들을 그림
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
@@ -192,6 +193,7 @@ public class Board extends JPanel implements Runnable, Constants {
             paddleMove();//하단 바 이동 메소드 실행
             dropItems();
             checkItemList();
+            checkPaddleMode(); // 리버스 모드 판단 메소드
             repaint();
             try {
                 game.sleep(waitTime);
@@ -201,6 +203,22 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
+    public void checkPaddleMode()
+    {
+    	if(Item.check2 == 1)
+    	{
+    		try
+    		{
+    			audio = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav"));
+    			clip = AudioSystem.getClip(null);
+                clip.open(audio);
+                clip.stop();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    	}
+    }
+    
     public void addItem(Item i) {
         items.add(i);
     }
@@ -281,6 +299,14 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    ball.setYDir(xSpeed);
 	                    if (brick[i].isDestroyed()) {
 	                    	   destroy_check = true;	
+	                    	   try {
+	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
+	                               Clip clip = AudioSystem.getClip();
+	                               clip.open(audioInputStream);
+	                               clip.start();
+	                           } catch(Exception ex) {
+	                              ex.printStackTrace();
+	                           }
 	                        bricksLeft--;
 	                        score += 1;
 	                        addItem(brick[i].item);
@@ -291,6 +317,14 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    ball.setXDir(-xSpeed);
 	                    if (brick[i].isDestroyed()) {
 	                    	   destroy_check = true;
+	                    	   try {
+	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
+	                               Clip clip = AudioSystem.getClip();
+	                               clip.open(audioInputStream);
+	                               clip.start();
+	                           } catch(Exception ex) {
+	                              ex.printStackTrace();
+	                           }
 	                        bricksLeft--;
 	                        score += 1;
 	                        addItem(brick[i].item);
@@ -301,6 +335,14 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    ball.setXDir(xSpeed);
 	                    if (brick[i].isDestroyed()) {
 	                    	   destroy_check = true;
+	                    	   try {
+	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
+	                               Clip clip = AudioSystem.getClip();
+	                               clip.open(audioInputStream);
+	                               clip.start();
+	                           } catch(Exception ex) {
+	                              ex.printStackTrace();
+	                           }
 	                        bricksLeft--;
 	                        score += 1;
 	                        addItem(brick[i].item);
@@ -311,6 +353,14 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    ball.setYDir(-xSpeed);
 	                    if (brick[i].isDestroyed()) {
 	                    	   destroy_check = true;
+	                    	   try {
+	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
+	                               Clip clip = AudioSystem.getClip();
+	                               clip.open(audioInputStream);
+	                               clip.start();
+	                           } catch(Exception ex) {
+	                              ex.printStackTrace();
+	                           }
 	                        bricksLeft--;
 	                        score += 1;
 	                        addItem(brick[i].item);
@@ -359,14 +409,7 @@ public class Board extends JPanel implements Runnable, Constants {
             level = 1;
         }
         try {
-        	if(Item.check2 == 0)
-        	{
-        		 audio = AudioSystem.getAudioInputStream(new File(songs[level-1]).getAbsoluteFile());
-        	}
-        	else if(Item.check2 == 1)
-        	{
-        		audio = AudioSystem.getAudioInputStream(new File(songs[level]).getAbsoluteFile());
-        	}
+        	audio = AudioSystem.getAudioInputStream(new File(songs[level-1]).getAbsoluteFile());
             clip = AudioSystem.getClip(null);
             clip.open(audio);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
