@@ -74,6 +74,7 @@ public class Board extends JPanel implements Runnable, Constants {
     
     private boolean PBdraw = false; //패들과 공을 그릴지 결정
     private boolean readyDraw = true; //레디 상태
+
     //Constructor
     public Board(int width, int height) {
         super.setSize(width, height);
@@ -167,7 +168,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
 
     //runs the game
-    public void run() {   
+    public void run() {  
         while(true) {   
         	readyDraw = false;
         	PBdraw = true; //공과 패들을 그림
@@ -198,7 +199,6 @@ public class Board extends JPanel implements Runnable, Constants {
                 ie.printStackTrace();
             }
         }
-
     }
 
     public void addItem(Item i) {
@@ -370,13 +370,15 @@ public class Board extends JPanel implements Runnable, Constants {
     
     /*Ready상태 출력*/
     public void drawReady(Graphics g) {
-    	Font font  = new Font("Serif", Font.BOLD, 30);
+    	Font font  = new Font("Serif", Font.BOLD, getWidth()/15); //폰트
     	g.setFont(font);
-    	g.setColor(Color.yellow);
-    	g.drawString("Ready", getWidth()/2 - 50, getHeight()/2 - 20);
-    	font  = new Font("Serif", Font.BOLD, 10);
+    	g.setColor(Color.yellow);//색 설정
+    	g.drawString("Ready", getWidth()*5/12, getHeight()/3);
+    	font  = new Font("Serif", Font.BOLD, getWidth()/40);
     	g.setFont(font);
-    	g.drawString("Press space to start", getWidth()/2 - 50, getHeight()/2);
+    	g.drawString("Press SPACE to start", getWidth()*2/5, getHeight()/2);
+    	g.drawString("Lives : " + lives, getWidth()*9/19, getHeight()*3/5); //남은 목숨
+    	setBackground(Color.BLACK); //배경 지정	
     }
     
     //fills the board
@@ -403,17 +405,16 @@ public class Board extends JPanel implements Runnable, Constants {
 	            	brick[i].draw(g);
 	    }
 	    g.setColor(Color.BLACK);
+	    Font font  = new Font("Serif", Font.BOLD, getWidth()/30); //폰트 설정
+    	g.setFont(font);
 	    //하드모드(좌우 방향 키를 게임 화면에 출력)
 	    if(gameMode == 1) {
-	        g.drawString("Left_Key", 10, getHeight() - (getHeight()/3));
-	        g.drawString(Character.toString(randomLeftKey), 10, getHeight() - (getHeight()/3) + 20);
-	        g.drawString("Right_Key", getWidth() - 70, getHeight() - (getHeight()/3));
-	        g.drawString(Character.toString(randomRightKey), getWidth() - 15, getHeight() - (getHeight()/3) + 20);
+	    	g.setColor(Color.red);//색 설정
+	        g.drawString(Character.toString(randomLeftKey), getWidth()*1/50, getHeight()*9/10);
+	        g.drawString(Character.toString(randomRightKey), getWidth()*97/100, getHeight()*9/10);
 	        }
-	        g.drawString("Lives: " + lives, 10, getHeight() - 50);
-	        g.drawString("Score: " + score, 10, getHeight() - 70);
-	        g.drawString("Level: " + level, 10, getHeight() - 90);
-	        g.drawString("Player: " + playerName, 10, getHeight() - 110);
+	    	g.setColor(Color.yellow);//색 설정
+	    	g.drawString("Score : " + score, getWidth()*1/50, getHeight()*96/100);//점수
 	
 	        for (Item i: items) {
 	            i.draw(g);
