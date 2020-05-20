@@ -25,12 +25,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int FrameWidth = WINDOW_WIDTH ;
     public static int FrameHeight = WINDOW_HEIGHT;
     //공 속도 변수
-<<<<<<< HEAD
- static int xSpeed = (int)Math.round(((double)(FrameWidth + FrameHeight)/949.0));
-
-=======
-    public static int xSpeed = 1;
->>>>>>> kwan
+    static int xSpeed = (int)Math.round(((double)(FrameWidth + FrameHeight)/949.0));
     
     //리버스 모드 확인 변수
     public static boolean reverse = false;
