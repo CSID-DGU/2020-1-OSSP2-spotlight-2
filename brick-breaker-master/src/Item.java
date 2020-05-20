@@ -170,7 +170,7 @@ public class Item extends Structure implements Constants {
 					else {
 						Board.reverse = false;
 						p.setColor(Color.BLACK); //하단 바 색상 BLACK으로 변경
-						heck2 = 1;
+						check2 = 1;
 					}
 				}
 		}
