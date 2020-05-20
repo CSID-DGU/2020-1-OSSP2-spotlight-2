@@ -25,7 +25,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int FrameWidth = WINDOW_WIDTH ;
     public static int FrameHeight = WINDOW_HEIGHT;
     //공 속도 변수
-    public static int xSpeed = 1;
+    public static int xSpeed = (int)Math.round(((double)(FrameWidth + FrameHeight)/949.0));
     
     //리버스 모드 확인 변수
     public static boolean reverse = false;
@@ -169,7 +169,8 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {  
-        while(true) {   
+        while(true) {
+        	System.out.println(ball.getXDir());
         	readyDraw = false;
         	PBdraw = true; //공과 패들을 그림
             FrameWidth = (int)getWidth();//현재 프레임의 가로 길이

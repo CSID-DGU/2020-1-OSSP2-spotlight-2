@@ -44,7 +44,7 @@ public class Structure implements Constants {
 	//Draw a structure
 	public void draw(Graphics g) {
 		g.setColor(color);
-		g.fillRect(x, y, width, height);
+		//g.fillRect(x, y, width, height);
 	}
 
 	//Mutator methods

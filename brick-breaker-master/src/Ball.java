@@ -56,6 +56,23 @@ public class Ball extends Structure implements Constants {
 		setY(getY());
 		setWidth((int)((10.0/486.0)*Board.FrameWidth));
 		setHeight((int)((10.0/486.0)*Board.FrameHeight));
+		Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+		if(getXDir() < 0 && getYDir() < 0) {
+			setXDir(-(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+			setYDir(-(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+		}
+		if(getXDir() > 0 && getYDir() < 0) {
+			setXDir((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+			setYDir(-(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+		}
+		if(getXDir() < 0 && getYDir() > 0) {
+			setXDir(-(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+			setYDir((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+		}
+		if(getXDir() > 0 && getYDir() > 0) {
+			setXDir((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+			setYDir((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+		}
     }
 	
 	//Moves the ball
@@ -70,9 +87,9 @@ public class Ball extends Structure implements Constants {
 	public void reset() {
 		x = Board.FrameWidth/2;
 		y = Board.FrameHeight/2;
-		xDir = 1;
-		yDir = -1;
-		Board.xSpeed = 1; //공속도 초기화
+		xDir = 1;//(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+		yDir = -1;//(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+		Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)); //공속도 초기화
 	}
 
 	//Mutator methods

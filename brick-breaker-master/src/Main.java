@@ -53,7 +53,7 @@ public class Main extends JFrame implements Constants {
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		frame.setResizable(true);//동적페이지
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		//frame.setMinimumSize(new Dimension(750, 750)); //창 최소 사이즈
 		board = new Board(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 		//-----------------------------
