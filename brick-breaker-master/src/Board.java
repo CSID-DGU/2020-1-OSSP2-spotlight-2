@@ -25,11 +25,19 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int FrameWidth = WINDOW_WIDTH ;
     public static int FrameHeight = WINDOW_HEIGHT;
     //공 속도 변수
+<<<<<<< HEAD
  static int xSpeed = (int)Math.round(((double)(FrameWidth + FrameHeight)/949.0));
 
+=======
+    public static int xSpeed = 1;
+>>>>>>> kwan
     
     //리버스 모드 확인 변수
     public static boolean reverse = false;
+    
+    //공속도 상태 확인 변수
+    public static int ball_speed = 0;
+    
     //왼쪽 오른쪽 키 입력을 확인할 변수
     int key_temp = 0;
    
@@ -173,7 +181,9 @@ public class Board extends JPanel implements Runnable, Constants {
         while(true) {
         	readyDraw = false;
         	PBdraw = true; //공과 패들을 그림
-            FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
+            int x1 = ball.getX();
+            int y1 = ball.getY();
+        	FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
             FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
             ball.changeBallSet();
             paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
@@ -181,8 +191,7 @@ public class Board extends JPanel implements Runnable, Constants {
             	if (brick[i] != null)
             		brick[i].changeBrickSet(); //벽돌의 크기, 좌표 재설정
             }
-            int x1 = ball.getX();
-            int y1 = ball.getY();
+
             makeBricks();//벽돌 생성
             checkPaddle(x1, y1);
             checkWall(x1, y1);

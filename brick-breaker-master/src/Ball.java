@@ -56,37 +56,44 @@ public class Ball extends Structure implements Constants {
 		setY(getY());
 		setWidth((int)((10.0/486.0)*Board.FrameWidth));
 		setHeight((int)((10.0/486.0)*Board.FrameHeight));
-		Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+		/*공 속도 설정*/
+		if(Board.ball_speed == 0) { //공속도 증가x
+			Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+		}
+		else { //공속도 증가
+			Board.xSpeed = ((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)))*2;
+		}
+		
+		/*xDir 설정*/
 		if(getXDir() < 0 && getYDir() < 0) {
-			setXDir(-(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
-			setYDir(-(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+			setXDir(-Board.xSpeed);
+			setYDir(-Board.xSpeed);
 		}
-		if(getXDir() > 0 && getYDir() < 0) {
-			setXDir((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
-			setYDir(-(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+		else if(getXDir() > 0 && getYDir() < 0) {
+			setXDir(Board.xSpeed);
+			setYDir(-Board.xSpeed);
 		}
-		if(getXDir() < 0 && getYDir() > 0) {
-			setXDir(-(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
-			setYDir((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+		else if(getXDir() < 0 && getYDir() > 0) {
+			setXDir(-Board.xSpeed);
+			setYDir(Board.xSpeed);
 		}
-		if(getXDir() > 0 && getYDir() > 0) {
-			setXDir((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
-			setYDir((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
+		else if(getXDir() > 0 && getYDir() > 0) {
+			setXDir(Board.xSpeed);
+			setYDir(Board.xSpeed);
 		}
     }
 	
 	//Moves the ball
 	public void move() {
 		x += xDir;
-		//System.out.printf("xDir : %lf",xDir);
 		y += yDir;
-		//System.out.printf("yDir : %lf",yDir);
 	}
 
 	//Resets the ball to original position at center of screen
 	public void reset() {
 		x = Board.FrameWidth/2;
 		y = Board.FrameHeight/2;
+		Board.ball_speed = 0; //공속도 증가 상태를 원래대로 초기화
 		xDir = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
 		yDir = -(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
 		Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)); //공속도 초기화
