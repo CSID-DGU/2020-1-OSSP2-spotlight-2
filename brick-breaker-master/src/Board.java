@@ -25,7 +25,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public static int FrameWidth = WINDOW_WIDTH ;
     public static int FrameHeight = WINDOW_HEIGHT;
     //공 속도 변수
-    public static int xSpeed = 1;
+    public static int xSpeed = 2;//Math.round(Board.FrameWidth+Board.FrameHeight/949);
     
     //리버스 모드 확인 변수
     public static boolean reverse = false;
@@ -359,7 +359,14 @@ public class Board extends JPanel implements Runnable, Constants {
             level = 1;
         }
         try {
-            audio = AudioSystem.getAudioInputStream(new File(songs[level-1]).getAbsoluteFile());
+        	if(Item.check2 == 0)
+        	{
+        		 audio = AudioSystem.getAudioInputStream(new File(songs[level-1]).getAbsoluteFile());
+        	}
+        	else if(Item.check2 == 1)
+        	{
+        		audio = AudioSystem.getAudioInputStream(new File(songs[level]).getAbsoluteFile());
+        	}
             clip = AudioSystem.getClip(null);
             clip.open(audio);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
