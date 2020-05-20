@@ -34,8 +34,8 @@ public class Item extends Structure implements Constants {
 
 	Ball b = Board.ball; //Board의 ball을 저장
 	//---------------------------------------------------------
-	public static boolean check = false;
-	
+	public static int check = 0;
+	public static int check2 = 0;
 	//Constructor
 	public Item(int x, int y, int width, int height, Color color, int type) {
 		super(x, y, width, height, color);
@@ -97,17 +97,17 @@ public class Item extends Structure implements Constants {
 			//System.out.println(p.getWidth());
 			p.setWidth(p.getWidth() + 15);
 			//System.out.println(p.getWidth());
-			check = true;
+			check = 1;
 			return;
 		}
 		else if (getType() == 2 && p.getWidth() > PADDLE_MIN) {
 			//System.out.println(p.getWidth());
 			p.setWidth(p.getWidth() - 15);
 			//System.out.println(p.getWidth());
-			check= true;
+			check= -1;
 			return;
 		}
-		check= false;
+		check= 0;
 	}
 
 	/*공의 속도 변경*/
@@ -164,11 +164,13 @@ public class Item extends Structure implements Constants {
 					if (Board.reverse == false) {
 						Board.reverse = true;
 						p.setColor(Color.RED);//하단 바 색상 RED로 변경
+						check2 = 1;
 					}
 					//리버스 활성화 상태라면 비활성화 상태로 변경
 					else {
 						Board.reverse = false;
 						p.setColor(Color.BLACK); //하단 바 색상 BLACK으로 변경
+						heck2 = 1;
 					}
 				}
 		}

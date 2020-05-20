@@ -45,17 +45,9 @@ public class Board extends JPanel implements Runnable, Constants {
     private Thread game;
 
     //Songs for background music
-    private String songOne = "./dist/wav/One.wav";
-    private String songTwo = "./dist/wav/Two.wav";
-    private String songThree = "./dist/wav/Three.wav";
-    private String songFour = "./dist/wav/Four.wav";
-    private String songFive = "./dist/wav/Five.wav";
-    private String songSix = "./dist/wav/Six.wav";
-    private String songSeven = "./dist/wav/Seven.wav";
-    private String songEight = "./dist/wav/Eight.wav";
-    private String songNine = "./dist/wav/Nine.wav";
-    private String songTen = "./dist/wav/Ten.wav";
-    private String[] trackList = {songOne, songTwo, songThree, songFour, songFive, songSix, songSeven, songEight, songNine, songTen};
+    private String songOne = "./dist/wav/Venetian.wav";
+    private String songTwo = "./dist/wav/IDCIDK.wav";
+    private String[] trackList = {songOne, songTwo};
     private AudioInputStream audio;
     private Clip clip;
 
@@ -106,7 +98,7 @@ public class Board extends JPanel implements Runnable, Constants {
         gameMode = JOptionPane.showOptionDialog(null, "게임 모드를 선택하세요", "게임 모드 선택", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, modeOptions, modeOptions[0]);
         //Start Screen that displays information and asks if the user wants music or not, stores that choice
         String[] musicOptions = {"Yes", "No"};
-        withSound = JOptionPane.showOptionDialog(null, "Brick Breaker, Version 1.2\nTy-Lucas Kelley\nVisit www.tylucaskelley.com for more projects.\n\nControls\n    Spacebar: Start game, Pause/Resume while in game.\n    Left/Right arrow keys: Move paddle\nItems\n    Green Item: Expand paddle\n    Red Item: Shrink paddle\nScoring\n    Block: 50 points\n    Level-up: 100 points\n    Life Loss: -100 points\n\n\n     Do you want background music?", "About the Game", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, musicOptions, musicOptions[1]);
+        withSound = JOptionPane.showOptionDialog(null, "Virus Breaker, Version 1.2\nTy-Lucas Kelley\nVisit www.tylucaskelley.com for more projects.\n\nControls\n    Spacebar: Start game, Pause/Resume while in game.\n    Left/Right arrow keys: Move paddle\nItems\n    Green Item: Expand paddle\n    Red Item: Shrink paddle\nScoring\n    Block: 50 points\n    Level-up: 100 points\n    Life Loss: -100 points\n\n\n     Do you want background music?", "About the Game", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, musicOptions, musicOptions[1]);
         playMusic(trackList, withSound, level);
 
         game = new Thread(this);
