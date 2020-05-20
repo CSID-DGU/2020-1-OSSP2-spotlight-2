@@ -24,12 +24,14 @@
 
 //Imports
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 //Class definition
 public class Paddle extends Structure implements Constants {
-
+	Graphics g;
    //Constructor
    public Paddle(int x , int y, int width, int height, Color color) {
       super(x, y, width, height, color);

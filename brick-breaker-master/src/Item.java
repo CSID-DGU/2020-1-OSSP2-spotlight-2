@@ -24,15 +24,21 @@
 
 //Imports
 import java.awt.*;
+import java.io.InputStream;
 
 import javax.swing.ImageIcon;
 
 //Class definition
 public class Item extends Structure implements Constants {
+	Board board;
+	private String songOne = "./dist/wav/Venetian.wav";
+	private String songTwo = "./dist/wav/IDCIDK.wav";
+    private String[] trackList2 = {songTwo}; //for Reverse Music
+    private String[] trackList1 = {songOne};
 	//Variables
 	private int type;
-
 	Ball b = Board.ball; //Board의 ball을 저장
+	Paddle paddle;
 	//---------------------------------------------------------
 	public static int check = 0;
 	public static int check2 = 0;
@@ -153,7 +159,7 @@ public class Item extends Structure implements Constants {
 			}
 		}
 	}
-	
+
 	//리버스 모드 활성화 / 비활성화
 	public void reverseMode(Paddle p) {
 		//Basic 모드만 적용
@@ -184,4 +190,10 @@ public class Item extends Structure implements Constants {
 	public int getType() {
 		return type;
 	}
+
+	
+	
+	
+	
+	
 }

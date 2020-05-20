@@ -31,7 +31,7 @@ import javax.swing.ImageIcon;
 public class Ball extends Structure implements Constants {
 	//Variables
 	private boolean onScreen;
-	private int xDir = (Board.FrameWidth/486), yDir = -(Board.FrameHeight/463);
+	private int xDir = 1, yDir = -1;
 
 	//Constructor
 	public Ball(int x, int y, int width, int height, Color color) {
@@ -87,8 +87,8 @@ public class Ball extends Structure implements Constants {
 	public void reset() {
 		x = Board.FrameWidth/2;
 		y = Board.FrameHeight/2;
-		xDir = 1;//(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
-		yDir = -1;//(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+		xDir = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+		yDir = -(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
 		Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)); //공속도 초기화
 	}
 
