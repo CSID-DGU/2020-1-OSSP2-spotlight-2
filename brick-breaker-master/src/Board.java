@@ -19,8 +19,8 @@ public class Board extends JPanel implements Runnable, Constants {
     public static Brick[] brick = new Brick[10];
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
-    private int score = 0, lives = MAX_LIVES, bricksLeft = 10, waitTime = 3, withSound, level = 1;
-     
+    private int score = 0, lives = MAX_LIVES, bricksLeft = 10, waitTime = 3, level = 1;
+    protected int withSound =1;
     //창의 크기 불러옴
     public static int FrameWidth = WINDOW_WIDTH ;
     public static int FrameHeight = WINDOW_HEIGHT;
@@ -346,6 +346,7 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
+    
     //plays different music throughout game if user wants to
     public void playMusic(String[] songs, int yesNo, int level) {
         if (yesNo == 1) {

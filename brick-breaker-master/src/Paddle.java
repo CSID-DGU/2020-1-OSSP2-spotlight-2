@@ -24,26 +24,29 @@
 
 //Imports
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 //Class definition
 public class Paddle extends Structure implements Constants {
-
+	Graphics g;
    //Constructor
    public Paddle(int x , int y, int width, int height, Color color) {
       super(x, y, width, height, color);
    }
 	//Draws the paddle
    
-    ImageIcon icon = new ImageIcon("./img/paddle1.png");
-	Image img = icon.getImage();
-	
+    ImageIcon icon1 = new ImageIcon("./img/paddle1.png");
+	Image img1 = icon1.getImage();
+	ImageIcon icon2 = new ImageIcon("./img/paddle2.png");
+	Image img2 = icon2.getImage();
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(img, x, y, width, height, null);
-		//g.setColor(color);
-		//g.fillRect(x, y, width, height);
+		if(Board.reverse == true) {
+			g.drawImage(img2, x, y, width, height, null);
+		} else g.drawImage(img1, x, y, width, height, null);
 	}
 
 	//프레임 크기에 따른 패들 크기, 좌표 재설정
