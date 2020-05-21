@@ -78,7 +78,7 @@ public class Paddle extends Structure implements Constants {
 	{
 		x = (Board.FrameWidth/2)-(PADDLE_WIDTH/2);
 		y = Board.FrameHeight - 13;
-		Item.check = 0;
+		Item.check = 0; //패들 길이 아이템 초기화
 		setWidth((int)((70.0/486.0)*Board.FrameWidth)); //하단 바 크기 초기화
 		Board.reverse = false;//리버스 모드 비활성화
 	}
