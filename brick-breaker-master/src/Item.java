@@ -99,18 +99,22 @@ public class Item extends Structure implements Constants {
 
 	//Resize the paddle, depending on which item is caught. Changes in increments of 15 until min/max width is reached.
 	public void resizePaddle(Paddle p) {
-		if (getType() == 1 && p.getWidth() < PADDLE_MAX) {
-			//System.out.println(p.getWidth());
-			p.setWidth(p.getWidth() + 15);
-			//System.out.println(p.getWidth());
-			check = 1;
+		if (getType() == 1) { //패들 길이 증가
+			if (check == -1) { //패들이 최소 길이길 경우
+				check = 0; //패들을 중간 길이로 변경
+			}
+			else { //패들이 중간 길이길 경우
+				check = 1; //패들을 최대 길이로 변경
+			}
 			return;
 		}
-		else if (getType() == 2 && p.getWidth() > PADDLE_MIN) {
-			//System.out.println(p.getWidth());
-			p.setWidth(p.getWidth() - 15);
-			//System.out.println(p.getWidth());
-			check= -1;
+		else if (getType() == 2) { //패들 길이 감소
+			if (check == 1) { //패들이 최대 길이일 경우
+				check = 0; //패들을 중간 길이로 변경
+			}
+			else { //패들이 중간 길이일 경우
+				check= -1; //패들을 최소 길이로 변경
+			}
 			return;
 		}
 		check= 0;
