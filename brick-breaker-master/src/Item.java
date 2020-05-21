@@ -94,7 +94,7 @@ public class Item extends Structure implements Constants {
 
 	//Drop the item down towards the paddle at slow pace
 	public void drop() {
-		y += 1;
+		y += (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/1150.0));
 	}
 
 	//Resize the paddle, depending on which item is caught. Changes in increments of 15 until min/max width is reached.
