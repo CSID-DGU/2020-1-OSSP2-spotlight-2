@@ -197,7 +197,6 @@ public class Board extends JPanel implements Runnable, Constants {
             paddleMove();//하단 바 이동 메소드 실행
             dropItems();
             checkItemList();
-            checkPaddleMode(); // 리버스 모드 판단 메소드
             repaint();
             try {
                 game.sleep(waitTime);
@@ -207,22 +206,6 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
-    public void checkPaddleMode()
-    {
-    	if(Item.check2 == 1)
-    	{
-    		try
-    		{
-    			audio = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav"));
-    			clip = AudioSystem.getClip(null);
-                clip.open(audio);
-                clip.stop();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-    	}
-    }
-    
     public void addItem(Item i) {
         items.add(i);
     }
