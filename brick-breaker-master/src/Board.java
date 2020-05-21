@@ -394,6 +394,11 @@ public class Board extends JPanel implements Runnable, Constants {
             		brick[i] = null;
             	}
             }
+	        for (Item j: items) {
+	        	if (j != null) {
+	        		j = null;
+	        	}
+	        }
             repaint();
             stop();
             isPaused.set(true);
@@ -471,7 +476,9 @@ public class Board extends JPanel implements Runnable, Constants {
 	    	g.drawString("Score : " + score, getWidth()*1/50, getHeight()*96/100);//점수
 	
 	        for (Item i: items) {
-	            i.draw(g);
+	        	if (i != null) {
+	        		i.draw(g);
+	        	}
 	        }
 	        
         if (lives == MIN_LIVES) {
