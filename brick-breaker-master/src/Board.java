@@ -253,6 +253,14 @@ public class Board extends JPanel implements Runnable, Constants {
 	        Item tempItem = items.get(i);
 	        if (paddle.caughtItem(tempItem)) {
 	            items.remove(i);
+	            try {
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/WoodPlankFlicks.wav").getAbsoluteFile());
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(audioInputStream);
+                    clip.start();
+                } catch(Exception ex) {
+                   ex.printStackTrace();
+                }
 	        }
 	        else if (tempItem.getY() > Board.FrameHeight) {
 	            items.remove(i);
@@ -639,7 +647,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 //isSpace = true;
                 if (lives > MIN_LIVES) {
                     if (isPaused.get() == false) {
-                        //stop();
+                        stop();
                         isPaused.set(true);
                     }
                     else {
