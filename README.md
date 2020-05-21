@@ -49,18 +49,14 @@ Team spotlight
  - [X] UI개선을 위해 아이템 및 벽돌 이미지 추가
  - [X] 백그라운드 이미지의 크기 조절중
 
-## 4. 게임 아이템 추가(개선중)
-- 녹색 아이템 획득 : 하단 바 길이 증가
-- 붉은색 아이템 획득 : 하단 바 길이 감소
-- 파란색 아이템 획득 : 공 속도 증가(1회)
-- 분홍색 아이템 획득 : 공 속도 감소(1회)
-- 노란색 아이템 획득 : 좌우 키 반전(paddle의 색상을 반전시키므로 사용자에게 좌우키가 반전된 사실을 직관적으로 알려준다.)
+## 4. 게임 아이템 추가
+<img src = "res/item.png">
 
 ## 5. GameTheme(게임 테마)
-<img src="res/thumbnail.jpg">
+<img src="res/thumbnail.png">
 
 - 코로나가 만연한 지금! 의사가 되어 Covid-19를 격퇴하라!
-- 랜덤으로 생성되는 코로나 바이러스를 Paddle을 조작하여 마스크 쓴 사람들 통해 제거하라!
+- 랜덤으로 생성되는 코로나 바이러스를 Paddle을 조작하여 제거하라!
 - 여러 아이템들은 당신을 도울수도 혹은 곤경에 빠뜨릴수도 항상 신중하라!!
 - 당신에게 주어진 기회는 단 한번뿐!!!
 - 당신의 기록을 저장하고 자랑할수 있는 랭킹 시스템 까지!!!
@@ -71,7 +67,6 @@ Team spotlight
 
 ## 7. 이미지 및 음원 출처
 - Item 이미지 : 직접 구현
-<img src='res/item.png'>
 
 - Virus 이미지 : https://pixabay.com/ko/illustrations/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EC%99%B8%EB%94%B4-%EC%BD%94%EB%A1%9C%EB%82%98-%EC%A0%84%EC%97%BC%EB%B3%91-4930122/
 
@@ -79,4 +74,4 @@ Team spotlight
 
 - Ball 이미지: https://pixabay.com/ko/vectors/공-강철-은화-라운드-149921/
 
-- Background Sound 및 효과음 : https://www.youtube.com/audiolibrary/soundeffects?ar=1590045019076&nv=1
+- Background Sound 가및 효과음 : https://www.youtube.com/audiolibrary/soundeffects?ar=1590045019076&nv=1
