@@ -24,7 +24,6 @@
 
 //Imports
 import java.awt.*;
-import java.io.InputStream;
 
 import javax.swing.ImageIcon;
 
@@ -33,8 +32,7 @@ public class Item extends Structure implements Constants {
 	Board board;
 	private String songOne = "./dist/wav/Venetian.wav";
 	private String songTwo = "./dist/wav/IDCIDK.wav";
-    private String[] trackList2 = {songTwo}; //for Reverse Music
-    private String[] trackList1 = {songOne};
+
 	//Variables
 	private int type;
 	Ball b = Board.ball; //Board의 ball을 저장
@@ -125,7 +123,7 @@ public class Item extends Structure implements Constants {
 		//공 속도 증가
 		if(getType() == 3 && Board.xSpeed < 2) {
 			//Board.xSpeed++;
-			Board.xSpeed = ((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)))*2;
+			Board.xSpeed = ((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
 			Board.ball_speed = 1;
 			if(b.getXDir() < 0 && b.getYDir() < 0) {
 				b.setXDir(-Board.xSpeed);
@@ -147,7 +145,7 @@ public class Item extends Structure implements Constants {
 		//공 속도 감소
 		else if(getType() == 4 && Board.xSpeed > 1) {
 			//Board.xSpeed++;
-			Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+			Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)*2/3);
 			Board.ball_speed = 0;
 			if(b.getXDir() < 0 && b.getYDir() < 0) {
 				b.setXDir(-Board.xSpeed);

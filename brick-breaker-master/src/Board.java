@@ -315,6 +315,8 @@ public class Board extends JPanel implements Runnable, Constants {
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
 	                               Clip clip = AudioSystem.getClip();
 	                               clip.open(audioInputStream);
+	                               FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+	                               gainControl.setValue(-10.0f); 
 	                               clip.start();
 	                           } catch(Exception ex) {
 	                              ex.printStackTrace();
@@ -333,6 +335,8 @@ public class Board extends JPanel implements Runnable, Constants {
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
 	                               Clip clip = AudioSystem.getClip();
 	                               clip.open(audioInputStream);
+	                               FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+	                               gainControl.setValue(-10.0f); 
 	                               clip.start();
 	                           } catch(Exception ex) {
 	                              ex.printStackTrace();
@@ -351,6 +355,8 @@ public class Board extends JPanel implements Runnable, Constants {
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
 	                               Clip clip = AudioSystem.getClip();
 	                               clip.open(audioInputStream);
+	                               FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+	                               gainControl.setValue(-10.0f); 
 	                               clip.start();
 	                           } catch(Exception ex) {
 	                              ex.printStackTrace();
@@ -369,6 +375,8 @@ public class Board extends JPanel implements Runnable, Constants {
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
 	                               Clip clip = AudioSystem.getClip();
 	                               clip.open(audioInputStream);
+	                               FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+	                               gainControl.setValue(-10.0f); 
 	                               clip.start();
 	                           } catch(Exception ex) {
 	                              ex.printStackTrace();
