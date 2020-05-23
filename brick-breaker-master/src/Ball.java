@@ -46,9 +46,6 @@ public class Ball extends Structure implements Constants {
 	@Override
 	public void draw(Graphics g) {
 		g.drawImage(img, x, y, width, height, null);
-		
-		//g.setColor(color);
-		//g.fillOval(x, y, width, height);
 	}
 
 	public void changeBallSet() {
@@ -58,10 +55,10 @@ public class Ball extends Structure implements Constants {
 		setHeight((int)((10.0/486.0)*Board.FrameHeight));
 		/*공 속도 설정*/
 		if(Board.ball_speed == 0) { //공속도 증가x
-			Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+			Board.xSpeed = (Math.max(Board.FrameWidth/586,Board.FrameHeight/563));
 		}
 		else { //공속도 증가
-			Board.xSpeed = ((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)))*2;
+			Board.xSpeed = ((int)((double)(Board.FrameWidth)/486.0))+1;
 		}
 		
 		/*xDir 설정*/
@@ -94,9 +91,9 @@ public class Ball extends Structure implements Constants {
 		x = Board.FrameWidth/2;
 		y = Board.FrameHeight/2;
 		Board.ball_speed = 0; //공속도 증가 상태를 원래대로 초기화
-		xDir = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
-		yDir = -(int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
-		Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)); //공속도 초기화
+		xDir = (int)((double)(Board.FrameWidth)/486.0);
+		yDir = -(int)((double)(Board.FrameWidth)/486.0);
+		Board.xSpeed = (int)((double)(Board.FrameWidth)/486.0); //공속도 초기화
 	}
 
 	//Mutator methods

@@ -39,14 +39,6 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	private boolean destroyed;
 	public Item item;
 	private Color itemColor;
-	private Color[] blueColors = {BLUE_BRICK_ONE, BLUE_BRICK_TWO, BLUE_BRICK_THREE, Color.BLACK};
-	private Color[] redColors = {RED_BRICK_ONE, RED_BRICK_TWO, RED_BRICK_THREE, Color.BLACK};
-	private Color[] purpleColors = {PURPLE_BRICK_ONE, PURPLE_BRICK_TWO, PURPLE_BRICK_THREE, Color.BLACK};
-	private Color[] yellowColors = {YELLOW_BRICK_ONE, YELLOW_BRICK_TWO, YELLOW_BRICK_THREE, Color.BLACK};
-	private Color[] pinkColors = {PINK_BRICK_ONE, PINK_BRICK_TWO, PINK_BRICK_THREE, Color.BLACK};
-	private Color[] grayColors = {GRAY_BRICK_ONE, GRAY_BRICK_TWO, GRAY_BRICK_THREE, Color.BLACK};
-	private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
-	private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
 
 	//블록 이미지 img에 저장
 	ImageIcon icon = new ImageIcon("./img/brickVirus.png");
@@ -96,34 +88,8 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	//Add a hit to the brick, and destroy the brick when hits == lives
 	public void addHit() {
 		hits++;
-		nextColor();
 		if (hits == lives) {
 			setDestroyed(true);
-		}
-	}
-
-	//Change color to get lighter until the brick is destroyed
-	public void nextColor() {
-		if (color == colors[0][0] || color == colors[0][1] || color == colors[0][2]) {
-			color = blueColors[hits];
-		}
-		if (color == colors[1][0] || color == colors[1][1] || color == colors[1][2]) {
-			color = redColors[hits];
-		}
-		if (color == colors[2][0] || color == colors[2][1] || color == colors[2][2]) {
-			color = purpleColors[hits];
-		}
-		if (color == colors[3][0] || color == colors[3][1] || color == colors[3][2]) {
-			color = yellowColors[hits];
-		}
-		if (color == colors[4][0] || color == colors[4][1] || color == colors[4][2]) {
-			color = pinkColors[hits];
-		}
-		if (color == colors[5][0] || color == colors[5][1] || color == colors[5][2]) {
-			color = grayColors[hits];
-		}
-		if (color == colors[6][0] || color == colors[6][1] || color == colors[6][2]) {
-			color = greenColors[hits];
 		}
 	}
 

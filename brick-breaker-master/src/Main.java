@@ -51,7 +51,7 @@ public class Main extends JFrame implements Constants {
 		
 		Dimension dim = new Dimension(750, 750);
 		frame = new JFrame("Virus Breaker");
-		frame.setSize(dim);
+		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		frame.setResizable(true);//동적페이지
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setMinimumSize(dim);

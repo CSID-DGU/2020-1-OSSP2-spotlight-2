@@ -50,8 +50,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //Songs for background music
     private String songOne = "./dist/wav/Venetian.wav";
-    private String songTwo = "./dist/wav/IDCIDK.wav";
-    private String[] trackList = {songOne, songTwo};
+    private String[] trackList = {songOne};
     private AudioInputStream audio;
     private Clip clip;
 
@@ -93,18 +92,17 @@ public class Board extends JPanel implements Runnable, Constants {
         if (playerName == null) {
             System.exit(0);
         }
-        if (playerName.toUpperCase().equals("TY") || playerName.toUpperCase().equals("TYKELLEY") || playerName.toUpperCase().equals("TYLUCAS") || playerName.toUpperCase().equals("TYLUCASKELLEY") || playerName.toUpperCase().equals("TY-LUCAS") || playerName.toUpperCase().equals("TY-LUCAS KELLEY") || playerName.toUpperCase().equals("TY KELLEY")) {
+        //Hidden name(이스터 에그)
+        if (playerName.toUpperCase().equals("SPOTLIGHT") || playerName.toUpperCase().equals("OSSP") || playerName.toUpperCase().equals("DONGHOKIM")) {
             score += 1000;
-            JOptionPane.showMessageDialog(null, "You unlocked the secret 1,000 point bonus! Nice name choice by the way.", "1,000 Points", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "멋진 이름이네요 1,000 점을 드립니다!", "1,000 Points", JOptionPane.INFORMATION_MESSAGE);
         }
         
         //게임 모드 선택
         String[] modeOptions = {"Basic", "Hard"};
         gameMode = JOptionPane.showOptionDialog(null, "게임 모드를 선택하세요", "게임 모드 선택", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, modeOptions, modeOptions[0]);
         //Start Screen that displays information and asks if the user wants music or not, stores that choice
-        String[] musicOptions = {"Yes", "No"};
-        withSound = JOptionPane.showOptionDialog(null, "Virus Breaker, Version 1.2\nTy-Lucas Kelley\nVisit www.tylucaskelley.com for more projects.\n\nControls\n    Spacebar: Start game, Pause/Resume while in game.\n    Left/Right arrow keys: Move paddle\nItems\n    Green Item: Expand paddle\n    Red Item: Shrink paddle\nScoring\n    Block: 50 points\n    Level-up: 100 points\n    Life Loss: -100 points\n\n\n     Do you want background music?", "About the Game", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, musicOptions, musicOptions[1]);
-        playMusic(trackList, withSound, level);
+        playMusic(trackList, 0, level);
 
         game = new Thread(this);
         game.start();
@@ -208,19 +206,6 @@ public class Board extends JPanel implements Runnable, Constants {
                 ie.printStackTrace();
             }
         }
-    }
-
-    public void checkPaddleMode()
-    {
-    	try
-    	{
-    		audio = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav"));
-    		clip = AudioSystem.getClip(null);
-            clip.open(audio);
-            clip.stop();
-        } catch (Exception e) {
-                e.printStackTrace();
-            }
     }
     
     public void addItem(Item i) {
@@ -397,11 +382,13 @@ public class Board extends JPanel implements Runnable, Constants {
             key_temp = 0;
             PBdraw = false;
             readyDraw = true;
+            //벽돌 리셋
             for (int i = 0; i < 10; i++) {
             	if(brick[i] != null) {
             		brick[i] = null;
             	}
             }
+            //아이템 리셋
     	    for (int j = 0; j < items.size(); j++) {
     	        Item tempItem = items.get(j);
     	        items.remove(j);
@@ -420,9 +407,6 @@ public class Board extends JPanel implements Runnable, Constants {
         }
         else if (yesNo == -1) {
             System.exit(0);
-        }
-        if (level == 10) {
-            level = 1;
         }
         try {
         	audio = AudioSystem.getAudioInputStream(new File(songs[level-1]).getAbsoluteFile());
@@ -497,155 +481,9 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
-    //Makes sure the HighScores.txt file exists
-    public void makeTable() throws IOException {
-        String filename = "HighScores";
-        File f = new File(filename + ".txt");
-        if (f.createNewFile()) {
-            try {
-                writeFakeScores();
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        }
-        else {
-            //do nothing
-        }
-    }
-
-    //if there was no previous high score table, this one inputs 10 fake players and scores to fill it
-    public void writeFakeScores() throws IOException {
-        Random rand = new Random();
-
-        int numLines = 10;
-        File f = new File("HighScores.txt");
-        BufferedWriter bw = new BufferedWriter(new FileWriter(f.getAbsoluteFile()));
-        for (int i = 1; i <= numLines; i++) {
-            int score = rand.nextInt(2000);
-            if (numLines - i >= 1) {
-                bw.write("Name: " + "Player" + i + ", " + "Score: " + score + "\n");
-            }
-            else {
-                bw.write("Name: " + "Player" + i + ", " + "Score: " + score);
-            }
-        }
-        bw.close();
-        try {
-            sortTable();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
     //Returns the player's name and score formatted correctly
     public String playerInfo() {
         return "Name: " + playerName + ", Score: " + score;
-    }
-
-    //returns the number of lines in the high score file
-    public int linesInFile(File f) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(f.getAbsoluteFile()));
-        int lines = 0;
-        while (br.readLine() != null) {
-            lines++;
-        }
-        br.close();
-        return lines;
-    }
-
-    //Add game to high score file by appending it and getting line number from previous method
-    public void saveGame() throws IOException {
-        File f = new File("HighScores.txt");
-        FileWriter fw = new FileWriter(f.getAbsoluteFile(), true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.append("\n" + playerInfo());
-        bw.close();
-    }
-
-    //sorts the high score table high to low using maps and other fun things
-    public void sortTable() throws IOException {
-        File f = new File("HighScores.txt");
-        File temp = new File("temp.txt");
-        TreeMap<Integer, ArrayList<String>> topTen = new TreeMap<Integer, ArrayList<String>>();
-        BufferedReader br = new BufferedReader(new FileReader(f.getAbsoluteFile()));
-        BufferedWriter bw = new BufferedWriter(new FileWriter(temp.getAbsoluteFile()));
-
-
-        String line = null;
-        while ((line = br.readLine()) != null) {
-            if (line.isEmpty()) {
-                continue;
-            }
-                String[] scores = line.split("Score: ");
-                Integer score = Integer.valueOf(scores[1]);
-                ArrayList<String> players = null;
-               
-                //make sure two players with same score are dealt with
-                if ((players = topTen.get(score)) == null) {
-                    players = new ArrayList<String>(1);
-                    players.add(scores[0]);
-                    topTen.put(Integer.valueOf(scores[1]), players);
-                }
-                else {
-                    players.add(scores[0]);
-                }
-
-        }
-
-        for (Integer score : topTen.descendingKeySet()) {
-            for (String player : topTen.get(score)) {
-                try {
-                    bw.append(player + "Score: " + score + "\n");
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
-            }
-        }
-        br.close();
-        bw.close();
-        try {
-            makeNewScoreTable();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    //save the sorted table to the high score file
-    public void makeNewScoreTable() throws IOException {
-        File f = new File("HighScores.txt");
-        File g = new File("temp.txt");
-        f.delete();
-        g.renameTo(f);
-    }
-   
-    //Print the top 10 scores, but first excecutes all other file-related methods
-    public void printScores(Graphics g) throws IOException {
-        try {
-            makeTable();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        try {
-            saveGame();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        try {
-            sortTable();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        int h = 100;
-        File fileToRead = new File("HighScores.txt");
-        LineNumberReader lnr = new LineNumberReader(new FileReader(fileToRead));
-        String line = lnr.readLine();
-        while (line != null && lnr.getLineNumber() <= 10) {
-            int rank = lnr.getLineNumber();
-            g.drawString(rank + ". " + line, getWidth()/5, h);
-            h += 15;
-            line = lnr.readLine();
-        }
-        lnr.close();
     }
    
     //하단 바의 이동 방향 제어
@@ -677,17 +515,21 @@ public class Board extends JPanel implements Runnable, Constants {
                     }
                 }
                 else {
-                    paddle.setWidth(getWidth()/7);
                     lives = MAX_LIVES;
                     score = 0;
                     level = 1;
-                    makeBricks();
                     isPaused.set(true);
+                    //brick 리셋
                     for (int i = 0; i < 10; i++) {
                         	if(brick[i] != null) { //brick이 생성되어 있는 경우
                         		brick[i].setDestroyed(false);
                         	}
                     	}
+                    //item 리셋
+            	    for (int j = 0; j < items.size(); j++) {
+            	        Item tempItem = items.get(j);
+            	        items.remove(j);
+            	    }
                 	}
            		}
             //Basic 모드 조작 키

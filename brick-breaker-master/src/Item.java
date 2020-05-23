@@ -24,17 +24,12 @@
 
 //Imports
 import java.awt.*;
-import java.io.InputStream;
 
 import javax.swing.ImageIcon;
 
 //Class definition
 public class Item extends Structure implements Constants {
 	Board board;
-	private String songOne = "./dist/wav/Venetian.wav";
-	private String songTwo = "./dist/wav/IDCIDK.wav";
-    private String[] trackList2 = {songTwo}; //for Reverse Music
-    private String[] trackList1 = {songOne};
 	//Variables
 	private int type;
 	Ball b = Board.ball; //Board의 ball을 저장
