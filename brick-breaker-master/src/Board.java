@@ -209,18 +209,15 @@ public class Board extends JPanel implements Runnable, Constants {
 
     public void checkPaddleMode()
     {
-    	if(Item.check2 == 1)
+    	try
     	{
-    		try
-    		{
-    			audio = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav"));
-    			clip = AudioSystem.getClip(null);
-                clip.open(audio);
-                clip.stop();
-            } catch (Exception e) {
+    		audio = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav"));
+    		clip = AudioSystem.getClip(null);
+            clip.open(audio);
+            clip.stop();
+        } catch (Exception e) {
                 e.printStackTrace();
             }
-    	}
     }
     
     public void addItem(Item i) {
@@ -394,11 +391,6 @@ public class Board extends JPanel implements Runnable, Constants {
             		brick[i] = null;
             	}
             }
-	        for (Item j: items) {
-	        	if (j != null) {
-	        		j = null;
-	        	}
-	        }
             repaint();
             stop();
             isPaused.set(true);
@@ -476,9 +468,8 @@ public class Board extends JPanel implements Runnable, Constants {
 	    	g.drawString("Score : " + score, getWidth()*1/50, getHeight()*96/100);//점수
 	
 	        for (Item i: items) {
-	        	if (i != null) {
+	        	if(i != null)
 	        		i.draw(g);
-	        	}
 	        }
 	        
         if (lives == MIN_LIVES) {
@@ -678,10 +669,8 @@ public class Board extends JPanel implements Runnable, Constants {
                     makeBricks();
                     isPaused.set(true);
                     for (int i = 0; i < 10; i++) {
-                        for (int j = 0; j < 5; j++) {
-                        		if(brick[i] != null) { //brick이 생성되어 있는 경우
-                        			brick[i].setDestroyed(false);
-                        		}
+                        	if(brick[i] != null) { //brick이 생성되어 있는 경우
+                        		brick[i].setDestroyed(false);
                         	}
                     	}
                 	}

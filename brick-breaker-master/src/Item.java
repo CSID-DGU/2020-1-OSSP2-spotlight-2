@@ -41,7 +41,7 @@ public class Item extends Structure implements Constants {
 	Paddle paddle;
 	//---------------------------------------------------------
 	public static int check = 0;
-	public static int check2 = 0;
+
 	//Constructor
 	public Item(int x, int y, int width, int height, Color color, int type) {
 		super(x, y, width, height, color);
@@ -178,17 +178,16 @@ public class Item extends Structure implements Constants {
 					if (Board.reverse == false) {
 						Board.reverse = true;
 						p.setColor(Color.RED);//하단 바 색상 RED로 변경
-						check2 = 1;
 					}
 					//리버스 활성화 상태라면 비활성화 상태로 변경
 					else {
 						Board.reverse = false;
 						p.setColor(Color.BLACK); //하단 바 색상 BLACK으로 변경
-						check2 = 0;
 					}
 				}
 		}
 	}
+	
 	//Set the item's type
 	public void setType(int type) {
 		this.type = type;

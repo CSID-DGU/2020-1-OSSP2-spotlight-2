@@ -63,7 +63,6 @@ public class Paddle extends Structure implements Constants {
 		}
 		else if(Item.check == 1)
 		{
-
 			setWidth((int)((70.0/486.0)*Board.FrameWidth+Board.FrameWidth/25));
 		}
 		else if(Item.check == -1)
