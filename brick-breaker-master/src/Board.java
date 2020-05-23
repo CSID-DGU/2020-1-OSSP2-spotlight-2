@@ -130,6 +130,10 @@ public class Board extends JPanel implements Runnable, Constants {
     		int BrickWidth = FrameWidth/10;
     		int BrickHeight = FrameWidth/20;
     		int brickX = (FrameWidth) - (rand.nextInt(FrameWidth - BrickWidth/2) + BrickWidth/2);
+    		if(brickX >= FrameWidth-BrickWidth && brickX <= FrameWidth) // 벽돌이 화면을 넘어서 생성이되는 경우 최대 brickX값을 제외해주므로 예외처리를 한다.
+    		{
+    			brickX = FrameWidth-BrickWidth;
+    		}
     		int brickY = (FrameHeight/3) - (rand.nextInt(FrameHeight/3 - BrickHeight/2) + 1);
     		double rateX = (double)FrameWidth / (double)brickX;
     		double rateY = (double)(FrameHeight/3) /(double)brickY;
@@ -253,7 +257,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	        Item tempItem = items.get(i);
 	        if (paddle.caughtItem(tempItem)) {
 	            items.remove(i);
-	            try {
+	            try {  // 아이템을 얻은 경우 경우 소리를 출력해준다.
                     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/WoodPlankFlicks.wav").getAbsoluteFile());
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioInputStream);
@@ -294,7 +298,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    ball.setYDir(xSpeed);
 	                    if (brick[i].isDestroyed()) {
 	                    	   destroy_check = true;	
-	                    	   try {
+	                    	   try { // 벽돌을 꺠트리는 경우 소리를 출력해준다.
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
 	                               Clip clip = AudioSystem.getClip();
 	                               clip.open(audioInputStream);
@@ -312,7 +316,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    ball.setXDir(-xSpeed);
 	                    if (brick[i].isDestroyed()) {
 	                    	   destroy_check = true;
-	                    	   try {
+	                    	   try {  // 벽돌을 꺠트리는 경우 소리를 출력해준다.
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
 	                               Clip clip = AudioSystem.getClip();
 	                               clip.open(audioInputStream);
@@ -330,7 +334,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    ball.setXDir(xSpeed);
 	                    if (brick[i].isDestroyed()) {
 	                    	   destroy_check = true;
-	                    	   try {
+	                    	   try {  // 벽돌을 꺠트리는 경우 소리를 출력해준다.
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
 	                               Clip clip = AudioSystem.getClip();
 	                               clip.open(audioInputStream);
@@ -348,7 +352,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    ball.setYDir(-xSpeed);
 	                    if (brick[i].isDestroyed()) {
 	                    	   destroy_check = true;
-	                    	   try {
+	                    	   try {  // 벽돌을 꺠트리는 경우 소리를 출력해준다.
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
 	                               Clip clip = AudioSystem.getClip();
 	                               clip.open(audioInputStream);
@@ -647,7 +651,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 //isSpace = true;
                 if (lives > MIN_LIVES) {
                     if (isPaused.get() == false) {
-                        stop();
+                       // stop();
                         isPaused.set(true);
                     }
                     else {
