@@ -58,7 +58,8 @@ public class Ball extends Structure implements Constants {
 		setHeight((int)((10.0/486.0)*Board.FrameHeight));
 		/*공 속도 설정*/
 		if(Board.ball_speed == 0) { //공속도 증가x
-			Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0));
+			Board.xSpeed = (Math.max(Board.FrameWidth/586,Board.FrameHeight/563));
+			System.out.println(Board.xSpeed);
 		}
 		else { //공속도 증가
 			Board.xSpeed = ((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)))*2;
