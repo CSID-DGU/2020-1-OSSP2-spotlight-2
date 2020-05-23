@@ -258,7 +258,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	        if (paddle.caughtItem(tempItem)) {
 	            items.remove(i);
 	            try {  // 아이템을 얻은 경우 경우 소리를 출력해준다.
-                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/WoodPlankFlicks.wav").getAbsoluteFile());
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crowd.wav").getAbsoluteFile());
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioInputStream);
                     clip.start();
