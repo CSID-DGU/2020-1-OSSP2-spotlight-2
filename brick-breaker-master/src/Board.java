@@ -210,6 +210,19 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
+    public void checkPaddleMode()
+    {
+    	try
+    	{
+    		audio = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav"));
+    		clip = AudioSystem.getClip(null);
+            clip.open(audio);
+            clip.stop();
+        } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+    
     public void addItem(Item i) {
         items.add(i);
     }
@@ -258,7 +271,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	        if (paddle.caughtItem(tempItem)) {
 	            items.remove(i);
 	            try {  // 아이템을 얻은 경우 경우 소리를 출력해준다.
-                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/WoodPlankFlicks.wav").getAbsoluteFile());
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crowd.wav").getAbsoluteFile());
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioInputStream);
                     clip.start();
@@ -397,6 +410,10 @@ public class Board extends JPanel implements Runnable, Constants {
             		brick[i] = null;
             	}
             }
+    	    for (int j = 0; j < items.size(); j++) {
+    	        Item tempItem = items.get(j);
+    	        items.remove(j);
+    	    }
             repaint();
             stop();
             isPaused.set(true);
@@ -474,7 +491,8 @@ public class Board extends JPanel implements Runnable, Constants {
 	    	g.drawString("Score : " + score, getWidth()*1/50, getHeight()*96/100);//점수
 	
 	        for (Item i: items) {
-	            i.draw(g);
+	        	if(i != null)
+	        		i.draw(g);
 	        }
 	        
         if (lives == MIN_LIVES) {
@@ -674,10 +692,8 @@ public class Board extends JPanel implements Runnable, Constants {
                     makeBricks();
                     isPaused.set(true);
                     for (int i = 0; i < 10; i++) {
-                        for (int j = 0; j < 5; j++) {
-                        		if(brick[i] != null) { //brick이 생성되어 있는 경우
-                        			brick[i].setDestroyed(false);
-                        		}
+                        	if(brick[i] != null) { //brick이 생성되어 있는 경우
+                        		brick[i].setDestroyed(false);
                         	}
                     	}
                 	}
@@ -726,7 +742,6 @@ public class Board extends JPanel implements Runnable, Constants {
 	            }
             }
         }
-
     }
 }
 
