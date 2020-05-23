@@ -82,8 +82,26 @@ public class Item extends Structure implements Constants {
 			if(type >= 5 && type <= 10 ) {
 				return;
 			}
-			g.setColor(color);
-			g.fillRect(x, y, width, height);
+			if(color == Color.GREEN) {// 하단 바 크기 증가	
+				ImageIcon icon = new ImageIcon("./img/item_increment.png");
+				Image img = icon.getImage();
+				g.drawImage(img, x, y, width, height, null);
+			}
+			if(color == Color.RED) {// 하단 바 크기 감소
+				ImageIcon icon = new ImageIcon("./img/item_decrement.png");
+				Image img = icon.getImage();
+				g.drawImage(img, x, y, width, height, null);
+			}
+			if(color== Color.BLUE) {// 공 속도 증가
+				ImageIcon icon = new ImageIcon("./img/item_fast.png");
+				Image img = icon.getImage();
+				g.drawImage(img, x, y, width, height, null);
+			}
+			if(color == Color.PINK) {// 공 속도 감소
+				ImageIcon icon = new ImageIcon("./img/item_slow.png");
+				Image img = icon.getImage();
+				g.drawImage(img, x, y, width, height, null);
+			}
 		}
 	}
 

@@ -403,6 +403,9 @@ public class Board extends JPanel implements Runnable, Constants {
     	        Item tempItem = items.get(j);
     	        items.remove(j);
     	    }
+    	    //하드모드 키 리셋
+    	    randomLeftKey = 'F';
+    	    randomRightKey = 'J';
             repaint();
             stop();
             isPaused.set(true);
