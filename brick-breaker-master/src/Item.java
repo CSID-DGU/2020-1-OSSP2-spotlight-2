@@ -82,8 +82,26 @@ public class Item extends Structure implements Constants {
 			if(type >= 5 && type <= 10 ) {
 				return;
 			}
-			g.setColor(color);
-			g.fillRect(x, y, width, height);
+			if(color == Color.GREEN) {// 하단 바 크기 증가	
+				ImageIcon icon = new ImageIcon("./img/item_increment.png");
+				Image img = icon.getImage();
+				g.drawImage(img, x, y, width, height, null);
+			}
+			if(color == Color.RED) {// 하단 바 크기 감소
+				ImageIcon icon = new ImageIcon("./img/item_decrement.png");
+				Image img = icon.getImage();
+				g.drawImage(img, x, y, width, height, null);
+			}
+			if(color== Color.BLUE) {// 공 속도 증가
+				ImageIcon icon = new ImageIcon("./img/item_fast.png");
+				Image img = icon.getImage();
+				g.drawImage(img, x, y, width, height, null);
+			}
+			if(color == Color.PINK) {// 공 속도 감소
+				ImageIcon icon = new ImageIcon("./img/item_slow.png");
+				Image img = icon.getImage();
+				g.drawImage(img, x, y, width, height, null);
+			}
 		}
 	}
 
@@ -118,48 +136,14 @@ public class Item extends Structure implements Constants {
 	/*공의 속도 변경*/
 	public void changeBallSpeed(Paddle p) {
 		//공 속도 증가
-		if(getType() == 3 && Board.xSpeed < 2) {
+		if(getType() == 3) {
 			//Board.xSpeed++;
-			Board.xSpeed = ((int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)));
 			Board.ball_speed = 1;
-			if(b.getXDir() < 0 && b.getYDir() < 0) {
-				b.setXDir(-Board.xSpeed);
-				b.setYDir(-Board.xSpeed);
-			}
-			else if(b.getXDir() > 0 && b.getYDir() > 0) {
-				b.setXDir(Board.xSpeed);
-				b.setYDir(Board.xSpeed);
-			}
-			else if(b.getXDir() > 0 && b.getYDir() < 0) {
-				b.setXDir(Board.xSpeed);
-				b.setYDir(-Board.xSpeed);
-			}
-			else {
-				b.setXDir(-Board.xSpeed);
-				b.setYDir(Board.xSpeed);
-			}
 		}
 		//공 속도 감소
-		else if(getType() == 4 && Board.xSpeed > 1) {
+		else if(getType() == 4) {
 			//Board.xSpeed++;
-			Board.xSpeed = (int)Math.round(((double)(Board.FrameWidth + Board.FrameHeight)/949.0)*2/3);
 			Board.ball_speed = 0;
-			if(b.getXDir() < 0 && b.getYDir() < 0) {
-				b.setXDir(-Board.xSpeed);
-				b.setYDir(-Board.xSpeed);
-			}
-			else if(b.getXDir() > 0 && b.getYDir() > 0) {
-				b.setXDir(Board.xSpeed);
-				b.setYDir(Board.xSpeed);
-			}
-			else if(b.getXDir() > 0 && b.getYDir() < 0) {
-				b.setXDir(Board.xSpeed);
-				b.setYDir(-Board.xSpeed);
-			}
-			else {
-				b.setXDir(-Board.xSpeed);
-				b.setYDir(Board.xSpeed);
-			}
 		}
 	}
 
