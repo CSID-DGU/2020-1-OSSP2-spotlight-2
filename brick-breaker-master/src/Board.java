@@ -286,16 +286,6 @@ public class Board extends JPanel implements Runnable, Constants {
 	        Item tempItem = items.get(i);
 	        if (paddle.caughtItem(tempItem)) {
 	            items.remove(i);
-	            try {  // 아이템을 얻은 경우 소리를  출력한다.
-                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Wood.wav").getAbsoluteFile());
-                    Clip clip = AudioSystem.getClip();
-                    clip.open(audioInputStream);
-                    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                    gainControl.setValue(-10.0f); 
-                    clip.start();
-                } catch(Exception ex) {
-                   ex.printStackTrace();
-                }
 	        }
 	        else if (tempItem.getY() > Board.FrameHeight) {
 	            items.remove(i);
@@ -474,7 +464,6 @@ public class Board extends JPanel implements Runnable, Constants {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
         g.drawImage(Main.icon.getImage(), 0, 0, getWidth(), getHeight(), null);
-
         //Ready 상태 출력(처음 시작 전 Ready 출력)
         if ((lives > MIN_LIVES) && (readyDraw == true)) {
         	drawReady(g);
@@ -496,13 +485,14 @@ public class Board extends JPanel implements Runnable, Constants {
         		}
         	}
         }
+
 	    for (int i = 0; i < 10; i++) {
 	            //벽돌이 그 위치에 없을 경우 벽돌을 그린다
 	            if (brick[i] != null)
 	            	brick[i].draw(g);
 	    }
 	    g.setColor(Color.BLACK);
-	    Font font  = new Font("Impact", Font.BOLD, (getWidth()+getHeight())/50); //폰트 설정
+	    Font font  = new Font("Impact", Font.PLAIN, (getWidth()+getHeight())/50); //폰트 설정
     	g.setFont(font);
 	    //하드모드(좌우 방향 키를 게임 화면에 출력)
 	    if(gameMode == 1) {

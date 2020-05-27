@@ -25,8 +25,13 @@
 //Imports
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.ImageIcon;
 
 //Class definition
@@ -104,6 +109,16 @@ public class Paddle extends Structure implements Constants {
 			i.resizePaddle(this); //하단 바 크기 변경
 			i.changeBallSpeed(this); //공 속도 변경
 			i.reverseMode(this); //리버스 모드
+            try {  // 아이템을 얻은 경우 소리를  출력한다.
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Wood.wav").getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                gainControl.setValue(-10.0f); 
+                clip.start();
+            } catch(Exception ex) {
+               ex.printStackTrace();
+            }
 			return true;
 		}
 		return false;
