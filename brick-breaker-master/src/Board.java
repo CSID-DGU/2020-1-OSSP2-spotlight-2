@@ -421,7 +421,7 @@ public class Board extends JPanel implements Runnable, Constants {
             }
             //아이템 리셋
     	    for (int j = 0; j < items.size(); j++) {
-    	        Item tempItem = items.get(j);
+    	      
     	        items.remove(j);
     	    }
     	    //하드모드 키 리셋
@@ -706,7 +706,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 //isSpace = true;
                 if (lives > MIN_LIVES) {
                     if (isPaused.get() == false) {
-                       // stop();
+                       //stop();
                         isPaused.set(true);
                     }
                     else {
@@ -726,7 +726,6 @@ public class Board extends JPanel implements Runnable, Constants {
                     	}
                     //item 리셋
             	    for (int j = 0; j < items.size(); j++) {
-            	        Item tempItem = items.get(j);
             	        items.remove(j);
             	    }
                 	}

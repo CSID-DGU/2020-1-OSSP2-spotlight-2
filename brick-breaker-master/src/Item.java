@@ -130,7 +130,6 @@ public class Item extends Structure implements Constants {
 			}
 			return;
 		}
-		//check= 0;
 	}
 
     /*공의 속도 변경*/
