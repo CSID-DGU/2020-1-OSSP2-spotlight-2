@@ -68,6 +68,37 @@ public class Board extends JPanel implements Runnable, Constants {
     private Color[] greenColors = {GREEN_BRICK_ONE, GREEN_BRICK_TWO, GREEN_BRICK_THREE, Color.BLACK};
     private Color[][] colors = {blueColors, redColors, purpleColors, yellowColors, pinkColors, grayColors, greenColors};
     
+    //이미지 파일
+    private ImageIcon readyimg = new ImageIcon("./img/READY.png");
+    private ImageIcon scoreimg = new ImageIcon("./img/SCORE.png");
+    private ImageIcon heartimg = new ImageIcon("./img/HEART.png");
+    private ImageIcon A = new ImageIcon("./img/A.png");
+    private ImageIcon B = new ImageIcon("./img/B.png");
+    private ImageIcon C = new ImageIcon("./img/C.png");
+    private ImageIcon D = new ImageIcon("./img/D.png");
+    private ImageIcon E = new ImageIcon("./img/E.png");
+    private ImageIcon F = new ImageIcon("./img/F.png");
+    private ImageIcon G = new ImageIcon("./img/G.png");
+    private ImageIcon H = new ImageIcon("./img/H.png");
+    private ImageIcon I = new ImageIcon("./img/I.png");
+    private ImageIcon J = new ImageIcon("./img/J.png");
+    private ImageIcon K = new ImageIcon("./img/K.png");
+    private ImageIcon L = new ImageIcon("./img/L.png");
+    private ImageIcon M = new ImageIcon("./img/M.png");
+    private ImageIcon N = new ImageIcon("./img/N.png");
+    private ImageIcon O = new ImageIcon("./img/O.png");
+    private ImageIcon P = new ImageIcon("./img/P.png");
+    private ImageIcon Q = new ImageIcon("./img/Q.png");
+    private ImageIcon R = new ImageIcon("./img/R.png");
+    private ImageIcon S = new ImageIcon("./img/S.png");
+    private ImageIcon T = new ImageIcon("./img/T.png");
+    private ImageIcon U = new ImageIcon("./img/U.png");
+    private ImageIcon V = new ImageIcon("./img/V.png");
+    private ImageIcon W = new ImageIcon("./img/W.png");
+    private ImageIcon X = new ImageIcon("./img/X.png");
+    private ImageIcon Y = new ImageIcon("./img/Y.png");
+    private ImageIcon Z = new ImageIcon("./img/Z.png");
+    
     //패들의 위치
     private int paddleX = (486/2)-(PADDLE_WIDTH/2);
     private int paddleY = 463 - 13;
@@ -309,7 +340,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                              ex.printStackTrace();
 	                           }
 	                        bricksLeft--;
-	                        score += 1;
+	                        score += 100;
 	                        addItem(brick[i].item);
 	                    }
 	                }
@@ -329,7 +360,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                              ex.printStackTrace();
 	                           }
 	                        bricksLeft--;
-	                        score += 1;
+	                        score += 100;
 	                        addItem(brick[i].item);
 	                    }
 	                }
@@ -349,7 +380,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                              ex.printStackTrace();
 	                           }
 	                        bricksLeft--;
-	                        score += 1;
+	                        score += 100;
 	                        addItem(brick[i].item);
 	                    }
 	                }
@@ -369,7 +400,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                              ex.printStackTrace();
 	                           }
 	                        bricksLeft--;
-	                        score += 1;
+	                        score += 100;
 	                        addItem(brick[i].item);
 	                    }
 	                }
@@ -433,14 +464,7 @@ public class Board extends JPanel implements Runnable, Constants {
     
     /*Ready상태 출력*/
     public void drawReady(Graphics g) {
-    	Font font  = new Font("Serif", Font.BOLD, getWidth()/15); //폰트
-    	g.setFont(font);
-    	g.setColor(Color.yellow);//색 설정
-    	g.drawString("Ready", getWidth()*5/12, getHeight()/3);
-    	font  = new Font("Serif", Font.BOLD, getWidth()/40);
-    	g.setFont(font);
-    	g.drawString("Press SPACE to start", getWidth()*2/5, getHeight()/2);
-    	g.drawString("Lives : " + lives, getWidth()*9/19, getHeight()*3/5); //남은 목숨
+    	g.drawImage(readyimg.getImage(), getWidth()*5/19, getHeight()/4, getWidth()/2, getHeight()/2, null);
     	setBackground(Color.BLACK); //배경 지정	
     }
     
@@ -462,24 +486,197 @@ public class Board extends JPanel implements Runnable, Constants {
 		       ball.draw(g);
         }
         
+        //lives 하트 이미지로 출력
+        if(lives >= MAX_LIVES-2) {
+        	g.drawImage(heartimg.getImage(), getWidth()*96/100, getHeight()/100, getWidth()/30, getHeight()/30, null);
+        	if(lives >= MAX_LIVES-1) {
+        		g.drawImage(heartimg.getImage(), getWidth()*92/100, getHeight()/100, getWidth()/30, getHeight()/30, null);
+        		if(lives >= MAX_LIVES) {
+        			g.drawImage(heartimg.getImage(), getWidth()*88/100, getHeight()/100, getWidth()/30, getHeight()/30, null);
+        		}
+        	}
+        }
 	    for (int i = 0; i < 10; i++) {
 	            //벽돌이 그 위치에 없을 경우 벽돌을 그린다
 	            if (brick[i] != null)
 	            	brick[i].draw(g);
 	    }
 	    g.setColor(Color.BLACK);
-	    Font font  = new Font("Serif", Font.BOLD, getWidth()/30); //폰트 설정
+	    Font font  = new Font("Impact", Font.BOLD, (getWidth()+getHeight())/50); //폰트 설정
     	g.setFont(font);
 	    //하드모드(좌우 방향 키를 게임 화면에 출력)
 	    if(gameMode == 1) {
-	    	g.setColor(Color.red);//색 설정
-	        g.drawString(Character.toString(randomLeftKey), getWidth()*1/50, getHeight()*9/10);
-	        g.drawString(Character.toString(randomRightKey), getWidth()*97/100, getHeight()*9/10);
+	        //왼쪽 이동 키
+	    	switch(randomLeftKey) {
+	    	case 'A':
+	    		g.drawImage(A.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'B':
+	    		g.drawImage(B.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'C':
+	    		g.drawImage(C.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'D':
+	    		g.drawImage(D.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'E':
+	    		g.drawImage(E.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'F':
+	    		g.drawImage(F.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'G':
+	    		g.drawImage(G.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'H':
+	    		g.drawImage(H.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'I':
+	    		g.drawImage(I.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'J':
+	    		g.drawImage(J.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'K':
+	    		g.drawImage(K.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'L':
+	    		g.drawImage(L.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'M':
+	    		g.drawImage(M.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'N':
+	    		g.drawImage(N.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'O':
+	    		g.drawImage(O.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'P':
+	    		g.drawImage(P.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'Q':
+	    		g.drawImage(Q.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'R':
+	    		g.drawImage(R.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'S':
+	    		g.drawImage(S.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'T':
+	    		g.drawImage(T.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'U':
+	    		g.drawImage(U.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'V':
+	    		g.drawImage(V.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'W':
+	    		g.drawImage(W.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'X':
+	    		g.drawImage(X.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'Y':
+	    		g.drawImage(Y.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'Z':
+	    		g.drawImage(Z.getImage(), getWidth()*1/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    		
+	    	}
+	    	//오른쪽 이동 키
+	    	switch (randomRightKey){
+	    	case 'A':
+	    		g.drawImage(A.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'B':
+	    		g.drawImage(B.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'C':
+	    		g.drawImage(C.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'D':
+	    		g.drawImage(D.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'E':
+	    		g.drawImage(E.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'F':
+	    		g.drawImage(F.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'G':
+	    		g.drawImage(G.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'H':
+	    		g.drawImage(H.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'I':
+	    		g.drawImage(I.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'J':
+	    		g.drawImage(J.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'K':
+	    		g.drawImage(K.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'L':
+	    		g.drawImage(L.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'M':
+	    		g.drawImage(M.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'N':
+	    		g.drawImage(N.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'O':
+	    		g.drawImage(O.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'P':
+	    		g.drawImage(P.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'Q':
+	    		g.drawImage(Q.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'R':
+	    		g.drawImage(R.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'S':
+	    		g.drawImage(S.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'T':
+	    		g.drawImage(T.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'U':
+	    		g.drawImage(U.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'V':
+	    		g.drawImage(V.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'W':
+	    		g.drawImage(W.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'X':
+	    		g.drawImage(X.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'Y':
+	    		g.drawImage(Y.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	case 'Z':
+	    		g.drawImage(Z.getImage(), getWidth()*46/50, getHeight()*9/10, getWidth()/15, getHeight()/25, null);
+	    		break;
+	    	}  	
 	        }
-	    	g.setColor(Color.yellow);//색 설정
-	    	g.drawString("Score : " + score, getWidth()*1/50, getHeight()*96/100);//점수
+
+	    	g.setColor(Color.red);//색 설정
+	    	//score 출력
+	    	g.drawString(Integer.toString(score), getWidth()/100, getHeight()*5/100);
+
 	
-	        for (Item i: items) {
+	    	for (Item i: items) {
 	        	if(i != null)
 	        		i.draw(g);
 	        }
@@ -488,7 +685,6 @@ public class Board extends JPanel implements Runnable, Constants {
             g.setColor(Color.BLACK);
             g.fillRect(0,0,getWidth(),getHeight());
             g.setColor(Color.WHITE);
-            //g.drawString("Name: " + playerName + ", Score: " + score + ", Level: " + level, getWidth()/5, 20);
             g.drawString("Game Over!", getWidth()/5, 50);
             g.drawString("Press the Spacebar twice to play again.", getWidth()/5, getHeight()-20);
         }
