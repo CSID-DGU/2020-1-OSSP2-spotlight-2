@@ -37,9 +37,10 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	private int lives, hits;
 	private double rateX, rateY;
 	private boolean destroyed;
-	public Item item;
 	private Color itemColor;
-
+	
+	public Item item;
+	public Ball b = Board.ball;
 	//블록 이미지 img에 저장
 	ImageIcon icon = new ImageIcon("./img/brickVirus.png");
 	Image img = icon.getImage();
@@ -95,7 +96,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 
 	//Detect if the brick has been hit on its bottom, top, left, or right sides
 	public boolean hitBottom(int ballX, int ballY) { //아래쪽에 공이 맞는 경우
-		if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y + height - Board.xSpeed) && (ballY <= y + height) && (destroyed == false)) {
+		if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y + height - Board.xSpeed) && (ballY <= y + height) && (destroyed == false) && (b.getYDir() < 0)) {
 			addHit();
 			return true;
 		}
@@ -103,7 +104,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	}
 
 	public boolean hitTop(int ballX, int ballY) { //위쪽에 공이 맞는 경우
-		if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y) && (ballY <= y + Board.xSpeed) && (destroyed == false)) {
+		if ((ballX >= x) && (ballX <= x + width + 1) && (ballY >= y) && (ballY <= y + Board.xSpeed) && (destroyed == false) && (b.getYDir() > 0)) {
 			addHit();
 			return true;
 		}
@@ -111,7 +112,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	}
 
 	public boolean hitLeft(int ballX, int ballY) { //왼쪽에 공이 맞는 경우
-		if ((ballY >= y) && (ballY <= y + height) && (ballX >= x) && (ballX <= x + Board.xSpeed) && (destroyed == false)) {
+		if ((ballY >= y) && (ballY <= y + height) && (ballX >= x) && (ballX <= x + Board.xSpeed) && (destroyed == false) && (b.getXDir() > 0)) {
 			addHit();
 			return true;
 		}
@@ -119,7 +120,7 @@ public class Brick extends Structure implements Constants, ImageObserver {
 	}
 
 	public boolean hitRight(int ballX, int ballY) { //오른쪽에 공이 맞는 경우
-		if ((ballY >= y) && (ballY <= y + height) && (ballX <= x + width) && (ballX >= x + width - Board.xSpeed) && (destroyed == false)) {
+		if ((ballY >= y) && (ballY <= y + height) && (ballX <= x + width) && (ballX >= x + width - Board.xSpeed) && (destroyed == false) && (b.getXDir() < 0)) {
 			addHit();
 			return true;
 		}

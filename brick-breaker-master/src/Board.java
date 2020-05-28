@@ -285,6 +285,30 @@ public class Board extends JPanel implements Runnable, Constants {
 	    for (int i = 0; i < items.size(); i++) {
 	        Item tempItem = items.get(i);
 	        if (paddle.caughtItem(tempItem)) {
+	        	if((gameMode == 0) && (tempItem.getType() < 6)) {
+	                try {  // 아이템을 얻은 경우 소리를  출력한다.
+	                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Wood.wav").getAbsoluteFile());
+	                    Clip clip = AudioSystem.getClip();
+	                    clip.open(audioInputStream);
+	                    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+	                    gainControl.setValue(-10.0f); 
+	                    clip.start();
+	                } catch(Exception ex) {
+	                   ex.printStackTrace();
+	                }
+	        	}
+	        	if((gameMode == 1) && (tempItem.getType() < 5)) {
+	                try {  // 아이템을 얻은 경우 소리를  출력한다.
+	                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Wood.wav").getAbsoluteFile());
+	                    Clip clip = AudioSystem.getClip();
+	                    clip.open(audioInputStream);
+	                    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+	                    gainControl.setValue(-10.0f); 
+	                    clip.start();
+	                } catch(Exception ex) {
+	                   ex.printStackTrace();
+	                }
+	        	}
 	            items.remove(i);
 	        }
 	        else if (tempItem.getY() > Board.FrameHeight) {
@@ -421,7 +445,6 @@ public class Board extends JPanel implements Runnable, Constants {
             }
             //아이템 리셋
     	    for (int j = 0; j < items.size(); j++) {
-    	        Item tempItem = items.get(j);
     	        items.remove(j);
     	    }
     	    //하드모드 키 리셋
@@ -706,7 +729,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 //isSpace = true;
                 if (lives > MIN_LIVES) {
                     if (isPaused.get() == false) {
-                       // stop();
+                    	stop();
                         isPaused.set(true);
                     }
                     else {
@@ -726,7 +749,6 @@ public class Board extends JPanel implements Runnable, Constants {
                     	}
                     //item 리셋
             	    for (int j = 0; j < items.size(); j++) {
-            	        Item tempItem = items.get(j);
             	        items.remove(j);
             	    }
                 	}
