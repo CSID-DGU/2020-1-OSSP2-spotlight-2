@@ -285,8 +285,9 @@ public class Board extends JPanel implements Runnable, Constants {
 	    for (int i = 0; i < items.size(); i++) {
 	        Item tempItem = items.get(i);
 	        if (paddle.caughtItem(tempItem)) {
+	        	//베이직모드 아이템 획득시 소리 출력
 	        	if((gameMode == 0) && (tempItem.getType() < 6)) {
-	                try {  // 아이템을 얻은 경우 소리를  출력한다.
+	                try { 
 	                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Wood.wav").getAbsoluteFile());
 	                    Clip clip = AudioSystem.getClip();
 	                    clip.open(audioInputStream);
@@ -297,8 +298,9 @@ public class Board extends JPanel implements Runnable, Constants {
 	                   ex.printStackTrace();
 	                }
 	        	}
+	        	//하드모드 아이템 획득시 소리 출력
 	        	if((gameMode == 1) && (tempItem.getType() < 5)) {
-	                try {  // 아이템을 얻은 경우 소리를  출력한다.
+	                try { 
 	                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Wood.wav").getAbsoluteFile());
 	                    Clip clip = AudioSystem.getClip();
 	                    clip.open(audioInputStream);
@@ -729,7 +731,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 //isSpace = true;
                 if (lives > MIN_LIVES) {
                     if (isPaused.get() == false) {
-                    	stop();
+                    	//stop();
                         isPaused.set(true);
                     }
                     else {

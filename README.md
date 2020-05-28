@@ -47,15 +47,22 @@ Team spotlight
 ### 5주차 진행 사항
  - [X] 동적 창 구현을 위해 생성된 객체 크기 조절
  - [X] UI개선을 위해 아이템 및 벽돌 이미지 추가
- - [X] 백그라운드 이미지의 크기 조절중
+ - [X] 백그라운드 이미지의 크기 조절
+ - [X] 게임 사운드 추가 및 수정
+
+### 6주차 진행 사항
+ - [X] Life이미지 및 Ready화면 이미지 추가
+ - [X] 하드모드 좌우 하단 알파벳 이미지 추가
+ - [X] AWS 서버 생성 및 서버 코드 작성
+
 
 ## 4. 게임 아이템 추가
 <img src = "res/item.png">
 
 ## 5. GameTheme(게임 테마)
-<img src="res/thumbnail2.png">
+<img src="res/thumbnail1.png">
 
-- 코로나가 만연한 지금! 의사가 되어 Covid-19를 격퇴하라!
+- 코로나가 만연한 지금! Covid-19를 격퇴하라!
 - 랜덤으로 생성되는 코로나 바이러스를 Paddle을 조작하여 제거하라!
 - 여러 아이템들은 당신을 도울수도 혹은 곤경에 빠뜨릴수도 항상 신중하라!!
 - 당신에게 주어진 기회는 단 한번뿐!!!
@@ -67,6 +74,8 @@ Team spotlight
 
 ## 7. 이미지 및 음원 출처
 - Item 이미지 : 직접 구현
+
+- 알파벳 / Life / READY 이미지: 직접 구현
 
 - Virus 이미지 : https://pixabay.com/ko/illustrations/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EC%99%B8%EB%94%B4-%EC%BD%94%EB%A1%9C%EB%82%98-%EC%A0%84%EC%97%BC%EB%B3%91-4930122/
 
