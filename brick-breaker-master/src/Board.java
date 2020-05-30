@@ -12,6 +12,10 @@ import java.util.TreeMap;
 
 //Class definition
 public class Board extends JPanel implements Runnable, Constants {
+	//충돌 이펙트
+	public static collision collision;
+	static boolean makeCollision = false;
+	static int collisiontime;
 	
     //Items on-screen
     public static Paddle paddle;
@@ -184,6 +188,23 @@ public class Board extends JPanel implements Runnable, Constants {
         }
     }
 
+    public void makeCollision(int colX, int colY) {
+		int Width = FrameWidth/10;
+		int Height = FrameWidth/20;
+		double rateX = (double)FrameWidth / (double)colX;
+		double rateY = (double)(FrameHeight/3) /(double)colY;
+		collision = new collision(colX,colY,Width,Height, Color.BLACK, rateX, rateY, 100, 1);  
+		collisiontime = 100;
+		makeCollision = true;
+    }
+    
+    public void deleteCollision() {
+    	collisiontime--;
+    	if(collisiontime == 0) {
+    		makeCollision = false;
+    	}    	
+    }
+    
     //starts the thread
     public void start() {
         game.resume();
@@ -231,6 +252,7 @@ public class Board extends JPanel implements Runnable, Constants {
             dropItems();
             checkItemList();
             repaint();
+            deleteCollision();
             try {
                 game.sleep(waitTime);
             } catch (InterruptedException ie) {
@@ -423,6 +445,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	            }
             	//벽돌이 깨진 경우 그 벽돌 위치에 벽돌 제거
             	if (destroy_check) {
+            		makeCollision(brick[i].x, brick[i].y);
             		brick[i] = null;
             		destroy_check = false;
             	}
@@ -493,7 +516,12 @@ public class Board extends JPanel implements Runnable, Constants {
         if ((lives > MIN_LIVES) && (readyDraw == true)) {
         	drawReady(g);
         }
-
+        //충돌이 있는 경우
+        if(makeCollision) {
+        	collision.draw(g);
+        	
+        }
+        
         //패들과 공을 그려야 되는 경우
         if(PBdraw == true) {
 		       paddle.draw(g);
