@@ -34,19 +34,28 @@ public class Main extends JFrame implements Constants {
 	//private static Board board;
 	private static Container pane;
 	private static Dimension dim;
+	static ImageIcon button;
 
 	//---------------------------------배경
 	//static ImageIcon icon;
 
     public Main() {
-        
+
+
         setTitle("virus breaker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JPanel MainContainer = new JPanel();
         setContentPane(MainContainer);
         
-        JButton OpenBasic = new JButton("게임시작[베이직]");
+    	//베이직 모드 버튼
+    	Image button1 = new ImageIcon("./img/B.png").getImage();
+    	button1 = button1.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+        JButton OpenBasic = new JButton(new ImageIcon(button1));
+        OpenBasic.setBorderPainted(false); //버튼 외곽선 삭제
+        OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
+        OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제
+
         OpenBasic.addActionListener(new ActionListener() {
             // 만들어진 버튼 "새 창 띄우기"에 버튼이 눌러지면 발생하는 행동을 정의
             @Override
@@ -54,11 +63,17 @@ public class Main extends JFrame implements Constants {
                 // TODO Auto-generated method stub
             	Board.gameMode = 0;
                 new gameWindow(); // 클래스 newWindow를 새로 만들어낸다
-                setVisible(true);
+                setVisible(false);
             }      
         });
         
-        JButton OpenHard = new JButton("게임시작[하드]");    
+    	//하드 모드 버튼
+    	Image button2 = new ImageIcon("./img/H.png").getImage();
+    	button2 = button2.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+        JButton OpenHard = new JButton(new ImageIcon(button2));
+        OpenHard.setBorderPainted(false); //버튼 외곽선 삭제
+        OpenHard.setContentAreaFilled(false); //버튼 나머지 영역 삭제
+        OpenHard.setFocusPainted(false); //버튼 눌리는 부분 삭제 
         OpenHard.addActionListener(new ActionListener() {
             // 만들어진 버튼 "새 창 띄우기"에 버튼이 눌러지면 발생하는 행동을 정의
             @Override
@@ -69,10 +84,11 @@ public class Main extends JFrame implements Constants {
                 setVisible(false);
             }     
         });
-        MainContainer.add(OpenBasic);
-        MainContainer.add(OpenHard);
+
+        MainContainer.add(OpenBasic, "Center");
+        MainContainer.add(OpenHard, "Center");
         setSize(500,500);
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
     }
     
