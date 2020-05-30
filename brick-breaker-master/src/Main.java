@@ -22,10 +22,19 @@
 //This "Main" class runs the game. 
 //Imports
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 //Class definition
 public class Main extends JFrame implements Constants {
@@ -35,19 +44,29 @@ public class Main extends JFrame implements Constants {
 	private static Container pane;
 	private static Dimension dim;
 	static ImageIcon button;
-
-	//---------------------------------배경
+	JScrollPane scrollPane;
+	 //---------------------------------배경
 	//static ImageIcon icon;
-
+	ImageIcon back;
+	
     public Main() {
-
-
         setTitle("virus breaker");
+        back = new ImageIcon("./img/earth.jpg");
+    	
+		JPanel background = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.drawImage(back.getImage(),0,0,null);
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
+		
+		scrollPane = new JScrollPane(background);
+		setContentPane(scrollPane);
+		
+    	setTitle("virus breaker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        JPanel MainContainer = new JPanel();
-        setContentPane(MainContainer);
-        
+
     	//베이직 모드 버튼
     	Image button1 = new ImageIcon("./img/B.png").getImage();
     	button1 = button1.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
@@ -85,10 +104,10 @@ public class Main extends JFrame implements Constants {
             }     
         });
 
-        MainContainer.add(OpenBasic, "Center");
-        MainContainer.add(OpenHard, "Center");
-        setSize(500,500);
-        setResizable(true);
+        background.add(OpenBasic);
+        background.add(OpenHard);
+        setSize(1280,720);
+        setResizable(false);
         setVisible(true);
     }
     
