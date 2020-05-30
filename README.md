@@ -84,3 +84,5 @@ Team spotlight
 - Ball 이미지: https://pixabay.com/ko/vectors/공-강철-은화-라운드-149921/
 
 - Background Sound 가및 효과음 : https://www.youtube.com/audiolibrary/soundeffects?ar=1590045019076&nv=1
+
+- Mainmenu Background image : https://pixabay.com/ko/illustrations/%EC%A7%80%EA%B5%AC-%EC%BD%94%EB%A1%9C%EB%82%98-%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EA%B8%80%EB%A1%9C%EB%B8%8C-5138795/
