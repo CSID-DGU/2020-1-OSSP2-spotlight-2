@@ -22,10 +22,18 @@
 //This "Main" class runs the game. 
 //Imports
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 //Class definition
 public class Main extends JFrame implements Constants {
@@ -34,19 +42,34 @@ public class Main extends JFrame implements Constants {
 	//private static Board board;
 	private static Container pane;
 	private static Dimension dim;
-
-	//---------------------------------배경
+	JScrollPane scrollPane;
+	 //---------------------------------배경
 	//static ImageIcon icon;
-
+	ImageIcon back;
+	
     public Main() {
         
-        setTitle("virus breaker");
+          back = new ImageIcon("./img/earth.jpg");
+    	
+		JPanel background = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.drawImage(back.getImage(),0,0,null);
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
+		
+		scrollPane = new JScrollPane(background);
+		setContentPane(scrollPane);
+		
+    	setTitle("virus breaker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        JPanel MainContainer = new JPanel();
-        setContentPane(MainContainer);
+//        JPanel MainContainer = new JPanel();
+//        setContentPane(MainContainer);
         
         JButton OpenBasic = new JButton("게임시작[베이직]");
+        background.add(OpenBasic);
         OpenBasic.addActionListener(new ActionListener() {
             // 만들어진 버튼 "새 창 띄우기"에 버튼이 눌러지면 발생하는 행동을 정의
             @Override
@@ -69,9 +92,9 @@ public class Main extends JFrame implements Constants {
                 setVisible(false);
             }     
         });
-        MainContainer.add(OpenBasic);
-        MainContainer.add(OpenHard);
-        setSize(500,500);
+        background.add(OpenBasic);
+        background.add(OpenHard);
+        setSize(1280,720);
         setResizable(false);
         setVisible(true);
     }
