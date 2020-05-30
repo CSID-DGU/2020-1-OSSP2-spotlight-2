@@ -19,7 +19,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public static Brick[] brick = new Brick[10];
     BoardListener boardtest1 = new BoardListener();
     //Initial Values for some important variables
-    private int score = 0, lives = MAX_LIVES, bricksLeft = 10, waitTime = 3, level = 1;
+    public static int score = 0, lives = MAX_LIVES, bricksLeft = 10, waitTime = 3, level = 1;
     protected int withSound =1;
     //창의 크기 불러옴
     public static int FrameWidth = WINDOW_WIDTH ;
@@ -119,19 +119,19 @@ public class Board extends JPanel implements Runnable, Constants {
         ball = new Ball(ballX, ballY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
-        playerName = JOptionPane.showInputDialog(null, "Please enter your name:", "Virus Breaker", JOptionPane.QUESTION_MESSAGE);
-        if (playerName == null) {
-            System.exit(0);
-        }
-        //Hidden name(이스터 에그)
-        if (playerName.toUpperCase().equals("SPOTLIGHT") || playerName.toUpperCase().equals("OSSP") || playerName.toUpperCase().equals("DONGHOKIM")) {
-            score += 1000;
-            JOptionPane.showMessageDialog(null, "멋진 이름이네요 1,000 점을 드립니다!", "1,000 Points", JOptionPane.INFORMATION_MESSAGE);
-        }
+//        playerName = JOptionPane.showInputDialog(null, "Please enter your name:", "Virus Breaker", JOptionPane.QUESTION_MESSAGE);
+//        if (playerName == null) {
+//            System.exit(0);
+//        }
+//        //Hidden name(이스터 에그)
+//        if (playerName.toUpperCase().equals("SPOTLIGHT") || playerName.toUpperCase().equals("OSSP") || playerName.toUpperCase().equals("DONGHOKIM")) {
+//            score += 1000;
+//            JOptionPane.showMessageDialog(null, "멋진 이름이네요 1,000 점을 드립니다!", "1,000 Points", JOptionPane.INFORMATION_MESSAGE);
+//        }
         
         //게임 모드 선택
         String[] modeOptions = {"Basic", "Hard"};
-        gameMode = JOptionPane.showOptionDialog(null, "게임 모드를 선택하세요", "게임 모드 선택", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, modeOptions, modeOptions[0]);
+        //gameMode = JOptionPane.showOptionDialog(null, "게임 모드를 선택하세요", "게임 모드 선택", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, modeOptions, modeOptions[0]);
         //Start Screen that displays information and asks if the user wants music or not, stores that choice
         playMusic(trackList, 0, level);
 
@@ -488,7 +488,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
-        g.drawImage(Main.icon.getImage(), 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(gameWindow.icon.getImage(), 0, 0, getWidth(), getHeight(), null);
         //Ready 상태 출력(처음 시작 전 Ready 출력)
         if ((lives > MIN_LIVES) && (readyDraw == true)) {
         	drawReady(g);
