@@ -781,7 +781,7 @@ public class Board extends JPanel implements Runnable, Constants {
             	        items.remove(j);
             	    }   
             	    game.interrupt();
-            	    Main.M.setVisible(true);
+            	    Main.M.setVisible(true);//메인메뉴로
                 	}
            		}
             //Basic 모드 조작 키
