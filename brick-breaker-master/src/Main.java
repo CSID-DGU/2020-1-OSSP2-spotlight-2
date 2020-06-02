@@ -22,7 +22,6 @@
 //This "Main" class runs the game. 
 //Imports
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -38,7 +37,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 //Class definition
 public class Main extends JFrame implements Constants {
@@ -48,16 +46,14 @@ public class Main extends JFrame implements Constants {
    public static gameWindow G;
    public static Clip clip;
    //private static Board board;
-   private static Container pane;
-   private static Dimension dim;
    static ImageIcon button;
-   JScrollPane scrollPane;
+
     //---------------------------------배경
    //static ImageIcon icon;
    ImageIcon back;
     public Main() {
         setTitle("virus breaker"); //타이틀 설정
-      Music();
+        Music();//배경음악 출력
         back = new ImageIcon("./img/earth.jpg"); //배경 이미지
         //배경 이미지 그림
         background = new JPanel(){
