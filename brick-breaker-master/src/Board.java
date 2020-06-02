@@ -16,7 +16,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	public static collision collision;
 	static boolean makeCollision = false;
 	static int collisiontime;
-	
+
     //Items on-screen
     public static Paddle paddle;
     public static Ball ball;
@@ -104,8 +104,8 @@ public class Board extends JPanel implements Runnable, Constants {
     private ImageIcon Z = new ImageIcon("./img/Z.png");
     
     //패들의 위치
-    private int paddleX = (486/2)-(PADDLE_WIDTH/2);
-    private int paddleY = 463 - 13;
+    private int paddleX = (Board.FrameWidth/2)-(PADDLE_WIDTH/2);
+    private int paddleY = Board.FrameHeight - 13;
     //공 시작 위치
     private int ballX = FrameWidth/2;
     private int ballY = FrameHeight/2;
@@ -780,7 +780,7 @@ public class Board extends JPanel implements Runnable, Constants {
                     //item 리셋
             	    for (int j = 0; j < items.size(); j++) {
             	        items.remove(j);
-            	    }
+            	    }   
                 	}
            		}
             //Basic 모드 조작 키

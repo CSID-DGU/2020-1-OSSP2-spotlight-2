@@ -22,6 +22,7 @@
 //This "Main" class runs the game. 
 //Imports
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -39,8 +40,10 @@ import javax.swing.JScrollPane;
 //Class definition
 public class Main extends JFrame implements Constants {
 	//Variables
-	public static JFrame frame;
+	public static JPanel background;
+	
 	//private static Board board;
+	private BorderLayout layout = new BorderLayout();
 	private static Container pane;
 	private static Dimension dim;
 	static ImageIcon button;
@@ -51,9 +54,10 @@ public class Main extends JFrame implements Constants {
 	
     public Main() {
         setTitle("virus breaker");
+
         back = new ImageIcon("./img/earth.jpg");
     	
-		JPanel background = new JPanel() {
+        background = new JPanel(){
 			public void paintComponent(Graphics g) {
 				g.drawImage(back.getImage(),0,0,getWidth(), getHeight(), null);
 				setOpaque(false);
@@ -75,7 +79,7 @@ public class Main extends JFrame implements Constants {
         OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제
         OpenBasic.addActionListener(new ActionListener() {
-            // 만들어진 버튼 "새 창 띄우기"에 버튼이 눌러지면 발생하는 행동을 정의
+            // Basic Mode 행동 정의
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
@@ -93,7 +97,7 @@ public class Main extends JFrame implements Constants {
         OpenHard.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenHard.setFocusPainted(false); //버튼 눌리는 부분 삭제 
         OpenHard.addActionListener(new ActionListener() {
-            // 만들어진 버튼 "새 창 띄우기"에 버튼이 눌러지면 발생하는 행동을 정의
+            // Hard Mode 버튼 행동 정의
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
@@ -102,17 +106,18 @@ public class Main extends JFrame implements Constants {
                 setVisible(false);
             }     
         });
-
-        background.add(OpenBasic, "Center");
+        
+        background.add(OpenBasic);
         background.add(OpenHard);
         setSize(1280,720);
         setResizable(true);
         setVisible(true);
+
     }
     
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        new Main();
+    		new Main();
     }
 }
 	
