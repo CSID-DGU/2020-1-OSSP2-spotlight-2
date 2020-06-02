@@ -55,12 +55,10 @@ public class Main extends JFrame implements Constants {
 	ImageIcon back;
 
     public Main() {
-        setTitle("virus breaker");
+        setTitle("virus breaker"); // 타이틀 설정
+        back = new ImageIcon("./img/earth.jpg");  	
+		JPanel background = new JPanel(new GridLayout(1,3)) {
 
-        back = new ImageIcon("./img/earth.jpg");
-
-    	
-		JPanel background = new JPanel(new GridLayout(1,2)) {
 			public void paintComponent(Graphics g) {
 				g.drawImage(back.getImage(),0,0,getWidth(), getHeight(),null);
 
@@ -69,9 +67,7 @@ public class Main extends JFrame implements Constants {
 			}
 		};
  
-//		scrollPane = new JScrollPane(background);
 		setContentPane(background);	
-    	setTitle("virus breaker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 		
@@ -117,7 +113,7 @@ public class Main extends JFrame implements Constants {
                 // TODO Auto-generated method stub
             	Board.gameMode = 0;
                 G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
-                setVisible(false);
+                setVisible(false); // 화면을 보이지 않게 설정
             }      
         });
 
@@ -136,7 +132,7 @@ public class Main extends JFrame implements Constants {
                 // TODO Auto-generated method stub
             	Board.gameMode = 1;
                 G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
-                setVisible(false);
+                setVisible(false); // 화면을 보이지 않게 설정
             }     
         });
 
@@ -144,14 +140,21 @@ public class Main extends JFrame implements Constants {
         middlePanel.add(blank2);
         middlePanel.add(OpenBasic);
         middlePanel.add(OpenHard);
+        background.add(leftPanel);
         background.add(middlePanel);
-        background.add(middlePanel);
+        background.add(rightPanel);
         
         setLocationByPlatform(true);
-        setSize(1280,720);
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // 창 크기 설정
         setResizable(true);
         setVisible(true);
-      
+
+        Dimension dim = new Dimension(750,750);
+        setMinimumSize(dim); // 최소 사이즈 설정
+		dim = Toolkit.getDefaultToolkit().getScreenSize();
+		// 창 시작 위치 설정
+		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
+
     }
 
     public static void main(String[] args) {
@@ -166,20 +169,19 @@ public class Main extends JFrame implements Constants {
 	    // 버튼이 눌러지면 만들어지는 새 창을 정의한 클래스
 	    gameWindow() {
 			icon = new ImageIcon("./img/background.gif");
-			setTitle("Virus breaker");
-			Dimension dim = new Dimension(750, 750);
-			setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-			setResizable(true);//동적페이지
+			setTitle("Virus breaker"); // 타이틀 설정
+			Dimension dim = new Dimension(750, 750); 
+			setSize(Main.M.getWidth(), Main.M.getHeight()); // 창 크기 설정
+			setResizable(true);// 리사이징 가능하게 설정
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setMinimumSize(dim);
-			board = new Board(WINDOW_WIDTH, WINDOW_HEIGHT);
+			setMinimumSize(dim); // 창 최소 사이즈 설정
+			board = new Board(WINDOW_WIDTH, WINDOW_HEIGHT); // board 객체 생성
 
 			//-----------------------------
-			add(board);
+			add(board); // board 추가
 
-			//Place frame in the middle of the screen
-			dim = Toolkit.getDefaultToolkit().getScreenSize();
-			setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
+			// 메인 메뉴 위치를 출력
+			setLocation(Main.M.getX(),Main.M.getY());
 
 			//Sets the icon of the program
 			setIconImage(Toolkit.getDefaultToolkit().getImage("img/Icon.png"));
