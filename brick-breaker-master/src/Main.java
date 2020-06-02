@@ -21,7 +21,7 @@
 */
 //This "Main" class runs the game. 
 //Imports
-
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -41,8 +41,11 @@ import javax.swing.JScrollPane;
 //Class definition
 public class Main extends JFrame implements Constants {
 	//Variables
-	public static JFrame frame;
+	public JPanel background;
+	public static Main M;
+	public static gameWindow G;
 	//private static Board board;
+	private BorderLayout layout = new BorderLayout();
 	private static Container pane;
 	private static Dimension dim;
 	static ImageIcon button;
@@ -50,61 +53,55 @@ public class Main extends JFrame implements Constants {
 	 //---------------------------------배경
 	//static ImageIcon icon;
 	ImageIcon back;
-	
-	GridBagConstraints[] gbc = new GridBagConstraints[30];
-	
+
     public Main() {
         setTitle("virus breaker");
+
         back = new ImageIcon("./img/earth.jpg");
+
     	
 		JPanel background = new JPanel(new GridLayout(1,2)) {
 			public void paintComponent(Graphics g) {
 				g.drawImage(back.getImage(),0,0,getWidth(), getHeight(),null);
+
 				setOpaque(false);
 				super.paintComponent(g);
 			}
 		};
-		
-		scrollPane = new JScrollPane(background);
-		setContentPane(scrollPane);
-		
+ 
+//		scrollPane = new JScrollPane(background);
+		setContentPane(background);	
     	setTitle("virus breaker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 		
-		JPanel leftPanel = new JPanel(new GridLayout(5,1)) {
+		JPanel leftPanel = new JPanel(new GridLayout(1,1)) {
 			public void paintComponent(Graphics g) {
 				setOpaque(false);
 				super.paintComponent(g);
 			}
 		};
-		Image login = new ImageIcon("./img/L.png").getImage();
-		login = login.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
-        JButton Logg = new JButton(new ImageIcon(login));
-        Logg.setBorderPainted(false); //버튼 외곽선 삭제
-        Logg.setContentAreaFilled(false); //버튼 나머지 영역 삭제
-        Logg.setFocusPainted(false); //버튼 눌리는 부분 삭제
-        Logg.setPreferredSize(new Dimension(100, 100));
-        Logg.addActionListener(new ActionListener() {
-            // 만들어진 버튼 "새 창 띄우기"에 버튼이 눌러지면 발생하는 행동을 정의
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-            	Board.gameMode = 0;
-                new gameWindow(); // 클래스 newWindow를 새로 만들어낸다
-                setVisible(false);
-            }      
-        });
-        leftPanel.add(Logg);
-		
+		JPanel middlePanel = new JPanel(new GridLayout(6,1))
+		{
+			public void paintComponent(Graphics g) {
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
         
-        JPanel rightPanel = new JPanel(new GridLayout(3,1)) {
+        JPanel rightPanel = new JPanel(new GridLayout(1,1)) {
 			public void paintComponent(Graphics g) {
 				setOpaque(false);
 				super.paintComponent(g);
 			}
 		};
-		
+		 JButton blank1 = new JButton();
+		 JButton blank2 = new JButton();
+		 blank1.setBorderPainted(false);
+		 blank2.setBorderPainted(false);
+		 blank1.setContentAreaFilled(false);
+		 blank2.setContentAreaFilled(false);
+
     	//베이직 모드 버튼
     	Image button1 = new ImageIcon("./img/B.png").getImage();
     	button1 = button1.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
@@ -112,21 +109,18 @@ public class Main extends JFrame implements Constants {
         OpenBasic.setBorderPainted(false); //버튼 외곽선 삭제
         OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제
-        OpenBasic.setPreferredSize(new Dimension(100, 100));
+        //OpenBasic.setPreferredSize(new Dimension(100, 100));
         OpenBasic.addActionListener(new ActionListener() {
-            // 만들어진 버튼 "새 창 띄우기"에 버튼이 눌러지면 발생하는 행동을 정의
+            // Basic Mode 행동 정의
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
             	Board.gameMode = 0;
-                new gameWindow(); // 클래스 newWindow를 새로 만들어낸다
+                G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
                 setVisible(false);
             }      
         });
-//        gbc[0] = new GridBagConstraints();
-//        gbc[0].gridx = 0;
-//        gbc[0].gridy = 0;
-        
+
     	//하드 모드 버튼
     	Image button2 = new ImageIcon("./img/H.png").getImage();
     	button2 = button2.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
@@ -136,48 +130,40 @@ public class Main extends JFrame implements Constants {
         OpenHard.setFocusPainted(false); //버튼 눌리는 부분 삭제 
         OpenHard.setPreferredSize(new Dimension(100, 100));
         OpenHard.addActionListener(new ActionListener() {
-            // 만들어진 버튼 "새 창 띄우기"에 버튼이 눌러지면 발생하는 행동을 정의
+            // Hard Mode 버튼 행동 정의
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
             	Board.gameMode = 1;
-                new gameWindow(); // 클래스 newWindow를 새로 만들어낸다
+                G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
                 setVisible(false);
             }     
         });
-        for(int u = 1; u < 20; u++) {
-        	gbc[u] = new GridBagConstraints();
-        }
-//        gbc[20] = new GridBagConstraints();
-//        gbc[20].gridx = 20;
-//        gbc[20].gridy = 0;
-        
-        //background.add(OpenBasic,gbc[0]);
-        //background.add(OpenHard,gbc[20]);
-        rightPanel.add(OpenBasic);
-        rightPanel.add(OpenHard);
-        
-        background.add(leftPanel);
-        background.add(rightPanel);
+
+        middlePanel.add(blank1);
+        middlePanel.add(blank2);
+        middlePanel.add(OpenBasic);
+        middlePanel.add(OpenHard);
+        background.add(middlePanel);
+        background.add(middlePanel);
         
         setLocationByPlatform(true);
         setSize(1280,720);
         setResizable(true);
         setVisible(true);
-       
+      
     }
-    
+
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        new Main();
+    		M = new Main();
     }
 }
-	
+
 	class gameWindow extends JFrame implements Constants {
 		static ImageIcon icon;
 		private static Board board;
 	    // 버튼이 눌러지면 만들어지는 새 창을 정의한 클래스
-		
 	    gameWindow() {
 			icon = new ImageIcon("./img/background.gif");
 			setTitle("Virus breaker");
