@@ -24,12 +24,14 @@
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -40,13 +42,13 @@ import javax.swing.JPanel;
 
 //Class definition
 public class Main extends JFrame implements Constants {
-
 	//Variables
 	public JPanel background;
-	public static Main M;
-	public static gameWindow G;
+	public static Main M; //메인 페이지
+	public static gameWindow G; //게임 페이지
 	public static Clip clip;
 	//private static Board board;
+
 	static ImageIcon button;
 	 //---------------------------------배경
 	//static ImageIcon icon;
@@ -64,17 +66,48 @@ public class Main extends JFrame implements Constants {
             super.paintComponent(g);
          }
       };
+
       setContentPane(background);   
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+		
+		JPanel leftPanel = new JPanel(new GridLayout(1,1)) {
+			public void paintComponent(Graphics g) {
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
+		JPanel middlePanel = new JPanel(new GridLayout(6,1))
+		{
+			public void paintComponent(Graphics g) {
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
+        
+        JPanel rightPanel = new JPanel(new GridLayout(1,1)) {
+			public void paintComponent(Graphics g) {
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
+		 JButton blank1 = new JButton();
+		 JButton blank2 = new JButton();
+		 blank1.setBorderPainted(false);
+		 blank2.setBorderPainted(false);
+		 blank1.setContentAreaFilled(false);
+		 blank2.setContentAreaFilled(false);
 
-       //베이직 모드 버튼
-       Image button1 = new ImageIcon("./img/B.png").getImage();
-       button1 = button1.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+
+    	//베이직 모드 버튼
+    	Image button1 = new ImageIcon("./img/B.png").getImage();
+    	button1 = button1.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         JButton OpenBasic = new JButton(new ImageIcon(button1));
         OpenBasic.setBorderPainted(false); //버튼 외곽선 삭제
         OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제
+        //OpenBasic.setPreferredSize(new Dimension(100, 100));
         OpenBasic.addActionListener(new ActionListener() {
             // Basic Mode 행동 정의
             @Override
@@ -87,13 +120,15 @@ public class Main extends JFrame implements Constants {
             }      
         });
 
-       //하드 모드 버튼
-       Image button2 = new ImageIcon("./img/H.png").getImage();
-       button2 = button2.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+
+    	//하드 모드 버튼
+    	Image button2 = new ImageIcon("./img/H.png").getImage();
+    	button2 = button2.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
         JButton OpenHard = new JButton(new ImageIcon(button2));
         OpenHard.setBorderPainted(false); //버튼 외곽선 삭제
         OpenHard.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenHard.setFocusPainted(false); //버튼 눌리는 부분 삭제 
+        OpenHard.setPreferredSize(new Dimension(100, 100));
         OpenHard.addActionListener(new ActionListener() {
             // Hard Mode 버튼 행동 정의
             @Override
@@ -106,19 +141,28 @@ public class Main extends JFrame implements Constants {
             }     
         });
 
-        background.add(OpenBasic, "Center"); //베이직 모드 버튼 추가
-        background.add(OpenHard); //하드 모드 버튼 추가
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT); //창 크기 설정
-        setResizable(true); //리사이징 가능하게 설정
-        setVisible(true); //화면 보임
-        Dimension dim = new Dimension(750, 750);
-        setMinimumSize(dim); //최소 사이즈
+        middlePanel.add(blank1);
+        middlePanel.add(blank2);
+        middlePanel.add(OpenBasic);
+        middlePanel.add(OpenHard);
+        background.add(leftPanel);
+        background.add(middlePanel);
+        background.add(rightPanel);
+        
+        setLocationByPlatform(true);
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // 창 크기 설정
+        setResizable(true);
+        setVisible(true);
 
-      dim = Toolkit.getDefaultToolkit().getScreenSize();
-      //창 시작 위치
-      setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
-
+        Dimension dim = new Dimension(750,750);
+        setMinimumSize(dim); // 최소 사이즈 설정
+		dim = Toolkit.getDefaultToolkit().getScreenSize();
+		// 창 시작 위치 설정
+		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
     }
+
+
+    
     //음악 실행 메소드
     public void Music() {
         try {
