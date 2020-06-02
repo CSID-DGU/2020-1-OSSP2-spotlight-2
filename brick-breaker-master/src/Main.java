@@ -109,6 +109,8 @@ public class Main extends JFrame implements Constants {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setResizable(true);
         setVisible(true);
+        Dimension dim = new Dimension(750,750);
+        setMinimumSize(dim);
 		dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
     }
@@ -127,7 +129,7 @@ public class Main extends JFrame implements Constants {
 			icon = new ImageIcon("./img/background.gif");
 			setTitle("Virus breaker");
 			Dimension dim = new Dimension(750, 750);
-			setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+			setSize(Main.M.getWidth(), Main.M.getHeight());
 			setResizable(true);//동적페이지
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setMinimumSize(dim);
@@ -136,9 +138,8 @@ public class Main extends JFrame implements Constants {
 			//-----------------------------
 			add(board);
 
-			//Place frame in the middle of the screen
-			dim = Toolkit.getDefaultToolkit().getScreenSize();
-			setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
+			// 메인 메뉴 위치를 출력
+			setLocation(Main.M.getX(),Main.M.getY());
 
 			//Sets the icon of the program
 			setIconImage(Toolkit.getDefaultToolkit().getImage("img/Icon.png"));
