@@ -55,12 +55,12 @@ public class Main extends JFrame implements Constants {
     	
 		JPanel background = new JPanel() {
 			public void paintComponent(Graphics g) {
-				g.drawImage(back.getImage(),0,0,null);
+				g.drawImage(back.getImage(),0,0,getWidth(), getHeight(), null);
 				setOpaque(false);
 				super.paintComponent(g);
 			}
 		};
-		
+ 
 		scrollPane = new JScrollPane(background);
 		setContentPane(scrollPane);
 		
@@ -74,7 +74,6 @@ public class Main extends JFrame implements Constants {
         OpenBasic.setBorderPainted(false); //버튼 외곽선 삭제
         OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제
-
         OpenBasic.addActionListener(new ActionListener() {
             // 만들어진 버튼 "새 창 띄우기"에 버튼이 눌러지면 발생하는 행동을 정의
             @Override
@@ -85,7 +84,7 @@ public class Main extends JFrame implements Constants {
                 setVisible(false);
             }      
         });
-        
+
     	//하드 모드 버튼
     	Image button2 = new ImageIcon("./img/H.png").getImage();
     	button2 = button2.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
@@ -104,10 +103,10 @@ public class Main extends JFrame implements Constants {
             }     
         });
 
-        background.add(OpenBasic);
+        background.add(OpenBasic, "Center");
         background.add(OpenHard);
         setSize(1280,720);
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
     }
     
