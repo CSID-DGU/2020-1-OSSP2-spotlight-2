@@ -21,7 +21,6 @@
 */
 //This "Main" class runs the game. 
 //Imports
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -40,8 +39,10 @@ import javax.swing.JScrollPane;
 //Class definition
 public class Main extends JFrame implements Constants {
 	//Variables
-	public static JPanel background;
-	
+	public JPanel background;
+	private static Board board;
+	public static boolean end = true;
+	public static Main M;
 	//private static Board board;
 	private BorderLayout layout = new BorderLayout();
 	private static Container pane;
@@ -51,12 +52,10 @@ public class Main extends JFrame implements Constants {
 	 //---------------------------------배경
 	//static ImageIcon icon;
 	ImageIcon back;
-	
     public Main() {
         setTitle("virus breaker");
 
         back = new ImageIcon("./img/earth.jpg");
-    	
         background = new JPanel(){
 			public void paintComponent(Graphics g) {
 				g.drawImage(back.getImage(),0,0,getWidth(), getHeight(), null);
@@ -65,9 +64,8 @@ public class Main extends JFrame implements Constants {
 			}
 		};
  
-		scrollPane = new JScrollPane(background);
-		setContentPane(scrollPane);
-		
+//		scrollPane = new JScrollPane(background);
+		setContentPane(background);	
     	setTitle("virus breaker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -106,26 +104,25 @@ public class Main extends JFrame implements Constants {
                 setVisible(false);
             }     
         });
-        
-        background.add(OpenBasic);
+
+        background.add(OpenBasic, "Center");
         background.add(OpenHard);
         setSize(1280,720);
         setResizable(true);
         setVisible(true);
 
     }
-    
+
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-    		new Main();
+    		M = new Main();
     }
 }
-	
+
 	class gameWindow extends JFrame implements Constants {
 		static ImageIcon icon;
 		private static Board board;
 	    // 버튼이 눌러지면 만들어지는 새 창을 정의한 클래스
-		
 	    gameWindow() {
 			icon = new ImageIcon("./img/background.gif");
 			setTitle("Virus breaker");

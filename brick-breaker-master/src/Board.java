@@ -16,7 +16,6 @@ public class Board extends JPanel implements Runnable, Constants {
 	public static collision collision;
 	static boolean makeCollision = false;
 	static int collisiontime;
-
     //Items on-screen
     public static Paddle paddle;
     public static Ball ball;
@@ -781,6 +780,8 @@ public class Board extends JPanel implements Runnable, Constants {
             	    for (int j = 0; j < items.size(); j++) {
             	        items.remove(j);
             	    }   
+            	    game.interrupt();
+            	    Main.M.setVisible(true);
                 	}
            		}
             //Basic 모드 조작 키
