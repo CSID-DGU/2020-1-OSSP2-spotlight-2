@@ -226,37 +226,37 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {  
-        while(true) {
-        	readyDraw = false;
-        	PBdraw = true; //공과 패들을 그림
-            int x1 = ball.getX();
-            int y1 = ball.getY();
-        	FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
-            FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
-            ball.changeBallSet();
-            paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
-            for (int i = 0; i < 10; i++) {
-            	if (brick[i] != null)
-            		brick[i].changeBrickSet(); //벽돌의 크기, 좌표 재설정
-            }
-
-            makeBricks();//벽돌 생성
-            checkPaddle(x1, y1);
-            checkWall(x1, y1);
-            checkBricks(x1, y1);
-            checkLives();
-            checkIfOut(y1);
-            ball.move();
-            paddleMove();//하단 바 이동 메소드 실행
-            dropItems();
-            checkItemList();
-            repaint();
-            deleteCollision();
-            try {
-                game.sleep(waitTime);
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-            }
+        try {
+	        while(true) {
+	        	readyDraw = false;
+	        	PBdraw = true; //공과 패들을 그림
+	            int x1 = ball.getX();
+	            int y1 = ball.getY();
+	        	FrameWidth = (int)getWidth();//현재 프레임의 가로 길이
+	            FrameHeight = (int)getHeight();//현재 프레임의 세로 길이
+	            ball.changeBallSet();
+	            paddle.changePaddleSet(); //패들의 크기, 좌표 재설정
+	            for (int i = 0; i < 10; i++) {
+	            	if (brick[i] != null)
+	            		brick[i].changeBrickSet(); //벽돌의 크기, 좌표 재설정
+	            }
+	
+	            makeBricks();//벽돌 생성
+	            checkPaddle(x1, y1);
+	            checkWall(x1, y1);
+	            checkBricks(x1, y1);
+	            checkLives();
+	            checkIfOut(y1);
+	            ball.move();
+	            paddleMove();//하단 바 이동 메소드 실행
+	            dropItems();
+	            checkItemList();
+	            repaint();
+	            deleteCollision();
+	            game.sleep(waitTime);
+	        }
+        } catch (InterruptedException e) {
+            System.out.println("스레드 종료");
         }
     }
     
@@ -494,6 +494,7 @@ public class Board extends JPanel implements Runnable, Constants {
             clip = AudioSystem.getClip(null);
             clip.open(audio);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+           
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -728,7 +729,7 @@ public class Board extends JPanel implements Runnable, Constants {
             g.fillRect(0,0,getWidth(),getHeight());
             g.setColor(Color.WHITE);
             g.drawString("Game Over!", getWidth()/5, 50);
-            g.drawString("Press the Spacebar twice to play again.", getWidth()/5, getHeight()-20);
+            g.drawString("Press the Spacebar : Back to Main Menu", getWidth()/5, getHeight()-20);
         }
     }
 
@@ -780,7 +781,9 @@ public class Board extends JPanel implements Runnable, Constants {
             	    for (int j = 0; j < items.size(); j++) {
             	        items.remove(j);
             	    }   
-            	    game.interrupt();
+            	    game.interrupt(); //게임 종료
+            	    clip.stop(); //음악 정지
+            	    Main.G.setVisible(false); //게임 화면 끄기
             	    Main.M.setVisible(true);//메인메뉴로
                 	}
            		}

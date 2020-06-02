@@ -40,9 +40,8 @@ import javax.swing.JScrollPane;
 public class Main extends JFrame implements Constants {
 	//Variables
 	public JPanel background;
-	private static Board board;
-	public static boolean end = true;
 	public static Main M;
+	public static gameWindow G;
 	//private static Board board;
 	private BorderLayout layout = new BorderLayout();
 	private static Container pane;
@@ -82,7 +81,7 @@ public class Main extends JFrame implements Constants {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
             	Board.gameMode = 0;
-                new gameWindow(); // 클래스 newWindow를 새로 만들어낸다
+                G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
                 setVisible(false);
             }      
         });
@@ -100,17 +99,18 @@ public class Main extends JFrame implements Constants {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
             	Board.gameMode = 1;
-                new gameWindow(); // 클래스 newWindow를 새로 만들어낸다
+                G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
                 setVisible(false);
             }     
         });
 
         background.add(OpenBasic, "Center");
         background.add(OpenHard);
-        setSize(1280,720);
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setResizable(true);
         setVisible(true);
-
+		dim = Toolkit.getDefaultToolkit().getScreenSize();
+		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
     }
 
     public static void main(String[] args) {
