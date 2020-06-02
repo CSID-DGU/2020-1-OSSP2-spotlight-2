@@ -40,20 +40,21 @@ import javax.swing.JPanel;
 
 //Class definition
 public class Main extends JFrame implements Constants {
-   //Variables
-   public JPanel background;
-   public static Main M;
-   public static gameWindow G;
-   public static Clip clip;
-   //private static Board board;
-   static ImageIcon button;
 
-    //---------------------------------배경
-   //static ImageIcon icon;
-   ImageIcon back;
+	//Variables
+	public JPanel background;
+	public static Main M;
+	public static gameWindow G;
+	public static Clip clip;
+	//private static Board board;
+	static ImageIcon button;
+	 //---------------------------------배경
+	//static ImageIcon icon;
+	ImageIcon back;
     public Main() {
         setTitle("virus breaker"); //타이틀 설정
-        Music();//배경음악 출력
+		Music(); //음악 출력
+
         back = new ImageIcon("./img/earth.jpg"); //배경 이미지
         //배경 이미지 그림
         background = new JPanel(){
@@ -63,8 +64,8 @@ public class Main extends JFrame implements Constants {
             super.paintComponent(g);
          }
       };
- 
       setContentPane(background);   
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
        //베이직 모드 버튼
@@ -112,6 +113,7 @@ public class Main extends JFrame implements Constants {
         setVisible(true); //화면 보임
         Dimension dim = new Dimension(750, 750);
         setMinimumSize(dim); //최소 사이즈
+
       dim = Toolkit.getDefaultToolkit().getScreenSize();
       //창 시작 위치
       setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
