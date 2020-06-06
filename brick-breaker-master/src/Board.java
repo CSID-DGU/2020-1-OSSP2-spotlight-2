@@ -256,7 +256,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	            game.sleep(waitTime);
 	        }
         } catch (InterruptedException e) {
-            System.out.println("스레드 종료");
+            System.out.println("게임 종료");
         }
     }
     
@@ -783,16 +783,6 @@ public class Board extends JPanel implements Runnable, Constants {
             	    }   
             	    game.interrupt(); //게임 종료
             	    clip.stop(); //음악 정지
-                    //메인메뉴 음악 실행
-                    try {
-                       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/IDCIDK.wav").getAbsoluteFile());
-                        Main.M.clip = AudioSystem.getClip(null);
-                        Main.M.clip.open(audioInputStream);
-                        Main.M.clip.loop(Clip.LOOP_CONTINUOUSLY);
-                       
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                     //메인메뉴 음악 실행
                     try {
                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/IDCIDK.wav").getAbsoluteFile());
