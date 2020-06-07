@@ -62,7 +62,7 @@ public class Main extends JFrame implements Constants {
 
     public Main() {
         setTitle("virus breaker"); // 타이틀 설정
-        Music();
+        //Music();
         back = new ImageIcon("./img/earth.jpg");  	
 		JPanel background = new JPanel(new GridLayout(1,3)) {
 
@@ -75,7 +75,7 @@ public class Main extends JFrame implements Constants {
 		};
 
  
-      setContentPane(background);   
+        setContentPane(background);   
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 		
@@ -108,8 +108,8 @@ public class Main extends JFrame implements Constants {
 
 
     	//베이직 모드 버튼
-    	Image button1 = new ImageIcon("./img/B.png").getImage();
-    	button1 = button1.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+    	Image button1 = new ImageIcon("./img/BasicMode.png").getImage();
+    	button1 = button1.getScaledInstance(250, 110, java.awt.Image.SCALE_SMOOTH);
         JButton OpenBasic = new JButton(new ImageIcon(button1));
         OpenBasic.setBorderPainted(false); //버튼 외곽선 삭제
         OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
@@ -129,8 +129,8 @@ public class Main extends JFrame implements Constants {
 
 
     	//하드 모드 버튼
-    	Image button2 = new ImageIcon("./img/H.png").getImage();
-    	button2 = button2.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+    	Image button2 = new ImageIcon("./img/HardMode.png").getImage();
+    	button2 = button2.getScaledInstance(250, 110, java.awt.Image.SCALE_SMOOTH);
         JButton OpenHard = new JButton(new ImageIcon(button2));
         OpenHard.setBorderPainted(false); //버튼 외곽선 삭제
         OpenHard.setContentAreaFilled(false); //버튼 나머지 영역 삭제
@@ -147,11 +147,31 @@ public class Main extends JFrame implements Constants {
                 setVisible(false); //화면 보이지 않게 설정
             }     
         });
+        
+      //랭킹 버튼
+    	Image button3 = new ImageIcon("./img/Ranking.png").getImage();
+    	button3 = button3.getScaledInstance(270, 110, java.awt.Image.SCALE_SMOOTH);
+        JButton OpenRank = new JButton(new ImageIcon(button3));
+        OpenRank.setBorderPainted(false); //버튼 외곽선 삭제
+        OpenRank.setContentAreaFilled(false); //버튼 나머지 영역 삭제
+        OpenRank.setFocusPainted(false); //버튼 눌리는 부분 삭제 
+        OpenRank.setPreferredSize(new Dimension(100, 100));
+        OpenRank.addActionListener(new ActionListener() {
+            // Hard Mode 버튼 행동 정의
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+               //Board.gameMode = 1;
+                //G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
+                //clip.stop(); //메인메뉴 음악 정지
+               // setVisible(false); //화면 보이지 않게 설정
+            }     
+        });
 
         middlePanel.add(blank1);
-        middlePanel.add(blank2);
         middlePanel.add(OpenBasic);
         middlePanel.add(OpenHard);
+        middlePanel.add(OpenRank);
         background.add(leftPanel);
         background.add(middlePanel);
         background.add(rightPanel);
@@ -213,4 +233,5 @@ public class Main extends JFrame implements Constants {
          setIconImage(Toolkit.getDefaultToolkit().getImage("img/Icon.png"));
          setVisible(true);         
    }
+      
 }
