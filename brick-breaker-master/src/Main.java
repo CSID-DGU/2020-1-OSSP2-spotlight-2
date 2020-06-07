@@ -62,7 +62,7 @@ public class Main extends JFrame implements Constants {
 
     public Main() {
         setTitle("virus breaker"); // 타이틀 설정
-        //Music();
+        Music();
         back = new ImageIcon("./img/earth.jpg");  	
 		JPanel background = new JPanel(new GridLayout(1,3)) {
 
