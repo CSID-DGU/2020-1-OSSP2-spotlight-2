@@ -161,10 +161,9 @@ public class Main extends JFrame implements Constants {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-               //Board.gameMode = 1;
-                //G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
-                //clip.stop(); //메인메뉴 음악 정지
-               // setVisible(false); //화면 보이지 않게 설정
+               //Board.gameMode = 1;               
+               //clip.stop(); //메인메뉴 음악 정지
+               //setVisible(false); //화면 보이지 않게 설정
             }     
         });
 
@@ -190,7 +189,7 @@ public class Main extends JFrame implements Constants {
     }
 
 
-    
+  
     //음악 실행 메소드
     public void Music() {
         try {
@@ -232,6 +231,5 @@ public class Main extends JFrame implements Constants {
          //Sets the icon of the program
          setIconImage(Toolkit.getDefaultToolkit().getImage("img/Icon.png"));
          setVisible(true);         
-   }
-      
+   }     
 }
