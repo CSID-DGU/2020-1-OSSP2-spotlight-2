@@ -75,6 +75,10 @@ public class Board extends JPanel implements Runnable, Constants {
     private ImageIcon readyimg = new ImageIcon("./img/READY.png");
     private ImageIcon scoreimg = new ImageIcon("./img/SCORE.png");
     private ImageIcon heartimg = new ImageIcon("./img/HEART.png");
+    private ImageIcon back = new ImageIcon("./img/back.png");
+    private ImageIcon gameOver = new ImageIcon("./img/over.png");
+    private ImageIcon space = new ImageIcon("./img/space.png");
+    private ImageIcon scoreImg = new ImageIcon("./img/score.png");
     private ImageIcon A = new ImageIcon("./img/A.png");
     private ImageIcon B = new ImageIcon("./img/B.png");
     private ImageIcon C = new ImageIcon("./img/C.png");
@@ -728,8 +732,11 @@ public class Board extends JPanel implements Runnable, Constants {
             g.setColor(Color.BLACK);
             g.fillRect(0,0,getWidth(),getHeight());
             g.setColor(Color.WHITE);
-            g.drawString("Game Over!", getWidth()/5, 50);
-            g.drawString("Press the Spacebar : Back to Main Menu", getWidth()/5, getHeight()-20);
+            g.drawImage(gameOver.getImage(), getWidth()*25/100, getHeight()*10/100, getWidth()/2, getHeight()/8, null);
+            g.drawImage(scoreImg.getImage(), getWidth()*42/100, getHeight()*35/100, getWidth()/6, getHeight()/10, null);
+            g.drawString(Integer.toString(score), getWidth()*48/100, getHeight()*50/100);
+            g.drawImage(back.getImage(), getWidth()*25/100, getHeight()*70/100, getWidth()/2, getHeight()/10, null);
+            g.drawImage(space.getImage(), getWidth()*25/100, getHeight()*80/100, getWidth()/2, getHeight()/8, null);
         }
     }
 
