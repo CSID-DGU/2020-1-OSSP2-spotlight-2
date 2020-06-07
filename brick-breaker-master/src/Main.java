@@ -26,8 +26,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -161,10 +159,9 @@ public class Main extends JFrame implements Constants {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-               //Board.gameMode = 1;
-                //G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
-                //clip.stop(); //메인메뉴 음악 정지
-               // setVisible(false); //화면 보이지 않게 설정
+               //Board.gameMode = 1;               
+               //clip.stop(); //메인메뉴 음악 정지
+               //setVisible(false); //화면 보이지 않게 설정
             }     
         });
 
@@ -190,11 +187,11 @@ public class Main extends JFrame implements Constants {
     }
 
 
-    
+  
     //음악 실행 메소드
     public void Music() {
         try {
-           AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/IDCIDK.wav").getAbsoluteFile());
+           AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Venetian.wav").getAbsoluteFile());
             clip = AudioSystem.getClip(null);
             clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -232,6 +229,5 @@ public class Main extends JFrame implements Constants {
          //Sets the icon of the program
          setIconImage(Toolkit.getDefaultToolkit().getImage("img/Icon.png"));
          setVisible(true);         
-   }
-      
+   }     
 }
