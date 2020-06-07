@@ -148,7 +148,7 @@ public class Main extends JFrame implements Constants {
             }     
         });
         
-      //랭킹 버튼
+        //랭킹 버튼
     	Image button3 = new ImageIcon("./img/Ranking.png").getImage();
     	button3 = button3.getScaledInstance(270, 110, java.awt.Image.SCALE_SMOOTH);
         JButton OpenRank = new JButton(new ImageIcon(button3));

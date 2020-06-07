@@ -256,7 +256,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	            game.sleep(waitTime);
 	        }
         } catch (InterruptedException e) {
-            System.out.println("스레드 종료");
+            System.out.println("게임 종료");
         }
     }
     
