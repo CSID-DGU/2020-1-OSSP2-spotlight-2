@@ -26,8 +26,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -62,7 +60,7 @@ public class Main extends JFrame implements Constants {
 
     public Main() {
         setTitle("virus breaker"); // 타이틀 설정
-        //Music();
+        Music();
         back = new ImageIcon("./img/earth.jpg");  	
 		JPanel background = new JPanel(new GridLayout(1,3)) {
 
@@ -193,7 +191,7 @@ public class Main extends JFrame implements Constants {
     //음악 실행 메소드
     public void Music() {
         try {
-           AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/IDCIDK.wav").getAbsoluteFile());
+           AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Venetian.wav").getAbsoluteFile());
             clip = AudioSystem.getClip(null);
             clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
