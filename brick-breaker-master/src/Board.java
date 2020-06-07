@@ -727,7 +727,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	        	if(i != null)
 	        		i.draw(g);
 	        }
-	        
+	        //게임 오버 창
         if (lives == MIN_LIVES) {
             g.setColor(Color.BLACK);
             g.fillRect(0,0,getWidth(),getHeight());
