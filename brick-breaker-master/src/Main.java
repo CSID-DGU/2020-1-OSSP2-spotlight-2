@@ -1,5 +1,5 @@
 /*
-*    Brick Breaker, Version 1.2
+     Brick Breaker, Version 1.2
 *    By Ty-Lucas Kelley
 *   
 *    **LICENSE**
@@ -141,6 +141,26 @@ public class Main extends JFrame implements Constants {
             }     
         });
 
+      //랭킹 버튼
+        Image button3 = new ImageIcon("./img/Ranking.png").getImage();
+        button3 = button3.getScaledInstance(270, 110, java.awt.Image.SCALE_SMOOTH);
+         JButton OpenRank = new JButton(new ImageIcon(button3));
+         OpenRank.setBorderPainted(false); //버튼 외곽선 삭제
+         OpenRank.setContentAreaFilled(false); //버튼 나머지 영역 삭제
+         OpenRank.setFocusPainted(false); //버튼 눌리는 부분 삭제 
+         OpenRank.setPreferredSize(new Dimension(100, 100));
+         OpenRank.addActionListener(new ActionListener() {
+             // Hard Mode 버튼 행동 정의
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 // TODO Auto-generated method stub
+                //Board.gameMode = 1;
+                 //G = new gameWindow(); // 클래스 gameWindow를 새로 만들어낸다
+                 //clip.stop(); //메인메뉴 음악 정지
+                // setVisible(false); //화면 보이지 않게 설정
+             }     
+         });
+         
         middlePanel.add(blank1);
         middlePanel.add(blank2);
         middlePanel.add(OpenBasic);
