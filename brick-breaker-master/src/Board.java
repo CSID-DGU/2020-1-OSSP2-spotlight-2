@@ -52,7 +52,7 @@ public class Board extends JPanel implements Runnable, Constants {
     private Thread game;
 
     //Songs for background music
-    private String songOne = "./dist/wav/Venetian.wav";
+    private String songOne = "./dist/wav/IDCIDK.wav";    
     private String[] trackList = {songOne};
     private AudioInputStream audio;
     private Clip clip;
@@ -75,6 +75,10 @@ public class Board extends JPanel implements Runnable, Constants {
     private ImageIcon readyimg = new ImageIcon("./img/READY.png");
     private ImageIcon scoreimg = new ImageIcon("./img/SCORE.png");
     private ImageIcon heartimg = new ImageIcon("./img/HEART.png");
+    private ImageIcon back = new ImageIcon("./img/back.png");
+    private ImageIcon gameOver = new ImageIcon("./img/over.png");
+    private ImageIcon space = new ImageIcon("./img/space.png");
+    private ImageIcon scoreImg = new ImageIcon("./img/score.png");
     private ImageIcon A = new ImageIcon("./img/A.png");
     private ImageIcon B = new ImageIcon("./img/B.png");
     private ImageIcon C = new ImageIcon("./img/C.png");
@@ -120,22 +124,6 @@ public class Board extends JPanel implements Runnable, Constants {
         setFocusable(true);
         paddle = new Paddle(paddleX, paddleY, PADDLE_WIDTH, PADDLE_HEIGHT, Color.WHITE);
         ball = new Ball(ballX, ballY, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
-
-        //Get the player's name
-//        playerName = JOptionPane.showInputDialog(null, "Please enter your name:", "Virus Breaker", JOptionPane.QUESTION_MESSAGE);
-//        if (playerName == null) {
-//            System.exit(0);
-//        }
-//        //Hidden name(이스터 에그)
-//        if (playerName.toUpperCase().equals("SPOTLIGHT") || playerName.toUpperCase().equals("OSSP") || playerName.toUpperCase().equals("DONGHOKIM")) {
-//            score += 1000;
-//            JOptionPane.showMessageDialog(null, "멋진 이름이네요 1,000 점을 드립니다!", "1,000 Points", JOptionPane.INFORMATION_MESSAGE);
-//        }
-        
-        //게임 모드 선택
-        String[] modeOptions = {"Basic", "Hard"};
-        //gameMode = JOptionPane.showOptionDialog(null, "게임 모드를 선택하세요", "게임 모드 선택", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, modeOptions, modeOptions[0]);
-        //Start Screen that displays information and asks if the user wants music or not, stores that choice
         playMusic(trackList, 0, level);
 
         game = new Thread(this);
@@ -256,7 +244,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	            game.sleep(waitTime);
 	        }
         } catch (InterruptedException e) {
-            System.out.println("스레드 종료");
+            System.out.println("게임 종료");
         }
     }
     
@@ -728,8 +716,11 @@ public class Board extends JPanel implements Runnable, Constants {
             g.setColor(Color.BLACK);
             g.fillRect(0,0,getWidth(),getHeight());
             g.setColor(Color.WHITE);
-            g.drawString("Game Over!", getWidth()/5, 50);
-            g.drawString("Press the Spacebar : Back to Main Menu", getWidth()/5, getHeight()-20);
+            g.drawImage(gameOver.getImage(), getWidth()*25/100, getHeight()*10/100, getWidth()/2, getHeight()/8, null);
+            g.drawImage(scoreImg.getImage(), getWidth()*42/100, getHeight()*35/100, getWidth()/6, getHeight()/10, null);
+            g.drawString(Integer.toString(score), getWidth()*48/100, getHeight()*50/100);
+            g.drawImage(back.getImage(), getWidth()*25/100, getHeight()*70/100, getWidth()/2, getHeight()/10, null);
+            g.drawImage(space.getImage(), getWidth()*25/100, getHeight()*80/100, getWidth()/2, getHeight()/8, null);
         }
     }
 
@@ -785,17 +776,7 @@ public class Board extends JPanel implements Runnable, Constants {
             	    clip.stop(); //음악 정지
                     //메인메뉴 음악 실행
                     try {
-                       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/IDCIDK.wav").getAbsoluteFile());
-                        Main.M.clip = AudioSystem.getClip(null);
-                        Main.M.clip.open(audioInputStream);
-                        Main.M.clip.loop(Clip.LOOP_CONTINUOUSLY);
-                       
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    //메인메뉴 음악 실행
-                    try {
-                       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/IDCIDK.wav").getAbsoluteFile());
+                       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Venetian.wav").getAbsoluteFile());
                         Main.M.clip = AudioSystem.getClip(null);
                         Main.M.clip.open(audioInputStream);
                         Main.M.clip.loop(Clip.LOOP_CONTINUOUSLY);
