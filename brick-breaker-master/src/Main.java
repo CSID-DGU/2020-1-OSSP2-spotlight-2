@@ -22,9 +22,6 @@
 //This "Main" class runs the game. 
 //Imports
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -112,13 +109,7 @@ public class Main extends JFrame implements Constants {
         JButton OpenBasic = new JButton(new ImageIcon(button1));
         OpenBasic.setBorderPainted(false); //버튼 외곽선 삭제
         OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
-<<<<<<< HEAD
         OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제   
-        //OpenBasic.setPreferredSize(new Dimension(10, 10));
-=======
-        OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제
-        OpenBasic.setPreferredSize(new Dimension(10, 10));
->>>>>>> kwan
         OpenBasic.addActionListener(new ActionListener() {
             // Basic Mode 행동 정의
             @Override
@@ -139,7 +130,6 @@ public class Main extends JFrame implements Constants {
         OpenHard.setBorderPainted(false); //버튼 외곽선 삭제
         OpenHard.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenHard.setFocusPainted(false); //버튼 눌리는 부분 삭제 
-        //OpenHard.setPreferredSize(new Dimension(100, 100));
         OpenHard.addActionListener(new ActionListener() {
             // Hard Mode 버튼 행동 정의
             @Override
@@ -159,7 +149,6 @@ public class Main extends JFrame implements Constants {
         OpenRank.setBorderPainted(false); //버튼 외곽선 삭제
         OpenRank.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenRank.setFocusPainted(false); //버튼 눌리는 부분 삭제 
-        //OpenRank.setPreferredSize(new Dimension(100, 100));
         OpenRank.addActionListener(new ActionListener() {
             // Hard Mode 버튼 행동 정의
             @Override
