@@ -23,6 +23,7 @@
 //Imports
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -38,8 +39,11 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 //Class definition
 public class Main extends JFrame implements Constants {
@@ -49,16 +53,13 @@ public class Main extends JFrame implements Constants {
 	public static gameWindow G;
 	public static Clip clip;
 	//private static Board board;
-	private BorderLayout layout = new BorderLayout();
-	private static Container pane;
-	private static Dimension dim;
 	static ImageIcon button;
 	JScrollPane scrollPane;
 	 //---------------------------------배경
 	//static ImageIcon icon;
 	ImageIcon back;
-
-    public Main() {
+	
+	public Main() {
         setTitle("virus breaker"); // 타이틀 설정
         Music();
         back = new ImageIcon("./img/earth.jpg");  	
@@ -107,12 +108,12 @@ public class Main extends JFrame implements Constants {
 
     	//베이직 모드 버튼
     	Image button1 = new ImageIcon("./img/BasicMode.png").getImage();
-    	button1 = button1.getScaledInstance(250, 110, java.awt.Image.SCALE_SMOOTH);
+    	button1 = button1.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
         JButton OpenBasic = new JButton(new ImageIcon(button1));
         OpenBasic.setBorderPainted(false); //버튼 외곽선 삭제
         OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제
-        //OpenBasic.setPreferredSize(new Dimension(100, 100));
+        OpenBasic.setPreferredSize(new Dimension(10, 10));
         OpenBasic.addActionListener(new ActionListener() {
             // Basic Mode 행동 정의
             @Override
@@ -128,12 +129,12 @@ public class Main extends JFrame implements Constants {
 
     	//하드 모드 버튼
     	Image button2 = new ImageIcon("./img/HardMode.png").getImage();
-    	button2 = button2.getScaledInstance(250, 110, java.awt.Image.SCALE_SMOOTH);
+    	button2 = button2.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
         JButton OpenHard = new JButton(new ImageIcon(button2));
         OpenHard.setBorderPainted(false); //버튼 외곽선 삭제
         OpenHard.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenHard.setFocusPainted(false); //버튼 눌리는 부분 삭제 
-        OpenHard.setPreferredSize(new Dimension(100, 100));
+        //OpenHard.setPreferredSize(new Dimension(100, 100));
         OpenHard.addActionListener(new ActionListener() {
             // Hard Mode 버튼 행동 정의
             @Override
@@ -148,12 +149,12 @@ public class Main extends JFrame implements Constants {
         
         //랭킹 버튼
     	Image button3 = new ImageIcon("./img/Ranking.png").getImage();
-    	button3 = button3.getScaledInstance(270, 110, java.awt.Image.SCALE_SMOOTH);
+    	button3 = button3.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
         JButton OpenRank = new JButton(new ImageIcon(button3));
         OpenRank.setBorderPainted(false); //버튼 외곽선 삭제
         OpenRank.setContentAreaFilled(false); //버튼 나머지 영역 삭제
         OpenRank.setFocusPainted(false); //버튼 눌리는 부분 삭제 
-        OpenRank.setPreferredSize(new Dimension(100, 100));
+        //OpenRank.setPreferredSize(new Dimension(100, 100));
         OpenRank.addActionListener(new ActionListener() {
             // Hard Mode 버튼 행동 정의
             @Override
@@ -202,7 +203,31 @@ public class Main extends JFrame implements Constants {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-          M = new Main();
+    	JTextField idField = new JTextField(5);
+    	JTextField pwField = new JTextField(5);
+
+    	JPanel loginPanel = new JPanel();
+    	loginPanel.setLayout(new GridLayout(2,2));
+    	loginPanel.add(new JLabel("ID"));
+    	loginPanel.add(idField);
+    	loginPanel.add(new JLabel("Password"));
+    	loginPanel.add(pwField);
+
+    	String[] options = {"Sign In", "Sign Up"};
+		int logIn = JOptionPane.showOptionDialog(null, "Login", "Login", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if(logIn == 0) {
+			while(true) {
+			int result = JOptionPane.showConfirmDialog(null, loginPanel, "Login", JOptionPane.OK_CANCEL_OPTION);
+		      if (result == JOptionPane.OK_OPTION) {
+		          System.out.println("ID: " + idField.getText());
+		          System.out.println("Password: " + pwField.getText());
+		       }
+			}
+			}
+		else if(logIn == 1) {
+
+		}
+         // M = new Main();
     }
 }
 
