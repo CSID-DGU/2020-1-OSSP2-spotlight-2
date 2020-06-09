@@ -50,9 +50,6 @@ public class Main extends JFrame implements Constants {
 	public static gameWindow G;
 	public static Clip clip;
 	//private static Board board;
-	private BorderLayout layout = new BorderLayout();
-	private static Container pane;
-	private static Dimension dim;
 	static ImageIcon button;
 	JScrollPane scrollPane;
 	 //---------------------------------배경
