@@ -1,4 +1,4 @@
-# 2020-1-OSSP2-spotlight-2
+a# 2020-1-OSSP2-spotlight-2
 Team spotlight
 
 원본 소스 : https://github.com/tylucaskelley/brick-breaker
@@ -13,8 +13,9 @@ Team spotlight
  - 운영체제 : Linux(ubuntu)  
  - 통합 계발 환경 : Eclipse  
  - 개발 언어 : JAVA  
- - 데이터베이스 MySQL  
-
+ - 데이터베이스 AWS_RDS, MySQL  
+ - 웹 서비스 : AWS
+ 
 ## 2. 패치 내역
 
  - 하단 바의 움직임 개선  
