@@ -207,20 +207,24 @@ public class Main extends JFrame implements Constants {
     	loginPanel.add(new JLabel("Password"));
     	loginPanel.add(pwField);
 
+		 Client Client = new Client();
+		 Client.startClient();
     	String[] options = {"Sign In", "Sign Up"};
 		int logIn = JOptionPane.showOptionDialog(null, "Login", "Login", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		if(logIn == 0) {
-			while(true) {
 			int result = JOptionPane.showConfirmDialog(null, loginPanel, "Login", JOptionPane.OK_CANCEL_OPTION);
 		      if (result == JOptionPane.OK_OPTION) {
 		          System.out.println("ID: " + idField.getText());
 		          System.out.println("Password: " + pwField.getText());
 		       }
 			}
-			}
 		else if(logIn == 1) {
 
 		}
+
+		 Client.send(idField.getText()); 
+		 Client.send(pwField.getText());
+		 Client.stopClient();
          // M = new Main();
     }
 }
