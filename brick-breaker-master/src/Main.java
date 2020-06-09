@@ -29,6 +29,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -70,7 +72,6 @@ public class Main extends JFrame implements Constants {
 			}
 		};
 
- 
         setContentPane(background);   
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -102,6 +103,7 @@ public class Main extends JFrame implements Constants {
 		 blank1.setContentAreaFilled(false);
 		 blank2.setContentAreaFilled(false);
 
+		 MyMouseListener listener = new MyMouseListener();
 
     	//베이직 모드 버튼
     	Image button1 = new ImageIcon("./img/BasicMode.png").getImage();
@@ -121,7 +123,7 @@ public class Main extends JFrame implements Constants {
                 setVisible(false); //화면 보이지 않게 설정
             }      
         });
-
+        OpenBasic.addMouseListener(listener);
 
     	//하드 모드 버튼
     	Image button2 = new ImageIcon("./img/HardMode.png").getImage();
@@ -141,6 +143,7 @@ public class Main extends JFrame implements Constants {
                 setVisible(false); //화면 보이지 않게 설정
             }     
         });
+        OpenHard.addMouseListener(listener);
         
         //랭킹 버튼
     	Image button3 = new ImageIcon("./img/Ranking.png").getImage();
@@ -159,7 +162,8 @@ public class Main extends JFrame implements Constants {
                //setVisible(false); //화면 보이지 않게 설정
             }     
         });
-
+        OpenRank.addMouseListener(listener);
+        
         middlePanel.add(blank1);
         middlePanel.add(OpenBasic);
         middlePanel.add(OpenHard);
@@ -181,8 +185,6 @@ public class Main extends JFrame implements Constants {
 
     }
 
-
-  
     //음악 실행 메소드
     public void Music() {
         try {
@@ -252,5 +254,34 @@ public class Main extends JFrame implements Constants {
          //Sets the icon of the program
          setIconImage(Toolkit.getDefaultToolkit().getImage("img/Icon.png"));
          setVisible(true);         
-   }     
+   }  
+  
 }
+   
+   class MyMouseListener implements MouseListener{
+
+	    @Override
+	    public void mouseClicked(MouseEvent e) {
+	    }
+
+	    @Override
+	    public void mousePressed(MouseEvent e) {
+	    }
+
+	    @Override
+	    public void mouseReleased(MouseEvent e) {
+	    }
+
+	    @Override//마우스가 버튼 안으로 들어오면 빨간색으로 바뀜
+	    public void mouseEntered(MouseEvent e) {
+	        JButton b = (JButton)e.getSource();
+	        b.setBorderPainted(true);
+	    }
+
+	    @Override//마우스가 버튼 밖으로 나가면 노란색으로 바뀜
+	    public void mouseExited(MouseEvent e) {
+	    	JButton b = (JButton)e.getSource();
+	        b.setBorderPainted(false);
+	    }
+	    
+	}
