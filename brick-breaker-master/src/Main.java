@@ -39,8 +39,11 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 //Class definition
 public class Main extends JFrame implements Constants {
@@ -55,8 +58,8 @@ public class Main extends JFrame implements Constants {
 	 //---------------------------------배경
 	//static ImageIcon icon;
 	ImageIcon back;
-
-    public Main() {
+	
+	public Main() {
         setTitle("virus breaker"); // 타이틀 설정
         Music();
         back = new ImageIcon("./img/earth.jpg");  	
@@ -109,8 +112,13 @@ public class Main extends JFrame implements Constants {
         JButton OpenBasic = new JButton(new ImageIcon(button1));
         OpenBasic.setBorderPainted(false); //버튼 외곽선 삭제
         OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
+<<<<<<< HEAD
         OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제   
         //OpenBasic.setPreferredSize(new Dimension(10, 10));
+=======
+        OpenBasic.setFocusPainted(false); //버튼 눌리는 부분 삭제
+        OpenBasic.setPreferredSize(new Dimension(10, 10));
+>>>>>>> kwan
         OpenBasic.addActionListener(new ActionListener() {
             // Basic Mode 행동 정의
             @Override
@@ -200,7 +208,31 @@ public class Main extends JFrame implements Constants {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-          M = new Main();
+    	JTextField idField = new JTextField(5);
+    	JTextField pwField = new JTextField(5);
+
+    	JPanel loginPanel = new JPanel();
+    	loginPanel.setLayout(new GridLayout(2,2));
+    	loginPanel.add(new JLabel("ID"));
+    	loginPanel.add(idField);
+    	loginPanel.add(new JLabel("Password"));
+    	loginPanel.add(pwField);
+
+    	String[] options = {"Sign In", "Sign Up"};
+		int logIn = JOptionPane.showOptionDialog(null, "Login", "Login", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if(logIn == 0) {
+			while(true) {
+			int result = JOptionPane.showConfirmDialog(null, loginPanel, "Login", JOptionPane.OK_CANCEL_OPTION);
+		      if (result == JOptionPane.OK_OPTION) {
+		          System.out.println("ID: " + idField.getText());
+		          System.out.println("Password: " + pwField.getText());
+		       }
+			}
+			}
+		else if(logIn == 1) {
+
+		}
+         // M = new Main();
     }
 }
 
