@@ -51,6 +51,9 @@ public class Main extends JFrame implements Constants {
 	public static Main M;
 	public static gameWindow G;
 	public static Clip clip;
+	public static String sign;
+	public static String id;
+	public static boolean gameStart = false;
 	//private static Board board;
 	static ImageIcon button;
 	JScrollPane scrollPane;
@@ -201,33 +204,67 @@ public class Main extends JFrame implements Constants {
         // TODO Auto-generated method stub
     	JTextField idField = new JTextField(5);
     	JTextField pwField = new JTextField(5);
-
     	JPanel loginPanel = new JPanel();
     	loginPanel.setLayout(new GridLayout(2,2));
     	loginPanel.add(new JLabel("ID"));
     	loginPanel.add(idField);
     	loginPanel.add(new JLabel("Password"));
     	loginPanel.add(pwField);
-
 		 Client Client = new Client();
 		 Client.startClient();
-    	String[] options = {"Sign In", "Sign Up"};
-		int logIn = JOptionPane.showOptionDialog(null, "Login", "Login", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		if(logIn == 0) {
-			int result = JOptionPane.showConfirmDialog(null, loginPanel, "Login", JOptionPane.OK_CANCEL_OPTION);
-		      if (result == JOptionPane.OK_OPTION) {
-		          System.out.println("ID: " + idField.getText());
-		          System.out.println("Password: " + pwField.getText());
-		       }
+    	String[] options = {"Sign In", "Sign Up", "Exit"};
+    	while(true) {
+			int logIn = JOptionPane.showOptionDialog(null, "Login", "Login", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+			//로그인
+			if(logIn == 0) {
+				sign = "0";
+				JOptionPane.showConfirmDialog(null, loginPanel, "Sign in", JOptionPane.OK_CANCEL_OPTION);
+				sign = sign + " " + idField.getText();
+				sign = sign + " " + pwField.getText();
+				sign = sign + " 0";
+				}
+			//회원 가입
+			else if(logIn == 1) {
+				sign = "1";
+				JOptionPane.showConfirmDialog(null, loginPanel, "Sign Up", JOptionPane.OK_CANCEL_OPTION);
+				sign = sign + " " + idField.getText();
+				sign = sign + " " + pwField.getText();
+				sign = sign + " 0";
 			}
-		else if(logIn == 1) {
-
-		}
-
-		 Client.send(idField.getText()); 
-		 Client.send(pwField.getText());
-		 Client.stopClient();
-         // M = new Main();
+			//종료
+			else if(logIn == 2) {
+				break;
+			}
+			 Client.send(sign); 
+			 Client.receive();
+			 //loginCheck가 1이면 로그인 성공
+			 if(Client.loginCheck == 1) {
+				 gameStart = true;
+				 id = idField.getText();
+				 break;
+			 }
+			 //loginCheck가 2면 로그인 실패
+			 else if(Client.loginCheck == 2) {
+				 JOptionPane.showMessageDialog(null, "로그인 실패", "Message", JOptionPane.ERROR_MESSAGE);
+				 Client.loginCheck = 0;
+			 }
+			//loginCheck가 3면 회원가입 성공
+			 else if(Client.loginCheck == 3) {
+				 JOptionPane.showMessageDialog(null, "회원가입 성공", "Message", JOptionPane.YES_OPTION);
+				 Client.loginCheck = 0;
+			 }
+			//loginCheck가 4면 회원가입 실패
+			 else if(Client.loginCheck == 4) {
+				 JOptionPane.showMessageDialog(null, "회원가입 실패", "Message", JOptionPane.ERROR_MESSAGE);
+				 Client.loginCheck = 0;
+			 }
+			 idField = null;
+			 pwField = null;
+    	}
+		 //Client.stopClient();
+    	if(gameStart == true) {
+    		M = new Main();
+    	}
     }
 }
 
