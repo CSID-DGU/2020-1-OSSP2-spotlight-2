@@ -1,4 +1,12 @@
-<<<<<<< HEAD
+/Ball.class
+/Board$BoardListener.class
+/Board.class
+/Brick.class
+/Client$1.class
+/Client$2.class
+/Client.class
+/Constants.class
+/Item.class
 /Main$1.class
 /Main$2.class
 /Main$3.class
@@ -6,10 +14,8 @@
 /Main$5.class
 /Main$6.class
 /Main$7.class
-/Client.class
-/Client$1.class
-/Client$2.class
-=======
+/Main.class
 /MyMouseListener.class
->>>>>>> kye
-/Client$3.class
+/Paddle.class
+/Structure.class
+/gameWindow.class

@@ -202,18 +202,19 @@ public class Main extends JFrame implements Constants {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-    	JTextField idField = new JTextField(5);
-    	JTextField pwField = new JTextField(5);
-    	JPanel loginPanel = new JPanel();
-    	loginPanel.setLayout(new GridLayout(2,2));
-    	loginPanel.add(new JLabel("ID"));
-    	loginPanel.add(idField);
-    	loginPanel.add(new JLabel("Password"));
-    	loginPanel.add(pwField);
+    	//서버 연결
 		 Client Client = new Client();
 		 Client.startClient();
     	String[] options = {"Sign In", "Sign Up", "Exit"};
     	while(true) {
+    		JTextField idField = new JTextField(5);//id 입력 필드
+        	JTextField pwField = new JTextField(5);//패스워드 입력 필드  	
+        	JPanel loginPanel = new JPanel();//로그인 패널
+        	loginPanel.setLayout(new GridLayout(2,2));
+        	loginPanel.add(new JLabel("ID"));
+        	loginPanel.add(idField);
+        	loginPanel.add(new JLabel("Password"));
+        	loginPanel.add(pwField);
 			int logIn = JOptionPane.showOptionDialog(null, "Login", "Login", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 			//로그인
 			if(logIn == 0) {
@@ -235,9 +236,16 @@ public class Main extends JFrame implements Constants {
 			else if(logIn == 2) {
 				break;
 			}
-			 Client.send(sign); 
-			 Client.receive();
+			if((!idField.getText().equals("")) && (!pwField.getText().equals(""))) {			 
+				 Client.send(sign); 
+				 Client.receive();
+			}
+			else if((idField.getText().equals("") || pwField.getText().equals(""))) {
+				Client.loginCheck = 5;
+			}
+			
 			 //loginCheck가 1이면 로그인 성공
+			 System.out.println(Client.loginCheck);
 			 if(Client.loginCheck == 1) {
 				 gameStart = true;
 				 id = idField.getText();
@@ -245,21 +253,23 @@ public class Main extends JFrame implements Constants {
 			 }
 			 //loginCheck가 2면 로그인 실패
 			 else if(Client.loginCheck == 2) {
-				 JOptionPane.showMessageDialog(null, "로그인 실패", "Message", JOptionPane.ERROR_MESSAGE);
-				 Client.loginCheck = 0;
+				 System.out.println(Client.loginCheck);
+				 JOptionPane.showMessageDialog(null, "로그인 실패", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 			 }
 			//loginCheck가 3면 회원가입 성공
 			 else if(Client.loginCheck == 3) {
-				 JOptionPane.showMessageDialog(null, "회원가입 성공", "Message", JOptionPane.YES_OPTION);
-				 Client.loginCheck = 0;
+				 JOptionPane.showMessageDialog(null, "회원가입 성공", "회원가입 성공", JOptionPane.INFORMATION_MESSAGE);
 			 }
 			//loginCheck가 4면 회원가입 실패
 			 else if(Client.loginCheck == 4) {
-				 JOptionPane.showMessageDialog(null, "회원가입 실패", "Message", JOptionPane.ERROR_MESSAGE);
-				 Client.loginCheck = 0;
+				 JOptionPane.showMessageDialog(null, "회원가입 실패", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
 			 }
-			 idField = null;
-			 pwField = null;
+			 //잘못된 값 입력(id 또는 패스워드가 빈칸)
+			 else if(Client.loginCheck == 5) {
+				 JOptionPane.showMessageDialog(null, "잘못된 값을 입력했습니다", "잘못된 값 입력", JOptionPane.ERROR_MESSAGE);
+			 }
+
+			 Client.loginCheck = 0;
     	}
 		 //Client.stopClient();
     	if(gameStart == true) {
