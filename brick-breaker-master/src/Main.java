@@ -48,6 +48,7 @@ import javax.swing.JTextField;
 public class Main extends JFrame implements Constants {
 	//Variables
 	public JPanel background;
+	public int loginCheck2;
 	public static Main M;
 	public static gameWindow G;
 	public static Clip clip;
@@ -241,6 +242,7 @@ public class Main extends JFrame implements Constants {
 			}
 			 Client.send(sign); 
 			 Client.receive();
+
 			 //loginCheck가 1이면 로그인 성공
 			 if(Client.loginCheck == 1) {
 				 gameStart = true;

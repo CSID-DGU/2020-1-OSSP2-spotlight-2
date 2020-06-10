@@ -8,7 +8,7 @@ import java.net.Socket;
 public class Client {
    Socket socket;
 
-   public int loginCheck = 0;
+   public int loginCheck;
    void startClient() {
       // connect()와 read() 메소드는 블로킹 되기 때문에 별도의 스레드를 생성해서 처리합니다.
       Thread thread = new Thread() {
@@ -43,10 +43,6 @@ public class Client {
    }
 
    void receive() {
-
-	   Thread thread = new Thread() {
-        
-         public void run() {
 	         try {
 	        	 byte[] arr = new byte[100];
 	            InputStream is = socket.getInputStream();
@@ -59,9 +55,6 @@ public class Client {
 	            System.out.println("서버와 통신 안됨");
 	            stopClient();
 	         }
-	      }
-      };
-      thread.start();
    }
 
    void send(String message) {
