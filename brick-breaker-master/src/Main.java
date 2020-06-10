@@ -48,6 +48,7 @@ import javax.swing.JTextField;
 public class Main extends JFrame implements Constants {
 	//Variables
 	public JPanel background;
+	public int loginCheck2;
 	public static Main M;
 	public static gameWindow G;
 	public static Clip clip;
@@ -62,55 +63,56 @@ public class Main extends JFrame implements Constants {
 	ImageIcon back;
 	
 	public Main() {
+
         setTitle("virus breaker"); // 타이틀 설정
         Music();
-        back = new ImageIcon("./img/earth.jpg");  	
-		JPanel background = new JPanel(new GridLayout(1,3)) {
+        back = new ImageIcon("./img/earth.jpg");     
+      JPanel background = new JPanel(new GridLayout(1,3)) {
 
-			public void paintComponent(Graphics g) {
-				g.drawImage(back.getImage(),0,0,getWidth(), getHeight(),null);
+         public void paintComponent(Graphics g) {
+            g.drawImage(back.getImage(),0,0,getWidth(), getHeight(),null);
 
-				setOpaque(false);
-				super.paintComponent(g);
-			}
-		};
+            setOpaque(false);
+            super.paintComponent(g);
+         }
+      };
 
         setContentPane(background);   
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-		
-		JPanel leftPanel = new JPanel(new GridLayout(1,1)) {
-			public void paintComponent(Graphics g) {
-				setOpaque(false);
-				super.paintComponent(g);
-			}
-		};
-		JPanel middlePanel = new JPanel(new GridLayout(6,1))
-		{
-			public void paintComponent(Graphics g) {
-				setOpaque(false);
-				super.paintComponent(g);
-			}
-		};
+      
+      JPanel leftPanel = new JPanel(new GridLayout(1,1)) {
+         public void paintComponent(Graphics g) {
+            setOpaque(false);
+            super.paintComponent(g);
+         }
+      };
+      JPanel middlePanel = new JPanel(new GridLayout(6,1))
+      {
+         public void paintComponent(Graphics g) {
+            setOpaque(false);
+            super.paintComponent(g);
+         }
+      };
         
         JPanel rightPanel = new JPanel(new GridLayout(1,1)) {
-			public void paintComponent(Graphics g) {
-				setOpaque(false);
-				super.paintComponent(g);
-			}
-		};
-		 JButton blank1 = new JButton();
-		 JButton blank2 = new JButton();
-		 blank1.setBorderPainted(false);
-		 blank2.setBorderPainted(false);
-		 blank1.setContentAreaFilled(false);
-		 blank2.setContentAreaFilled(false);
+         public void paintComponent(Graphics g) {
+            setOpaque(false);
+            super.paintComponent(g);
+         }
+      };
+       JButton blank1 = new JButton();
+       JButton blank2 = new JButton();
+       blank1.setBorderPainted(false);
+       blank2.setBorderPainted(false);
+       blank1.setContentAreaFilled(false);
+       blank2.setContentAreaFilled(false);
 
-		 MyMouseListener listener = new MyMouseListener();
+       MyMouseListener listener = new MyMouseListener();
 
-    	//베이직 모드 버튼
-    	Image button1 = new ImageIcon("./img/BasicMode.png").getImage();
-    	button1 = button1.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
+       //베이직 모드 버튼
+       Image button1 = new ImageIcon("./img/BasicMode.png").getImage();
+       button1 = button1.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
         JButton OpenBasic = new JButton(new ImageIcon(button1));
         OpenBasic.setBorderPainted(false); //버튼 외곽선 삭제
         OpenBasic.setContentAreaFilled(false); //버튼 나머지 영역 삭제
@@ -128,9 +130,11 @@ public class Main extends JFrame implements Constants {
         });
         OpenBasic.addMouseListener(listener);
 
+
     	//하드 모드 버튼
     	Image button2 = new ImageIcon("./img/HardMode.png").getImage();
     	button2 = button2.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
+
         JButton OpenHard = new JButton(new ImageIcon(button2));
         OpenHard.setBorderPainted(false); //버튼 외곽선 삭제
         OpenHard.setContentAreaFilled(false); //버튼 나머지 영역 삭제
@@ -149,8 +153,8 @@ public class Main extends JFrame implements Constants {
         OpenHard.addMouseListener(listener);
         
         //랭킹 버튼
-    	Image button3 = new ImageIcon("./img/Ranking.png").getImage();
-    	button3 = button3.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
+       Image button3 = new ImageIcon("./img/Ranking.png").getImage();
+       button3 = button3.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
         JButton OpenRank = new JButton(new ImageIcon(button3));
         OpenRank.setBorderPainted(false); //버튼 외곽선 삭제
         OpenRank.setContentAreaFilled(false); //버튼 나머지 영역 삭제
@@ -182,9 +186,9 @@ public class Main extends JFrame implements Constants {
 
         Dimension dim = new Dimension(750,750);
         setMinimumSize(dim); // 최소 사이즈 설정
-		dim = Toolkit.getDefaultToolkit().getScreenSize();
-		// 창 시작 위치 설정
-		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
+      dim = Toolkit.getDefaultToolkit().getScreenSize();
+      // 창 시작 위치 설정
+      setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
 
     }
 
@@ -202,7 +206,6 @@ public class Main extends JFrame implements Constants {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-    	// 서버연결
 		 Client Client = new Client();
 		 Client.startClient();
     	String[] options = {"Sign In", "Sign Up", "Exit"};
@@ -269,6 +272,7 @@ public class Main extends JFrame implements Constants {
     	if(gameStart == true) {
     		M = new Main();
     	}
+
     }
 }
 
@@ -301,28 +305,28 @@ public class Main extends JFrame implements Constants {
    
    class MyMouseListener implements MouseListener{
 
-	    @Override
-	    public void mouseClicked(MouseEvent e) {
-	    }
+       @Override
+       public void mouseClicked(MouseEvent e) {
+       }
 
-	    @Override
-	    public void mousePressed(MouseEvent e) {
-	    }
+       @Override
+       public void mousePressed(MouseEvent e) {
+       }
 
-	    @Override
-	    public void mouseReleased(MouseEvent e) {
-	    }
+       @Override
+       public void mouseReleased(MouseEvent e) {
+       }
 
-	    @Override//마우스가 버튼 안으로 들어오면 빨간색으로 바뀜
-	    public void mouseEntered(MouseEvent e) {
-	        JButton b = (JButton)e.getSource();
-	        b.setBorderPainted(true);
-	    }
+       @Override//마우스가 버튼 안으로 들어오면 빨간색으로 바뀜
+       public void mouseEntered(MouseEvent e) {
+           JButton b = (JButton)e.getSource();
+           b.setBorderPainted(true);
+       }
 
-	    @Override//마우스가 버튼 밖으로 나가면 노란색으로 바뀜
-	    public void mouseExited(MouseEvent e) {
-	    	JButton b = (JButton)e.getSource();
-	        b.setBorderPainted(false);
-	    }
-	    
-	}
+       @Override//마우스가 버튼 밖으로 나가면 노란색으로 바뀜
+       public void mouseExited(MouseEvent e) {
+          JButton b = (JButton)e.getSource();
+           b.setBorderPainted(false);
+       }
+       
+   }
