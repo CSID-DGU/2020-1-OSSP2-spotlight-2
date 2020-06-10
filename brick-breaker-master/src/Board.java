@@ -170,13 +170,6 @@ public class Board extends JPanel implements Runnable, Constants {
 	    	}
         }
     }
-
-    public void makeCollision(int colX, int colY) {
-		int Width = FrameWidth/10;
-		int Height = FrameWidth/20;
-		double rateX = (double)FrameWidth / (double)colX;
-		double rateY = (double)(FrameHeight/3) /(double)colY;
-    }
     
     //starts the thread
     public void start() {
@@ -417,7 +410,6 @@ public class Board extends JPanel implements Runnable, Constants {
 	            }
             	//벽돌이 깨진 경우 그 벽돌 위치에 벽돌 제거
             	if (destroy_check) {
-            		makeCollision(brick[i].x, brick[i].y);
             		brick[i] = null;
             		destroy_check = false;
             	}

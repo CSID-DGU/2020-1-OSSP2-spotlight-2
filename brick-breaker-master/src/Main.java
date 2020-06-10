@@ -46,21 +46,23 @@ import javax.swing.JTextField;
 
 //Class definition
 public class Main extends JFrame implements Constants {
-   //Variables
-   public JPanel background;
-   public static Main M;
-   public static gameWindow G;
-   public static Clip clip;
-   static String sign;
-   //public static String[] sign = new String[4];
-   //private static Board board;
-   static ImageIcon button;
-   JScrollPane scrollPane;
-    //---------------------------------배경
-   //static ImageIcon icon;
-   ImageIcon back;
-   
-   public Main() {
+	//Variables
+	public JPanel background;
+	public static Main M;
+	public static gameWindow G;
+	public static Clip clip;
+	public static String sign;
+	public static String id;
+	public static boolean gameStart = false;
+	//private static Board board;
+	static ImageIcon button;
+	JScrollPane scrollPane;
+	 //---------------------------------배경
+	//static ImageIcon icon;
+	ImageIcon back;
+	
+	public Main() {
+
         setTitle("virus breaker"); // 타이틀 설정
         Music();
         back = new ImageIcon("./img/earth.jpg");     
@@ -127,9 +129,11 @@ public class Main extends JFrame implements Constants {
         });
         OpenBasic.addMouseListener(listener);
 
-       //하드 모드 버튼
-       Image button2 = new ImageIcon("./img/HardMode.png").getImage();
-       button2 = button2.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
+
+    	//하드 모드 버튼
+    	Image button2 = new ImageIcon("./img/HardMode.png").getImage();
+    	button2 = button2.getScaledInstance(200, 80, java.awt.Image.SCALE_SMOOTH);
+
         JButton OpenHard = new JButton(new ImageIcon(button2));
         OpenHard.setBorderPainted(false); //버튼 외곽선 삭제
         OpenHard.setContentAreaFilled(false); //버튼 나머지 영역 삭제
@@ -201,54 +205,71 @@ public class Main extends JFrame implements Constants {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-       JTextField idField = new JTextField(5);
-       JTextField pwField = new JTextField(5);
-       JPanel loginPanel = new JPanel();
-       loginPanel.setLayout(new GridLayout(2,2));
-       loginPanel.add(new JLabel("ID"));
-       loginPanel.add(idField);
-       loginPanel.add(new JLabel("Password"));
-       loginPanel.add(pwField);
-       Client Client = new Client();
-       Client.startClient();
-       String[] options = {"Sign In", "Sign Up"};
-      int logIn = JOptionPane.showOptionDialog(null, "Login", "Login", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-      //로그인
-      if(logIn == 0) {
-         int result = JOptionPane.showConfirmDialog(null, loginPanel, "Sign in", JOptionPane.OK_CANCEL_OPTION);
-         sign = "0" + " " + idField.getText()+ " " + pwField.getText()+ " " + "0";
-            if (result == JOptionPane.OK_OPTION) {
-                System.out.println("ID: " + idField.getText());
-                System.out.println("Password: " + pwField.getText());
-             }
-       }
-      //회원 가입
-      else if(logIn == 1) {
-          int logIn2 = 1;
-          int result = JOptionPane.showConfirmDialog(null, loginPanel, "Sign up", JOptionPane.OK_CANCEL_OPTION);
-          sign = "1" + " " + idField.getText()+ " " + pwField.getText()+ " " + "0";
-       }      
-       Client.send(sign); 
-       Client.receive();
-       System.out.println("tunnel");
-       //loginCheck가 1이면 로그인 성공, 2면 로그인 실패, 3이면 회원가입 성공 4면 회원가입 실패
-       if(Client.loginCheck == 1) {
-    	   M = new Main();
-       }
-       else if(Client.loginCheck == 2) {
-    	   System.out.println("Fail");
-       }
-       else if(Client.loginCheck == 3) {
-    	   M = new Main();
-       }
-       else if(Client.loginCheck == 4) {
-    	   //while(Client.loginCheck == 2) {
-    	   System.out.println("Fail");
-    		   
-    	   //}
-       }
-       //Client.stopClient();
-         // M = new Main();
+
+    	JTextField idField = new JTextField(5);
+    	JTextField pwField = new JTextField(5);
+    	JPanel loginPanel = new JPanel();
+    	loginPanel.setLayout(new GridLayout(2,2));
+    	loginPanel.add(new JLabel("ID"));
+    	loginPanel.add(idField);
+    	loginPanel.add(new JLabel("Password"));
+    	loginPanel.add(pwField);
+		 Client Client = new Client();
+		 Client.startClient();
+    	String[] options = {"Sign In", "Sign Up", "Exit"};
+    	while(true) {
+			int logIn = JOptionPane.showOptionDialog(null, "Login", "Login", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+			//로그인
+			if(logIn == 0) {
+				sign = "0";
+				JOptionPane.showConfirmDialog(null, loginPanel, "Sign in", JOptionPane.OK_CANCEL_OPTION);
+				sign = sign + " " + idField.getText();
+				sign = sign + " " + pwField.getText();
+				sign = sign + " 0";
+				}
+			//회원 가입
+			else if(logIn == 1) {
+				sign = "1";
+				JOptionPane.showConfirmDialog(null, loginPanel, "Sign Up", JOptionPane.OK_CANCEL_OPTION);
+				sign = sign + " " + idField.getText();
+				sign = sign + " " + pwField.getText();
+				sign = sign + " 0";
+			}
+			//종료
+			else if(logIn == 2) {
+				break;
+			}
+			 Client.send(sign); 
+			 Client.receive();
+			 //loginCheck가 1이면 로그인 성공
+			 if(Client.loginCheck == 1) {
+				 gameStart = true;
+				 id = idField.getText();
+				 break;
+			 }
+			 //loginCheck가 2면 로그인 실패
+			 else if(Client.loginCheck == 2) {
+				 JOptionPane.showMessageDialog(null, "로그인 실패", "Message", JOptionPane.ERROR_MESSAGE);
+				 Client.loginCheck = 0;
+			 }
+			//loginCheck가 3면 회원가입 성공
+			 else if(Client.loginCheck == 3) {
+				 JOptionPane.showMessageDialog(null, "회원가입 성공", "Message", JOptionPane.YES_OPTION);
+				 Client.loginCheck = 0;
+			 }
+			//loginCheck가 4면 회원가입 실패
+			 else if(Client.loginCheck == 4) {
+				 JOptionPane.showMessageDialog(null, "회원가입 실패", "Message", JOptionPane.ERROR_MESSAGE);
+				 Client.loginCheck = 0;
+			 }
+			 idField = null;
+			 pwField = null;
+    	}
+		 //Client.stopClient();
+    	if(gameStart == true) {
+    		M = new Main();
+    	}
+
     }
 }
 

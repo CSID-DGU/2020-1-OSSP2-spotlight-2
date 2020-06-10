@@ -14,6 +14,16 @@
 /Main$4.class
 /Main$6.class
 /Main$7.class
+<<<<<<< HEAD
 /Paddle.class
 /Structure.class
 /gameWindow.class
+=======
+/Client.class
+/Client$1.class
+/Client$2.class
+=======
+/MyMouseListener.class
+>>>>>>> kye
+/Client$3.class
+>>>>>>> kye

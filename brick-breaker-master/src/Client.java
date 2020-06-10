@@ -7,7 +7,8 @@ import java.net.Socket;
 
 public class Client {
    Socket socket;
-   public static int loginCheck = 0;
+
+   public int loginCheck = 0;
    void startClient() {
       // connect()와 read() 메소드는 블로킹 되기 때문에 별도의 스레드를 생성해서 처리합니다.
       Thread thread = new Thread() {
@@ -42,30 +43,35 @@ public class Client {
    }
 
    void receive() {
-      while(true) {
-         byte[] arr = new byte[100];
-         try {
-            InputStream is = socket.getInputStream();
-            int readByteCnt = is.read(arr);
-            if (readByteCnt == -1) {throw new IOException();}
-            String message = new String(arr, 0, readByteCnt, "UTF-8");
-            loginCheck = Integer.parseInt(message);
-            System.out.println("[메시지 수신] : " + message);
-         } catch (IOException e) {
-            System.out.println("서버와 통신 안됨");
-            stopClient();
-            break;
-         }
-      }
+
+	   Thread thread = new Thread() {
+        
+         public void run() {
+	         try {
+	        	 byte[] arr = new byte[100];
+	            InputStream is = socket.getInputStream();
+	            int readByteCnt = is.read(arr);
+	            if (readByteCnt == -1) {throw new IOException();}
+	            String message = new String(arr, 0, readByteCnt, "UTF-8");
+	            loginCheck = Integer.parseInt(message);
+	            System.out.println("[메시지 수신] : " + message);
+	         } catch (IOException e) {
+	            System.out.println("서버와 통신 안됨");
+	            stopClient();
+	         }
+	      }
+      };
+      thread.start();
    }
 
-   void send(String sign) {
+   void send(String message) {
+
       // write() 메소드는 블로킹 되기 때문에 별도의 스레드에서 실행합니다.
       Thread thread = new Thread() {
          @Override
          public void run() {
             try {
-               byte[] arr1 = sign.getBytes("UTF-8");
+               byte[] arr1 = message.getBytes("UTF-8");
                OutputStream os = socket.getOutputStream();
                os.write(arr1);
                os.flush();
