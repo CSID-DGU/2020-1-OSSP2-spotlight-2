@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class Client {
    Socket socket;
-   public int loginCheck = 0; //로그인 성공, 실패 전송
+   public int loginCheck;
    void startClient() {
       // connect()와 read() 메소드는 블로킹 되기 때문에 별도의 스레드를 생성해서 처리합니다.
       Thread thread = new Thread() {
@@ -40,24 +40,24 @@ public class Client {
       }
    }
 
-   //서버로부터 데이터 받기
-   void receive() {  
-	         try {
-	        	 byte[] arr = new byte[100];
-	            InputStream is = socket.getInputStream();
-	            int readByteCnt = is.read(arr);
-	            if (readByteCnt == -1) {throw new IOException();}
-	            String message = new String(arr, 0, readByteCnt, "UTF-8");
-	            loginCheck = Integer.parseInt(message);
-	            System.out.println("[메시지 수신] : " + loginCheck);
-	         } catch (IOException e) {
-	            System.out.println("서버와 통신 안됨");
-	            stopClient();
-	         }
-	  }
+   void receive() {
+            try {
+               byte[] arr = new byte[100];
+               InputStream is = socket.getInputStream();
+               int readByteCnt = is.read(arr);
+               if (readByteCnt == -1) {throw new IOException();}
+               String message = new String(arr, 0, readByteCnt, "UTF-8");
+               loginCheck = Integer.parseInt(message);
+               System.out.println("[메시지 수신] : " + message);
+            } catch (IOException e) {
+               System.out.println("서버와 통신 안됨");
+               stopClient();
+            }
+   }
 
    //데이터 서버로 전송
    void send(String message) {
+
       // write() 메소드는 블로킹 되기 때문에 별도의 스레드에서 실행합니다.
       Thread thread = new Thread() {
          @Override
