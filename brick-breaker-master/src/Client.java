@@ -7,7 +7,6 @@ import java.net.Socket;
 
 public class Client {
    Socket socket;
-
    public int loginCheck;
    void startClient() {
       // connect()와 read() 메소드는 블로킹 되기 때문에 별도의 스레드를 생성해서 처리합니다.
@@ -17,7 +16,7 @@ public class Client {
             socket = new Socket();
             try {
                System.out.println("[서버에 연결 요청 중]");
-               socket.connect(new InetSocketAddress("15.164.170.87", 8888));
+               socket.connect(new InetSocketAddress("54.180.99.189", 8888));
                System.out.println("[서버와 연결 완료]");
             } catch (IOException e) {
                System.out.println("[서버와 통신 안됨]");
@@ -26,7 +25,6 @@ public class Client {
                }
                return;
             }
-            //receive();
          }
       };
       thread.start();
@@ -57,6 +55,7 @@ public class Client {
             }
    }
 
+   //데이터 서버로 전송
    void send(String message) {
 
       // write() 메소드는 블로킹 되기 때문에 별도의 스레드에서 실행합니다.
