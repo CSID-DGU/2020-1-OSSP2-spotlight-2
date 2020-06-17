@@ -254,6 +254,7 @@ public class Main extends JFrame implements Constants {
 	         //둘다 빈칸이거나 하나만 빈칸일때
 	        else {
 	           JOptionPane.showMessageDialog(null, "잘못된 값을 입력했습니다", "잘못된 값 입력", JOptionPane.ERROR_MESSAGE);
+	           Client.stopClient();
 	           continue;
 	        }
 
@@ -277,7 +278,7 @@ public class Main extends JFrame implements Constants {
 				 JOptionPane.showMessageDialog(null, "동일 아이디가 존재합니다. 다른 아이디를 시도하세요", "Error", JOptionPane.ERROR_MESSAGE);
 			 }
     	}
-		 //Client.stopClient();
+
     	if(gameStart == true) {
     		M = new Main();
     	}
@@ -315,18 +316,19 @@ public class Main extends JFrame implements Constants {
    /*랭킹 화면*/
    class rankWindow extends JFrame implements Constants {
 	       // 버튼이 눌러지면 만들어지는 새 창을 정의한 클래스
-	   private String[] scr = new String[20];
+	   private String[] scr = new String[20]; //랭킹 정보
+	   ImageIcon back = new ImageIcon("./img/earth.jpg"); ;
 	       rankWindow() {
 	    	  setTitle("virus breaker"); // 타이틀 설정
 	         JPanel rank = new JPanel(){
 
 	            public void paintComponent(Graphics g) {
-	            	setBackground(Color.BLACK);
+	            	g.drawImage(back.getImage(),0,0,getWidth(), getHeight(),null);
 	            	Font font  = new Font("Impact", Font.PLAIN, 50);
 	            	g.setColor(Color.WHITE);
 	            	g.setFont(font);
-	            	g.drawString("랭킹창", 50, 50);
-	            	setOpaque(true);
+					g.drawString("랭킹창", 100, 100);
+	         		setOpaque(false);
 	            	super.paintComponent(g);
 	            }
 	         };
@@ -348,8 +350,8 @@ public class Main extends JFrame implements Constants {
 	         setResizable(true);//리사이징 가능
 	         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	         setMinimumSize(dim); //창 최소 사이즈 설정
-	         rank.add(backMenu);
-
+	         setResizable(true);
+	         
 	         //Place frame in main menu location
 	         setLocation(Main.M.getX(), Main.M.getY());
 
