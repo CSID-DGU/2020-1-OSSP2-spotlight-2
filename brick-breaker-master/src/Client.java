@@ -16,7 +16,7 @@ public class Client {
             socket = new Socket();
             try {
                System.out.println("[서버에 연결 요청 중]");
-               socket.connect(new InetSocketAddress("15.164.170.87", 8888));
+               socket.connect(new InetSocketAddress("3.34.124.12", 8888));
                System.out.println("[서버와 연결 완료]");
             } catch (IOException e) {
                System.out.println("[서버와 통신 안됨]");
