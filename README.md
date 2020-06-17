@@ -23,7 +23,8 @@ Team spotlight
  - 베이직 모드, 하드 모드 추가  
  - 아이템 추가  
  - 랭킹 시스템 서버 구현  
- - UI 개선 및 메인 메뉴 제작  
+ - UI 개선 및 메인 메뉴 제작 
+ - 회원가입 및 로그인 시스템 구현
 
 ## 3. 코드 업데이트 일지
 
@@ -56,6 +57,14 @@ Team spotlight
  - [X] 하드모드 좌우 하단 알파벳 이미지 추가
  - [X] AWS 서버 생성 및 서버 코드 작성
 
+### 7주차 진행 사항
+ - [X] 회원가입 및 로그인 시스템 구현 완료
+       (서버와 클라이언트 연결)
+ - [X] 메인페이지 및 메뉴 생성
+ - [X] 게임 사운드 수정
+
+### 8주차 진행사항
+ - [X] 게임 스코어 데이터베이스 생성 (베이직 / 하드)
 
 ## 4. 게임 아이템 추가
 <img src = "res/item.png">
@@ -86,4 +95,4 @@ Team spotlight
 
 - Background Sound 및 효과음 : https://www.youtube.com/audiolibrary/soundeffects?ar=1590045019076&nv=1
 
-- Mainmenu Background image : https://pixabay.com/ko/illustrations/%EC%A7%80%EA%B5%AC-%EC%BD%94%EB%A1%9C%EB%82%98-%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EA%B8%80%EB%A1%9C%EB%B8%8C-5138795/
+- Mainmenu Background 이미지 : https://pixabay.com/ko/illustrations/%EC%A7%80%EA%B5%AC-%EC%BD%94%EB%A1%9C%EB%82%98-%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EA%B8%80%EB%A1%9C%EB%B8%8C-5138795/
