@@ -22,29 +22,32 @@
 //This "Main" class runs the game. 
 //Imports
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 //Class definition
 public class Main extends JFrame implements Constants {
@@ -69,7 +72,7 @@ public class Main extends JFrame implements Constants {
 	public Main() {
 
         setTitle("virus breaker"); // 타이틀 설정
-        Music();
+        //Music();
         back = new ImageIcon("./img/earth.jpg");     
       JPanel background = new JPanel(new GridLayout(1,3)) {
 
@@ -309,55 +312,192 @@ public class Main extends JFrame implements Constants {
          //Sets the icon of the program
          setIconImage(Toolkit.getDefaultToolkit().getImage("img/Icon.png"));
          setVisible(true);         
-   }  
+       }  
   
-}
+   }
+   
+   class AutoLabel extends JLabel {
+	   
+	    public AutoLabel(String text) {
+	        setHorizontalAlignment(SwingConstants.CENTER);
+	        setText(text);
+	        addComponentListener(new ComponentAdapter() {
+	            @Override
+	            public void componentResized(ComponentEvent e) {
+	                resize();
+	            }
+	        });
+	    }
+	 
+	    void resize() {
+	        int i=0;
+	        while(true) {
+	            Font before = getFont();
+	            Font font = new Font(before.getName(), before.getStyle(), i);
+	            setFont(font);
+	            if(getPreferredSize().getWidth() - 10>getWidth() || getPreferredSize().getHeight() >getHeight()) {
+	                font = new Font(before.getName(), before.getStyle(), i-1);
+	                setFont(font);
+	                break;
+	            }
+	            i++;    
+	        }
+	    }
+	}
    
    /*랭킹 화면*/
    class rankWindow extends JFrame implements Constants {
-	       // 버튼이 눌러지면 만들어지는 새 창을 정의한 클래스
-	   private String[] scr = new String[20]; //랭킹 정보
-	   ImageIcon back = new ImageIcon("./img/earth.jpg"); ;
-	       rankWindow() {
-	    	  setTitle("virus breaker"); // 타이틀 설정
-	         JPanel rank = new JPanel(){
+	   public static String[] scr = new String[20];
+		rankWindow() {
+	   setTitle("Virus breaker"); // 타이틀 설정
+       
+	   JPanel rank = new JPanel(new GridLayout(8,1)){		   
+		   	            public void paintComponent(Graphics g) {
+		   	            	setBackground(Color.BLACK);
+		   	            	Font font  = new Font("Impact", Font.PLAIN, 50);
+		   	            	g.setColor(Color.WHITE);
+		   	            	g.setFont(font);
+		   	            	g.drawString("랭킹창", 50, 50);
+		   	            	setOpaque(true);
+		   	            	super.paintComponent(g);
+		   	            }
+		   	         };
+		   	         setContentPane(rank);
+       setContentPane(rank);   
+       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       
+       	JPanel Image = new JPanel(new GridLayout(1,1)) {
+       		public void paintComponent(Graphics g) {
+    		   setOpaque(false);
+    		   super.paintComponent(g);
+    	   	}
+       	};
+       
+       	JPanel Mode = new JPanel(new GridLayout(1,2)) {
+       		public void paintComponent(Graphics g) {
+       		  setOpaque(false);
+              super.paintComponent(g);
+       		}
+       	};
+       	JPanel Score1 = new JPanel(new GridLayout(1,2)) {
+    	   public void paintComponent(Graphics g) {
+    		   setOpaque(false);
+           	super.paintComponent(g);
+    	   }
+       	};
+     	JPanel Score2 = new JPanel(new GridLayout(1,2)) {
+     		public void paintComponent(Graphics g) {
+     			setOpaque(false);
+            	super.paintComponent(g);
+     		}
+    	 };
+    	 JPanel Score3 = new JPanel(new GridLayout(1,2)) {
+          public void paintComponent(Graphics g) {
+             setOpaque(false);
+             super.paintComponent(g);
+          }
+       	};
+       	JPanel Score4 = new JPanel(new GridLayout(1,2)) {
+           public void paintComponent(Graphics g) {
+              setOpaque(false);
+              super.paintComponent(g);
+           }
+       		};
+    	JPanel Score5 = new JPanel(new GridLayout(1,2)) {
+    		public void paintComponent(Graphics g) {
+      		 setOpaque(false);
+      		 super.paintComponent(g);
+    		}
+    	};
+     	JPanel toMainMenu = new JPanel(new GridLayout(1,1)) {
+     		public void paintComponent(Graphics g) {
+     			setOpaque(false);
+     			super.paintComponent(g);
+         }
+     	};
+          JButton backMenu = new JButton("To Main Menu"); 
+          backMenu.setFont(new Font("고딕", Font.BOLD,50));
+         backMenu.addActionListener(new ActionListener() {
+             // Hard Mode 버튼 행동 정의
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 // TODO Auto-generated method stub
+                Board.gameMode = 1;
+                Main.M.setVisible(true);
+                dispose();
+             }     
+         });        
+         backMenu.setBorderPainted(true);
+         backMenu.setContentAreaFilled(false);
+         toMainMenu.add(backMenu);
+         
+         JLabel Basic = new AutoLabel("Basic");
+         JLabel Hard = new AutoLabel("Hard");
+         Mode.add(Basic);
+         Mode.add(Hard);
+       
+         String[] BasicS = {"20", "qqasdfasdfasdwer :  10"," q"," w"," e"};
+         String[] HardS = {"aasdfsfs", " basdfasdf"," q"," w"," e"};
+         
+         
+       //베이직 모드 스코어-------------------- 
+         JLabel bscore1 = new AutoLabel(BasicS[0]);
+         bscore1.setFont(new Font("Serif", Font.BOLD, 11));
+         bscore1.setForeground(Color.WHITE);
+         //bscore1.setFont(getFont().deriveFont(15.0f));         
+         Score1.add(bscore1);
+         
+         JLabel bscore2 = new AutoLabel(BasicS[1]);
+         bscore2.setForeground(Color.WHITE);         
+         Score2.add(bscore2);
+         
+         JLabel bscore3 = new AutoLabel(BasicS[2]);  
+         bscore3.setForeground(Color.WHITE);
+         Score3.add(bscore3);
+         
+         JLabel bscore4 = new AutoLabel(BasicS[3]);
+         Score4.add(bscore4);
+         
+         JLabel bscore5 = new AutoLabel(BasicS[4]);
+         Score5.add(bscore5);
+        
+       //하드모드 스코어--------------------        
+         JLabel hscore1 = new AutoLabel(HardS[0]);
+         Score1.add(hscore1);
+         
+         JLabel hscore2 = new AutoLabel(HardS[1]);
+         Score2.add(hscore2);
+         
+         JLabel hscore3 = new AutoLabel(HardS[2]);        
+         Score3.add(hscore3);
+         
+         JLabel hscore4 = new AutoLabel(HardS[3]);
+         Score4.add(hscore4);
+         
+         JLabel hscore5 = new AutoLabel(HardS[4]);
+         Score5.add(hscore5);
+         
+         Dimension dim = new Dimension(750,750);
+         setMinimumSize(dim); // 최소 사이즈 설정
+         dim = Toolkit.getDefaultToolkit().getScreenSize();
+         // 창 시작 위치 설정
+         setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
+     
+         rank.add(Image);
+         rank.add(Mode);
+         rank.add(Score1);
+         rank.add(Score2);
+         rank.add(Score3);
+         rank.add(Score4);
+         rank.add(Score5);
+         rank.add(toMainMenu);
+         
+         setLocationByPlatform(true);
+         setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // 창 크기 설정
+         setResizable(true);
+         setVisible(true);
+		}
 
-	            public void paintComponent(Graphics g) {
-	            	g.drawImage(back.getImage(),0,0,getWidth(), getHeight(),null);
-	            	Font font  = new Font("Impact", Font.PLAIN, 50);
-	            	g.setColor(Color.WHITE);
-	            	g.setFont(font);
-					g.drawString("랭킹창", 100, 100);
-	         		setOpaque(false);
-	            	super.paintComponent(g);
-	            }
-	         };
-	         setContentPane(rank);
-	         JButton backMenu = new JButton("Back");
-	         
-	         backMenu.addActionListener(new ActionListener() {
-	             // Hard Mode 버튼 행동 정의
-	             @Override
-	             public void actionPerformed(ActionEvent e) {
-	                 // TODO Auto-generated method stub
-	                Main.M.setVisible(true);
-	                dispose();
-	             }     
-	         });
-	         rank.add(backMenu);
-	         Dimension dim = new Dimension(750, 750);
-	         setSize(Main.M.getWidth(), Main.M.getHeight()); //창 크기 설정
-	         setResizable(true);//리사이징 가능
-	         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	         setMinimumSize(dim); //창 최소 사이즈 설정
-	         setResizable(true);
-	         
-	         //Place frame in main menu location
-	         setLocation(Main.M.getX(), Main.M.getY());
-
-	         setVisible(true);   
-	         ranking();
-	   }  
 	       //게임 랭킹의 순위를 받아온다.
 	     public void ranking() {
 	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지

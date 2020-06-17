@@ -51,7 +51,6 @@ public class Client {
                if(msg.length() < 2) {
             	   loginCheck = Integer.parseInt(msg);
                }
-               System.out.println("[메시지 수신] : " + msg);
             } catch (IOException e) {
                System.out.println("서버와 통신 안됨");
                stopClient();
