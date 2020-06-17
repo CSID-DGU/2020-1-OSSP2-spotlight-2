@@ -69,7 +69,6 @@ public class Client {
                OutputStream os = socket.getOutputStream();
                os.write(arr1);
                os.flush();
-               System.out.println("전송완료");
             } catch(Exception e) {
                System.out.println("서버와 통신 안됨");
                stopClient();
