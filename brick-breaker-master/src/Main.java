@@ -350,7 +350,7 @@ public class Main extends JFrame implements Constants {
 	   public static String[] scr = new String[20];
 		rankWindow() {
 	   setTitle("Virus breaker"); // 타이틀 설정
-       
+	   ranking();
 	   JPanel rank = new JPanel(new GridLayout(8,1)){		   
 		   	            public void paintComponent(Graphics g) {
 		   	            	setBackground(Color.BLACK);
@@ -432,49 +432,63 @@ public class Main extends JFrame implements Constants {
          toMainMenu.add(backMenu);
          
          JLabel Basic = new AutoLabel("Basic");
+         Basic.setForeground(Color.YELLOW);
          JLabel Hard = new AutoLabel("Hard");
+         Hard.setForeground(Color.YELLOW);
          Mode.add(Basic);
          Mode.add(Hard);
        
-         String[] BasicS = {"20", "qqasdfasdfasdwer :  10"," q"," w"," e"};
-         String[] HardS = {"aasdfsfs", " basdfasdf"," q"," w"," e"};
-         
-         
        //베이직 모드 스코어-------------------- 
-         JLabel bscore1 = new AutoLabel(BasicS[0]);
-         bscore1.setFont(new Font("Serif", Font.BOLD, 11));
-         bscore1.setForeground(Color.WHITE);
-         //bscore1.setFont(getFont().deriveFont(15.0f));         
+         JLabel bscore1 = new JLabel("ID : " + scr[0] + "       Score : " + scr[1]);
+         bscore1.setFont(new Font("Serif", Font.BOLD, 20));
+         bscore1.setForeground(Color.WHITE);      
+         bscore1.setHorizontalAlignment(Score1.getWidth() / 4);
          Score1.add(bscore1);
          
-         JLabel bscore2 = new AutoLabel(BasicS[1]);
-         bscore2.setForeground(Color.WHITE);         
+         JLabel bscore2 = new JLabel("ID : " + scr[2] + "       Score : " + scr[3]);
+         bscore2.setForeground(Color.WHITE);    
+         bscore2.setHorizontalAlignment(Score1.getWidth() / 4);
          Score2.add(bscore2);
          
-         JLabel bscore3 = new AutoLabel(BasicS[2]);  
+         JLabel bscore3 = new JLabel("ID : " + scr[4] + "       Score : " + scr[5]);  
          bscore3.setForeground(Color.WHITE);
+         bscore3.setHorizontalAlignment(Score1.getWidth() / 4);
          Score3.add(bscore3);
          
-         JLabel bscore4 = new AutoLabel(BasicS[3]);
+         JLabel bscore4 = new JLabel("ID : " + scr[6] + "       Score : " + scr[7]);
+         bscore4.setForeground(Color.WHITE);
+         bscore4.setHorizontalAlignment(Score1.getWidth() / 4);
          Score4.add(bscore4);
          
-         JLabel bscore5 = new AutoLabel(BasicS[4]);
+         JLabel bscore5 = new JLabel("ID : " + scr[8] + "       Score : " + scr[9]);
+         bscore5.setForeground(Color.WHITE);
+         bscore5.setHorizontalAlignment(Score1.getWidth() / 4);
          Score5.add(bscore5);
         
        //하드모드 스코어--------------------        
-         JLabel hscore1 = new AutoLabel(HardS[0]);
+         JLabel hscore1 = new JLabel("ID : " + scr[10] + "       Score : " + scr[11]);
+         hscore1.setForeground(Color.WHITE);
+         hscore1.setHorizontalAlignment(Score1.getWidth() / 4);
          Score1.add(hscore1);
          
-         JLabel hscore2 = new AutoLabel(HardS[1]);
+         JLabel hscore2 = new JLabel("ID : " + scr[12] + "       Score : " + scr[13]);
+         hscore2.setForeground(Color.WHITE);
+         hscore2.setHorizontalAlignment(Score1.getWidth() / 4);
          Score2.add(hscore2);
          
-         JLabel hscore3 = new AutoLabel(HardS[2]);        
+         JLabel hscore3 = new JLabel("ID : " + scr[14] + "       Score : " + scr[15]);  
+         hscore3.setForeground(Color.WHITE);
+         hscore3.setHorizontalAlignment(Score1.getWidth() / 4);
          Score3.add(hscore3);
          
-         JLabel hscore4 = new AutoLabel(HardS[3]);
+         JLabel hscore4 = new JLabel("ID : " + scr[16] + "       Score : " + scr[17]);
+         hscore4.setForeground(Color.WHITE);
+         hscore4.setHorizontalAlignment(Score1.getWidth() / 4);
          Score4.add(hscore4);
          
-         JLabel hscore5 = new AutoLabel(HardS[4]);
+         JLabel hscore5 = new JLabel("ID : " + scr[18] + "       Score : " + scr[19]);
+         hscore5.setForeground(Color.WHITE);
+         hscore5.setHorizontalAlignment(Score1.getWidth() / 4);
          Score5.add(hscore5);
          
          Dimension dim = new Dimension(750,750);
