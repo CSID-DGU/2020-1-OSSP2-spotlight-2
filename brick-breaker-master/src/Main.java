@@ -257,7 +257,6 @@ public class Main extends JFrame implements Constants {
 	         //둘다 빈칸이거나 하나만 빈칸일때
 	        else {
 	           JOptionPane.showMessageDialog(null, "잘못된 값을 입력했습니다", "잘못된 값 입력", JOptionPane.ERROR_MESSAGE);
-	           Client.stopClient();
 	           continue;
 	        }
 
@@ -347,7 +346,7 @@ public class Main extends JFrame implements Constants {
    /*랭킹 화면*/
    class rankWindow extends JFrame implements Constants {
 	   public static String[] scr = new String[20];
-		rankWindow() {
+	   rankWindow() {
 	   setTitle("Virus breaker"); // 타이틀 설정
 	   ranking();//랭킹 정보 받아오기
 	   JPanel rank = new JPanel(new GridLayout(8,1)){		   
@@ -424,7 +423,7 @@ public class Main extends JFrame implements Constants {
           backMenu.setBorderPainted(false); //버튼 외곽선 삭제
           backMenu.setContentAreaFilled(false); //버튼 나머지 영역 삭제
           backMenu.setFocusPainted(false); //버튼 눌리는 부분 삭제 
-         backMenu.addActionListener(new ActionListener() {
+          backMenu.addActionListener(new ActionListener() {
              // 메인 메뉴로 이동 버튼 행동 정의
              @Override
              public void actionPerformed(ActionEvent e) {
@@ -521,8 +520,10 @@ public class Main extends JFrame implements Constants {
 	     public void ranking() {
 	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
 	    	 Main.Client.send(a);//서버로 랭킹 요청
+	    	 
 	    	 Main.Client.receive();//랭킹 정보를 받음
 	    	 scr = Client.msg.split(" ");//받은 랭킹 정보를 저장(각 모드별로 1등에서 5등)
+
 	     }
 	}
    

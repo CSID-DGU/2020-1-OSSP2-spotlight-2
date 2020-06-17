@@ -43,7 +43,7 @@ public class Client {
 
    void receive() {
             try {
-               byte[] arr = new byte[100];
+               byte[] arr = new byte[1000];
                InputStream is = socket.getInputStream();
                int readByteCnt = is.read(arr);
                if (readByteCnt == -1) {throw new IOException();}
