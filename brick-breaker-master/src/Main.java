@@ -370,6 +370,9 @@ public class Main extends JFrame implements Constants {
        		public void paintComponent(Graphics g) {
     		   setOpaque(false);
     		   super.paintComponent(g);
+    		   ImageIcon icon2;
+    		   icon2 = new ImageIcon("./img/Ranking.png");
+    		   g.drawImage(icon2.getImage(),getWidth()/4,0,getWidth()/2,getHeight(),null);
     	   	}
        	};
        
