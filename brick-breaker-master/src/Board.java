@@ -730,6 +730,16 @@ public class Board extends JPanel implements Runnable, Constants {
                     }
                 }
                 else {
+            	    String sign = "";
+            	    if(gameMode == 0) {
+            	    	sign = "2 " + Main.id + " " + "pw" + " " + score + " 0";
+            	    }
+            	    if(gameMode == 1) {
+            	    	sign = "3 " + Main.id + " " + "pw" + " 0 " + score;
+            	    }
+
+            	    Main.Client.send(sign); 
+            	    
                     lives = MAX_LIVES;
                     score = 0;
                     level = 1;
@@ -744,8 +754,7 @@ public class Board extends JPanel implements Runnable, Constants {
             	    for (int j = 0; j < items.size(); j++) {
             	        items.remove(j);
             	    }   
-            	    String sign = "2 " + Main.id + " " + "0" + " " + score;
-            	    Main.Client.send(sign);
+            	    
             	    game.interrupt(); //게임 종료
             	    clip.stop(); //음악 정지
                     //메인메뉴 음악 실행

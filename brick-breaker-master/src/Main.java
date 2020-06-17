@@ -233,6 +233,7 @@ public class Main extends JFrame implements Constants {
 				sign = sign + " " + idField.getText();
 				sign = sign + " " + pwField.getText();
 				sign = sign + " 0";
+				sign = sign + " 0";
 				}
 			//회원 가입
 			else if(logIn == 1) {
@@ -240,6 +241,7 @@ public class Main extends JFrame implements Constants {
 				JOptionPane.showConfirmDialog(null, loginPanel, "Sign Up", JOptionPane.OK_CANCEL_OPTION);
 				sign = sign + " " + idField.getText();
 				sign = sign + " " + pwField.getText();
+				sign = sign + " 0";
 				sign = sign + " 0";
 			}
 			//종료
@@ -332,7 +334,7 @@ public class Main extends JFrame implements Constants {
 	            Font before = getFont();
 	            Font font = new Font(before.getName(), before.getStyle(), i);
 	            setFont(font);
-	            if(getPreferredSize().getWidth()>getWidth() || getPreferredSize().getHeight()>getHeight()) {
+	            if(getPreferredSize().getWidth() - 10>getWidth() || getPreferredSize().getHeight() >getHeight()) {
 	                font = new Font(before.getName(), before.getStyle(), i-1);
 	                setFont(font);
 	                break;
@@ -344,6 +346,7 @@ public class Main extends JFrame implements Constants {
    
    /*랭킹 화면*/
    class rankWindow extends JFrame implements Constants {
+
 		rankWindow() {
 	   setTitle("rankWindow"); // 타이틀 설정
        //Music();
@@ -428,17 +431,17 @@ public class Main extends JFrame implements Constants {
          backMenu.setContentAreaFilled(false);
          toMainMenu.add(backMenu);
          
-         JLabel Basic = new JLabel("Basic");
-         JLabel Hard = new JLabel("Hard");
+         JLabel Basic = new AutoLabel("Basic");
+         JLabel Hard = new AutoLabel("Hard");
          Mode.add(Basic);
          Mode.add(Hard);
        
-         String[] BasicS = {"aasdfsdf", " basdfasdf"," q"," w"," e"};
+         String[] BasicS = {"20", "qqasdfasdfasdwer :  10"," q"," w"," e"};
          String[] HardS = {"aasdfsfs", " basdfasdf"," q"," w"," e"};
          
          
        //베이직 모드 스코어-------------------- 
-         JLabel bscore1 = new JLabel(BasicS[0]);
+         JLabel bscore1 = new AutoLabel(BasicS[0]);
          bscore1.setFont(new Font("Serif", Font.BOLD, 11));
          bscore1.setForeground(Color.WHITE);
          //bscore1.setFont(getFont().deriveFont(15.0f));         
@@ -494,6 +497,57 @@ public class Main extends JFrame implements Constants {
          setResizable(true);
          setVisible(true);
 		}
+//=======
+//	       // 버튼이 눌러지면 만들어지는 새 창을 정의한 클래스
+//	   private String[] scr = new String[20];
+//	       rankWindow() {
+//	    	  setTitle("virus breaker"); // 타이틀 설정
+//	         JPanel rank = new JPanel(){
+//
+//	            public void paintComponent(Graphics g) {
+//	            	setBackground(Color.BLACK);
+//	            	Font font  = new Font("Impact", Font.PLAIN, 50);
+//	            	g.setColor(Color.WHITE);
+//	            	g.setFont(font);
+//	            	g.drawString("랭킹창", 50, 50);
+//	            	setOpaque(true);
+//	            	super.paintComponent(g);
+//	            }
+//	         };
+//	         setContentPane(rank);
+//	         JButton backMenu = new JButton("Back");
+//	         
+//	         backMenu.addActionListener(new ActionListener() {
+//	             // Hard Mode 버튼 행동 정의
+//	             @Override
+//	             public void actionPerformed(ActionEvent e) {
+//	                 // TODO Auto-generated method stub
+//	                Main.M.setVisible(true);
+//	                dispose();
+//	             }     
+//	         });
+//	         rank.add(backMenu);
+//	         Dimension dim = new Dimension(750, 750);
+//	         setSize(Main.M.getWidth(), Main.M.getHeight()); //창 크기 설정
+//	         setResizable(true);//리사이징 가능
+//	         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//	         setMinimumSize(dim); //창 최소 사이즈 설정
+//	         rank.add(backMenu);
+//
+//	         //Place frame in main menu location
+//	         setLocation(Main.M.getX(), Main.M.getY());
+//
+//	         setVisible(true);   
+//	         ranking();
+//	   }  
+//	       //게임 랭킹의 순위를 받아온다.
+//	     public void ranking() {
+//	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
+//	    	 Main.Client.send(a);//서버로 랭킹 요청
+//	    	 Main.Client.receive();//랭킹 정보를 받음
+//	    	 scr = Client.msg.split(" ");//받은 랭킹 정보를 저장(각 모드별로 1등에서 5등)
+//	     }
+//>>>>>>> b9dbe45628f6689e9f60e7fe71f0b11fc9ecde4a
 	}
    
    class MyMouseListener implements MouseListener{
