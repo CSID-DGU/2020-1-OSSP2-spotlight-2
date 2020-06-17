@@ -22,7 +22,9 @@
 //This "Main" class runs the game. 
 //Imports
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -51,6 +53,8 @@ public class Main extends JFrame implements Constants {
 	public int loginCheck2;
 	public static Main M;
 	public static gameWindow G;
+	public static rankWindow R;
+	public static Client Client;
 	public static Clip clip;
 	public static String sign;
 	public static String id;
@@ -163,10 +167,9 @@ public class Main extends JFrame implements Constants {
             // Hard Mode 버튼 행동 정의
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-               //Board.gameMode = 1;               
-               //clip.stop(); //메인메뉴 음악 정지
-               //setVisible(false); //화면 보이지 않게 설정
+                // TODO Auto-generated method stub  
+            	R = new rankWindow();
+            	setVisible(false); //화면 보이지 않게 설정
             }     
         });
         OpenRank.addMouseListener(listener);
@@ -207,7 +210,7 @@ public class Main extends JFrame implements Constants {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
     	//서버 연결
-		 Client Client = new Client();
+		 Client = new Client();
 		 Client.startClient();
     	String[] options = {"Sign In", "Sign Up", "Exit"};
     	while(true) {
@@ -306,6 +309,51 @@ public class Main extends JFrame implements Constants {
    }  
   
 }
+   
+   /*랭킹 화면*/
+   class rankWindow extends JFrame implements Constants {
+	       // 버튼이 눌러지면 만들어지는 새 창을 정의한 클래스
+	       rankWindow() {
+	    	  setTitle("virus breaker"); // 타이틀 설정
+	         JPanel rank = new JPanel(){
+
+	            public void paintComponent(Graphics g) {
+	            	setBackground(Color.BLACK);
+	            	Font font  = new Font("Impact", Font.PLAIN, 50);
+	            	g.setColor(Color.WHITE);
+	            	g.setFont(font);
+	            	g.drawString("랭킹창", 50, 50);
+	            	setOpaque(true);
+	            	super.paintComponent(g);
+	            }
+	         };
+	         setContentPane(rank);
+	         JButton backMenu = new JButton("Back");
+	         
+	         backMenu.addActionListener(new ActionListener() {
+	             // Hard Mode 버튼 행동 정의
+	             @Override
+	             public void actionPerformed(ActionEvent e) {
+	                 // TODO Auto-generated method stub
+	                Board.gameMode = 1;
+	                Main.M.setVisible(true);
+	                dispose();
+	             }     
+	         });
+	         rank.add(backMenu);
+	         Dimension dim = new Dimension(750, 750);
+	         setSize(Main.M.getWidth(), Main.M.getHeight()); //창 크기 설정
+	         setResizable(true);//리사이징 가능
+	         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	         setMinimumSize(dim); //창 최소 사이즈 설정
+	         rank.add(backMenu);
+
+	         //Place frame in main menu location
+	         setLocation(Main.M.getX(), Main.M.getY());
+
+	         setVisible(true);         
+	   }  
+	}
    
    class MyMouseListener implements MouseListener{
 
