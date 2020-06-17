@@ -276,7 +276,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	        	if((gameMode == 0) && (tempItem.getType() < 6)) {
 	                try { 
 	                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Wood.wav").getAbsoluteFile());
-	                    Clip clip = AudioSystem.getClip();
+	                    Clip clip = AudioSystem.getClip(null);
 	                    clip.open(audioInputStream);
 	                    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 	                    gainControl.setValue(-10.0f); 
@@ -289,7 +289,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	        	if((gameMode == 1) && (tempItem.getType() < 5)) {
 	                try { 
 	                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Wood.wav").getAbsoluteFile());
-	                    Clip clip = AudioSystem.getClip();
+	                    Clip clip = AudioSystem.getClip(null);
 	                    clip.open(audioInputStream);
 	                    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 	                    gainControl.setValue(-10.0f); 
@@ -334,7 +334,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    	   destroy_check = true;	
 	                    	   try { // 벽돌을 꺠트리는 경우 소리를 출력해준다.
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
-	                               Clip clip = AudioSystem.getClip();
+	                               Clip clip = AudioSystem.getClip(null);
 	                               clip.open(audioInputStream);
 	                               FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 	                               gainControl.setValue(-10.0f); 
@@ -354,7 +354,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    	   destroy_check = true;
 	                    	   try {  // 벽돌을 꺠트리는 경우 소리를 출력해준다.
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
-	                               Clip clip = AudioSystem.getClip();
+	                               Clip clip = AudioSystem.getClip(null);
 	                               clip.open(audioInputStream);
 	                               FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 	                               gainControl.setValue(-10.0f); 
@@ -374,7 +374,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    	   destroy_check = true;
 	                    	   try {  // 벽돌을 꺠트리는 경우 소리를 출력해준다.
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
-	                               Clip clip = AudioSystem.getClip();
+	                               Clip clip = AudioSystem.getClip(null);
 	                               clip.open(audioInputStream);
 	                               FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 	                               gainControl.setValue(-10.0f); 
@@ -394,7 +394,7 @@ public class Board extends JPanel implements Runnable, Constants {
 	                    	   destroy_check = true;
 	                    	   try {  // 벽돌을 꺠트리는 경우 소리를 출력해준다.
 	                               AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Crash.wav").getAbsoluteFile());
-	                               Clip clip = AudioSystem.getClip();
+	                               Clip clip = AudioSystem.getClip(null);
 	                               clip.open(audioInputStream);
 	                               FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 	                               gainControl.setValue(-10.0f); 
