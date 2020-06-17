@@ -230,6 +230,7 @@ public class Main extends JFrame implements Constants {
 				sign = sign + " " + idField.getText();
 				sign = sign + " " + pwField.getText();
 				sign = sign + " 0";
+				sign = sign + " 0";
 				}
 			//회원 가입
 			else if(logIn == 1) {
@@ -237,6 +238,7 @@ public class Main extends JFrame implements Constants {
 				JOptionPane.showConfirmDialog(null, loginPanel, "Sign Up", JOptionPane.OK_CANCEL_OPTION);
 				sign = sign + " " + idField.getText();
 				sign = sign + " " + pwField.getText();
+				sign = sign + " 0";
 				sign = sign + " 0";
 			}
 			//종료
@@ -313,6 +315,7 @@ public class Main extends JFrame implements Constants {
    /*랭킹 화면*/
    class rankWindow extends JFrame implements Constants {
 	       // 버튼이 눌러지면 만들어지는 새 창을 정의한 클래스
+	   private String[] scr = new String[20];
 	       rankWindow() {
 	    	  setTitle("virus breaker"); // 타이틀 설정
 	         JPanel rank = new JPanel(){
@@ -335,7 +338,6 @@ public class Main extends JFrame implements Constants {
 	             @Override
 	             public void actionPerformed(ActionEvent e) {
 	                 // TODO Auto-generated method stub
-	                Board.gameMode = 1;
 	                Main.M.setVisible(true);
 	                dispose();
 	             }     
@@ -351,8 +353,16 @@ public class Main extends JFrame implements Constants {
 	         //Place frame in main menu location
 	         setLocation(Main.M.getX(), Main.M.getY());
 
-	         setVisible(true);         
+	         setVisible(true);   
+	         ranking();
 	   }  
+	       //게임 랭킹의 순위를 받아온다.
+	     public void ranking() {
+	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
+	    	 Main.Client.send(a);//서버로 랭킹 요청
+	    	 Main.Client.receive();//랭킹 정보를 받음
+	    	 scr = Client.msg.split(" ");//받은 랭킹 정보를 저장(각 모드별로 1등에서 5등)
+	     }
 	}
    
    class MyMouseListener implements MouseListener{
