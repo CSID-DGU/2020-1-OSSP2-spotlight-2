@@ -72,7 +72,7 @@ public class Main extends JFrame implements Constants {
 	public Main() {
 
         setTitle("virus breaker"); // 타이틀 설정
-        //Music();
+        Music();
         back = new ImageIcon("./img/earth.jpg");     
       JPanel background = new JPanel(new GridLayout(1,3)) {
 
@@ -350,6 +350,8 @@ public class Main extends JFrame implements Constants {
 	   public static String[] scr = new String[20];
 		rankWindow() {
 	   setTitle("Virus breaker"); // 타이틀 설정
+	   
+	   ranking();//랭킹 정보 받아오기
        
 	   JPanel rank = new JPanel(new GridLayout(8,1)){		   
 		   	            public void paintComponent(Graphics g) {
@@ -417,12 +419,14 @@ public class Main extends JFrame implements Constants {
      	};
           JButton backMenu = new JButton("To Main Menu"); 
           backMenu.setFont(new Font("고딕", Font.BOLD,50));
+          backMenu.setBorderPainted(false); //버튼 외곽선 삭제
+          backMenu.setContentAreaFilled(false); //버튼 나머지 영역 삭제
+          backMenu.setFocusPainted(false); //버튼 눌리는 부분 삭제 
          backMenu.addActionListener(new ActionListener() {
-             // Hard Mode 버튼 행동 정의
+             // 메인 메뉴로 이동 버튼 행동 정의
              @Override
              public void actionPerformed(ActionEvent e) {
                  // TODO Auto-generated method stub
-                Board.gameMode = 1;
                 Main.M.setVisible(true);
                 dispose();
              }     
@@ -441,13 +445,13 @@ public class Main extends JFrame implements Constants {
          
          
        //베이직 모드 스코어-------------------- 
-         JLabel bscore1 = new AutoLabel(BasicS[0]);
+         JLabel bscore1 = new AutoLabel(scr[0] + " " + scr[1]);
          bscore1.setFont(new Font("Serif", Font.BOLD, 11));
          bscore1.setForeground(Color.WHITE);
          //bscore1.setFont(getFont().deriveFont(15.0f));         
          Score1.add(bscore1);
          
-         JLabel bscore2 = new AutoLabel(BasicS[1]);
+         JLabel bscore2 = new AutoLabel(BasicS[0]);
          bscore2.setForeground(Color.WHITE);         
          Score2.add(bscore2);
          
