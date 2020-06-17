@@ -469,6 +469,7 @@ public class Board extends JPanel implements Runnable, Constants {
     public void drawReady(Graphics g) {
     	g.drawImage(readyimg.getImage(), getWidth()*5/19, getHeight()/4, getWidth()/2, getHeight()/2, null);
     	setBackground(Color.BLACK); //배경 지정	
+    	setOpaque(false);
     }
     
     //fills the board

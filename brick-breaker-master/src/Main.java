@@ -257,6 +257,7 @@ public class Main extends JFrame implements Constants {
 	         //둘다 빈칸이거나 하나만 빈칸일때
 	        else {
 	           JOptionPane.showMessageDialog(null, "잘못된 값을 입력했습니다", "잘못된 값 입력", JOptionPane.ERROR_MESSAGE);
+	           Client.stopClient();
 	           continue;
 	        }
 
@@ -280,7 +281,7 @@ public class Main extends JFrame implements Constants {
 				 JOptionPane.showMessageDialog(null, "동일 아이디가 존재합니다. 다른 아이디를 시도하세요", "Error", JOptionPane.ERROR_MESSAGE);
 			 }
     	}
-		 //Client.stopClient();
+
     	if(gameStart == true) {
     		M = new Main();
     	}
@@ -346,10 +347,9 @@ public class Main extends JFrame implements Constants {
    
    /*랭킹 화면*/
    class rankWindow extends JFrame implements Constants {
-
+	   public static String[] scr = new String[20];
 		rankWindow() {
-	   setTitle("rankWindow"); // 타이틀 설정
-       //Music();
+	   setTitle("Virus breaker"); // 타이틀 설정
        
 	   JPanel rank = new JPanel(new GridLayout(8,1)){		   
 		   	            public void paintComponent(Graphics g) {
@@ -497,57 +497,14 @@ public class Main extends JFrame implements Constants {
          setResizable(true);
          setVisible(true);
 		}
-//=======
-//	       // 버튼이 눌러지면 만들어지는 새 창을 정의한 클래스
-//	   private String[] scr = new String[20];
-//	       rankWindow() {
-//	    	  setTitle("virus breaker"); // 타이틀 설정
-//	         JPanel rank = new JPanel(){
-//
-//	            public void paintComponent(Graphics g) {
-//	            	setBackground(Color.BLACK);
-//	            	Font font  = new Font("Impact", Font.PLAIN, 50);
-//	            	g.setColor(Color.WHITE);
-//	            	g.setFont(font);
-//	            	g.drawString("랭킹창", 50, 50);
-//	            	setOpaque(true);
-//	            	super.paintComponent(g);
-//	            }
-//	         };
-//	         setContentPane(rank);
-//	         JButton backMenu = new JButton("Back");
-//	         
-//	         backMenu.addActionListener(new ActionListener() {
-//	             // Hard Mode 버튼 행동 정의
-//	             @Override
-//	             public void actionPerformed(ActionEvent e) {
-//	                 // TODO Auto-generated method stub
-//	                Main.M.setVisible(true);
-//	                dispose();
-//	             }     
-//	         });
-//	         rank.add(backMenu);
-//	         Dimension dim = new Dimension(750, 750);
-//	         setSize(Main.M.getWidth(), Main.M.getHeight()); //창 크기 설정
-//	         setResizable(true);//리사이징 가능
-//	         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	         setMinimumSize(dim); //창 최소 사이즈 설정
-//	         rank.add(backMenu);
-//
-//	         //Place frame in main menu location
-//	         setLocation(Main.M.getX(), Main.M.getY());
-//
-//	         setVisible(true);   
-//	         ranking();
-//	   }  
-//	       //게임 랭킹의 순위를 받아온다.
-//	     public void ranking() {
-//	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
-//	    	 Main.Client.send(a);//서버로 랭킹 요청
-//	    	 Main.Client.receive();//랭킹 정보를 받음
-//	    	 scr = Client.msg.split(" ");//받은 랭킹 정보를 저장(각 모드별로 1등에서 5등)
-//	     }
-//>>>>>>> b9dbe45628f6689e9f60e7fe71f0b11fc9ecde4a
+
+	       //게임 랭킹의 순위를 받아온다.
+	     public void ranking() {
+	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
+	    	 Main.Client.send(a);//서버로 랭킹 요청
+	    	 Main.Client.receive();//랭킹 정보를 받음
+	    	 scr = Client.msg.split(" ");//받은 랭킹 정보를 저장(각 모드별로 1등에서 5등)
+	     }
 	}
    
    class MyMouseListener implements MouseListener{
