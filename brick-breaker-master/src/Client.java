@@ -7,8 +7,8 @@ import java.net.Socket;
 
 public class Client {
    Socket socket;
-
    public int loginCheck;
+   public static String msg;
    void startClient() {
       // connect()와 read() 메소드는 블로킹 되기 때문에 별도의 스레드를 생성해서 처리합니다.
       Thread thread = new Thread() {
@@ -17,7 +17,11 @@ public class Client {
             socket = new Socket();
             try {
                System.out.println("[서버에 연결 요청 중]");
+<<<<<<< HEAD
                socket.connect(new InetSocketAddress("3.34.97.31", 8888));
+=======
+               socket.connect(new InetSocketAddress("54.180.99.189", 8888));
+>>>>>>> 6b927ceae1c92a5a4051d11666d7318b860be353
                System.out.println("[서버와 연결 완료]");
             } catch (IOException e) {
                System.out.println("[서버와 통신 안됨]");
@@ -26,7 +30,6 @@ public class Client {
                }
                return;
             }
-            //receive();
          }
       };
       thread.start();
@@ -44,19 +47,21 @@ public class Client {
 
    void receive() {
             try {
-               byte[] arr = new byte[100];
+               byte[] arr = new byte[1000];
                InputStream is = socket.getInputStream();
                int readByteCnt = is.read(arr);
                if (readByteCnt == -1) {throw new IOException();}
-               String message = new String(arr, 0, readByteCnt, "UTF-8");
-               loginCheck = Integer.parseInt(message);
-               System.out.println("[메시지 수신] : " + message);
+               msg = new String(arr, 0, readByteCnt, "UTF-8");
+               if(msg.length() < 2) {
+            	   loginCheck = Integer.parseInt(msg);
+               }
             } catch (IOException e) {
                System.out.println("서버와 통신 안됨");
                stopClient();
             }
    }
 
+   //데이터 서버로 전송
    void send(String message) {
 
       // write() 메소드는 블로킹 되기 때문에 별도의 스레드에서 실행합니다.
@@ -68,7 +73,6 @@ public class Client {
                OutputStream os = socket.getOutputStream();
                os.write(arr1);
                os.flush();
-               System.out.println("전송완료");
             } catch(Exception e) {
                System.out.println("서버와 통신 안됨");
                stopClient();

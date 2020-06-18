@@ -22,27 +22,32 @@
 //This "Main" class runs the game. 
 //Imports
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 //Class definition
 public class Main extends JFrame implements Constants {
@@ -51,6 +56,8 @@ public class Main extends JFrame implements Constants {
 	public int loginCheck2;
 	public static Main M;
 	public static gameWindow G;
+	public static rankWindow R;
+	public static Client Client;
 	public static Clip clip;
 	public static String sign;
 	public static String id;
@@ -163,10 +170,9 @@ public class Main extends JFrame implements Constants {
             // Hard Mode 버튼 행동 정의
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-               //Board.gameMode = 1;               
-               //clip.stop(); //메인메뉴 음악 정지
-               //setVisible(false); //화면 보이지 않게 설정
+                // TODO Auto-generated method stub  
+            	R = new rankWindow();
+            	setVisible(false); //화면 보이지 않게 설정
             }     
         });
         OpenRank.addMouseListener(listener);
@@ -206,7 +212,8 @@ public class Main extends JFrame implements Constants {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-		 Client Client = new Client();
+    	//서버 연결
+		 Client = new Client();
 		 Client.startClient();
     	String[] options = {"Sign In", "Sign Up", "Exit"};
     	while(true) {
@@ -226,6 +233,7 @@ public class Main extends JFrame implements Constants {
 				sign = sign + " " + idField.getText();
 				sign = sign + " " + pwField.getText();
 				sign = sign + " 0";
+				sign = sign + " 0";
 				}
 			//회원 가입
 			else if(logIn == 1) {
@@ -234,11 +242,13 @@ public class Main extends JFrame implements Constants {
 				sign = sign + " " + idField.getText();
 				sign = sign + " " + pwField.getText();
 				sign = sign + " 0";
+				sign = sign + " 0";
 			}
 			//종료
 			else if(logIn == 2) {
 				break;
 			}
+
 			if((!idField.getText().equals("")) && (!pwField.getText().equals(""))) {
 	               //둘다 빈칸이 아닐때
 	            Client.send(sign); 
@@ -249,6 +259,7 @@ public class Main extends JFrame implements Constants {
 	           JOptionPane.showMessageDialog(null, "잘못된 값을 입력했습니다", "잘못된 값 입력", JOptionPane.ERROR_MESSAGE);
 	           continue;
 	        }
+
 			 //loginCheck가 1이면 로그인 성공
 			 if(Client.loginCheck == 1) {
 				 gameStart = true;
@@ -268,7 +279,7 @@ public class Main extends JFrame implements Constants {
 				 JOptionPane.showMessageDialog(null, "동일 아이디가 존재합니다. 다른 아이디를 시도하세요", "Error", JOptionPane.ERROR_MESSAGE);
 			 }
     	}
-		 //Client.stopClient();
+
     	if(gameStart == true) {
     		M = new Main();
     	}
@@ -299,9 +310,222 @@ public class Main extends JFrame implements Constants {
          //Sets the icon of the program
          setIconImage(Toolkit.getDefaultToolkit().getImage("img/Icon.png"));
          setVisible(true);         
-   }  
+       }  
   
-}
+   }
+   
+   class AutoLabel extends JLabel {
+	   
+	    public AutoLabel(String text) {
+	        setHorizontalAlignment(SwingConstants.CENTER);
+	        setText(text);
+	        addComponentListener(new ComponentAdapter() {
+	            @Override
+	            public void componentResized(ComponentEvent e) {
+	                resize();
+	            }
+	        });
+	    }
+	 
+	    void resize() {
+	        int i=0;
+	        while(true) {
+	            Font before = getFont();
+	            Font font = new Font(before.getName(), before.getStyle(), i);
+	            setFont(font);
+	            if(getPreferredSize().getWidth() - 10>getWidth() || getPreferredSize().getHeight() >getHeight()) {
+	                font = new Font(before.getName(), before.getStyle(), i-1);
+	                setFont(font);
+	                break;
+	            }
+	            i++;    
+	        }
+	    }
+	}
+   
+   /*랭킹 화면*/
+   class rankWindow extends JFrame implements Constants {
+	   public static String[] scr = new String[20];
+	   rankWindow() {
+	   setTitle("Virus breaker"); // 타이틀 설정
+	   ranking();//랭킹 정보 받아오기
+	   JPanel rank = new JPanel(new GridLayout(8,1)){		   
+		   	            public void paintComponent(Graphics g) {
+		   	            	setBackground(Color.BLACK);
+		   	            	Font font  = new Font("Impact", Font.PLAIN, 50);
+		   	            	g.setColor(Color.WHITE);
+		   	            	g.setFont(font);
+		   	            	g.drawString("랭킹창", 50, 50);
+		   	            	setOpaque(true);
+		   	            	super.paintComponent(g);
+		   	            }
+		   	         };
+		   	         setContentPane(rank);
+       setContentPane(rank);   
+       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       
+       	JPanel Image = new JPanel(new GridLayout(1,1)) {
+       		public void paintComponent(Graphics g) {
+    		   setOpaque(false);
+    		   super.paintComponent(g);
+    		   ImageIcon icon2;
+    		   icon2 = new ImageIcon("./img/Ranking.png");
+    		   g.drawImage(icon2.getImage(),getWidth()/4,0,getWidth()/2,getHeight(),null);
+    	   	}
+       	};
+       
+       	JPanel Mode = new JPanel(new GridLayout(1,2)) {
+       		public void paintComponent(Graphics g) {
+       		  setOpaque(false);
+              super.paintComponent(g);
+       		}
+       	};
+       	JPanel Score1 = new JPanel(new GridLayout(1,2)) {
+    	   public void paintComponent(Graphics g) {
+    		   setOpaque(false);
+           	super.paintComponent(g);
+    	   }
+       	};
+     	JPanel Score2 = new JPanel(new GridLayout(1,2)) {
+     		public void paintComponent(Graphics g) {
+     			setOpaque(false);
+            	super.paintComponent(g);
+     		}
+    	 };
+    	 JPanel Score3 = new JPanel(new GridLayout(1,2)) {
+          public void paintComponent(Graphics g) {
+             setOpaque(false);
+             super.paintComponent(g);
+          }
+       	};
+       	JPanel Score4 = new JPanel(new GridLayout(1,2)) {
+           public void paintComponent(Graphics g) {
+              setOpaque(false);
+              super.paintComponent(g);
+           }
+       		};
+    	JPanel Score5 = new JPanel(new GridLayout(1,2)) {
+    		public void paintComponent(Graphics g) {
+      		 setOpaque(false);
+      		 super.paintComponent(g);
+    		}
+    	};
+     	JPanel toMainMenu = new JPanel(new GridLayout(1,1)) {
+     		public void paintComponent(Graphics g) {
+     			setOpaque(false);
+     			super.paintComponent(g);
+         }
+     	};
+     	 MyMouseListener listener = new MyMouseListener();//객체
+     	 
+          JButton backMenu = new JButton("To Main Menu"); 
+          backMenu.setFont(new Font("고딕", Font.BOLD,50));
+          backMenu.setBorderPainted(false); //버튼 외곽선 삭제
+          backMenu.setContentAreaFilled(false); //버튼 나머지 영역 삭제
+          backMenu.setFocusPainted(false); //버튼 눌리는 부분 삭제 
+          backMenu.addActionListener(new ActionListener() {
+             // 메인 메뉴로 이동 버튼 행동 정의
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 // TODO Auto-generated method stub
+                Main.M.setVisible(true);
+                dispose();
+             }     
+         });        
+         backMenu.addMouseListener(listener);
+         backMenu.setContentAreaFilled(false);
+         toMainMenu.add(backMenu);
+         
+         JLabel Basic = new AutoLabel("Basic");
+         Basic.setForeground(Color.ORANGE);
+         JLabel Hard = new AutoLabel("Hard");
+         Hard.setForeground(Color.RED);
+         Mode.add(Basic);
+         Mode.add(Hard);
+       
+       //베이직 모드 스코어-------------------- 
+         JLabel bscore1 = new JLabel("ID : " + scr[0] + "       Score : " + scr[1]);
+         bscore1.setForeground(Color.WHITE);      
+         bscore1.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score1.add(bscore1);
+         
+         JLabel bscore2 = new JLabel("ID : " + scr[2] + "       Score : " + scr[3]);
+         bscore2.setForeground(Color.WHITE);    
+         bscore2.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score2.add(bscore2);
+         
+         JLabel bscore3 = new JLabel("ID : " + scr[4] + "       Score : " + scr[5]);  
+         bscore3.setForeground(Color.WHITE);
+         bscore3.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score3.add(bscore3);
+         
+         JLabel bscore4 = new JLabel("ID : " + scr[6] + "       Score : " + scr[7]);
+         bscore4.setForeground(Color.WHITE);
+         bscore4.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score4.add(bscore4);
+         
+         JLabel bscore5 = new JLabel("ID : " + scr[8] + "       Score : " + scr[9]);
+         bscore5.setForeground(Color.WHITE);
+         bscore5.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score5.add(bscore5);
+        
+       //하드모드 스코어--------------------        
+         JLabel hscore1 = new JLabel("ID : " + scr[10] + "       Score : " + scr[11]);
+         hscore1.setForeground(Color.WHITE);
+         hscore1.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score1.add(hscore1);
+         
+         JLabel hscore2 = new JLabel("ID : " + scr[12] + "       Score : " + scr[13]);
+         hscore2.setForeground(Color.WHITE);
+         hscore2.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score2.add(hscore2);
+         
+         JLabel hscore3 = new JLabel("ID : " + scr[14] + "       Score : " + scr[15]);  
+         hscore3.setForeground(Color.WHITE);
+         hscore3.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score3.add(hscore3);
+         
+         JLabel hscore4 = new JLabel("ID : " + scr[16] + "       Score : " + scr[17]);
+         hscore4.setForeground(Color.WHITE);
+         hscore4.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score4.add(hscore4);
+         
+         JLabel hscore5 = new JLabel("ID : " + scr[18] + "       Score : " + scr[19]);
+         hscore5.setForeground(Color.WHITE);
+         hscore5.setHorizontalAlignment(Score1.getWidth() / 4);
+         Score5.add(hscore5);
+         
+         Dimension dim = new Dimension(750,750);
+         setMinimumSize(dim); // 최소 사이즈 설정
+         dim = Toolkit.getDefaultToolkit().getScreenSize();
+         // 창 시작 위치 설정
+         setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
+     
+         rank.add(Image);
+         rank.add(Mode);
+         rank.add(Score1);
+         rank.add(Score2);
+         rank.add(Score3);
+         rank.add(Score4);
+         rank.add(Score5);
+         rank.add(toMainMenu);
+         
+         setLocationByPlatform(true);
+         setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // 창 크기 설정
+         setResizable(true);
+         setVisible(true);
+		}
+
+	       //게임 랭킹의 순위를 받아온다.
+	     public void ranking() {
+	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
+	    	 Main.Client.send(a);//서버로 랭킹 요청
+	    	 
+	    	 Main.Client.receive();//랭킹 정보를 받음
+	    	 scr = Client.msg.split(" ");//받은 랭킹 정보를 저장(각 모드별로 1등에서 5등)
+
+	     }
+	}
    
    class MyMouseListener implements MouseListener{
 
@@ -320,13 +544,13 @@ public class Main extends JFrame implements Constants {
        @Override//마우스가 버튼 안으로 들어오면 빨간색으로 바뀜
        public void mouseEntered(MouseEvent e) {
            JButton b = (JButton)e.getSource();
-           b.setBorderPainted(true);
+           b.setFocusPainted(true);
        }
 
        @Override//마우스가 버튼 밖으로 나가면 노란색으로 바뀜
        public void mouseExited(MouseEvent e) {
           JButton b = (JButton)e.getSource();
-           b.setBorderPainted(false);
+           b.setFocusPainted(false);
        }
        
    }
