@@ -477,7 +477,6 @@ public class Board extends JPanel implements Runnable, Constants {
     public void drawReady(Graphics g) {
     	g.drawImage(readyimg.getImage(), getWidth()*5/19, getHeight()/4, getWidth()/2, getHeight()/2, null);
     	setBackground(Color.BLACK); //배경 지정	
-    	setOpaque(false);
     }
     
     //fills the board
@@ -742,16 +741,6 @@ public class Board extends JPanel implements Runnable, Constants {
                     }
                 }
                 else {
-            	    String sign = "";
-            	    if(gameMode == 0) {
-            	    	sign = "2 " + Main.id + " " + "pw" + " " + score + " 0";
-            	    }
-            	    if(gameMode == 1) {
-            	    	sign = "3 " + Main.id + " " + "pw" + " 0 " + score;
-            	    }
-
-            	    Main.Client.send(sign); 
-            	    
                     lives = MAX_LIVES;
                     score = 0;
                     level = 1;
@@ -766,7 +755,6 @@ public class Board extends JPanel implements Runnable, Constants {
             	    for (int j = 0; j < items.size(); j++) {
             	        items.remove(j);
             	    }   
-            	    
             	    game.interrupt(); //게임 종료
             	    clip.stop(); //음악 정지
                     //메인메뉴 음악 실행
@@ -779,8 +767,8 @@ public class Board extends JPanel implements Runnable, Constants {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+            	    Main.G.setVisible(false); //게임 화면 끄기
             	    Main.M.setVisible(true);//메인메뉴로
-                    Main.G.dispose();//게임 화면 끄기
                 	}
            		}
             //Basic 모드 조작 키
