@@ -1,14 +1,22 @@
 //Imports
-import java.awt.*;
-import javax.swing.*;
-import java.util.Random;
-import java.lang.Thread;
-import javax.sound.sampled.*;
-import java.io.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.TreeMap;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 //Class definition
 public class Board extends JPanel implements Runnable, Constants {
@@ -679,11 +687,14 @@ public class Board extends JPanel implements Runnable, Constants {
 	    	//score 출력
 	    	g.drawString(Integer.toString(score), getWidth()/100, getHeight()*5/100);
 
-	
-	    	for (Item i: items) {
-	        	if(i != null)
-	        		i.draw(g);
-	        }
+	    	// 반복자를 이용하여 item을 그림
+	    	Iterator<Item> iter = items.iterator();
+	    	while(iter.hasNext())
+	    	{
+	    		Item it = iter.next();
+	    		it.draw(g);
+	    	}
+	    	
 	        //게임 오버 창
         if (lives == MIN_LIVES) {
             g.setColor(Color.BLACK);
