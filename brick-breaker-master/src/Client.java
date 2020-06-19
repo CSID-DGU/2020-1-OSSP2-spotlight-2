@@ -47,7 +47,7 @@ public class Client {
 
    void receive() {
             try {
-               byte[] arr = new byte[100];
+               byte[] arr = new byte[1000];
                InputStream is = socket.getInputStream();
                int readByteCnt = is.read(arr);
                if (readByteCnt == -1) {throw new IOException();}
@@ -73,7 +73,6 @@ public class Client {
                OutputStream os = socket.getOutputStream();
                os.write(arr1);
                os.flush();
-               System.out.println("전송완료");
             } catch(Exception e) {
                System.out.println("서버와 통신 안됨");
                stopClient();

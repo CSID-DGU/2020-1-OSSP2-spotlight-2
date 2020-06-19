@@ -72,7 +72,7 @@ public class Main extends JFrame implements Constants {
 	public Main() {
 
         setTitle("virus breaker"); // 타이틀 설정
-        //Music();
+        Music();
         back = new ImageIcon("./img/earth.jpg");     
       JPanel background = new JPanel(new GridLayout(1,3)) {
 
@@ -257,12 +257,10 @@ public class Main extends JFrame implements Constants {
 	         //둘다 빈칸이거나 하나만 빈칸일때
 	        else {
 	           JOptionPane.showMessageDialog(null, "잘못된 값을 입력했습니다", "잘못된 값 입력", JOptionPane.ERROR_MESSAGE);
-	           Client.stopClient();
 	           continue;
 	        }
 
 			 //loginCheck가 1이면 로그인 성공
-			 System.out.println(Client.loginCheck);
 			 if(Client.loginCheck == 1) {
 				 gameStart = true;
 				 id = idField.getText();
@@ -348,9 +346,9 @@ public class Main extends JFrame implements Constants {
    /*랭킹 화면*/
    class rankWindow extends JFrame implements Constants {
 	   public static String[] scr = new String[20];
-		rankWindow() {
+	   rankWindow() {
 	   setTitle("Virus breaker"); // 타이틀 설정
-	   ranking();
+	   ranking();//랭킹 정보 받아오기
 	   JPanel rank = new JPanel(new GridLayout(8,1)){		   
 		   	            public void paintComponent(Graphics g) {
 		   	            	setBackground(Color.BLACK);
@@ -418,32 +416,35 @@ public class Main extends JFrame implements Constants {
      			super.paintComponent(g);
          }
      	};
+     	 MyMouseListener listener = new MyMouseListener();//객체
+     	 
           JButton backMenu = new JButton("To Main Menu"); 
           backMenu.setFont(new Font("고딕", Font.BOLD,50));
-         backMenu.addActionListener(new ActionListener() {
-             // Hard Mode 버튼 행동 정의
+          backMenu.setBorderPainted(false); //버튼 외곽선 삭제
+          backMenu.setContentAreaFilled(false); //버튼 나머지 영역 삭제
+          backMenu.setFocusPainted(false); //버튼 눌리는 부분 삭제 
+          backMenu.addActionListener(new ActionListener() {
+             // 메인 메뉴로 이동 버튼 행동 정의
              @Override
              public void actionPerformed(ActionEvent e) {
                  // TODO Auto-generated method stub
-                Board.gameMode = 1;
                 Main.M.setVisible(true);
                 dispose();
              }     
          });        
-         backMenu.setBorderPainted(true);
+         backMenu.addMouseListener(listener);
          backMenu.setContentAreaFilled(false);
          toMainMenu.add(backMenu);
          
          JLabel Basic = new AutoLabel("Basic");
-         Basic.setForeground(Color.YELLOW);
+         Basic.setForeground(Color.ORANGE);
          JLabel Hard = new AutoLabel("Hard");
-         Hard.setForeground(Color.YELLOW);
+         Hard.setForeground(Color.RED);
          Mode.add(Basic);
          Mode.add(Hard);
        
        //베이직 모드 스코어-------------------- 
          JLabel bscore1 = new JLabel("ID : " + scr[0] + "       Score : " + scr[1]);
-         bscore1.setFont(new Font("Serif", Font.BOLD, 20));
          bscore1.setForeground(Color.WHITE);      
          bscore1.setHorizontalAlignment(Score1.getWidth() / 4);
          Score1.add(bscore1);
@@ -519,8 +520,10 @@ public class Main extends JFrame implements Constants {
 	     public void ranking() {
 	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
 	    	 Main.Client.send(a);//서버로 랭킹 요청
+	    	 
 	    	 Main.Client.receive();//랭킹 정보를 받음
 	    	 scr = Client.msg.split(" ");//받은 랭킹 정보를 저장(각 모드별로 1등에서 5등)
+
 	     }
 	}
    
@@ -541,13 +544,13 @@ public class Main extends JFrame implements Constants {
        @Override//마우스가 버튼 안으로 들어오면 빨간색으로 바뀜
        public void mouseEntered(MouseEvent e) {
            JButton b = (JButton)e.getSource();
-           b.setBorderPainted(true);
+           b.setFocusPainted(true);
        }
 
        @Override//마우스가 버튼 밖으로 나가면 노란색으로 바뀜
        public void mouseExited(MouseEvent e) {
           JButton b = (JButton)e.getSource();
-           b.setBorderPainted(false);
+           b.setFocusPainted(false);
        }
        
    }
