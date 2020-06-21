@@ -1,5 +1,5 @@
-a# 2020-1-OSSP2-spotlight-2
-Team spotlight
+# 2020-1-OSSP2-spotlight-2
+# Team spotlight
 
 원본 소스 : https://github.com/tylucaskelley/brick-breaker
 
@@ -15,7 +15,7 @@ Team spotlight
  - 개발 언어 : JAVA  
  - 데이터베이스 AWS_RDS, MySQL  
  - 웹 서비스 : AWS
- 
+
 ## 2. 패치 내역
 
  - 하단 바의 움직임 개선  
@@ -23,8 +23,11 @@ Team spotlight
  - 베이직 모드, 하드 모드 추가  
  - 아이템 추가  
  - 랭킹 시스템 서버 구현  
- - UI 개선 및 메인 메뉴 제작 
+ - UI 개선 및 메인 메뉴 제작
  - 회원가입 및 로그인 시스템 구현
+ - 메인메뉴 및 게임화면을 동적 창으로 구현
+ - SHA-256 패스워드 암호화 저장방식 구현
+ - 데이터베이스 연동 스코어 랭킹 창 구현
 
 ## 3. 코드 업데이트 일지
 
@@ -61,11 +64,13 @@ Team spotlight
  - [X] 회원가입 및 로그인 시스템 구현 완료
        (서버와 클라이언트 연결)
  - [X] 메인페이지 및 메뉴 생성
- - [X] 게임 사운드 수정
+ - [X] 랭킹 시스템 구현
 
 ### 8주차 진행사항
- - [X] 랭킹 시스템 구현
- - [X] 패스워드 암호화 적용
+ - [X] 랭킹 페이지 구현
+ - [X] 솔트값을 더한 SHA-256 패스워드 암호화 적용
+ - [X] 게임 사운드 추가 및 수정
+
 
 ## 4. 게임 아이템 추가
 <img src = "res/item.png">
@@ -80,10 +85,13 @@ Team spotlight
 - 당신의 기록을 저장하고 자랑할수 있는 랭킹 시스템 까지!!!
 - 과연 당신이 1등이 되고 최고 점수를 획득할 수 있을까??
 
-## 6. 타임라인
+## 6. 메인메뉴 화면
+<img src="MainPageThumbnail.png">
+
+## 7. 타임라인
 <img src="res/timeline.png">
 
-## 7. 이미지 및 음원 출처
+## 8. 이미지 및 음원 출처
 - Virus 이미지 : https://pixabay.com/ko/illustrations/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EC%99%B8%EB%94%B4-%EC%BD%94%EB%A1%9C%EB%82%98-%EC%A0%84%EC%97%BC%EB%B3%91-4930122/
 
 - Background 영상 : https://pixabay.com/ko/videos/%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EC%BD%94%EB%A1%9C%EB%82%98-%EC%84%B8%EA%B3%84%EC%A0%81-%EC%9C%A0%ED%96%89%EB%B3%91-33131/
@@ -91,6 +99,8 @@ Team spotlight
 - Ball 이미지: https://pixabay.com/ko/vectors/공-강철-은화-라운드-149921/
 
 - Background Sound 및 효과음 : https://www.youtube.com/audiolibrary/soundeffects?ar=1590045019076&nv=1
+
+- 랭킹 화면 진입 Sound : https://www.youtube.com/audiolibrary/music?ar=1592721023049&nv=1
 
 - Mainmenu Background 이미지 : https://pixabay.com/ko/illustrations/%EC%A7%80%EA%B5%AC-%EC%BD%94%EB%A1%9C%EB%82%98-%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EA%B8%80%EB%A1%9C%EB%B8%8C-5138795/
 
