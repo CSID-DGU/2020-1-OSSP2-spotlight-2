@@ -172,6 +172,7 @@ public class Main extends JFrame implements Constants {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub  
             	R = new rankWindow();
+            	clip.stop(); //메인메뉴 음악 정지
             	setVisible(false); //화면 보이지 않게 설정
             }     
         });
@@ -246,6 +247,9 @@ public class Main extends JFrame implements Constants {
 			}
 			//종료
 			else if(logIn == 2) {
+				break;
+			}
+			else {
 				break;
 			}
 
@@ -346,6 +350,7 @@ public class Main extends JFrame implements Constants {
    /*랭킹 화면*/
    class rankWindow extends JFrame implements Constants {
 	   public static String[] scr = new String[20];
+	   private static Clip clip;
 	   rankWindow() {
 	   setTitle("Virus breaker"); // 타이틀 설정
 	   ranking();//랭킹 정보 받아오기
@@ -363,6 +368,8 @@ public class Main extends JFrame implements Constants {
 		   	         setContentPane(rank);
        setContentPane(rank);   
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       
+       rankMusic();//랭킹 음악 출력
        
        	JPanel Image = new JPanel(new GridLayout(1,1)) {
        		public void paintComponent(Graphics g) {
@@ -428,6 +435,17 @@ public class Main extends JFrame implements Constants {
              @Override
              public void actionPerformed(ActionEvent e) {
                  // TODO Auto-generated method stub
+            	 clip.stop(); //음악 정지
+                 //메인메뉴 음악 실행
+                 try {
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Venetian.wav").getAbsoluteFile());
+                     Main.M.clip = AudioSystem.getClip(null);
+                     Main.M.clip.open(audioInputStream);
+                     Main.M.clip.loop(Clip.LOOP_CONTINUOUSLY);
+                    
+                 } catch (Exception ei) {
+                     ei.printStackTrace();
+                 }
                 Main.M.setVisible(true);
                 dispose();
              }     
@@ -512,10 +530,23 @@ public class Main extends JFrame implements Constants {
          
          setLocationByPlatform(true);
          setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // 창 크기 설정
+         setLocation(Main.M.getX(), Main.M.getY()); //랭킹 창 위치
          setResizable(true);
          setVisible(true);
 		}
 
+	   /*랭킹창 음악*/
+	    public void rankMusic() {
+	        try {
+	           AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/The_Throne_Room.wav").getAbsoluteFile());
+	            clip = AudioSystem.getClip(null);
+	            clip.open(audioInputStream);
+	            clip.loop(Clip.LOOP_CONTINUOUSLY);
+	           
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
 	       //게임 랭킹의 순위를 받아온다.
 	     public void ranking() {
 	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
