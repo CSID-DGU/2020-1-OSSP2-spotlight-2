@@ -349,82 +349,82 @@ public class Main extends JFrame implements Constants {
    
    /*랭킹 화면*/
    class rankWindow extends JFrame implements Constants {
-	   public static String[] scr = new String[20];
-	   private static Clip clip;
-	   rankWindow() {
-	   setTitle("Virus breaker"); // 타이틀 설정
-	   ranking();//랭킹 정보 받아오기
-	   JPanel rank = new JPanel(new GridLayout(8,1)){		   
-		   	            public void paintComponent(Graphics g) {
-		   	            	setBackground(Color.BLACK);
-		   	            	Font font  = new Font("Impact", Font.PLAIN, 50);
-		   	            	g.setColor(Color.WHITE);
-		   	            	g.setFont(font);
-		   	            	g.drawString("랭킹창", 50, 50);
-		   	            	setOpaque(true);
-		   	            	super.paintComponent(g);
-		   	            }
-		   	         };
-		   	         setContentPane(rank);
+      public static String[] scr = new String[20];
+      private static Clip clip;
+      rankWindow() {
+      setTitle("Virus breaker"); // 타이틀 설정
+      ranking();//랭킹 정보 받아오기
+      JPanel rank = new JPanel(new GridLayout(8,1)){         
+                        public void paintComponent(Graphics g) {
+                           setBackground(Color.BLACK);
+                           Font font  = new Font("Impact", Font.PLAIN, 50);
+                           g.setColor(Color.WHITE);
+                           g.setFont(font);
+                           g.drawString("랭킹창", 50, 50);
+                           setOpaque(true);
+                           super.paintComponent(g);
+                        }
+                     };
+                     setContentPane(rank);
        setContentPane(rank);   
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        
        rankMusic();//랭킹 음악 출력
        
-       	JPanel Image = new JPanel(new GridLayout(1,1)) {
-       		public void paintComponent(Graphics g) {
-    		   setOpaque(false);
-    		   super.paintComponent(g);
-    		   ImageIcon icon2;
-    		   icon2 = new ImageIcon("./img/Ranking.png");
-    		   g.drawImage(icon2.getImage(),getWidth()/4,0,getWidth()/2,getHeight(),null);
-    	   	}
-       	};
+          JPanel Image = new JPanel(new GridLayout(1,1)) {
+             public void paintComponent(Graphics g) {
+             setOpaque(false);
+             super.paintComponent(g);
+             ImageIcon icon2;
+             icon2 = new ImageIcon("./img/Ranking.png");
+             g.drawImage(icon2.getImage(),getWidth()/4,0,getWidth()/2,getHeight(),null);
+             }
+          };
        
-       	JPanel Mode = new JPanel(new GridLayout(1,2)) {
-       		public void paintComponent(Graphics g) {
-       		  setOpaque(false);
+          JPanel Mode = new JPanel(new GridLayout(1,2)) {
+             public void paintComponent(Graphics g) {
+               setOpaque(false);
               super.paintComponent(g);
-       		}
-       	};
-       	JPanel Score1 = new JPanel(new GridLayout(1,2)) {
-    	   public void paintComponent(Graphics g) {
-    		   setOpaque(false);
-           	super.paintComponent(g);
-    	   }
-       	};
-     	JPanel Score2 = new JPanel(new GridLayout(1,2)) {
-     		public void paintComponent(Graphics g) {
-     			setOpaque(false);
-            	super.paintComponent(g);
-     		}
-    	 };
-    	 JPanel Score3 = new JPanel(new GridLayout(1,2)) {
+             }
+          };
+          JPanel Score1 = new JPanel(new GridLayout(1,2)) {
+          public void paintComponent(Graphics g) {
+             setOpaque(false);
+              super.paintComponent(g);
+          }
+          };
+        JPanel Score2 = new JPanel(new GridLayout(1,2)) {
+           public void paintComponent(Graphics g) {
+              setOpaque(false);
+               super.paintComponent(g);
+           }
+        };
+        JPanel Score3 = new JPanel(new GridLayout(1,2)) {
           public void paintComponent(Graphics g) {
              setOpaque(false);
              super.paintComponent(g);
           }
-       	};
-       	JPanel Score4 = new JPanel(new GridLayout(1,2)) {
+          };
+          JPanel Score4 = new JPanel(new GridLayout(1,2)) {
            public void paintComponent(Graphics g) {
               setOpaque(false);
               super.paintComponent(g);
            }
-       		};
-    	JPanel Score5 = new JPanel(new GridLayout(1,2)) {
-    		public void paintComponent(Graphics g) {
-      		 setOpaque(false);
-      		 super.paintComponent(g);
-    		}
-    	};
-     	JPanel toMainMenu = new JPanel(new GridLayout(1,1)) {
-     		public void paintComponent(Graphics g) {
-     			setOpaque(false);
-     			super.paintComponent(g);
+             };
+       JPanel Score5 = new JPanel(new GridLayout(1,2)) {
+          public void paintComponent(Graphics g) {
+             setOpaque(false);
+             super.paintComponent(g);
+          }
+       };
+        JPanel toMainMenu = new JPanel(new GridLayout(1,1)) {
+           public void paintComponent(Graphics g) {
+              setOpaque(false);
+              super.paintComponent(g);
          }
-     	};
-     	 MyMouseListener listener = new MyMouseListener();//객체
-     	 
+        };
+         MyMouseListener listener = new MyMouseListener();//객체
+         
           JButton backMenu = new JButton("To Main Menu"); 
           backMenu.setFont(new Font("고딕", Font.BOLD,50));
           backMenu.setBorderPainted(false); //버튼 외곽선 삭제
@@ -435,7 +435,7 @@ public class Main extends JFrame implements Constants {
              @Override
              public void actionPerformed(ActionEvent e) {
                  // TODO Auto-generated method stub
-            	 clip.stop(); //음악 정지
+                clip.stop(); //음악 정지
                  //메인메뉴 음악 실행
                  try {
                     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/Venetian.wav").getAbsoluteFile());
@@ -533,30 +533,30 @@ public class Main extends JFrame implements Constants {
          setLocation(Main.M.getX(), Main.M.getY()); //랭킹 창 위치
          setResizable(true);
          setVisible(true);
-		}
+      }
 
-	   /*랭킹창 음악*/
-	    public void rankMusic() {
-	        try {
-	           AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/The_Throne_Room.wav").getAbsoluteFile());
-	            clip = AudioSystem.getClip(null);
-	            clip.open(audioInputStream);
-	            clip.loop(Clip.LOOP_CONTINUOUSLY);
-	           
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	    }
-	       //게임 랭킹의 순위를 받아온다.
-	     public void ranking() {
-	    	 String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
-	    	 Main.Client.send(a);//서버로 랭킹 요청
-	    	 
-	    	 Main.Client.receive();//랭킹 정보를 받음
-	    	 scr = Client.msg.split(" ");//받은 랭킹 정보를 저장(각 모드별로 1등에서 5등)
+      /*랭킹창 음악*/
+       public void rankMusic() {
+           try {
+              AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./dist/wav/The_Throne_Room.wav").getAbsoluteFile());
+               clip = AudioSystem.getClip(null);
+               clip.open(audioInputStream);
+               clip.loop(Clip.LOOP_CONTINUOUSLY);
+              
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
+          //게임 랭킹의 순위를 받아온다.
+        public void ranking() {
+           String a = "4 id pw sc1 sc2";//랭킹 요청 메세지
+           Main.Client.send(a);//서버로 랭킹 요청
+           
+           Main.Client.receive();//랭킹 정보를 받음
+           scr = Client.msg.split(" ");//받은 랭킹 정보를 저장(각 모드별로 1등에서 5등)
 
-	     }
-	}
+        }
+   }
    
    class MyMouseListener implements MouseListener{
 
