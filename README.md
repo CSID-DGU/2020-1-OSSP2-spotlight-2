@@ -1,4 +1,4 @@
-a# 2020-1-OSSP2-spotlight-2
+2020-1-OSSP2-spotlight-2
 Team spotlight
 
 원본 소스 : https://github.com/tylucaskelley/brick-breaker
