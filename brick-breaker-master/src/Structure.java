@@ -19,7 +19,7 @@
 *    You should have received a copy of the GNU General Public License
 *    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+//
 //This "Structure" class is the base for all on-screen objects in the game. The Ball, Brick, Item, and Paddle classes extend it.
 
 //Imports
