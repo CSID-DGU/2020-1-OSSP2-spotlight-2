@@ -95,3 +95,12 @@ Team spotlight
 - Mainmenu Background 이미지 : https://pixabay.com/ko/illustrations/%EC%A7%80%EA%B5%AC-%EC%BD%94%EB%A1%9C%EB%82%98-%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EA%B8%80%EB%A1%9C%EB%B8%8C-5138795/
 
 - 이외의 이미지 : 직접 구현
+
+## 8. 실행 방법
+
+- 해당 프로젝트를 clone해 사용자의 linux에 다운 받는다.
+- 프로젝트 내의 brick-breaker-master폴더를 eclipse에서 File/Open Projects from File System.. 으로 오픈한다.
+- aws 서버의 고정 ip 주소를 할당 받지 않아 실행을 원하면 kw2577@naver.com 으로 서버의 ip 주소를 요청한다.
+- 제공 받은 ip 주소를 이용해 Client.java 파일의 20번째 줄에서 서버의 ip 주소를 변경한다.
+- 컴파일 후 프로그램을 실행한다.
+
