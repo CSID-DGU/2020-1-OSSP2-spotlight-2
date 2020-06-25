@@ -102,5 +102,12 @@ Team spotlight
 - 프로젝트 내의 brick-breaker-master폴더를 eclipse에서 File/Open Projects from File System.. 으로 오픈한다.
 - aws 서버의 고정 ip 주소를 할당 받지 않아 실행을 원하면 kw2577@naver.com 으로 서버의 ip 주소를 요청한다.
 - 제공 받은 ip 주소를 이용해 Client.java 파일의 20번째 줄에서 서버의 ip 주소를 변경한다.
-- 컴파일 후 프로그램을 실행한다.
+- eclipse 에서 컴파일 후 프로그램을 실행한다.
 
+- [서버가 고정 ip 주소를 할당 받지 않아 jar파일로 배포를 못했지만 터미널에서의 실행을 원할 시 위의 과정 후에 아래의 과정을 수행한다.]
+- 우선 eclipse에서 File/Export로 들어간다.
+- 다음으로 Java의 JAR file을 선택한다.
+- Next를 눌러 프로젝트 폴더를 선택하고, 경로를 2020-2-OSSP2-sportlight-2/brick-breaker-master 로 지정하고 이름을 brick.jar로 설정한다
+- Next를 두번 클릭한 뒤 Main class를 Main으로 설정한다.
+- Finish를 눌러 jar 파일 생성을 완료하고 터미널을 실행해 jar파일을 생성한 2020-2-OSSP2-sportlight-2/brick-breaker-master로 이동한다.
+- java -jar brick.jar 커멘드를 입력해 프로그램을 실행한다.
