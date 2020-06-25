@@ -21,7 +21,7 @@
 */
 //
 //This "Structure" class is the base for all on-screen objects in the game. The Ball, Brick, Item, and Paddle classes extend it.
-
+//
 //Imports
 import java.awt.*;
 
